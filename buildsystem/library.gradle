@@ -1,0 +1,128 @@
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'http://oss.sonatype.org/content/repositories/snapshots'
+        }
+        maven {
+            url 'https://github.com/eikaramba/stetho-realm/raw/master/maven-repo'
+        }
+        maven { url "https://jitpack.io" }
+    }
+}
+
+ext {
+    //Android
+    androidBuildToolsVersion = "25.0.2"
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
+    java8 = true
+
+    //Libraries
+    supportLibsVersion = '25.2.0'
+    constraintVersion = '1.0.2'
+    daggerVersion = '2.9'
+    butterKnifeVersion = '8.5.1'
+    rxJavaVersion = '1.2.6'//'2.0.6'
+    rxAndroidVersion = '1.2.1'//'2.0.1'
+    rxBindingVersion = '1.0.0'
+    rxPermissionsVersion ='0.9.1@aar'
+    okHttpVersion = '3.6.0'
+    okHttpVersionLogger ='1.0.4'
+    retrofitVersion ='2.2.0'
+    gsonVersion     ='2.8.0'
+    frescoVersion   = '1.1.0'
+    glideVersion    ='3.7.0'
+    baseRecyclerVersion = '2.8.2'
+    reactivenetworkVersion = '0.8.0'
+    drawerVersion         ='5.3.0@aar'
+    coordinatortabVersion = '1.0.6'
+    networking  ='0.4.0'
+    //Testing
+    robolectricVersion = '3.0'
+    jUnitVersion = '4.12'
+    assertJVersion = '1.7.1'
+    mockitoVersion = '1.9.5'
+    dexmakerVersion = '1.0'
+    espressoVersion = '2.0'
+    testingSupportLibVersion = '0.1'
+    autoValue='1.2'
+
+    //Development
+    leakCanaryVersion = '1.6-SNAPSHOT'
+    blockcanaryVersion = '1.4.1'
+    stethoVersion = '1.4.2'
+    realmStethoVersion='2.0.0'
+    taktVersion   = '1.0.3'
+
+
+    supportDependencies = [
+            supportCompat          : "com.android.support:appcompat-v7:${supportLibsVersion}",
+            supportDesign          : "com.android.support:design:${supportLibsVersion}",
+            supportRecyclerView    : "com.android.support:recyclerview-v7:${supportLibsVersion}",
+            supportCardView        : "com.android.support:cardview-v7:${supportLibsVersion}",
+            customtabs             : "com.android.support:customtabs:${supportLibsVersion}",
+            constraintLayout       : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+            butterKnife            : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterknifeCompiler    : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+    ]
+
+    injectDependencies = [
+            rxjava                 : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxandroid              : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            rxbinding              : "com.jakewharton.rxbinding:rxbinding:${rxBindingVersion}",
+            dagger                 : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler         : "com.google.dagger:dagger-compiler:${daggerVersion}",
+    ]
+
+    networkDependencies = [
+            okHttp                 : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            okHttpLogging          : "com.github.ihsanbal:LoggingInterceptor:${okHttpVersionLogger}",
+            retrofit               : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGsonConverter  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitRxJavaAdapter  : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            reactivenetwork        : "com.github.pwittchen:reactivenetwork:${reactivenetworkVersion}",
+            glide                  : "com.github.bumptech.glide:glide:${glideVersion}",
+            networking             : "com.amitshekhar.android:android-networking:${networking}",
+    ]
+
+    appDependencies  =[
+            baseRecyclerView       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${baseRecyclerVersion}",
+            drawer                 : "com.mikepenz:materialdrawer:${drawerVersion}",
+            coordinatortab         : "cn.hugeterry.coordinatortablayout:coordinatortablayout:${coordinatortabVersion}",
+            searchview             : "com.lapism:searchview:4.0",
+            bottomTab              : "me.majiajie:pager-bottom-tab-strip:2.0.0",
+            fabButton              : "com.github.clans:fab:1.6.4",
+    ]
+
+    developmentDependencies = [
+            leakCanary  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            blockCanary : "com.github.markzhai:blockcanary-android:${blockcanaryVersion}",
+            stetho      : "com.facebook.stetho:stetho:${stethoVersion}",
+            realmStetho : "com.uphyca:stetho_realm:${realmStethoVersion}",
+            stethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
+            takt        : "jp.wasabeef:takt:${taktVersion}",
+    ]
+
+    dataTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            assertj:            "org.assertj:assertj-core:${assertJVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric:        "org.robolectric:robolectric:${robolectricVersion}",
+    ]
+
+    domainTestDependencies = [
+            junit:              "junit:junit:${jUnitVersion}",
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+    ]
+
+    presentationTestDependencies = [
+            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
+            dexmaker:           "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerMockito:    "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            testingSupportLib:  "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+    ]
+}

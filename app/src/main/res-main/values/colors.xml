@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rippelColor">#5F000000</color>
+    <color name="primary_dark">#07bfac</color>
+    <color name="emailbackground">#0977ec</color>
+    <color name="backgroundPrimary">#EEEEEE</color>
+    <color name="colorPrimary">#07bfac</color>
+    <color name="colorPrimaryDark">#00897B</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="background_item">#5F000000</color> <!-- 12% -->
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="text_color">#1a1919</color>
+    <color name="md_black_1000">#000000</color>
+    <color name="text_color1">#333333</color>
+    <color name="refresh1">@color/primary_dark</color>
+    <color name="refresh2">@color/colorPrimaryDark</color>
+    <color name="refresh3">@color/fab_normal</color>
+    <color name="fab_normal">#F44336</color>
+    <color name="fab_Pressed">#D32F2F</color>
+    <color name="fab_Ripple">#B71C1C</color>
+    <color name="fab_normal1">#9C27B0</color>
+    <color name="fab_Pressed1">#6A1B9A</color>
+    <color name="fab_Ripple1">#4A148C</color>
+    <color name="fab_normal2">#FFEB3B</color>
+    <color name="fab_Pressed2">#FBC02D</color>
+    <color name="fab_Ripple2">#F57F17</color>
+    <color name="edittext_floating">#B0BEC5</color>
+    <color name="bpDarker_blue">#0099cc</color>
+    <color name="green">#12a110</color>
+    <color name="md_red_700">@color/fab_normal</color>
+    <color name="material_drawer_hint_icon">#ffffff</color>
+</resources>

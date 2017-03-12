@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark">
+
+    <com.toan_itc.mobifone.libs.particleview.ParticleView
+        android:id="@+id/splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        pv:pv_background_color="@color/md_red_500"
+        pv:pv_host_text="Mobifone"
+        pv:pv_particle_text="THÀNH NHÂN"
+        pv:pv_particle_text_size="20sp"
+        pv:pv_text_color="@color/white"/>
+</RelativeLayout>

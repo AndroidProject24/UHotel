@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Uhotel</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_share">Share</string>
+    <string name="action_refresh">Refresh</string>
+
+    <!--HOME-->
+    <string name="home_welcome">Welcome back,</string>
+
+    <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
+    <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>
+    <string name="common_no_network_msg">No network connected!\nPlease hit the screen and try again after connecting~</string>
+    <string name="retry">Thử lại</string>
+    <string name="kho_so">Kho số</string>
+    <string name="thu_tuc">Thủ tục</string>
+    <string name="cong_no">Công nợ</string>
+    <string name="ct_km">Chương trình khuyến mãi</string>
+    <string name="up_anh">Úp ảnh</string>
+
+</resources>

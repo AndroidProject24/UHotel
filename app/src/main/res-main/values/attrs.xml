@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Progessbar-->
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension"/>
+        <attr name="indicatorName" format="string"/>
+        <attr name="indicatorColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="expandableLayout">
+        <attr name="ael_duration" format="integer" />
+        <attr name="ael_expanded" format="boolean" />
+        <attr name="ael_defaultChildIndex" format="integer" />
+        <attr name="ael_defaultPosition" format="dimension" />
+        <attr name="ael_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="ael_interpolator" format="enum">
+            <enum name="accelerateDecelerate" value="0" />
+            <enum name="accelerate" value="1" />
+            <enum name="anticipate" value="2" />
+            <enum name="anticipateOvershoot" value="3" />
+            <enum name="bounce" value="4" />
+            <enum name="decelerate" value="5" />
+            <enum name="fastOutLinearIn" value="6" />
+            <enum name="fastOutSlowIn" value="7" />
+            <enum name="linear" value="8" />
+            <enum name="linearOutSlowIn" value="9" />
+            <enum name="overshoot" value="10" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="ParticleView">
+        <attr name="pv_host_text" format="string"/>
+        <attr name="pv_host_text_size" format="dimension"/>
+        <attr name="pv_particle_text" format="string"/>
+        <attr name="pv_particle_text_size" format="dimension"/>
+        <attr name="pv_text_color" format="color"/>
+        <attr name="pv_background_color" format="color"/>
+        <attr name="pv_text_anim_time" format="integer"/>
+        <attr name="pv_spread_anim_time" format="integer"/>
+        <attr name="pv_host_text_anim_time" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="StateLayout">
+        <attr name="errorDrawable" format="reference" />
+        <attr name="emptyDrawable" format="reference" />
+        <attr name="progressView" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.toan_itc.mobifone.libs.view.StateLayout
+    android:id="@+id/stateLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@+id/txt_search"
+        style="@style/search_edittext"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:gravity="start|center_vertical"
+        android:hint="@string/home_txt_hint_search"
+        android:digits="*?012345789"
+        android:textColor="@color/md_black_1000"
+        android:textSize="14sp"/>
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_toRightOf="@+id/txt_search"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:spinnerMode="dropdown"/>
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_search"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rad_090"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="090"/>
+
+        <RadioButton
+            android:id="@+id/rad_093"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="093"/>
+
+        <RadioButton
+            android:id="@+id/rad_089"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="089"/>
+    </RadioGroup>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/radio_group"/>
+</com.toan_itc.mobifone.libs.view.StateLayout>
