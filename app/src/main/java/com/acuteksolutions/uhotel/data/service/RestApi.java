@@ -1,6 +1,12 @@
 package com.acuteksolutions.uhotel.data.service;
 
+import com.acuteksolutions.uhotel.mvp.model.JsonObject;
+import com.acuteksolutions.uhotel.mvp.model.JsonString;
+import com.acuteksolutions.uhotel.mvp.model.login.Login;
+
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -10,52 +16,40 @@ import rx.Observable;
  */
 
 public interface RestApi {
-    String BASE_URL = "http://n3t.top/test/api/";
+  String BASE_URL = "http://lv-api.acuteksolutions.com/cxf/ws/messagebus/rest/";
 
-    /*Movies*/
-    @GET("timsim")
-    Observable<Movies> getKhoso(@Query("search") String search, @Query("kho") String kho, @Query("dau") String dau, @Query("dang") String dang);
-/*
-    @GET
-    Observable<Movies> getLoadmore(@Url String url);
+  //Service Path
+  public static final String ACUCORE_SERVICE_PATH = "/cxf/ws/messagebus/rest/request/{mac}/Beesmart?path=";
+  public static final String ACUCORE_AUTHORIZE_SERVICE_PATH = "/cxf/ws/messagebus/rest/authorize/Beesmart/AuthorizeService";
+  public static final String ACUCORE_PIN_SERVICE_PATH = "check/Beesmart/PinCodeService";
 
-    @GET("dangsim")
-    Observable<JsonArray<Dangsim>> getDangSim(@Query("noibat") String noibat);
+  //Movies
+  public static final String VOD_IMAGE_URL = "http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/";
+  public static final String VOD_INFO_PATH = "/vod/info/{id}";
+  public static final String VOD_LIST_INFO_PATH = "/vod/info?purchase_item_list={id_list}";
 
-    *//*LOGIN*//*
-    @POST("login")
-    Observable<JsonObject<Login>> getLogin(@Query("email") String email, @Query("password") String password, @Query("shop_id") String shop_id);
+  public static final String MOVIE_BY_CONTENT_ID_PATH = "/restapi/rest/{region_uid}/content/media?include_media_resources=true&content_info_id={cid}";
 
-    @POST("request-password")
-    Observable<ResponseBody> forgotPassword(@Query("email") String email, @Query("shop_id") String shop_id);
+  public static final String VOD_CATEGORIES_PATH = "/restapi/rest/{region_uid}/store/categories";
+  public static final String VOD_BY_CATEGORY_ID_PATH = "/restapi/rest/{region_uid}/store/products?purchase_category_id={catId}";
 
-    *//*REGISTER*//*
-    @POST("validate")
-    Observable<ResponseBody> checkEmail(@Query("email") String email, @Query("shop_id") String shop_id);
+  //EPG
+  public static final String ALL_CHANNELS_PATH = "/restapi/rest/{region_uid}/channels";
+  public static final String ALL_CHANNELS_PROGRAM_PATH = "/restapi/rest/{region_uid}/tvprogram?date={date}";
+  public static final String CHANNEL_PROGRAM_BY_ID_PATH = "/restapi/rest/{region_uid}/tvprogram?channel_id={channel_id}&date={date}&page_size=2000";
+  public static final String MANUAL_LOGIN_PATH = "/{mac}/{pin}?region={region_name}&operator={operator_name}";
 
-    @GET("register")
-    Observable<JsonObject<Register>> getRegister(@Query("email") String email, @Query("password") String password, @Query("shop_id") String shop_id);
+  //Parental Control
+  public static final String AUTHENTICATE_PARENTAL_PIN_PATH = "/{mac}/{profileUid}/{action}?parentalPin={parental_pin}";
+  public static final String UPDATE_PARENTAL_CONTROL_SETTINGS_PATH = "/{mac}/{profileId}/update?data={parental_settings}&parentalPin={parental_pin}";
+  public static final String CHANGE_PARENTAL_CONTROL_PIN_PATH = "/{mac}/{profileId}/changepin?data={new_pin}&parentalPin={old_pin}";
 
-    *//*UPANH*//*
-    @Multipart
-    @POST("upanh/tratruoc")
-    Observable<Upanh> postImageCanhanTratruoc(@Part("sdt") RequestBody sdt, @Part("dichvu") RequestBody dichvu,
-                                              @Part MultipartBody.Part file1,
-                                              @Part MultipartBody.Part file2,
-                                              @Part MultipartBody.Part file3);
+  /*Login*/
+  @POST("authorize/Beesmart/AuthorizeService/{mac}/{pin}")
+  Observable<JsonObject<Login>> getLogin(@Path("mac") String mac, @Path("pin") String pin, @Query("region") String region_name, @Query("operator") String operator_name);
 
-    @Multipart
-    @POST("upanh/trasaucanhan")
-    Observable<Upanh> postImageCanhanTrasau(@Part(value = "sdt") String sdt, @Part(value = "dichvu") String dichvu, @Part("cmnd_mt\"; filename=\"image1.png\" ") RequestBody photo1,
-                                            @Part("cmnd_ms\"; filename=\"image2.png\" ") RequestBody photo2, @Part("hopdong_mt\"; filename=\"image3.png\" ") RequestBody photo3, @Part("hopdong_ms\"; filename=\"image4.png\" ") RequestBody photo4, @Part("phuluc4\"; filename=\"image5.png\" ") RequestBody photo5);
-
-    @Multipart
-    @POST("upanh/trasaudoanhnghiep")
-    Observable<Upanh> postImageDoanhnghiep(@Part(value = "sdt") String sdt, @Part(value = "dichvu") String dichvu, @Part("cmnd_mt\"; filename=\"image1.png\" ") RequestBody photo1,
-                                           @Part("cmnd_ms\"; filename=\"image2.png\" ") RequestBody photo2, @Part("hopdong_mt\"; filename=\"image3.png\" ") RequestBody photo3, @Part("hopdong_ms\"; filename=\"image4.png\" ") RequestBody photo4,
-                                           @Part("phuluc4\"; filename=\"image5.png\" ") RequestBody photo5, @Part("gpkd\"; filename=\"image6.png\" ") RequestBody photo6);
-    *//*KHUYEMAI*//*
-    @GET("theloai/{IDtheloai}")
-    Observable<JsonArray<Theloai>> getThutuc(@Path("IDtheloai") int IDtheloai);*/
+  /*Movies*/
+  @GET("request/{mac}/Beesmart")
+  Observable<JsonString<String>> getPathMovies(@Path("mac") String mac, @Query("path") String path);
 
 }

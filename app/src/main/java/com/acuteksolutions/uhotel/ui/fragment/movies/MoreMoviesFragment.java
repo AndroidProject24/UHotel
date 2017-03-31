@@ -5,9 +5,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
-import com.acuteksolutions.uhotel.mvp.presenter.movies.MoviesPresenter;
-import com.acuteksolutions.uhotel.mvp.view.movies.MoviesView;
+import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
+import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.movies.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
@@ -66,6 +67,11 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
   public void onDestroyView() {
     super.onDestroyView();
     mPresenter.detachView();
+  }
+
+  @Override
+  public void listCategory(List<Category> categoryList) {
+
   }
 
   @Override

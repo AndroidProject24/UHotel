@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.toan_itc.mobifone.libs.view.StateLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/stateLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+</com.toan_itc.mobifone.libs.view.StateLayout>

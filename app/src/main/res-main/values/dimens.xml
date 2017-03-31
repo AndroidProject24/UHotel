@@ -6,8 +6,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="cardview_left">8dp</dimen>
-    <dimen name="cardview_top">5dp</dimen>
+    <dimen name="cardview_margin">10dp</dimen>
     <dimen name="textSize14">14sp</dimen>
     <dimen name="textSize16">16sp</dimen>
     <dimen name="textSize18">18sp</dimen>
@@ -17,4 +16,6 @@
     <dimen name="textSize26">26sp</dimen>
     <dimen name="textSize28">28sp</dimen>
     <dimen name="textSize30">30sp</dimen>
+
+    <dimen name="fullscreen_status_bar_height">0dp</dimen>
 </resources>

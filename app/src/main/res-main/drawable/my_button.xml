@@ -5,5 +5,5 @@
     <stroke android:color="@null" />
     <stroke
         android:width="1dp"
-        android:color="@color/edittext_floating" />
+        android:color="@color/black" />
 </shape>

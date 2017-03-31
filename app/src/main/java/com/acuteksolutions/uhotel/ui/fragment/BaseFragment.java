@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
-import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.libs.view.FadeViewAnimProvider;
 import com.acuteksolutions.uhotel.libs.view.StateLayout;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
@@ -40,17 +39,6 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   private Unbinder unbinder;
   private String TAG = getTAG();
   protected abstract String getTAG();
-  protected ToolbarTitleListener toolbarTitleListener;
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    try {
-      toolbarTitleListener = (ToolbarTitleListener) getActivity();
-    } catch (ClassCastException e) {
-      throw new ClassCastException(context.toString()
-              + " must implement OnHeadlineSelectedListener");
-    }
-  }
 
   @Nullable
   @Override

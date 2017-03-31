@@ -17,4 +17,5 @@ public class Constant {
     public static final String BundleCONTENT="BundleCONTENT";
     public static final String BundleDATE="BundleDATE";
     public static final String BundleIsFist="BundleIsFist";
+    public static final String DEVICE_MAC = "00000000ffee";
 }

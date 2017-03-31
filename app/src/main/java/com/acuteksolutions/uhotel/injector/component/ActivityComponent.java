@@ -6,6 +6,7 @@ import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.MainFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
+import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoreMoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 
@@ -20,9 +21,9 @@ public interface ActivityComponent {
   void inject(MainFragment mainFragment);
 
   /*LOGIN*/
- /* void inject(LoginFragment loginFragment);
+  void inject(LoginFragment loginFragment);
 
-  void inject(RegisterFragment registerFragment);*/
+  /*void inject(RegisterFragment registerFragment);*/
 
 
   /*LIVETV*/

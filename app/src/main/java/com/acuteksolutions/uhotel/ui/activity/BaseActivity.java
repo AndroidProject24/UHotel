@@ -14,6 +14,7 @@ import android.view.View;
 import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.injector.component.ActivityComponent;
+import com.acuteksolutions.uhotel.injector.component.DaggerActivityComponent;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.utils.StatusBarUtil;
 import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;

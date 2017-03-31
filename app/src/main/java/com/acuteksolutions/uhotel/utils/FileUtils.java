@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.toan_itc.mobifone.BuildConfig.DEBUG;
+import static com.fernandocejas.frodo.BuildConfig.DEBUG;
 
 /**
  * Created by huynhvantoan on 9/23/16.

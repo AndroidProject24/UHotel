@@ -1,11 +1,14 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.widget.FrameLayout;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
@@ -13,113 +16,94 @@ import com.acuteksolutions.uhotel.interfaces.KeyListener;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.ui.fragment.MainFragment;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
+import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
+import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
+import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
+import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
+import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-import static com.acuteksolutions.uhotel.R.id.toolbar;
-
 public class MainActivity extends BaseActivity implements ToolbarTitleListener {
-    @BindView(toolbar)
-    Toolbar mToolbar;
-    private AccountHeader headerResult = null;
     private Drawer result = null;
     private boolean doubleBackToExitPressedOnce;
     @Inject
     PreferencesHelper mPreferencesHelper;
+    @BindView(R.id.drawer_container)
+    FrameLayout mLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSupportActionBar(mToolbar);
+        initToolbarTranparent();
         initDrawer(savedInstanceState);
     }
+
+    private void initToolbarTranparent(){
+      setSupportActionBar(mToolbar);
+      mToolbar.setBackgroundColor(Color.TRANSPARENT);
+      mToolbar.getBackground().setAlpha(100);
+      getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
     private void initDrawer(Bundle savedInstanceState){
-        //final IProfile profile = new ProfileDrawerItem().withName(mPreferencesHelper.getFistName()+" "+mPreferencesHelper.getLastName()).withEmail(mPreferencesHelper.getEmail()).withIcon(mPreferencesHelper.getAvatar()).withIdentifier(100);
-        final IProfile profile = new ProfileDrawerItem().withName("Huỳnh văn toàn").withEmail("huynhvantoan.itc@gmail.com").withIcon("https://scontent.fsgn5-2.fna.fbcdn.net/v/t31.0-8/11722301_794373917343882_7256246783339720174_o.jpg?oh=f93a997e513c128aa626de61c205d91c&oe=593ED314").withIdentifier(100);
-        headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withTranslucentStatusBar(true)
-                .withHeaderBackground(R.drawable.material_bg_account)
-                .addProfiles(profile)
-                .withSavedInstance(savedInstanceState)
-                .build();
         result = new DrawerBuilder(this)
                 .withActivity(this)
+                .withHeader(R.layout.header)
                 .withToolbar(mToolbar)
                 .withHasStableIds(true)
-                .withAccountHeader(headerResult)
-                .withRootView(R.id.drawer_container)
-                .withDisplayBelowStatusBar(false)
-                .withActionBarDrawerToggleAnimated(true)
+               // .withItemAnimator(new AlphaCrossFadeAnimator())
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Home").withIcon(R.mipmap.ic_profile).withIdentifier(1).withSetSelected(true),
-                        new PrimaryDrawerItem().withName("Kho số").withIcon(R.mipmap.ic_sim).withIdentifier(2).withSetSelected(true),
-                        new PrimaryDrawerItem().withName("khuyến mãi").withIcon(R.mipmap.ic_khuyenmai2).withIdentifier(3).withSetSelected(true),
-                        new PrimaryDrawerItem().withName("Công nợ").withIcon(R.mipmap.ic_congno).withIdentifier(4).withSetSelected(true),
-                        new PrimaryDrawerItem().withName("Thủ tục").withIcon(R.mipmap.ic_thutuc2).withIdentifier(5).withSetSelected(true).withEnabled(true),
-                        new PrimaryDrawerItem().withName("Úp ảnh").withIcon(R.mipmap.ic_upload).withIdentifier(6).withSetSelected(true),
-                        new PrimaryDrawerItem().withName("Profile").withIcon(R.mipmap.ic_profile).withIdentifier(7).withSetSelected(true),
-                        new SectionDrawerItem().withName("Help"),
-                        new PrimaryDrawerItem().withName("Contact").withIcon(R.mipmap.ic_call).withIdentifier(8).withSetSelected(true)
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_concierge)).withIcon(R.drawable.menu_concierge).withIdentifier(1).withSetSelected(true),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_live_tv)).withIcon(R.drawable.menu_livetv).withIdentifier(2).withSetSelected(true),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_movies)).withIcon(R.drawable.menu_movies).withIdentifier(3).withSetSelected(true),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_food_activity)).withIcon(R.drawable.menu_food_activities).withIdentifier(4).withSetSelected(true),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_room_control)).withIcon(R.drawable.menu_room_control).withIdentifier(5).withSetSelected(true).withEnabled(true),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName(getString(R.string.menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(6).withSetSelected(true)
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if (drawerItem != null) {
-                        if (drawerItem.getIdentifier() == 1) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
-                        } /*else if (drawerItem.getIdentifier() == 2) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UIKhosoFragment.newInstance());
-                        } else if (drawerItem.getIdentifier() == 3) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
-                        } else if (drawerItem.getIdentifier() == 4) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
-                        } else if (drawerItem.getIdentifier() == 5) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, LandingFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 6) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 7) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                        }else if (drawerItem.getIdentifier() == 8) {
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
-                        }*/else{
-                            replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
-                            //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
-                        }
-                       /* if (!mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
+                        if (mPreferencesHelper.getJsonLogin()!=null) {
                             if (drawerItem.getIdentifier() == 1) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                             } else if (drawerItem.getIdentifier() == 2) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, KhosoFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, LiveTVFragment.newInstance());
                             } else if (drawerItem.getIdentifier() == 3) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, KhuyenmaiFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
                             } else if (drawerItem.getIdentifier() == 4) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, CongnoFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, FoodFragment.newInstance());
                             } else if (drawerItem.getIdentifier() == 5) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, LandingFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, RoomServiceFragment.newInstance());
                             }else if (drawerItem.getIdentifier() == 6) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 7) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, UpanhFragment.newInstance());
-                            }else if (drawerItem.getIdentifier() == 8) {
-                                addFagment(getSupportFragmentManager(), R.id.fragment, LienHeFragment.newInstance());
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, SettingFragment.newInstance());
+                            }else{
+                                replaceFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
                             }
                         }else{
-                            addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());//TODO: LoginFragment
-                            //Snackbar.make(mToolbar, "Please login!", Snackbar.LENGTH_LONG).show();
-                        }*/
+                            addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+                            Snackbar.make(mLayout, "Please login!", Snackbar.LENGTH_LONG).show();
+                        }
                     }
                     return false;
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
+      if (Build.VERSION.SDK_INT >= 19) {
+        result.getDrawerLayout().setFitsSystemWindows(false);
+      }
     }
     @Override
     protected String getTAG() {
@@ -128,8 +112,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
     @Override
     protected void initViews() {
-        if(mPreferencesHelper.getUserId().equalsIgnoreCase("")) {
-            addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance()); //TODO: LoginFragment
+        if(mPreferencesHelper.getJsonLogin()==null) {
+            addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
         }else{
             addFagment(getSupportFragmentManager(), R.id.fragment, MainFragment.newInstance());
         }
@@ -152,7 +136,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState = result.saveInstanceState(outState);
-        outState = headerResult.saveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
 
@@ -168,7 +151,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                     finish();
                 }
                 this.doubleBackToExitPressedOnce = true;
-                Snackbar.make(mToolbar,R.string.msg_exit,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mLayout,R.string.msg_exit,Snackbar.LENGTH_SHORT).show();
                 new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
             } else {
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
@@ -196,9 +179,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     }
 
     @Override
-    public void hideToolBar(boolean isHide) {
+    public void hideToolBar(boolean isShow) {
         if(mToolbar != null) {
-            if (isHide)
+            if (isShow)
                 getSupportActionBar().hide();
             else
                 getSupportActionBar().show();

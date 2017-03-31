@@ -1,94 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.toan_itc.mobifone.libs.view.StateLayout
+<com.acuteksolutions.uhotel.libs.view.StateLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/login_bg"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:padding="@dimen/padding_sides"
-                android:id="@+id/login_layout">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stateLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bglogin"
+    android:gravity="center">
 
+    <ImageView
+        android:id="@+id/img_logo"
+        style="@style/style_base"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_uhotel"/>
 
     <LinearLayout
-        android:id="@+id/ll1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:id="@+id/layout_clock"
+        android:layout_below="@+id/img_logo"
+        style="@style/style_base"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_et_email"
-                android:inputType="textEmailAddress"
-                android:textSize="@dimen/text_medium" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/layout_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_et_pass"
-                android:inputType="textPassword"
-                android:textSize="@dimen/text_medium" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <CheckBox
-            android:id="@+id/checkboxRemember"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/checkbox_remember"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/my_button"
-            android:text="@string/btn_login"
-            android:textSize="@dimen/text_medium" />
+        <TextClock
+            android:id="@+id/lock"
+            style="@style/style_base"
+            android:format12Hour="h:mm a"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:timeZone="America/Los_Angeles"
+            tools:ignore="NewApi"/>
 
         <TextView
-            android:id="@+id/tvRestore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:clickable="true"
-            android:linksClickable="false"
-            android:text="@string/tv_restore"
-            android:textSize="@dimen/text_small"
-            android:textStyle="bold" />
+            android:id="@+id/txt_date"
+            style="@style/style_base"
+            android:gravity="center"
+            android:text="Tuesday, September 27th, 2016"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+        <!--Weather api-->
+        <ImageView
+            android:id="@+id/img_weather"
+            android:layout_width="32dp"
+            android:layout_height="20dp"
+            android:scaleType="centerInside"/>
 
+        <TextView
+            android:id="@+id/txt_temp"
+            style="@style/style_base"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/layout_pass"
+        android:layout_below="@+id/layout_clock"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:clickable="true"
-        android:gravity="bottom"
-        android:text="@string/tv_register"
-        android:textSize="@dimen/text_small"
-        android:textStyle="bold" />
-</com.toan_itc.mobifone.libs.view.StateLayout>
+        style="@style/style_base">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/etPass"
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_edittext"
+            android:hint="PIN"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:nextFocusDown="@+id/login_main_div_loginbutton"
+            android:nextFocusRight="@+id/login_main_div_loginbutton"
+            android:paddingLeft="10dp"
+            android:text="kt12345678"
+            android:textColor="@color/white"
+            android:textColorHint="#A6A9A9"
+            android:textSize="24sp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_button"
+        android:layout_below="@+id/layout_pass"
+        android:text="Log in"
+        android:textColor="@color/white"/>
+
+</com.acuteksolutions.uhotel.libs.view.StateLayout>

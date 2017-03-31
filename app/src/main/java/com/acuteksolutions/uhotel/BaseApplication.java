@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.acuteksolutions.uhotel.injector.component.ApplicationComponent;
+import com.acuteksolutions.uhotel.injector.component.DaggerApplicationComponent;
 import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
 import com.acuteksolutions.uhotel.utils.Utils;
 import com.bumptech.glide.Glide;
@@ -14,8 +15,6 @@ import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
-
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Toan.IT

@@ -21,7 +21,7 @@ ext {
     java8 = true
 
     //Libraries
-    supportLibsVersion = '25.2.0'
+    supportLibsVersion = '25.3.0'
     constraintVersion = '1.0.2'
     daggerVersion = '2.9'
     butterKnifeVersion = '8.5.1'
@@ -30,16 +30,16 @@ ext {
     rxBindingVersion = '1.0.0'
     rxPermissionsVersion ='0.9.1@aar'
     okHttpVersion = '3.6.0'
-    okHttpVersionLogger ='1.0.4'
+    okHttpVersionLogger ='1.0.5'
     retrofitVersion ='2.2.0'
     gsonVersion     ='2.8.0'
     frescoVersion   = '1.1.0'
     glideVersion    ='3.7.0'
     baseRecyclerVersion = '2.8.2'
     reactivenetworkVersion = '0.8.0'
-    drawerVersion         ='5.3.0@aar'
-    coordinatortabVersion = '1.0.6'
+    drawerVersion         ='5.8.2@aar'
     networking  ='0.4.0'
+    exoVersion='r2.2.0';
     //Testing
     robolectricVersion = '3.0'
     jUnitVersion = '4.12'
@@ -91,10 +91,7 @@ ext {
     appDependencies  =[
             baseRecyclerView       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${baseRecyclerVersion}",
             drawer                 : "com.mikepenz:materialdrawer:${drawerVersion}",
-            coordinatortab         : "cn.hugeterry.coordinatortablayout:coordinatortablayout:${coordinatortabVersion}",
-            searchview             : "com.lapism:searchview:4.0",
-            bottomTab              : "me.majiajie:pager-bottom-tab-strip:2.0.0",
-            fabButton              : "com.github.clans:fab:1.6.4",
+            exoPlayer              : "com.google.android.exoplayer:exoplayer:${exoVersion}",
     ]
 
     developmentDependencies = [

@@ -1,174 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="HardcodedText">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_landing"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/home_background"/>
-    <ImageView
-        android:id="@+id/img_logo"
-        style="@style/style_base"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_uhotel"/>
-    <TextView
-        android:id="@+id/txt_welcome"
-        style="@style/style_base"
-        android:layout_below="@+id/img_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="@string/home_welcome"
-        android:textSize="@dimen/textSize26"
-        android:textColor="@color/white"/>
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/img_landing">
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText">
 
-        <TableRow
+        <ImageView
+            android:id="@+id/img_landing"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="370dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_background"/>
 
-            <RelativeLayout
-                android:id="@+id/layout_message"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+        <ImageView
+            android:id="@+id/img_logo"
+            style="@style/style_base"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/logo_uhotel"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
+        <TextView
+            android:id="@+id/txt_welcome"
+            style="@style/style_base"
+            android:layout_below="@+id/img_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/home_welcome"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize26"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hotel exclusive"
-                        android:textColor="@color/md_yellow_800"
-                        android:textSize="@dimen/textSize16"
-                        android:textStyle="italic"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Enjoy in-room spa treatment"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize22"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Reserve today for 50% off"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize16"/>
-                </LinearLayout>
-
-                <ImageView
-                    style="@style/style_img_home"
-                    android:src="@drawable/home_message"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_bar"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hotel exclusive"
-                        android:textColor="@color/md_yellow_800"
-                        android:textSize="@dimen/textSize16"
-                        android:textStyle="italic"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Bar Luxe"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize22"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Complimentary Drink"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize16"/>
-                </LinearLayout>
-
-                <ImageView
-                    style="@style/style_img_home"
-                    android:src="@drawable/home_barluxe"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_sabrora"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Sambrosa"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize22"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Reserve atable and get one free appetizer"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textSize16"/>
-                </LinearLayout>
-
-                <ImageView
-                    style="@style/style_img_home"
-                    android:src="@drawable/home_sabrosa"/>
-            </RelativeLayout>
-        </TableRow>
-
-        <TableRow
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/img_landing">
 
-            <ImageView
-                android:id="@+id/img_movies"
-                style="@style/style_img_home2"
-                android:src="@drawable/home_movies"/>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
 
-            <ImageView
-                android:id="@+id/img_room_service"
-                style="@style/style_img_home2"
-                android:src="@drawable/home_roomService"/>
+                <RelativeLayout
+                    android:id="@+id/layout_message"
+                    style="@style/style_layout_home">
 
-            <ImageView
-                android:id="@+id/img_parental_control"
-                style="@style/style_img_home2"
-                android:src="@drawable/home_parentalControl"/>
-        </TableRow>
-    </TableLayout>
-</RelativeLayout>
+                    <ImageView
+                        style="@style/style_img_home"
+                        android:src="@drawable/home_message"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hotel exclusive"
+                            android:textColor="@color/md_yellow_800"
+                            android:textSize="@dimen/textSize16"
+                            android:textStyle="italic"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Enjoy in-room spa treatment"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize22"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reserve today for 50% off"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize16"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_bar"
+                    style="@style/style_layout_home">
+
+                    <ImageView
+                        style="@style/style_img_home"
+                        android:src="@drawable/home_barluxe"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hotel exclusive"
+                            android:textColor="@color/md_yellow_800"
+                            android:textSize="@dimen/textSize16"
+                            android:textStyle="italic"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bar Luxe"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize22"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Complimentary Drink"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize16"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_sabrora"
+                    style="@style/style_layout_home">
+
+                    <ImageView
+                        style="@style/style_img_home"
+                        android:src="@drawable/home_sabrosa"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sambrosa"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize22"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reserve atable and get one free appetizer"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/textSize16"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                style="@style/style_layout_home">
+
+                <ImageView
+                    android:id="@+id/img_movies"
+                    style="@style/style_img_home2"
+                    android:src="@drawable/home_movies"/>
+
+                <ImageView
+                    android:id="@+id/img_room_service"
+                    style="@style/style_img_home2"
+                    android:src="@drawable/home_room_service"/>
+
+                <ImageView
+                    android:id="@+id/img_parental_control"
+                    style="@style/style_img_home2"
+                    android:src="@drawable/home_parental_control"/>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+</ScrollView>

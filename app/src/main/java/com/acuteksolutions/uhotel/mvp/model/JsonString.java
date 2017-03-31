@@ -8,5 +8,5 @@ import com.google.gson.annotations.Expose;
  */
 public class JsonString<T> {
     @Expose
-    public String data;
+    public String result;
 }

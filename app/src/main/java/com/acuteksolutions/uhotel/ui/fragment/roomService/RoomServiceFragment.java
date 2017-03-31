@@ -5,19 +5,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
-import com.acuteksolutions.uhotel.mvp.presenter.movies.MoviesPresenter;
-import com.acuteksolutions.uhotel.mvp.view.movies.MoviesView;
-import com.acuteksolutions.uhotel.ui.adapter.movies.MoviesAdapter;
+import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
+import com.acuteksolutions.uhotel.mvp.view.RomServiceView;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class RoomServiceFragment extends BaseFragment implements MoviesView {
+public class RoomServiceFragment extends BaseFragment implements RomServiceView {
   @Inject
   MoviesPresenter
   mPresenter;
@@ -66,11 +62,5 @@ public class RoomServiceFragment extends BaseFragment implements MoviesView {
     mPresenter.detachView();
   }
 
-  @Override
-  public void listMovies(List<VODInfo> moviesList) {
-    MoviesAdapter moviesAdapter =new MoviesAdapter(moviesList);
-    moviesAdapter.openLoadAnimation();
-    mRecyclerview.setAdapter(moviesAdapter);
-  }
 }
 

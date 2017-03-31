@@ -10,5 +10,5 @@ import java.util.List;
  */
 public class JsonArray<T> {
     @Expose
-    public List<T> data;
+    public List<T> result;
 }

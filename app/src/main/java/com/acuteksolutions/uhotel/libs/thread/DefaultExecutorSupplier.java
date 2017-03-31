@@ -3,7 +3,7 @@ package com.acuteksolutions.uhotel.libs.thread;
 import android.os.Build;
 import android.os.Process;
 
-import com.toan_itc.mobifone.libs.thread.priority.PriorityThreadPoolExecutor;
+import com.acuteksolutions.uhotel.libs.thread.priority.PriorityThreadPoolExecutor;
 
 import java.io.File;
 import java.io.FileFilter;

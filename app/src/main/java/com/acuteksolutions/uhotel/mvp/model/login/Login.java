@@ -4,187 +4,150 @@ package com.acuteksolutions.uhotel.mvp.model.login;
  * Created by Toan.IT
  * Date: 12/06/2016
  */
-/**
- * id : 116
- * first_name : null
- * email : huynhvantoan.itc1@gmail.com
- * last_name : null
- * shop_id : 5
- * phone : null
- * avatar : null
- * address : null
- * postcode : null
- * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOiIxMTYiLCJpc3MiOiJodHRwczpcL1wvYXBpLnNtYXJ0c2Fsb24ubmV0XC9tb2JpbGVcL3YxXC9sb2dpbiIsImlhdCI6IjE0NjU3MDQ5NjQiLCJleHAiOiIxNDY1NzA4NTY0IiwibmJmIjoiMTQ2NTcwNDk2NCIsImp0aSI6Ijg1MWUzNmY1NjcwMTE3Zjc4Njg3NzU2NWQ0ZDdkZGM3In0.YjFlN2Y2MjI5YThmZTg0MzFlNWQxNWQyZjhlMDEzZTYyMGU2OTMyMzIyODJlZDAzMGNjNGJlNTcyMjVjNmY0MA
- * password_reset_timestamp : null
- * password_reset_token : null
- * point : 0.0
- * created_at : 2016-06-12 04:13:26
- * updated_at : 2016-06-12 04:16:04
- * Joined : 2M ago
- * LastUpdate : 1 second ago
- * LastLogin : 1S ago
- */
+
 public class Login {
-    private String id;
-    private String first_name;
-    private String email;
-    private String last_name;
-    private String shop_id;
-    private String phone;
-    private String avatar;
-    private String address;
-    private String postcode;
-    private String token;
-    private String password_reset_timestamp;
-    private String password_reset_token;
-    private String point;
-    private String created_at;
-    private String updated_at;
-    private String Joined;
-    private String LastUpdate;
-    private String LastLogin;
 
-    public String getId() {
-        return id;
+    /**
+     * subscriberUid : ab6b48c2-e401-4913-8354-281a340291b0
+     * profileUid : 82d4b107-aaf8-4a90-81fd-46abc267281d
+     * name : 1007
+     * gender : M
+     * languageId : 1
+     * parentalRating : 0
+     * autoSubtitlesEnabled : false
+     * autoAudioEnabled : false
+     * tvRecommendationsEnabled : false
+     * vodRecommendationsEnabled : false
+     * sipPhoneNotificationsEnabled : false
+     * setting : {}
+     * userId : 43
+     * regionId : 1
+     */
+
+    private String subscriberUid;
+    private String profileUid;
+    private String name;
+    private String gender;
+    private int languageId;
+    private int parentalRating;
+    private boolean autoSubtitlesEnabled;
+    private boolean autoAudioEnabled;
+    private boolean tvRecommendationsEnabled;
+    private boolean vodRecommendationsEnabled;
+    private boolean sipPhoneNotificationsEnabled;
+    private String setting;
+    private int userId;
+    private int regionId;
+
+    public String getSubscriberUid() {
+        return subscriberUid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSubscriberUid(String subscriberUid) {
+        this.subscriberUid = subscriberUid;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getProfileUid() {
+        return profileUid;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setProfileUid(String profileUid) {
+        this.profileUid = profileUid;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getGender() {
+        return gender;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getShop_id() {
-        return shop_id;
+    public int getLanguageId() {
+        return languageId;
     }
 
-    public void setShop_id(String shop_id) {
-        this.shop_id = shop_id;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
 
-    public String getPhone() {
-        return phone;
+    public int getParentalRating() {
+        return parentalRating;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setParentalRating(int parentalRating) {
+        this.parentalRating = parentalRating;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public boolean isAutoSubtitlesEnabled() {
+        return autoSubtitlesEnabled;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAutoSubtitlesEnabled(boolean autoSubtitlesEnabled) {
+        this.autoSubtitlesEnabled = autoSubtitlesEnabled;
     }
 
-    public String getAddress() {
-        return address;
+    public boolean isAutoAudioEnabled() {
+        return autoAudioEnabled;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAutoAudioEnabled(boolean autoAudioEnabled) {
+        this.autoAudioEnabled = autoAudioEnabled;
     }
 
-    public String getPostcode() {
-        return postcode;
+    public boolean isTvRecommendationsEnabled() {
+        return tvRecommendationsEnabled;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setTvRecommendationsEnabled(boolean tvRecommendationsEnabled) {
+        this.tvRecommendationsEnabled = tvRecommendationsEnabled;
     }
 
-    public String getToken() {
-        return token;
+    public boolean isVodRecommendationsEnabled() {
+        return vodRecommendationsEnabled;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setVodRecommendationsEnabled(boolean vodRecommendationsEnabled) {
+        this.vodRecommendationsEnabled = vodRecommendationsEnabled;
     }
 
-    public String getPassword_reset_timestamp() {
-        return password_reset_timestamp;
+    public boolean isSipPhoneNotificationsEnabled() {
+        return sipPhoneNotificationsEnabled;
     }
 
-    public void setPassword_reset_timestamp(String password_reset_timestamp) {
-        this.password_reset_timestamp = password_reset_timestamp;
+    public void setSipPhoneNotificationsEnabled(boolean sipPhoneNotificationsEnabled) {
+        this.sipPhoneNotificationsEnabled = sipPhoneNotificationsEnabled;
     }
 
-    public String getPassword_reset_token() {
-        return password_reset_token;
+    public String getSetting() {
+        return setting;
     }
 
-    public void setPassword_reset_token(String password_reset_token) {
-        this.password_reset_token = password_reset_token;
+    public void setSetting(String setting) {
+        this.setting = setting;
     }
 
-    public String getPoint() {
-        return point;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setPoint(String point) {
-        this.point = point;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public int getRegionId() {
+        return regionId;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public String getJoined() {
-        return Joined;
-    }
-
-    public void setJoined(String Joined) {
-        this.Joined = Joined;
-    }
-
-    public String getLastUpdate() {
-        return LastUpdate;
-    }
-
-    public void setLastUpdate(String LastUpdate) {
-        this.LastUpdate = LastUpdate;
-    }
-
-    public String getLastLogin() {
-        return LastLogin;
-    }
-
-    public void setLastLogin(String LastLogin) {
-        this.LastLogin = LastLogin;
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
     }
 }
