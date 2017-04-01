@@ -19,8 +19,10 @@ import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by Toan.IT on 5/11/16.
@@ -94,6 +96,14 @@ public class Utils {
     @SuppressLint("SimpleDateFormat")
     public static String convertDate(Date date) {
         return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
+
+    public static String getTime(){
+      Calendar c = Calendar.getInstance();
+      TimeZone tz = TimeZone.getTimeZone("America/Los_Angeles");
+      c.setTimeZone(tz);
+      SimpleDateFormat df = new SimpleDateFormat("h:mm a   |   MMMM dd, yyyy");
+      return df.format(c.getTime());
     }
     public static String ImageBase64(Bitmap bitmap){
         ByteArrayOutputStream bao = new ByteArrayOutputStream();

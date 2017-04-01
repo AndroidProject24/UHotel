@@ -10,10 +10,11 @@ import java.lang.annotation.RetentionPolicy;
  * Created by vantoan on 3/26/17.
  * Email: Huynhvantoan.itc@gmail.com
  */
-@StringDef({LinkDef.LINK_LIST_CATEGORY, LinkDef.LINK_LIST_MOVIES})
+@StringDef({LinkDef.LINK_LIST_CATEGORY, LinkDef.LINK_LIST_MOVIES,LinkDef.LINK_MOVIES_DETAILS,LinkDef.LINK_IMAGE_URL})
 @Retention(RetentionPolicy.CLASS)
 public @interface LinkDef {
   String LINK_LIST_CATEGORY="/restapi/rest/region_uid/store/categories";
   String LINK_LIST_MOVIES="/vod/info?purchase_item_list=id_list";
   String LINK_MOVIES_DETAILS="/restapi/rest/region_uid/store/products?purchase_category_id=catId";
+  String LINK_IMAGE_URL = "http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/";
 }

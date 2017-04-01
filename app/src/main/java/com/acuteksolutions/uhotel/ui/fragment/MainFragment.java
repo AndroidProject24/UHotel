@@ -1,14 +1,21 @@
 package com.acuteksolutions.uhotel.ui.fragment;
 
+import android.support.annotation.Nullable;
+import android.widget.TextView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
+import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
+import com.acuteksolutions.uhotel.utils.Preconditions;
+import com.acuteksolutions.uhotel.utils.Utils;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -19,6 +26,14 @@ import butterknife.OnClick;
 public class MainFragment extends BaseFragment {
   @Inject
   PreferencesHelper mPreferencesHelper;
+  @BindView(R.id.txt_welcome)
+  TextView mTxtWelcome;
+  @BindView(R.id.txt_marquee_bottom)
+  TextView mTxtMarqueeBottom;
+  @BindView(R.id.txt_datetime)
+  TextView mTxtDateTime;
+  @BindView(R.id.txt_temp)
+  TextView mTxtTemp;
   public static MainFragment newInstance() {
     return new MainFragment();
   }
@@ -34,7 +49,11 @@ public class MainFragment extends BaseFragment {
 
   @Override
   protected void initData() {
-
+    mTxtWelcome.setText(getResources().getString(R.string.home_welcome)+" "+ getName());
+    mTxtDateTime.setText(Utils.getTime());
+    mTxtTemp.setText("70");
+    mTxtMarqueeBottom.setText("");
+    mTxtMarqueeBottom.setSelected(true);
   }
 
   @Override
@@ -71,16 +90,23 @@ public class MainFragment extends BaseFragment {
   public void click_parentalControl(){
     replaceFagment(getFragmentManager(),R.id.fragment, ParentalControlFragment.newInstance());
   }
-   /*@Nullable
-   private String getName() {
-       final StringBuilder builder = new StringBuilder();
-       if ("M".equals(GlobalVariables.currentUser.getGender())) {
-           builder.append("Mr.");
-       } else {
-           builder.append("Ms.");
-       }
-       builder.append(GlobalVariables.currentUser.getName());
-       return builder.toString();
-   }*/
+
+  @Nullable
+  private String getName() {
+    try {
+      final StringBuilder builder = new StringBuilder();
+      Login login = Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin());
+      if ("M".equals(login.getGender())) {
+        builder.append("Mr.");
+      } else {
+        builder.append("Ms.");
+      }
+      builder.append(login.getName());
+      return builder.toString();
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    return "Mr.";
+  }
 
 }

@@ -4,11 +4,12 @@ import android.widget.ImageView;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
+
+import static com.acuteksolutions.uhotel.utils.ImageUtils.loadImage;
 
 public class MoviesAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
     public MoviesAdapter(List<VODInfo> datas) {
@@ -17,9 +18,12 @@ public class MoviesAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, VODInfo data) {
-        helper.setText(R.id.txt_thutuc, data.getContentInfoUid())
-                .addOnClickListener(R.id.txt_thutuc)
-                .addOnClickListener(R.id.img_theloai);
-        Glide.with(mContext).load(data.getContentInfoUid()).crossFade().into((ImageView) helper.getView(R.id.img_theloai));
+      try {
+        helper.setText(R.id.txt_movies_name, data.getDetail().getTitle())
+                .addOnClickListener(R.id.layout_item);
+        loadImage(mContext,data.getDetail().getPoster(),(ImageView) helper.getView(R.id.img_movies));
+      }catch (Exception e){
+        e.printStackTrace();
+      }
     }
 }

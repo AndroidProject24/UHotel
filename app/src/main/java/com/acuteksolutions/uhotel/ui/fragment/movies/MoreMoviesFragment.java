@@ -50,7 +50,7 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.more_movies_fragment;
   }
 
   @Override

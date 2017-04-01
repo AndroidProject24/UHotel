@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
@@ -15,6 +16,7 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.interfaces.KeyListener;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
+import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
 import com.acuteksolutions.uhotel.ui.fragment.MainFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
@@ -25,7 +27,6 @@ import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 
 import javax.inject.Inject;
 
@@ -48,10 +49,14 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     }
 
     private void initToolbarTranparent(){
-      setSupportActionBar(mToolbar);
-      mToolbar.setBackgroundColor(Color.TRANSPARENT);
-      mToolbar.getBackground().setAlpha(100);
-      getSupportActionBar().setDisplayShowTitleEnabled(false);
+        try {
+            setSupportActionBar(mToolbar);
+            mToolbar.setBackgroundColor(Color.TRANSPARENT);
+            mToolbar.getBackground().setAlpha(100);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     private void initDrawer(Bundle savedInstanceState){
         result = new DrawerBuilder(this)
@@ -59,20 +64,23 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
                 .withHeader(R.layout.header)
                 .withToolbar(mToolbar)
                 .withHasStableIds(true)
-               // .withItemAnimator(new AlphaCrossFadeAnimator())
+                .withDrawerWidthDp(400)
+                .withSliderBackgroundColorRes(R.color.black)
+                .withItemAnimator(new DefaultItemAnimator())
                 .addDrawerItems(
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_concierge)).withIcon(R.drawable.menu_concierge).withIdentifier(1).withSetSelected(true),
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_concierge)).withIcon(R.drawable.menu_concierge).withIdentifier(1).withSetSelected(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_live_tv)).withIcon(R.drawable.menu_livetv).withIdentifier(2).withSetSelected(true),
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_live_tv)).withIcon(R.drawable.menu_livetv).withIdentifier(2).withSetSelected(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_movies)).withIcon(R.drawable.menu_movies).withIdentifier(3).withSetSelected(true),
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_movies)).withIcon(R.drawable.menu_movies).withIdentifier(3).withSetSelected(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_food_activity)).withIcon(R.drawable.menu_food_activities).withIdentifier(4).withSetSelected(true),
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_food_activity)).withIcon(R.drawable.menu_food_activities).withIdentifier(4).withSetSelected(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_room_control)).withIcon(R.drawable.menu_room_control).withIdentifier(5).withSetSelected(true).withEnabled(true),
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_room_control)).withIcon(R.drawable.menu_room_control).withIdentifier(5).withSetSelected(true).withEnabled(true),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withName(getString(R.string.menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(6).withSetSelected(true)
+                        new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(6).withSetSelected(true),
+                        new DividerDrawerItem()
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     if (drawerItem != null) {

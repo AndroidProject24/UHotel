@@ -1,33 +1,24 @@
 package com.acuteksolutions.uhotel.ui.fragment.movies;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
-import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
-import com.acuteksolutions.uhotel.mvp.view.MoviesView;
-import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
-import com.acuteksolutions.uhotel.ui.adapter.movies.MoviesAdapter;
+import com.acuteksolutions.uhotel.ui.adapter.TabPagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.Unbinder;
 
-public class MoviesFragment extends BaseFragment implements MoviesView {
-  @Inject
-  MoviesPresenter
-  mPresenter;
+public class MoviesFragment extends BaseFragment {
+  @BindView(R.id.tabLayout)
+  TabLayout mTabLayout;
+  @BindView(R.id.view_pager)
+  ViewPager mViewPager;
+  Unbinder unbinder;
   private Context mContext;
-  @BindView(R.id.recycle_movies)
-  RecyclerView mRecyclerMovies;
+
   public static MoviesFragment newInstance() {
     return new MoviesFragment();
   }
@@ -35,7 +26,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    mContext=context;
+    mContext = context;
   }
 
   @Override
@@ -45,9 +36,11 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   protected void initViews() {
-    ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mPresenter.attachView(this);
-    initRecyclerview();
+    TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getFragmentManager());
+    tabPagerAdapter.addFragment(ListMoviesFragment.newInstance(), "1");
+    tabPagerAdapter.addFragment(ListMoviesFragment.newInstance(), "2");
+    mViewPager.setAdapter(tabPagerAdapter);
+    mTabLayout.setupWithViewPager(mViewPager);
   }
 
   @Override
@@ -57,35 +50,6 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   protected void initData() {
-    mPresenter.getCategory();
-  }
-
-  private void initRecyclerview(){
-    mRecyclerMovies.setLayoutManager(new LinearLayoutManager(mContext));
-    mRecyclerMovies.setHasFixedSize(true);
-  }
-
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    mPresenter.detachView();
-  }
-
-  @Override
-  public void listCategory(List<Category> categoryList) {
-    //Logger.e("categoryList="+categoryList.toString()+"\n GetID="+categoryList.get(0).getId());
-    mPresenter.getMoviesDetails(categoryList.get(0).getId());
-  }
-
-  @Override
-  public void listMovies(List<VODInfo> moviesList) {
-    Logger.e("moviesList="+moviesList.toString());
-    MoviesAdapter moviesAdapter =new MoviesAdapter(moviesList);
-    moviesAdapter.openLoadAnimation();
-    mRecyclerMovies.setAdapter(moviesAdapter);
-  }
-  @OnClick(R.id.btn_all_movies)
-  public void ClickAllMovies(){
 
   }
 }

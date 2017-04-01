@@ -35,11 +35,12 @@ ext {
     gsonVersion     ='2.8.0'
     frescoVersion   = '1.1.0'
     glideVersion    ='3.7.0'
-    baseRecyclerVersion = '2.8.2'
+    baseRecyclerVersion = '2.9.3'
     reactivenetworkVersion = '0.8.0'
     drawerVersion         ='5.8.2@aar'
     networking  ='0.4.0'
-    exoVersion='r2.2.0';
+    exoVersion='r2.2.0'
+
     //Testing
     robolectricVersion = '3.0'
     jUnitVersion = '4.12'

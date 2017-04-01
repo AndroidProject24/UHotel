@@ -102,7 +102,6 @@ dependencies {
     compile supportDependencies.supportDesign
     compile supportDependencies.supportRecyclerView
     compile supportDependencies.supportCardView
-    compile supportDependencies.constraintLayout
 
     //----- Butterknife
     compile supportDependencies.butterKnife

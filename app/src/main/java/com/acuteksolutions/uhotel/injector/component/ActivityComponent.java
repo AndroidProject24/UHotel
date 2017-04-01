@@ -7,8 +7,8 @@ import com.acuteksolutions.uhotel.ui.fragment.MainFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
+import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoreMoviesFragment;
-import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 
 import dagger.Component;
 
@@ -30,7 +30,7 @@ public interface ActivityComponent {
   void inject(LiveTVFragment liveTVFragment);
 
   /*MOVIES*/
-  void inject(MoviesFragment moviesFragment);
+  void inject(ListMoviesFragment listMoviesFragment);
 
   void inject(MoreMoviesFragment moreMoviesFragment);
 

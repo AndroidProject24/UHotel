@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 public class PreferencesHelper {
     private static SharedPreferences mPref;
     private static final String PREF_FILE_NAME = "PREF_APP_NAME";
-    private static final String PREF_USER = "PREF_USER";
+    private static final String PREF_USER = "PREF_USER_LOGIN";
     @Inject
     public PreferencesHelper(Context context) {
         mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);

@@ -31,7 +31,15 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
+import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -1506,5 +1514,22 @@ public class ImageUtils {
         byte[] bytes = baos.toByteArray();
         if (recycle && !src.isRecycled()) src.recycle();
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+    }
+    public static void loadImage(Context context,String url,ImageView imageView){
+      Glide.with(context).load(url)
+              .crossFade().into(imageView);
+    }
+    public static void loadImage(Fragment fragment, String url, final ViewGroup viewGroup){
+        Glide.with(fragment).load(url).asBitmap()
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(viewGroup.getWidth(), viewGroup.getHeight()) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                Drawable drawable = new BitmapDrawable(resource);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    viewGroup.setBackground(drawable);
+                }
+            }
+        });
     }
 }

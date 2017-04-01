@@ -48,4 +48,18 @@ public class Detail {
     public List<String> getGenres() {
         return genres;
     }
+
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "title='" + title + '\'' +
+                ", actors='" + actors + '\'' +
+                ", director='" + director + '\'' +
+                ", duration=" + duration +
+                ", poster='" + poster + '\'' +
+                ", description='" + description + '\'' +
+                ", genres=" + genres +
+                '}';
+    }
+
 }

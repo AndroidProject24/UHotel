@@ -64,5 +64,40 @@ public class FoodFragment extends BaseFragment implements FoodView {
     mPresenter.detachView();
   }
 
+  ///////////////////////////////////
+  ///////////  GET FAKE DATA  ///////////
+ /* public ListFood getALLInfoItemFromCatJSON(JSONObject jsondata, int catindex) {
+    try {
+      JSONArray jsonArray = jsondata.optJSONArray("FoodObject");
+      JSONObject jsonObject = jsonArray.getJSONObject(catindex);
+      if(catindex==0){
+        mFoodList.setTitle(mMenuCoffee.getText().toString());
+      }else if(catindex==1){
+        mFoodList.setTitle(mMenuRestaurant.getText().toString());
+      }else if(catindex==2){
+        mFoodList.setTitle(mMenuTop.getText().toString());
+      }else if(catindex==3){
+        mFoodList.setTitle(mMenuHotel.getText().toString());
+      }
+      List<Food> foodList=new ArrayList<>();
+      for (int i = 1; i <= 5; i++) {
+        Food food=new Food();
+        if (!Objects.equals(jsonObject.optString("img" + (i) + "Rating"), "")) {
+          food.setRating(Integer.parseInt(jsonObject.optString("img" + (i) + "Rating")));
+        }
+        food.setName(jsonObject.optString("img" + (i) + "Name"));
+        food.setType(jsonObject.optString("img" + (i) + "Type"));
+        food.setDes(jsonObject.optString("img" + (i) + "Desc"));
+        food.setAddress(jsonObject.optString("img" + (i) + "Address"));
+        food.setUrl(jsonObject.optInt("img" + i + "Path"));
+        foodList.add(food);
+      }
+      mFoodList.setFoodList(foodList);
+      return mFoodList;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }*/
 }
 

@@ -3,8 +3,8 @@ package com.acuteksolutions.uhotel.data.service;
 import com.acuteksolutions.uhotel.intdef.LinkDef;
 import com.acuteksolutions.uhotel.intdef.ParseGsonDef;
 import com.acuteksolutions.uhotel.intdef.PathDef;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
+import com.acuteksolutions.uhotel.mvp.model.data.Detail;
 import com.acuteksolutions.uhotel.mvp.model.data.Product;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
@@ -66,16 +66,37 @@ public class RestData {
             .observeOn(AndroidSchedulers.mainThread());
   }
 
-  public Observable<List<VODInfo>> getListMovies(String idList) {
+  public Observable<List<VODInfo>> getListMovies(String regionUID,String idList) {
     return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID,String.valueOf(idList)))
             .map(stringJsonString -> {
-              List<VODInfo> vodInfoList =null;
+              List<VODInfo> vodInfoList = new ArrayList<>();
               try {
-                JSONObject result = new JSONObject(stringJsonString.result);
-                Logger.e(result.toString());
-                JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
-                Logger.e(list.toString());
-                vodInfoList = new Gson().fromJson(list.toString(),new TypeToken<List<Category>>(){}.getType());
+                JSONArray result = new JSONArray(stringJsonString.result);
+                for(int i=0;i<result.length();i++){
+                  JSONObject item = result.getJSONObject(i);
+                  JSONObject jsonDetail = item.getJSONObject("details");
+                  JSONArray jsonGenres = jsonDetail.getJSONArray("genres");
+                  List<String> genres = new ArrayList<>();
+                  for (int j = 0; j < jsonGenres.length(); j++) {
+                    genres.add(jsonGenres.getString(j));
+                  }
+                  Detail detail = new Detail(
+                          (jsonDetail.optString("title").equals("")?jsonDetail.getString("title"): "N/A"),
+                          (jsonDetail.optString("actors").equals("")? jsonDetail.getString("actors") : "N/A"),
+                          (jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
+                          jsonDetail.optInt("duration",0),
+                          LinkDef.LINK_IMAGE_URL.replace("{regionId}", regionUID) + jsonDetail.getString("poster"),
+                          (jsonDetail.optString("description").equals("") ? jsonDetail.getString("description"): "No description"),
+                          genres
+                  );
+                  VODInfo vod = new VODInfo(
+                          item.getInt("purchaseId"),
+                          item.getString("contentInfoId"),
+                          detail,
+                          item.getInt("contentId")
+                  );
+                  vodInfoList.add(vod);
+                }
               }catch (JSONException e){
                 e.printStackTrace();
               }
@@ -90,32 +111,6 @@ public class RestData {
               List<Product> productList = new ArrayList<>();
               List<String> purchasesItem = new ArrayList<>();
               try {
-                long timestart=System.currentTimeMillis();
-                /*JsonParser jsonParser = new JsonParser();
-                JsonElement jsonTree = jsonParser.parse(stringJsonString.result);
-                if(jsonTree.isJsonObject()) {
-                  JsonObject jsonObject = jsonTree.getAsJsonObject();
-                  JsonArray list=jsonObject.getAsJsonArray(ParseGsonDef.ARRAY);
-                  if(list.isJsonArray()) {
-                    for (int i = 0; i < list.size(); i++) {
-                      JsonElement items = list.get(i);
-                      JsonObject object=items.getAsJsonObject();
-                      JsonArray item = object.getAsJsonArray(ParseGsonDef.ITEMS);
-                      for (int k = 0; k < item.size(); k++) {
-                        JsonElement id = list.get(k);
-                        JsonObject objectID=id.getAsJsonObject();
-                        if (null != objectID) {
-                          purchasesItem.add(objectID.get(ParseGsonDef.ID).getAsString());
-                        }
-                      }
-                      Product product = new Product(purchasesItem, null);
-                      productList.add(product);
-                      Logger.e(productList.toString());
-                    }
-                  }
-                }
-                //TEST Time
-                long timestart=System.currentTimeMillis();*/
                 JSONObject result = new JSONObject(stringJsonString.result);
                 JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
                 for (int i = 0; i < list.length(); i++) {
@@ -129,9 +124,8 @@ public class RestData {
                   }
                   Product product = new Product(purchasesItem, null);
                   productList.add(product);
-                  Logger.e(productList.toString());
+                  //Logger.e(productList.toString());
                 }
-                Logger.e("Time="+(System.currentTimeMillis()-timestart));
               }catch (JSONException e){
                 e.printStackTrace();
               }
@@ -145,8 +139,7 @@ public class RestData {
                   if (builder.length() == 0) builder.append(s);
                   builder.append(",").append(s);
                 }
-                Logger.e(builder.toString()+"\n substring="+strings.toString().substring(1,strings.toString().length()-1));
-                return getListMovies(builder.toString());
+                return getListMovies(regionUID,builder.toString());
               }
             })
             .observeOn(AndroidSchedulers.mainThread());
