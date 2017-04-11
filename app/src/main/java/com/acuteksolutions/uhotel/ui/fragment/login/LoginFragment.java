@@ -12,19 +12,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.mvp.presenter.LoginPresenter;
 import com.acuteksolutions.uhotel.mvp.view.LoginView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.ui.fragment.MainFragment;
-
+import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 import static com.acuteksolutions.uhotel.utils.Utils.isPasswordValid;
 
@@ -75,7 +72,6 @@ public class LoginFragment extends BaseFragment implements LoginView {
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
     mLoginPresenter.attachView(this);
     mEtPass.addTextChangedListener(textWatcher);
-    toolbarTitleListener.hideToolBar(true);
   }
 
   @Override
@@ -135,7 +131,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   public void loginSucess() {
-    replaceFagment(getFragmentManager(), R.id.fragment, MainFragment.newInstance());
+    replaceFagment(getFragmentManager(), R.id.fragment, LandingFragment.newInstance());
   }
 
   @Override
@@ -143,14 +139,5 @@ public class LoginFragment extends BaseFragment implements LoginView {
     showError("");
   }
 
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    try {
-      toolbarTitleListener.hideToolBar(false);
-    }catch (Exception e){
-      e.printStackTrace();
-    }
-  }
 }
 

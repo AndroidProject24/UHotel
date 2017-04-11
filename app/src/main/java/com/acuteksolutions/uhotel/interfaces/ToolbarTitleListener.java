@@ -8,5 +8,5 @@ package com.acuteksolutions.uhotel.interfaces;
 public interface ToolbarTitleListener {
     void changeTitle(String name);
 
-    void hideToolBar(boolean isShow);
+    void hideShowToolBar(boolean isShow);
 }

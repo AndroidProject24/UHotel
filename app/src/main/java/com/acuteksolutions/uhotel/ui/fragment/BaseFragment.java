@@ -10,16 +10,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
+import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.libs.view.FadeViewAnimProvider;
 import com.acuteksolutions.uhotel.libs.view.StateLayout;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import com.squareup.leakcanary.RefWatcher;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
@@ -39,7 +41,18 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   private Unbinder unbinder;
   private String TAG = getTAG();
   protected abstract String getTAG();
+  protected ToolbarTitleListener toolbarTitleListener;
 
+  @Override
+  public void onAttach(Context context) {
+    super.onAttach(context);
+    try {
+      toolbarTitleListener = (ToolbarTitleListener) getActivity();
+    } catch (ClassCastException e) {
+      throw new ClassCastException(context.toString()
+          + " must implement OnHeadlineSelectedListener");
+    }
+  }
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,27 +67,13 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, mContentView);
     mContext = getContext();
+    toolbarTitleListener.hideShowToolBar(false);
     initViews();
     initProgress();
     initData();
-    setTitle();
+    Logger.e(toString());
   }
-  private void setTitle(){
-    String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
-   /* if(currenttag.equalsIgnoreCase(KhosoFragment.class.getName())) {
-      toolbarTitleListener.changeTitle(getString(R.string.kho_so));
-    }else if(currenttag.equalsIgnoreCase(LandingFragment.class.getName())) {
-      toolbarTitleListener.changeTitle(getString(R.string.thu_tuc));
-    }else if(currenttag.equalsIgnoreCase(CongnoFragment.class.getName())) {
-      toolbarTitleListener.changeTitle(getString(R.string.cong_no));
-    }else if(currenttag.equalsIgnoreCase(KhuyenmaiFragment.class.getName())) {
-      toolbarTitleListener.changeTitle(getString(R.string.ct_km));
-    }else if(currenttag.equalsIgnoreCase(UpanhFragment.class.getName())) {
-      toolbarTitleListener.changeTitle(getString(R.string.up_anh));
-    }else{
-      toolbarTitleListener.changeTitle(getResources().getString(R.string.app_name));
-    }*/
-  }
+
   protected abstract void initViews();
 
   protected abstract int setLayoutResourceID();
@@ -85,7 +84,7 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     return mContentView;
   }
 
-  private Context getMContext() {
+  protected Context getmContext() {
     return mContext;
   }
 
@@ -116,10 +115,14 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   public void replaceFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
-    FragmentTransaction transaction = fragmentManager.beginTransaction();
-    transaction.replace(frameId, fragment,fragment.getClass().getName());
-    transaction.addToBackStack(null);
-    transaction.commit();
+    String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
+    Logger.e("currenttag="+currenttag+"fragment="+fragment.getTag());
+    if(!currenttag.equalsIgnoreCase(fragment.getTag())) {
+      FragmentTransaction transaction = fragmentManager.beginTransaction();
+      transaction.replace(frameId, fragment, fragment.getClass().getName());
+      transaction.addToBackStack(null);
+      transaction.commit();
+    }
   }
 
 
@@ -198,8 +201,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     if (this.mCompositeSubscription != null) {
       this.mCompositeSubscription.unsubscribe();
     }
-      /*  RefWatcher refWatcher = BaseApplication.getRefWatcher();
-        refWatcher.watch(this);*/
+    RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
+    refWatcher.watch(this);
   }
   @Override
   public String toString() {

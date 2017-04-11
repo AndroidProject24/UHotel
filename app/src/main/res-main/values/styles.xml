@@ -1,120 +1,139 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/md_red_700</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="FullscreenTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.TranslucentStatus">
-        <!-- MaterialDrawer specific values -->
-        <item name="material_drawer_background">@color/material_drawer_dark_background</item>
-        <item name="material_drawer_primary_text">@color/material_drawer_dark_primary_text</item>
-        <item name="material_drawer_primary_icon">@color/material_drawer_dark_primary_icon</item>
-        <item name="material_drawer_secondary_text">@color/material_drawer_dark_secondary_text</item>
-        <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>
-        <item name="material_drawer_hint_icon">@color/material_drawer_dark_hint_icon</item>
-        <item name="material_drawer_divider">@color/yellow</item>
-        <item name="material_drawer_selected">@color/material_drawer_dark_selected</item>
-        <item name="material_drawer_selected_text">@color/material_drawer_dark_selected_text</item>
-        <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
-    </style>
-    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="tabIndicatorColor">?attr/colorAccent</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
-        <item name="tabSelectedTextColor">@color/colorAccent</item>
-    </style>
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
-        <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/material_drawer_hint_icon</item>
-        <item name="android:textSize">20sp</item>
-        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="colorControlNormal">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
-    </style>
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/md_red_700</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+  <style name="FullscreenTheme" parent="MaterialDrawerTheme.Light.DarkToolbar.TranslucentStatus">
+    <!-- MaterialDrawer specific values -->
+    <item name="material_drawer_background">@color/material_drawer_dark_background</item>
+    <item name="material_drawer_primary_text">@color/material_drawer_dark_primary_text</item>
+    <item name="material_drawer_primary_icon">@color/material_drawer_dark_primary_icon</item>
+    <item name="material_drawer_secondary_text">@color/material_drawer_dark_secondary_text</item>
+    <item name="material_drawer_hint_text">@color/material_drawer_dark_hint_text</item>
+    <item name="material_drawer_hint_icon">@color/material_drawer_dark_hint_icon</item>
+    <item name="material_drawer_divider">@color/yellow</item>
+    <item name="material_drawer_selected">@color/material_drawer_dark_selected</item>
+    <item name="material_drawer_selected_text">@color/material_drawer_dark_selected_text</item>
+    <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
+  </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+  <style name="MainTabLayoutStyle" parent="Widget.Design.TabLayout">
+    <item name="tabMode">fixed</item>
+    <item name="tabGravity">fill</item>
+    <item name="tabIndicatorColor">@color/transparent</item>
+    <item name="android:tabStripEnabled">false</item>
+    <item name="tabIndicatorHeight">2dp</item>
+    <item name="android:layout_height">@dimen/action_bar_height</item>
+    <item name="tabBackground">@color/tab_background</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="tabSelectedTextColor">@color/tab_select</item>
+  </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+  <style name="MoviesTabLayoutStyle" parent="Widget.Design.TabLayout">
+    <item name="tabMode">fixed</item>
+    <item name="tabGravity">fill</item>
+    <item name="tabIndicatorColor">@color/transparent</item>
+    <item name="android:tabStripEnabled">false</item>
+    <item name="tabIndicatorHeight">2dp</item>
+    <item name="android:layout_height">@dimen/action_bar_height</item>
+    <item name="tabBackground">@color/tab_background</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="tabSelectedTextColor">@color/tab_select</item>
+  </style>
 
-    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert"/>
+  <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <!-- Hint color and label color in FALSE state -->
+    <item name="android:textColorHint">@color/material_drawer_hint_icon</item>
+    <item name="android:textSize">20sp</item>
+    <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+    <item name="colorAccent">@color/colorPrimary</item>
+    <item name="colorControlNormal">@color/colorPrimary</item>
+    <item name="colorControlActivated">@color/colorPrimaryDark</item>
+  </style>
 
-    <style name="AVLoadingIndicatorView">
-        <item name="minWidth">48dip</item>
-        <item name="maxWidth">48dip</item>
-        <item name="minHeight">48dip</item>
-        <item name="maxHeight">48dip</item>
-        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
-        <item name="indicatorColor">@color/primary_dark</item>
-    </style>
-    <!--STYLE CONFIG-->
-    <style name="style_base">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="main_img" parent="style_base">
-        <item name="android:layout_marginRight">10dp</item>
-    </style>
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="style_image_main" parent="style_base">
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:adjustViewBounds">true</item>
-    </style>
+  <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert"/>
 
-    <style name="style_text_main" parent="style_base">
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/md_black_1000</item>
-    </style>
+  <style name="AVLoadingIndicatorView">
+    <item name="minWidth">48dip</item>
+    <item name="maxWidth">48dip</item>
+    <item name="minHeight">48dip</item>
+    <item name="maxHeight">48dip</item>
+    <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
+    <item name="indicatorColor">@color/primary_dark</item>
+  </style>
+  <!--STYLE CONFIG-->
+  <style name="style_base">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
 
-    <style name="style_base_fill">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
+  <style name="main_img" parent="style_base">
+    <item name="android:layout_marginRight">10dp</item>
+  </style>
 
-    <!--LANDING-->
-    <style name="style_layout_home">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">350dp</item>
-        <item name="android:layout_weight">1</item>
-    </style>
+  <style name="style_image_main" parent="style_base">
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:layout_height">60dp</item>
+    <item name="android:adjustViewBounds">true</item>
+  </style>
 
-    <style name="style_img_home">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">350dp</item>
-        <item name="android:scaleType">fitXY</item>
-    </style>
+  <style name="style_text_main" parent="style_base">
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textSize">18sp</item>
+    <item name="android:textColor">@color/md_black_1000</item>
+  </style>
 
-    <style name="style_img_home2">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">350dp</item>
-        <item name="android:scaleType">fitXY</item>
-        <item name="android:layout_weight">1</item>
-    </style>
+  <style name="style_base_fill">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+  </style>
 
-    <!--MOVIES-->
-    <style name="Movies.Button.Footerpage" parent="Base.Widget.AppCompat.ActionButton">
-        <item name="android:background">#000</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:gravity">center</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:paddingLeft">30dp</item>
-        <item name="android:paddingRight">30dp</item>
-        <item name="android:layout_marginLeft">30dp</item>
-        <item name="android:layout_marginRight">30dp</item>
-    </style>
+  <!--LANDING-->
+  <style name="style_layout_home">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">350dp</item>
+    <item name="android:layout_weight">1</item>
+  </style>
+
+  <style name="style_img_home">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">350dp</item>
+    <item name="android:scaleType">fitXY</item>
+  </style>
+
+  <style name="style_img_home2">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">350dp</item>
+    <item name="android:scaleType">fitXY</item>
+    <item name="android:layout_weight">1</item>
+  </style>
+
+  <!--MOVIES-->
+  <style name="Movies.Button.Footerpage" parent="Base.Widget.AppCompat.ActionButton">
+    <item name="android:background">#000</item>
+    <item name="android:scaleType">center</item>
+    <item name="android:gravity">center</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:paddingTop">5dp</item>
+    <item name="android:paddingBottom">5dp</item>
+    <item name="android:paddingLeft">30dp</item>
+    <item name="android:paddingRight">30dp</item>
+    <item name="android:layout_marginLeft">30dp</item>
+    <item name="android:layout_marginRight">30dp</item>
+  </style>
 </resources>
 

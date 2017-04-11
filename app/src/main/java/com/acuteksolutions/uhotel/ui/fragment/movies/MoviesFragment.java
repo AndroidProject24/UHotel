@@ -3,20 +3,17 @@ package com.acuteksolutions.uhotel.ui.fragment.movies;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-
+import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.ui.adapter.TabPagerAdapter;
+import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
+import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 
-import butterknife.BindView;
-import butterknife.Unbinder;
-
-public class MoviesFragment extends BaseFragment {
+public class MoviesFragment extends BaseFragment{
   @BindView(R.id.tabLayout)
   TabLayout mTabLayout;
   @BindView(R.id.view_pager)
   ViewPager mViewPager;
-  Unbinder unbinder;
   private Context mContext;
 
   public static MoviesFragment newInstance() {
@@ -34,14 +31,6 @@ public class MoviesFragment extends BaseFragment {
     return this.getClass().getSimpleName();
   }
 
-  @Override
-  protected void initViews() {
-    TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getFragmentManager());
-    tabPagerAdapter.addFragment(ListMoviesFragment.newInstance(), "1");
-    tabPagerAdapter.addFragment(ListMoviesFragment.newInstance(), "2");
-    mViewPager.setAdapter(tabPagerAdapter);
-    mTabLayout.setupWithViewPager(mViewPager);
-  }
 
   @Override
   protected int setLayoutResourceID() {
@@ -49,8 +38,40 @@ public class MoviesFragment extends BaseFragment {
   }
 
   @Override
+  protected void initViews() {
+    TabMoviesDef tabMoviesDef = new TabMoviesDef();
+    mViewPager.setAdapter(new TabPagerMoviesAdapter(mContext,tabMoviesDef,getFragmentManager()));
+    mTabLayout.setupWithViewPager(mViewPager);
+    mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+    mTabLayout.addOnTabSelectedListener(onTabSelectedListener(mViewPager));
+    for (int i = 0; i < tabMoviesDef.tabSize(); i++) {
+      mTabLayout.getTabAt(i).setText(getString(tabMoviesDef.getTab(i)));
+    }
+  }
+
+  @Override
   protected void initData() {
 
   }
+
+  private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager pager) {
+    return new TabLayout.OnTabSelectedListener() {
+      @Override
+      public void onTabSelected(TabLayout.Tab tab) {
+        pager.setCurrentItem(tab.getPosition());
+      }
+
+      @Override
+      public void onTabUnselected(TabLayout.Tab tab) {
+
+      }
+
+      @Override
+      public void onTabReselected(TabLayout.Tab tab) {
+
+      }
+    };
+  }
+
 }
 

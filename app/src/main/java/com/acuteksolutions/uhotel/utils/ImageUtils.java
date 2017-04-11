@@ -1517,8 +1517,16 @@ public class ImageUtils {
     }
     public static void loadImage(Context context,String url,ImageView imageView){
       Glide.with(context).load(url)
-              .crossFade().into(imageView);
+          .dontAnimate()
+          .into(imageView);
     }
+
+    public static void loadImage(Context context,int drawable,ImageView imageView){
+        Glide.with(context).load(drawable)
+            .dontAnimate()
+            .into(imageView);
+    }
+
     public static void loadImage(Fragment fragment, String url, final ViewGroup viewGroup){
         Glide.with(fragment).load(url).asBitmap()
                 .skipMemoryCache(true)

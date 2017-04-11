@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.intdef;
+package com.acuteksolutions.uhotel.annotation;
 
 import android.support.annotation.StringDef;
 
@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Email: Huynhvantoan.itc@gmail.com
  */
 @StringDef({PathDef.REGION_UID, PathDef.CAT_ID, PathDef.LIST_ID})
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface PathDef {
   String REGION_UID="region_uid";
   String CAT_ID="catId";

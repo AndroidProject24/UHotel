@@ -8,9 +8,7 @@ import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-
 import java.util.List;
-
 import javax.inject.Inject;
 
 /**

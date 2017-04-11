@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.intdef;
+package com.acuteksolutions.uhotel.annotation;
 
 import android.support.annotation.StringDef;
 
@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Email: Huynhvantoan.itc@gmail.com
  */
 @StringDef({ParseGsonDef.ID,ParseGsonDef.ARRAY, ParseGsonDef.OBJECT,ParseGsonDef.ITEMS})
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface ParseGsonDef {
   String ID="id";
   String ARRAY="list";

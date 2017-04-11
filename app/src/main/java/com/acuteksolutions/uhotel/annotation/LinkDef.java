@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.intdef;
+package com.acuteksolutions.uhotel.annotation;
 
 import android.support.annotation.StringDef;
 
@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Email: Huynhvantoan.itc@gmail.com
  */
 @StringDef({LinkDef.LINK_LIST_CATEGORY, LinkDef.LINK_LIST_MOVIES,LinkDef.LINK_MOVIES_DETAILS,LinkDef.LINK_IMAGE_URL})
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface LinkDef {
   String LINK_LIST_CATEGORY="/restapi/rest/region_uid/store/categories";
   String LINK_LIST_MOVIES="/vod/info?purchase_item_list=id_list";

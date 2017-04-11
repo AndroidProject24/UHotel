@@ -1,30 +1,111 @@
 <resources>
-    <string name="app_name">Uhotel</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_share">Share</string>
-    <string name="action_refresh">Refresh</string>
-    <!--LOGIN-->
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="msg_exit">Bấm Back lần nữa để thoát ứng dụng!</string>
-    <!--HOME-->
-    <string name="home_welcome">Welcome back,</string>
-    <string name="menu_concierge">CONCIERGE</string>
-    <string name="menu_live_tv">LIVE TV</string>
-    <string name="menu_movies">MOVIES</string>
-    <string name="menu_food_activity">FOOD ACTIVITIES</string>
-    <string name="menu_room_control">ROOM CONTROL</string>
-    <string name="menu_setting">SETTING</string>
-    
-    
-    <!--COMMON-->
-    <string name="blank"/>
-    <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
-    <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>
-    <string name="common_no_network_msg">No network connected!\nPlease hit the screen and try again after connecting~</string>
-    <string name="retry">Retry</string>
-    <string name="no_internet">No Internet!</string>
-    <string name="are_you_online_please_check_your_device_connection_settings">Are you online? Please check your device connection settings.</string>
+  <string name="app_name">Uhotel</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="action_share">Share</string>
+  <string name="action_refresh">Refresh</string>
+
+  <!--LOGIN-->
+  <string name="error_invalid_password">This password is too short</string>
+  <string name="error_incorrect_password">This password is incorrect</string>
+  <string name="msg_exit">Bấm Back lần nữa để thoát ứng dụng!</string>
+  <string name="error_invalid_pin">Invalid PIN.</string>
+  <string name="error_badconnect">Bad Connection.</string>
+
+  <!--HOME-->
+  <string name="home_welcome">Welcome back,</string>
+  <string name="home_menu_home">HOME</string>
+  <string name="home_menu_concierge">CONCIERGE</string>
+  <string name="home_menu_live_tv">LIVE TV</string>
+  <string name="home_menu_movies">MOVIES</string>
+  <string name="home_menu_food_activity">FOOD &amp; ACTIVITIES</string>
+  <string name="home_menu_room_control">ROOM CONTROL</string>
+  <string name="home_menu_setting">SETTING</string>
+
+  <!--MOVIES-->
+  <string name="movies_menu_latest">Latest Movies</string>
+  <string name="movies_menu_action">Action</string>
+  <string name="movies_menu_adults">Adults</string>
+  <string name="movies_menu_comedy">Comedy</string>
+  <string name="movies_menu_drama">Drama</string>
+  <string name="movies_menu_events">Events</string>
+  <string name="movies_menu_family">Family</string>
+
+  <!--GUEST MENU PAGE-->
+  <string name="guest_menu_hotel">Hotel Directory</string>
+  <string name="guest_menu_dining">Dining</string>
+  <string name="guest_menu_activities">Activities</string>
+  <string name="guest_menu_parental_control">Parental Control</string>
+  <string name="guest_menu_emergency_exit">Emergency Exit</string>
+  <string name="guest_menu_restaurants">Restaurants</string>
+
+  <!--FOOD AND ACTIVITIES MENU PAGE-->
+  <string name="food_menu_item1">Coffee &amp; Brunch</string>
+  <string name="food_menu_item2">Best SF Restaurants</string>
+  <string name="food_menu_item3">Top 5 Attractions</string>
+  <string name="food_menu_item4">Hotel Exclusives</string>
+
+  <!--SUB PAGE STRING-->
+  <string name="page_name_concierge">CONCIERGE PAGE.\nThe page is undercontruction.</string>
+  <string name="page_name_livetv">LIVE TV PAGE.\nThe page is undercontruction.</string>
+  <string name="page_name_movies">MOVIES PAGE.\nThe page is undercontruction.</string>
+  <string name="page_name_food_and_activities">FOOD &amp; ACTIVITIES.\nThe page is undercontruction.</string>
+  <string name="page_name_room_control">ROOM CONTROL PAGE.\nThe page is undercontruction.</string>
+
+  <!--ROOM CONTROL PAGE-->
+  <string name="room_control_seek_item_on">On</string>
+  <string name="room_control_seek_item_off">Off</string>
+  <string name="room_control_seek_item_open">Open</string>
+  <string name="room_control_seek_item_close">Close</string>
+
+  <!--CONCIERGE PAGE-->
+  <string-array name="concierge_menu_array">
+    <item>Room Amenities</item>
+    <item>Car Rental</item>
+    <item>Checkout</item>
+    <item>Business Center</item>
+    <item>Housekeeping</item>
+    <item>Valet</item>
+    <item>Mirror</item>
+    <item>Parental Control</item>
+  </string-array>
+
+  <string-array name="concierge_room_left_array">
+    <item>Bath</item>
+    <item>Hygiene</item>
+    <item>Office</item>
+    <item>Appliances</item>
+    <item>Dental</item>
+  </string-array>
+
+  <!--GUEST SERVICES-->
+  <string-array name="guest_menu_array">
+    <item>Check-out</item>
+    <item>Complimentary Breakfast</item>
+    <item>Fitness Center</item>
+    <item>Swimming</item>
+    <item>Business Center</item>
+    <item>Parking (Valet)</item>
+  </string-array>
+
+  <!--SECURITY -->
+  <string-array name="security_menu_array">
+    <item>Parental Control</item>
+    <item>Safe Deposit Box</item>
+    <item>Fire Safety &amp; Security</item>
+    <item>Emergency Phone</item>
+    <item>Pet Policy</item>
+    <item>Smoking Policy</item>
+  </string-array>
+
+  <!--COMMON-->
+  <string name="blank"/>
+  <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>
+  <string name="common_error_msg">Oops, something wrong!\nPlease hit the screen and try again~</string>
+  <string name="common_no_network_msg">No network connected!\nPlease hit the screen and try again after connecting~</string>
+  <string name="retry">Retry</string>
+  <string name="no_internet">No Internet!</string>
+  <string name="are_you_online_please_check_your_device_connection_settings">Are you online? Please check your device connection settings.</string>
+
 
 </resources>

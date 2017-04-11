@@ -1,8 +1,8 @@
 package com.acuteksolutions.uhotel.data.service;
 
-import com.acuteksolutions.uhotel.intdef.LinkDef;
-import com.acuteksolutions.uhotel.intdef.ParseGsonDef;
-import com.acuteksolutions.uhotel.intdef.PathDef;
+import com.acuteksolutions.uhotel.annotation.LinkDef;
+import com.acuteksolutions.uhotel.annotation.ParseGsonDef;
+import com.acuteksolutions.uhotel.annotation.PathDef;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.Detail;
 import com.acuteksolutions.uhotel.mvp.model.data.Product;

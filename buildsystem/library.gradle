@@ -21,7 +21,7 @@ ext {
     java8 = true
 
     //Libraries
-    supportLibsVersion = '25.3.0'
+    supportLibsVersion = '25.3.1'
     constraintVersion = '1.0.2'
     daggerVersion = '2.9'
     butterKnifeVersion = '8.5.1'
@@ -40,7 +40,7 @@ ext {
     drawerVersion         ='5.8.2@aar'
     networking  ='0.4.0'
     exoVersion='r2.2.0'
-
+    mutidexVersion = '1.0.1'
     //Testing
     robolectricVersion = '3.0'
     jUnitVersion = '4.12'
@@ -54,6 +54,7 @@ ext {
     //Development
     leakCanaryVersion = '1.6-SNAPSHOT'
     blockcanaryVersion = '1.4.1'
+    blockcanaryExVersion = '0.9.5.2'
     stethoVersion = '1.4.2'
     realmStethoVersion='2.0.0'
     taktVersion   = '1.0.3'
@@ -68,6 +69,7 @@ ext {
             constraintLayout       : "com.android.support.constraint:constraint-layout:${constraintVersion}",
             butterKnife            : "com.jakewharton:butterknife:${butterKnifeVersion}",
             butterknifeCompiler    : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            mutidex                : "com.android.support:multidex:${mutidexVersion}",
     ]
 
     injectDependencies = [
@@ -96,12 +98,15 @@ ext {
     ]
 
     developmentDependencies = [
-            leakCanary  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
-            blockCanary : "com.github.markzhai:blockcanary-android:${blockcanaryVersion}",
-            stetho      : "com.facebook.stetho:stetho:${stethoVersion}",
-            realmStetho : "com.uphyca:stetho_realm:${realmStethoVersion}",
-            stethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
-            takt        : "jp.wasabeef:takt:${taktVersion}",
+            leakCanary             : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            leakCanaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+            blockCanary            : "com.github.markzhai:blockcanary-android:${blockcanaryVersion}",
+            stetho                 : "com.facebook.stetho:stetho:${stethoVersion}",
+            realmStetho            : "com.uphyca:stetho_realm:${realmStethoVersion}",
+            stethoOkHttp           : "com.facebook.stetho:stetho-okhttp3:${stethoVersion}",
+            takt                   : "jp.wasabeef:takt:${taktVersion}",
+            blockCanaryEx          : "com.letv.sarrsdesktop:BlockCanaryExJRT:${blockcanaryExVersion}",
+            blockCanaryExRelease   : "com.letv.sarrsdesktop:BlockCanaryExJRTNoOp:${blockcanaryExVersion}",
     ]
 
     dataTestDependencies = [

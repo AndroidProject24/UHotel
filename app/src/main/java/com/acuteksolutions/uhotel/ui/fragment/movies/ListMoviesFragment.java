@@ -1,12 +1,16 @@
 package com.acuteksolutions.uhotel.ui.fragment.movies;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.annotation.BundleDef;
+import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
@@ -17,13 +21,8 @@ import com.acuteksolutions.uhotel.ui.adapter.movies.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class ListMoviesFragment extends BaseFragment implements MoviesView {
   @Inject
@@ -39,8 +38,12 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
   @BindView(R.id.img_main)
   ImageView mImageMain;
 
-  public static ListMoviesFragment newInstance() {
-    return new ListMoviesFragment();
+  public static ListMoviesFragment newInstance(@TabMoviesDef.TabMovies int index) {
+    ListMoviesFragment fragment=new ListMoviesFragment();
+    Bundle bundle=new Bundle();
+    bundle.putInt(BundleDef.TAB_MOVIES,index);
+    fragment.setArguments(bundle);
+    return fragment;
   }
 
   @Override
@@ -95,8 +98,29 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   public void listCategory(List<Category> categoryList) {
-    //Logger.e("categoryList="+categoryList.toString()+"\n GetID="+categoryList.get(0).getId());
-    mPresenter.getMoviesDetails(categoryList.get(0).getId());
+    mPresenter.getMoviesDetails(Preconditions.checkNotNull(categoryList.get(Preconditions.checkNotNull(getArguments().getInt(BundleDef.TAB_MOVIES))).getId()));
+    switch (getArguments().getInt(BundleDef.TAB_MOVIES)){
+      case TabMoviesDef.TabMovies.LATEST:
+        break;
+      case TabMoviesDef.TabMovies.ACTION:
+
+        break;
+      case TabMoviesDef.TabMovies.ADULTS:
+
+        break;
+      case TabMoviesDef.TabMovies.COMEDY:
+
+        break;
+      case TabMoviesDef.TabMovies.DRAMA:
+
+        break;
+      case TabMoviesDef.TabMovies.EVENTS:
+
+        break;
+      case TabMoviesDef.TabMovies.FAMILY:
+
+        break;
+    }
   }
 
   @Override

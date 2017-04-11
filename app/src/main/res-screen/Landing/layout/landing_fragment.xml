@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:ignore="HardcodedText"
+      >
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_landing"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:scaleType="fitXY"
+        />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        style="@style/style_base"
+        />
+
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_below="@+id/img_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/home_welcome"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize26"
+        style="@style/style_base"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_datetime"
+        android:layout_below="@+id/txt_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        style="@style/style_base"
+        >
+
+      <TextView
+          android:id="@+id/txt_datetime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingRight="20dp"
+          android:text="3:30 PM PST    |    TUEDAY, AUGUST 11,2015"
+          android:textAllCaps="true"
+          android:textColor="@color/white"
+          android:textSize="18sp"
+          />
+
+      <TextView
+          android:id="@+id/txt_temp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:drawableLeft="@mipmap/walanding_temp"
+          android:drawablePadding="5dp"
+          android:text="78°C"
+          android:textColor="@color/white"
+          android:textSize="18sp"
+          />
+    </LinearLayout>
+
+    <!--MARQUEE TEXT-->
+    <TextView
+        android:id="@+id/txt_marquee_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/layout_tab"
+        android:drawablePadding="5dp"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scrollHorizontally="true"
+        android:text="                                                                                                                                                                                              Welcome to Waldorf Astoria Beverly Hills."
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        />
+
+    <TableLayout
+        android:id="@+id/layout_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/img_landing"
+        >
+
+      <TableRow
+          android:layout_width="match_parent"
+          android:layout_height="300dp"
+          >
+
+        <RelativeLayout
+            android:id="@+id/layout_message"
+            style="@style/style_layout_home"
+            >
+
+          <android.support.v7.widget.AppCompatImageView
+              android:id="@+id/img_message"
+              style="@style/style_img_home"
+              />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:orientation="vertical"
+              android:paddingBottom="20dp"
+              android:paddingLeft="30dp"
+              >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotel exclusive"
+                android:textColor="@color/md_yellow_800"
+                android:textSize="@dimen/textSize16"
+                android:textStyle="italic"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enjoy in-room spa treatment"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize22"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reserve today for 50% off"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize16"
+                />
+          </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_bar"
+            style="@style/style_layout_home"
+            >
+
+          <android.support.v7.widget.AppCompatImageView
+              android:id="@+id/img_bar"
+              style="@style/style_img_home"
+              />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:orientation="vertical"
+              android:paddingBottom="20dp"
+              android:paddingLeft="30dp"
+              >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotel exclusive"
+                android:textColor="@color/md_yellow_800"
+                android:textSize="@dimen/textSize16"
+                android:textStyle="italic"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bar Luxe"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize22"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Complimentary Drink"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize16"
+                />
+          </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_sabrora"
+            style="@style/style_layout_home"
+            >
+
+          <android.support.v7.widget.AppCompatImageView
+              android:id="@+id/img_sabrora"
+              style="@style/style_img_home"
+              />
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:orientation="vertical"
+              android:paddingBottom="20dp"
+              android:paddingLeft="30dp"
+              >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sambrosa"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize22"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reserve atable and get one free appetizer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize16"
+                />
+          </LinearLayout>
+        </RelativeLayout>
+      </TableRow>
+
+      <TableRow style="@style/style_layout_home">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_movies"
+            style="@style/style_img_home2"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_room_service"
+            style="@style/style_img_home2"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_parental_control"
+            style="@style/style_img_home2"
+            />
+      </TableRow>
+    </TableLayout>
+  </RelativeLayout>
+</ScrollView>

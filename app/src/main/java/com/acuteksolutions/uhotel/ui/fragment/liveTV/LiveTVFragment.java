@@ -1,26 +1,18 @@
 package com.acuteksolutions.uhotel.ui.fragment.liveTV;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
 import com.acuteksolutions.uhotel.mvp.view.LiveTvView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
 
 public class LiveTVFragment extends BaseFragment implements LiveTvView {
   @Inject
   MoviesPresenter
   mPresenter;
   private Context mContext;
-  @BindView(R.id.recyclerview)
-  RecyclerView mRecyclerview;
   public static LiveTVFragment newInstance() {
     return new LiveTVFragment();
   }
@@ -45,7 +37,7 @@ public class LiveTVFragment extends BaseFragment implements LiveTvView {
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.livetv_fragment;
   }
 
   @Override
@@ -54,8 +46,7 @@ public class LiveTVFragment extends BaseFragment implements LiveTvView {
   }
 
   private void initRecyclerview(){
-    mRecyclerview.setLayoutManager(new LinearLayoutManager(mContext));
-    mRecyclerview.setHasFixedSize(true);
+
   }
 
   @Override
