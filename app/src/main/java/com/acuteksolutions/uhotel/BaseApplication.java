@@ -38,7 +38,7 @@ public class BaseApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    //setupTest();
+    setupTest();
     initInjector();
     initData();
     mInstance = this;

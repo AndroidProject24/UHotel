@@ -1,6 +1,6 @@
 package com.acuteksolutions.uhotel.ui.fragment.landing;
 
-import android.support.annotation.Nullable;
+import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -10,11 +10,11 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
-import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.Utils;
 import javax.inject.Inject;
 
@@ -50,6 +50,7 @@ public class LandingFragment extends BaseFragment {
     return R.layout.landing_fragment;
   }
 
+  @SuppressLint("SetTextI18n")
   @Override protected void initData() {
     mTxtWelcome.setText(getResources().getString(R.string.home_welcome) + " " + getName());
     mTxtDateTime.setText(Utils.getTime());
@@ -95,21 +96,29 @@ public class LandingFragment extends BaseFragment {
     replaceFagment(getFragmentManager(), R.id.fragment, ParentalControlFragment.newInstance());
   }
 
-  @Nullable private String getName() {
+  private String getName() {
     try {
       final StringBuilder builder = new StringBuilder();
-      Login login = Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin());
-      if ("M".equals(login.getGender())) {
-        builder.append("Mr.");
-      } else {
-        builder.append("Ms.");
+      if(mPreferencesHelper.getJsonLogin()!=null) {
+        Login login = mPreferencesHelper.getJsonLogin();
+        if ("M".equals(login.getGender())) {
+          builder.append("Mr.");
+        } else {
+          builder.append("Ms.");
+        }
+        builder.append(login.getName());
+        return builder.toString();
+      }else{
+        replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
       }
-      builder.append(login.getName());
-      return builder.toString();
     } catch (Exception e) {
       e.printStackTrace();
     }
     return "Mr.";
   }
 
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    toolbarTitleListener.hideShowToolBar(false);
+  }
 }

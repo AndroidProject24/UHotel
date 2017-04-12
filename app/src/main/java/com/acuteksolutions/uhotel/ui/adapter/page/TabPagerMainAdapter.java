@@ -18,7 +18,7 @@ import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
  * Email: huynhvantoan.itc@gmail.com
  */
 
-public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter {
+public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter<LandingFragment> {
   private TabMainDef tab;
   private Context context;
   public TabPagerMainAdapter(Context context,TabMainDef tabMoviesDef,FragmentManager fm) {
@@ -51,6 +51,10 @@ public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter {
         break;
     }
     return fragment;
+  }
+
+  @Override public CharSequence getPageTitle(int position) {
+    return context.getString(tab.getTab(position));
   }
 
   @Override

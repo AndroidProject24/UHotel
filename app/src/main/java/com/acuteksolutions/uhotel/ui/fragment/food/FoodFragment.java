@@ -6,12 +6,11 @@ import android.support.v4.view.ViewPager;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
-import com.acuteksolutions.uhotel.mvp.view.FoodView;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerFoodAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
 
-public class FoodFragment extends BaseFragment implements FoodView {
+public class FoodFragment extends BaseFragment{
   @BindView(R.id.tabLayout)
   TabLayout mTabLayout;
   @BindView(R.id.view_pager)
@@ -42,12 +41,13 @@ public class FoodFragment extends BaseFragment implements FoodView {
   @Override
   protected void initViews() {
     TabFoodDef tabFoodDef = new TabFoodDef();
-    TabPagerFoodAdapter tabPagerFoodAdapter=new TabPagerFoodAdapter(mContext,tabFoodDef,getFragmentManager());
-    mViewPager.setAdapter(tabPagerFoodAdapter);
-    mTabLayout.setupWithViewPager(mViewPager);
     for (int i = 0; i < tabFoodDef.tabSize(); i++) {
       mTabLayout.addTab(mTabLayout.newTab().setText(getString(tabFoodDef.getTab(i))));
     }
+    TabPagerFoodAdapter tabPagerFoodAdapter=new TabPagerFoodAdapter(mContext,tabFoodDef,getChildFragmentManager());
+    mViewPager.setAdapter(tabPagerFoodAdapter);
+    mTabLayout.setupWithViewPager(mViewPager);
+    tabPagerFoodAdapter.getRegisteredFragment(mViewPager.getCurrentItem());
   }
 
   @Override

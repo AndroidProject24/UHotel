@@ -69,7 +69,6 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     super.onViewCreated(view, savedInstanceState);
     unbinder = ButterKnife.bind(this, mContentView);
     mContext = getContext();
-    toolbarTitleListener.hideShowToolBar(false);
     initProgress();
     initViews();
     initData();
@@ -118,14 +117,15 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   public void replaceFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
-    String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
+    FragmentTransaction transaction = fragmentManager.beginTransaction();
+    transaction.replace(frameId, fragment, fragment.getClass().getName());
+    transaction.addToBackStack(null);
+    transaction.commit();
+    /*String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
     Logger.e("currenttag="+currenttag+"fragment="+fragment.getTag());
     if(!currenttag.equalsIgnoreCase(fragment.getTag())) {
-      FragmentTransaction transaction = fragmentManager.beginTransaction();
-      transaction.replace(frameId, fragment, fragment.getClass().getName());
-      transaction.addToBackStack(null);
-      transaction.commit();
-    }
+
+    }*/
   }
 
 

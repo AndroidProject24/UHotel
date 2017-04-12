@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.FrameLayout;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
@@ -21,6 +20,7 @@ import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
+import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
@@ -36,7 +36,7 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private Drawer result = null;
   private boolean doubleBackToExitPressedOnce;
-  @BindView(R.id.fragment) FrameLayout mLayout;
+  @BindView(R.id.drawer_container) FrameLayout mLayout;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) ViewPager viewPagerMain;
@@ -45,9 +45,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    initToolbarTranparent();
     initDrawer(savedInstanceState);
-    initTabLayout();
   }
   @Override
   protected String getTAG() {
@@ -56,9 +54,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initViews() {
-    if(mPreferencesHelper.getJsonLogin()==null) {
-      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
-    }
+    initTabLayout();
   }
 
   @Override
@@ -68,7 +64,11 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initData() {
-
+    if(mPreferencesHelper.getJsonLogin()==null) {
+      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+    }
+    viewPagerMain.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabMain));
+    tabMain.addOnTabSelectedListener(new OnTabSelectedListener().onTabSelectedListener(viewPagerMain));
   }
 
   @Override
@@ -81,23 +81,16 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     super.onSaveInstanceState(outState);
   }
 
-  private void initToolbarTranparent(){
-    try {
-      setSupportActionBar(mToolbar);
-      getSupportActionBar().setDisplayShowTitleEnabled(false);
-    }catch (Exception e){
-      e.printStackTrace();
-    }
-  }
-
   private void initDrawer(Bundle savedInstanceState){
     result = new DrawerBuilder(this)
         .withActivity(this)
         .withHeader(R.layout.layout_logo)
+        .withDisplayBelowStatusBar(true)
+        .withTranslucentStatusBar(true)
         .withToolbar(mToolbar)
-        .withHasStableIds(true)
+        .withActionBarDrawerToggleAnimated(true)
         .withDrawerWidthDp(400)
-        .withSliderBackgroundColorRes(R.color.black)
+        .withSliderBackgroundDrawableRes(R.color.black)
         .withItemAnimator(new DefaultItemAnimator())
         .addDrawerItems(
             new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.CONCIERGE)).withIcon(R.drawable.menu_concierge).withIdentifier(1).withSetSelected(true),
@@ -143,6 +136,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     if (Build.VERSION.SDK_INT >= 19) {
       result.getDrawerLayout().setFitsSystemWindows(false);
     }
+    //result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
   }
 
   private void initTabLayout() {
@@ -154,31 +148,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
       TabPagerMainAdapter tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
       viewPagerMain.setAdapter(tabPagerAdapter);
       tabMain.setupWithViewPager(viewPagerMain);
-      viewPagerMain.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabMain));
-      tabMain.addOnTabSelectedListener(onTabSelectedListener(viewPagerMain));
       tabPagerAdapter.getRegisteredFragment(viewPagerMain.getCurrentItem());
     }catch (Exception e){
       e.printStackTrace();
     }
-  }
-
-  private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager pager) {
-    return new TabLayout.OnTabSelectedListener() {
-      @Override
-      public void onTabSelected(TabLayout.Tab tab) {
-        pager.setCurrentItem(tab.getPosition());
-      }
-
-      @Override
-      public void onTabUnselected(TabLayout.Tab tab) {
-
-      }
-
-      @Override
-      public void onTabReselected(TabLayout.Tab tab) {
-
-      }
-    };
   }
 
   @Override
@@ -216,12 +189,12 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   public void changeTitle(String name) {
-    mToolbar.setTitle(name);
+    //mToolbar.setTitle(name);
   }
 
   @Override
   public void hideShowToolBar(boolean isShow) {
-    if(mToolbar != null) {
+    /*if(mToolbar != null) {
       if (isShow) {
         if(getSupportActionBar()!=null)
           getSupportActionBar().show();
@@ -229,11 +202,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
       }else {
         result.closeDrawer();
         tabMain.setVisibility(View.VISIBLE);
-        if(getSupportActionBar()!=null) {
-          getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        if(getSupportActionBar()!=null)
           getSupportActionBar().hide();
-        }
       }
-    }
+    }*/
   }
 }

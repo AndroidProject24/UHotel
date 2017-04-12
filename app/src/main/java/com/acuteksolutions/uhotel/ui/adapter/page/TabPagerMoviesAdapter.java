@@ -3,6 +3,7 @@ package com.acuteksolutions.uhotel.ui.adapter.page;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;
@@ -33,5 +34,9 @@ public class TabPagerMoviesAdapter extends SmartFragmentStatePagerAdapter<ListMo
   @Override
   public int getCount() {
     return tab.tabSize();
+  }
+
+  @Override public boolean isViewFromObject(View view, Object object) {
+    return super.isViewFromObject(view, object);
   }
 }

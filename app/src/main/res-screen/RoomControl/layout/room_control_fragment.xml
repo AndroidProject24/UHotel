@@ -6,7 +6,7 @@
     >
 
 
-  <!--MAIN PAGE LAYOUT-->
+  <!--&lt;!&ndash;MAIN PAGE LAYOUT&ndash;&gt;
   <LinearLayout
       android:id="@+id/room_control_main"
       android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:textColor="@color/roomcontrol_name_spacing"
         android:textSize="30sp"
         />
-    <!--PRESET MENU ITEM-->
+    &lt;!&ndash;PRESET MENU ITEM&ndash;&gt;
     <LinearLayout
         android:id="@+id/room_control_preset_menu"
         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
           />
     </LinearLayout>
 
-    <!--MAIN PAGE CONTENT-->
+    &lt;!&ndash;MAIN PAGE CONTENT&ndash;&gt;
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         android:paddingTop="20dp"
         >
 
-      <!--TEMP LAYOUT-->
+      &lt;!&ndash;TEMP LAYOUT&ndash;&gt;
       <RelativeLayout
           android:id="@+id/room_control_temp"
           android:layout_width="300dp"
@@ -213,7 +213,7 @@
             app:textColor="@color/white"
             app:indicatorIcon="@drawable/ic_logo_uhotel"
             />
-<!--
+&lt;!&ndash;
         <me.tankery.lib.circularseekbar.CircularSeekBar
             android:id="@+id/room_control_temp_seek"
             android:layout_width="200dp"
@@ -224,10 +224,10 @@
             android:layout_marginStart="30dp"
             app:cs_max="100"
             app:cs_pointer_halo_color_ontouch="@color/roomcontrol_button_background_selected"
-            />-->
+            />&ndash;&gt;
       </RelativeLayout>
 
-      <!--LIGHT LAYOUT-->
+      &lt;!&ndash;LIGHT LAYOUT&ndash;&gt;
       <LinearLayout
           android:id="@+id/room_control_lights"
           android:layout_width="300dp"
@@ -253,7 +253,7 @@
             android:text="MAIN"
             style="@style/RoomControl_txt_title"
             />
-        <!--main-->
+        &lt;!&ndash;main&ndash;&gt;
         <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -272,7 +272,7 @@
             app:bsb_show_thumb_text="true"
             app:bsb_track_color="@color/yellow"/>
 
-       <!-- <android.support.v7.widget.AppCompatSeekBar
+       &lt;!&ndash; <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_lights_mainseek"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -284,7 +284,7 @@
             android:nextFocusUp="@+id/room_control_temp_btnDown"
             android:progressDrawable="@drawable/room_control_progess_selector"
             android:thumb="@drawable/room_control_thumb_selector"
-            />-->
+            />&ndash;&gt;
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -318,7 +318,7 @@
             android:text="OVERHEAD"
             style="@style/RoomControl_txt_title"
             />
-        <!--overhead-->
+        &lt;!&ndash;overhead&ndash;&gt;
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_lights_overheadseek"
             android:layout_width="match_parent"
@@ -365,7 +365,7 @@
             android:text="WALL"
             style="@style/RoomControl_txt_title"
             />
-        <!--wall-->
+        &lt;!&ndash;wall&ndash;&gt;
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_lights_wallseek"
             android:layout_width="match_parent"
@@ -406,7 +406,7 @@
         </LinearLayout>
 
       </LinearLayout>
-      <!--DRAPES-->
+      &lt;!&ndash;DRAPES&ndash;&gt;
       <LinearLayout
           android:id="@+id/room_control_drapes"
           android:layout_width="300dp"
@@ -432,7 +432,7 @@
             android:text="SHEERS"
             style="@style/RoomControl_txt_title"
             />
-        <!--sheers-->
+        &lt;!&ndash;sheers&ndash;&gt;
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_drapes_sheersseek"
             android:layout_width="match_parent"
@@ -479,7 +479,7 @@
             android:text="BLACKOUTS"
             style="@style/RoomControl_txt_title"
             />
-        <!--blackout-->
+        &lt;!&ndash;blackout&ndash;&gt;
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_drapes_blackoutsseek"
             android:layout_width="match_parent"
@@ -526,7 +526,7 @@
             android:text="SLIDER"
             style="@style/RoomControl_txt_title"
             />
-        <!--slider-->
+        &lt;!&ndash;slider&ndash;&gt;
         <android.support.v7.widget.AppCompatSeekBar
             android:id="@+id/room_control_drapes_sliderseek"
             android:layout_width="match_parent"
@@ -566,5 +566,5 @@
         </LinearLayout>
       </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
+  </LinearLayout>-->
 </RelativeLayout>

@@ -12,6 +12,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.ItemClickSupport;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
@@ -21,7 +22,6 @@ import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-import com.bumptech.glide.Glide;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -113,10 +113,10 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   public void listMovies(List<VODInfo> moviesList) {
-    //Logger.e("moviesList=" + moviesList.toString());
-    MoviesAdapter moviesAdapter = new MoviesAdapter(Glide.with(this),moviesList);
+    MoviesAdapter moviesAdapter = new MoviesAdapter(glide,moviesList);
     moviesAdapter.openLoadAnimation();
     mRecyclerMovies.setAdapter(moviesAdapter);
+    showInfo(moviesList.get(0));
     ItemClickSupport.addTo(mRecyclerMovies).setOnItemClickListener((recyclerView, position, v) ->
         showInfo(moviesList.get(position)));
   }

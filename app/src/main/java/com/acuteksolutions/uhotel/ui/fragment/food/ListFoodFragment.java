@@ -71,7 +71,7 @@ public class ListFoodFragment extends BaseFragment implements FoodView {
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.list_movies_fragment;
+    return R.layout.list_food_fragment;
   }
 
   @Override

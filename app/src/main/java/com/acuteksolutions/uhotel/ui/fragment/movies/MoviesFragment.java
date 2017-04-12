@@ -41,12 +41,13 @@ public class MoviesFragment extends BaseFragment{
   @Override
   protected void initViews() {
     TabMoviesDef tabMoviesDef = new TabMoviesDef();
-    TabPagerMoviesAdapter tabPagerMoviesAdapter=new TabPagerMoviesAdapter(mContext,tabMoviesDef,getFragmentManager());
-    mViewPager.setAdapter(tabPagerMoviesAdapter);
-    mTabLayout.setupWithViewPager(mViewPager);
     for (int i = 0; i < tabMoviesDef.tabSize(); i++) {
       mTabLayout.addTab(mTabLayout.newTab().setText(getString(tabMoviesDef.getTab(i))));
     }
+    TabPagerMoviesAdapter tabPagerMoviesAdapter=new TabPagerMoviesAdapter(mContext,tabMoviesDef,getChildFragmentManager());
+    mViewPager.setAdapter(tabPagerMoviesAdapter);
+    mTabLayout.setupWithViewPager(mViewPager);
+    tabPagerMoviesAdapter.getRegisteredFragment(mViewPager.getCurrentItem());
   }
 
   @Override
@@ -54,5 +55,6 @@ public class MoviesFragment extends BaseFragment{
     mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
     mTabLayout.addOnTabSelectedListener(new OnTabSelectedListener().onTabSelectedListener(mViewPager));
   }
+
 }
 

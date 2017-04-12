@@ -46,7 +46,7 @@ public class ParentalControlFragment extends BaseFragment implements ParentalCon
   @Override
   public void onDestroyView() {
     super.onDestroyView();
-    mPresenter.detachView();
+    //mPresenter.detachView();
   }
 
 }

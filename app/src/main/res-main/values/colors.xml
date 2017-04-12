@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="rippelColor">#5F000000</color>
-  <color name="primary_dark">#07bfac</color>
+  <color name="rippelColor">#FFFFFF</color>
+  <color name="primary_dark">#1d1d1d</color>
   <color name="backgroundPrimary">#EEEEEE</color>
-  <color name="colorPrimary">#07bfac</color>
-  <color name="colorPrimaryDark">#00897B</color>
+  <color name="colorPrimary">#1d1d1d</color>
+  <color name="colorPrimaryDark">#1d1d1d</color>
   <color name="colorAccent">#FFFFFF</color>
   <color name="background_item">#5F000000</color> <!-- 12% -->
   <color name="white">#FFFFFF</color>
@@ -17,5 +17,6 @@
 
   <!--TAB-->
   <color name="tab_background">#1d1d1d</color>
+  <color name="tab_background_child">#222632</color>
   <color name="tab_select">#e4960c</color>
 </resources>
