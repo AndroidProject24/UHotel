@@ -1,6 +1,5 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
@@ -43,7 +40,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) ViewPager viewPagerMain;
-  private TabPagerMainAdapter tabPagerAdapter;
   @Inject
   PreferencesHelper mPreferencesHelper;
   @Override
@@ -88,8 +84,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private void initToolbarTranparent(){
     try {
       setSupportActionBar(mToolbar);
-      mToolbar.setBackgroundColor(Color.TRANSPARENT);
-      mToolbar.getBackground().setAlpha(100);
       getSupportActionBar().setDisplayShowTitleEnabled(false);
     }catch (Exception e){
       e.printStackTrace();
@@ -99,7 +93,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private void initDrawer(Bundle savedInstanceState){
     result = new DrawerBuilder(this)
         .withActivity(this)
-        .withHeader(R.layout.header)
+        .withHeader(R.layout.layout_logo)
         .withToolbar(mToolbar)
         .withHasStableIds(true)
         .withDrawerWidthDp(400)
@@ -154,16 +148,15 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private void initTabLayout() {
     try {
       TabMainDef tabMainDef = new TabMainDef();
-      tabPagerAdapter = new TabPagerMainAdapter(this,tabMainDef,getSupportFragmentManager());
+      for (int i = 0; i < tabMainDef.tabSize(); i++) {
+        tabMain.addTab(tabMain.newTab().setText(getString(tabMainDef.getTab(i))));
+      }
+      TabPagerMainAdapter tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
       viewPagerMain.setAdapter(tabPagerAdapter);
       tabMain.setupWithViewPager(viewPagerMain);
       viewPagerMain.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabMain));
       tabMain.addOnTabSelectedListener(onTabSelectedListener(viewPagerMain));
-      ImageView tabOne = (ImageView) LayoutInflater.from(this).inflate(R.layout.icon_tab, null);
-      tabMain.addTab(tabMain.newTab().setCustomView(tabOne),0);
-      for (int i = 1; i < tabMainDef.tabSize(); i++) {
-        tabMain.addTab(tabMain.newTab().setText(getString(tabMainDef.getTab(i))),i);
-      }
+      tabPagerAdapter.getRegisteredFragment(viewPagerMain.getCurrentItem());
     }catch (Exception e){
       e.printStackTrace();
     }

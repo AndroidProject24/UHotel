@@ -38,7 +38,7 @@ public class BaseApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    setupTest();
+    //setupTest();
     initInjector();
     initData();
     mInstance = this;
@@ -94,14 +94,17 @@ public class BaseApplication extends Application {
     return application.refWatcher;
   }
   private void setupTest(){
-    if(!BlockCanaryEx.isInSamplerProcess(this)) {
-      BlockCanaryEx.install(new Config(this));
+    if (BuildConfig.DEBUG) {
+     // AndroidDevMetrics.initWith(this);
+      if(!BlockCanaryEx.isInSamplerProcess(this)) {
+        BlockCanaryEx.install(new Config(this));
+      }
+      if (LeakCanary.isInAnalyzerProcess(this)) {
+        // This process is dedicated to LeakCanary for heap analysis.
+        // You should not init your app in this process.
+        return;
+      }
+      refWatcher=LeakCanary.install(this);
     }
-    if (LeakCanary.isInAnalyzerProcess(this)) {
-      // This process is dedicated to LeakCanary for heap analysis.
-      // You should not init your app in this process.
-      return;
-    }
-    refWatcher=LeakCanary.install(this);
   }
 }

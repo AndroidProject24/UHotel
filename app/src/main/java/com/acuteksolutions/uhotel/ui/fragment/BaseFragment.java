@@ -21,6 +21,7 @@ import com.acuteksolutions.uhotel.libs.view.FadeViewAnimProvider;
 import com.acuteksolutions.uhotel.libs.view.StateLayout;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.squareup.leakcanary.RefWatcher;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -42,6 +43,7 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   private String TAG = getTAG();
   protected abstract String getTAG();
   protected ToolbarTitleListener toolbarTitleListener;
+  protected RequestManager glide;
 
   @Override
   public void onAttach(Context context) {
@@ -68,10 +70,9 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     unbinder = ButterKnife.bind(this, mContentView);
     mContext = getContext();
     toolbarTitleListener.hideShowToolBar(false);
-    initViews();
     initProgress();
+    initViews();
     initData();
-    Logger.e(toString());
   }
 
   protected abstract void initViews();
@@ -93,6 +94,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
       mStateLayout = ButterKnife.findById(getActivity(),R.id.stateLayout);
       mStateLayout.setViewSwitchAnimProvider(new FadeViewAnimProvider());
     }
+    glide= Glide.with(this);
+    Logger.e(toString());
   }
 
   public CompositeSubscription getCompositeSubscription() {
@@ -136,7 +139,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   public void onDestroy() {
     super.onDestroy();
     unsubscribe();
-    Glide.get(mContext).clearMemory();
+    Glide.get(getmContext()).clearMemory();
+    glide.onDestroy();
   }
   protected void toggleShowLoading(boolean toggle) {
     if (mStateLayout != null) {

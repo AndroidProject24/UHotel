@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.fernandocejas.frodo'
-apply plugin: 'com.frogermcs.androiddevmetrics'
+//apply plugin: 'com.frogermcs.androiddevmetrics'
 apply plugin: 'blockcanaryex'
 
 frodo {
@@ -20,6 +20,7 @@ android {
     versionCode globalConfiguration.getAt("androidVersionCode")
     versionName globalConfiguration.getAt("androidVersionName")
     multiDexEnabled true
+    vectorDrawables.useSupportLibrary = true
   }
   signingConfigs {
     Key {

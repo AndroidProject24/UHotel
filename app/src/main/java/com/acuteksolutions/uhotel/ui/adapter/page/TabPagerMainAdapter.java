@@ -4,8 +4,8 @@ package com.acuteksolutions.uhotel.ui.adapter.page;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
+import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
@@ -18,7 +18,7 @@ import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
  * Email: huynhvantoan.itc@gmail.com
  */
 
-public class TabPagerMainAdapter extends FragmentStatePagerAdapter {
+public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter {
   private TabMainDef tab;
   private Context context;
   public TabPagerMainAdapter(Context context,TabMainDef tabMoviesDef,FragmentManager fm) {
@@ -27,14 +27,10 @@ public class TabPagerMainAdapter extends FragmentStatePagerAdapter {
     this.tab=tabMoviesDef;
   }
 
-
   @Override
   public Fragment getItem(int position) {
     Fragment fragment = null;
     switch (position) {
-      case 0:
-        fragment= LandingFragment.newInstance();
-        break;
       case TabMainDef.TabMain.HOME:
         fragment= LandingFragment.newInstance();
         break;
@@ -59,7 +55,7 @@ public class TabPagerMainAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public int getCount() {
-    return tab.tabSize()+1;
+    return tab.tabSize();
   }
 
 }

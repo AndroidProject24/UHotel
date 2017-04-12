@@ -32,7 +32,7 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView 
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.room_control_fragment;
   }
 
   @Override

@@ -2,4 +2,5 @@
 
 <resources>
     <item name="material_drawer_item_centered_primary" type="id" />
+    <item name="item_click_support" type="id" />
 </resources>

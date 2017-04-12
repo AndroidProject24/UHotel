@@ -3,8 +3,8 @@ package com.acuteksolutions.uhotel.ui.adapter.page;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
+import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;
 
 /**
@@ -12,7 +12,7 @@ import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;
  * Created by toan.it on 1/12/16.
  * Email: huynhvantoan.itc@gmail.com
  */
-public class TabPagerMoviesAdapter extends FragmentStatePagerAdapter {
+public class TabPagerMoviesAdapter extends SmartFragmentStatePagerAdapter<ListMoviesFragment> {
   private TabMoviesDef tab;
   private Context context;
   public TabPagerMoviesAdapter(Context context,TabMoviesDef tabMoviesDef,FragmentManager fm) {
@@ -32,6 +32,6 @@ public class TabPagerMoviesAdapter extends FragmentStatePagerAdapter {
 
   @Override
   public int getCount() {
-    return tab.tabSize()+1;
+    return tab.tabSize();
   }
 }

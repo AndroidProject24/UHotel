@@ -13,11 +13,10 @@ import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
+import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.Utils;
 import javax.inject.Inject;
-
-import static com.acuteksolutions.uhotel.utils.ImageUtils.loadImage;
 
 /**
  * Created by Toan.IT
@@ -62,14 +61,14 @@ public class LandingFragment extends BaseFragment {
   @Override protected void initViews() {
     toolbarTitleListener.hideShowToolBar(true);
     ((MainActivity) getActivity()).getActivityComponent().inject(this);
-    loadImage(getmContext(),R.drawable.home_background,imgLanding);
-    loadImage(getmContext(),R.drawable.logo_uhotel,imgLogo);
-    loadImage(getmContext(),R.drawable.home_message,imgMessage);
-    loadImage(getmContext(),R.drawable.home_barluxe,imgBar);
-    loadImage(getmContext(),R.drawable.home_sabrosa,imgSabrora);
-    loadImage(getmContext(),R.drawable.home_movies,imgMovies);
-    loadImage(getmContext(),R.drawable.home_parental_control,imgParentalControl);
-    loadImage(getmContext(),R.drawable.home_room_service,imgRoomService);
+    ImageUtils.loadImage(glide,R.drawable.home_background,imgLanding);
+    ImageUtils.loadImage(glide,R.drawable.ic_logo_uhotel,imgLogo);
+    ImageUtils.loadImage(glide,R.drawable.home_message,imgMessage);
+    ImageUtils.loadImage(glide,R.drawable.home_barluxe,imgBar);
+    ImageUtils.loadImage(glide,R.drawable.home_sabrosa,imgSabrora);
+    ImageUtils.loadImage(glide,R.drawable.home_movies,imgMovies);
+    ImageUtils.loadImage(glide,R.drawable.home_parental_control,imgParentalControl);
+    ImageUtils.loadImage(glide,R.drawable.home_room_service,imgRoomService);
   }
 
   @OnClick(R.id.layout_message) public void click_message() {

@@ -8,6 +8,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
 
 public class MoviesFragment extends BaseFragment{
   @BindView(R.id.tabLayout)
@@ -34,44 +35,24 @@ public class MoviesFragment extends BaseFragment{
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.tab_viewpager_fragment;
   }
 
   @Override
   protected void initViews() {
     TabMoviesDef tabMoviesDef = new TabMoviesDef();
-    mViewPager.setAdapter(new TabPagerMoviesAdapter(mContext,tabMoviesDef,getFragmentManager()));
+    TabPagerMoviesAdapter tabPagerMoviesAdapter=new TabPagerMoviesAdapter(mContext,tabMoviesDef,getFragmentManager());
+    mViewPager.setAdapter(tabPagerMoviesAdapter);
     mTabLayout.setupWithViewPager(mViewPager);
-    mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-    mTabLayout.addOnTabSelectedListener(onTabSelectedListener(mViewPager));
     for (int i = 0; i < tabMoviesDef.tabSize(); i++) {
-      mTabLayout.getTabAt(i).setText(getString(tabMoviesDef.getTab(i)));
+      mTabLayout.addTab(mTabLayout.newTab().setText(getString(tabMoviesDef.getTab(i))));
     }
   }
 
   @Override
   protected void initData() {
-
+    mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+    mTabLayout.addOnTabSelectedListener(new OnTabSelectedListener().onTabSelectedListener(mViewPager));
   }
-
-  private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager pager) {
-    return new TabLayout.OnTabSelectedListener() {
-      @Override
-      public void onTabSelected(TabLayout.Tab tab) {
-        pager.setCurrentItem(tab.getPosition());
-      }
-
-      @Override
-      public void onTabUnselected(TabLayout.Tab tab) {
-
-      }
-
-      @Override
-      public void onTabReselected(TabLayout.Tab tab) {
-
-      }
-    };
-  }
-
 }
 

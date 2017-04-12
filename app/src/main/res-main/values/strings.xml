@@ -40,10 +40,10 @@
   <string name="guest_menu_restaurants">Restaurants</string>
 
   <!--FOOD AND ACTIVITIES MENU PAGE-->
-  <string name="food_menu_item1">Coffee &amp; Brunch</string>
-  <string name="food_menu_item2">Best SF Restaurants</string>
-  <string name="food_menu_item3">Top 5 Attractions</string>
-  <string name="food_menu_item4">Hotel Exclusives</string>
+  <string name="food_menu_coffee">Coffee &amp; Brunch</string>
+  <string name="food_menu_best">Best SF Restaurants</string>
+  <string name="food_menu_top">Top 5 Attractions</string>
+  <string name="food_menu_hotel">Hotel Exclusives</string>
 
   <!--SUB PAGE STRING-->
   <string name="page_name_concierge">CONCIERGE PAGE.\nThe page is undercontruction.</string>

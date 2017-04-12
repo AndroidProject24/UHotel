@@ -76,7 +76,7 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
 
   @Override
   public void listMovies(List<VODInfo> moviesList) {
-    MoviesAdapter moviesAdapter =new MoviesAdapter(moviesList);
+    MoviesAdapter moviesAdapter =new MoviesAdapter(glide,moviesList);
     moviesAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(moviesAdapter);
   }

@@ -69,6 +69,6 @@ public class TabMoviesDef {
   }
 
   public int tabSize(){
-    return 6;
+    return 7;
   }
 }

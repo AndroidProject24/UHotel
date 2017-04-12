@@ -9,9 +9,8 @@ import java.lang.annotation.RetentionPolicy;
  * Email: huynhvantoan.itc@gmail.com
  */
 
-@StringDef({BundleDef.TAB_MOVIES, BundleDef.LINK_LIST_MOVIES})
+@StringDef({BundleDef.TAB_INDEX})
 @Retention(RetentionPolicy.SOURCE)
 public @interface BundleDef {
-  String TAB_MOVIES="TAB_MOVIES";
-  String LINK_LIST_MOVIES="TAB_MOVIES";
+  String TAB_INDEX="TAB_INDEX";
 }

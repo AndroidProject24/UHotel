@@ -3,7 +3,7 @@ package com.acuteksolutions.uhotel.injector.component;
 import com.acuteksolutions.uhotel.injector.module.ActivityModule;
 import com.acuteksolutions.uhotel.injector.qualifier.PerActivity;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
-import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
+import com.acuteksolutions.uhotel.ui.fragment.food.ListFoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
@@ -34,5 +34,5 @@ public interface ActivityComponent {
   void inject(MoreMoviesFragment moreMoviesFragment);
 
   /*FOOD*/
-  void inject(FoodFragment foodFragment);
+  void inject(ListFoodFragment listFoodFragment);
 }

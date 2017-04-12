@@ -3,7 +3,6 @@ package com.acuteksolutions.uhotel.mvp.view;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
-
 import java.util.List;
 
 /**
@@ -15,4 +14,6 @@ public interface MoviesView extends BaseView {
     void listCategory(List<Category> categoryList);
 
     void listMovies(List<VODInfo> moviesList);
+
+    void showInfo(VODInfo info);
 }

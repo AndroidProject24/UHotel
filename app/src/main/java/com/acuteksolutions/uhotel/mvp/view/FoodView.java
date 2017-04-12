@@ -1,5 +1,7 @@
 package com.acuteksolutions.uhotel.mvp.view;
 
+import com.acuteksolutions.uhotel.mvp.model.food.Food;
+import com.acuteksolutions.uhotel.mvp.model.food.ListFood;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 
 /**
@@ -8,5 +10,7 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
  */
 public interface FoodView extends BaseView {
 
+  void getListFood(ListFood listFood);
 
+  void showInfo(Food info,String title);
 }

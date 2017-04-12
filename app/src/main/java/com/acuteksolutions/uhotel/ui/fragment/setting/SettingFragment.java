@@ -34,7 +34,7 @@ public class SettingFragment extends BaseFragment implements SettingView {
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.tab_viewpager_fragment;
   }
 
   @Override

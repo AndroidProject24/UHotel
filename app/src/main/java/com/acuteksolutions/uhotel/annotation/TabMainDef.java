@@ -16,12 +16,12 @@ public class TabMainDef {
 
   @IntDef({ HOME,CONCIERGE,LIVETV, MOVIES, FOOD, ROOMCONTROL})
   public @interface TabMain{
-    int HOME=1;
-    int CONCIERGE=2;
-    int LIVETV=3;
-    int MOVIES=4;
-    int FOOD=5;
-    int ROOMCONTROL=6;
+    int HOME=0;
+    int CONCIERGE=1;
+    int LIVETV=2;
+    int MOVIES=3;
+    int FOOD=4;
+    int ROOMCONTROL=5;
   }
 
   public static final int HOME = R.string.home_menu_home;
@@ -64,7 +64,7 @@ public class TabMainDef {
   }
 
   public int tabSize(){
-    return 7;
+    return 6;
   }
 
 }
