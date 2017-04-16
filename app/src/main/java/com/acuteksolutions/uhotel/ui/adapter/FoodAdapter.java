@@ -2,6 +2,7 @@ package com.acuteksolutions.uhotel.ui.adapter;
 
 import android.widget.ImageView;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.food.Food;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.bumptech.glide.RequestManager;
@@ -19,6 +20,7 @@ public class FoodAdapter extends BaseQuickAdapter<Food, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Food data) {
       try {
+        Logger.e(data.getName());
         helper.setText(R.id.txt_food_name, data.getName())
                 .addOnClickListener(R.id.layout_item);
         ImageUtils.loadImage(glide,data.getUrl(),(ImageView) helper.getView(R.id.img_food));

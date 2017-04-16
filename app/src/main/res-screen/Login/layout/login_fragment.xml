@@ -1,117 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.acuteksolutions.uhotel.libs.view.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bglogin"
+    android:gravity="center"
     >
-  <com.acuteksolutions.uhotel.libs.view.StateLayout
-      android:id="@+id/stateLayout"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@drawable/bglogin"
-      android:gravity="center"
 
+
+  <android.support.v7.widget.AppCompatImageView
+      android:id="@+id/img_logo"
+      android:layout_centerHorizontal="true"
+      app:srcCompat="@drawable/ic_logo_uhotel"
+      style="@style/style_base"
+      />
+
+  <LinearLayout
+      android:id="@+id/layout_clock"
+      android:layout_below="@+id/img_logo"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="40dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      style="@style/style_base"
       >
 
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/img_logo"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/ic_logo_uhotel"
-        style="@style/style_base"
-        />
-
-    <LinearLayout
-        android:id="@+id/layout_clock"
-        android:layout_below="@+id/img_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        style="@style/style_base"
-        >
-
-      <TextClock
-          android:id="@+id/lock"
-          android:format12Hour="h:mm a"
-          android:textColor="@color/white"
-          android:textSize="18sp"
-          android:timeZone="America/Los_Angeles"
-          tools:ignore="NewApi"
-          style="@style/style_base"
-          />
-
-      <TextView
-          android:id="@+id/txt_date"
-          android:gravity="center"
-          android:text="Tuesday, September 27th, 2016"
-          android:textAllCaps="true"
-          android:textColor="@color/white"
-          android:textSize="18sp"
-          style="@style/style_base"
-          />
-      <!--Weather api-->
-      <ImageView
-          android:id="@+id/img_weather"
-          android:layout_width="32dp"
-          android:layout_height="20dp"
-          android:scaleType="centerInside"
-          />
-
-      <TextView
-          android:id="@+id/txt_temp"
-          android:drawablePadding="10dp"
-          android:gravity="center"
-          android:paddingLeft="5dp"
-          android:text=""
-          android:textAllCaps="true"
-          android:textColor="@color/white"
-          android:textSize="18sp"
-          style="@style/style_base"
-          />
-    </LinearLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/layout_pass"
-        android:layout_below="@+id/layout_clock"
-        android:layout_centerHorizontal="true"
-        style="@style/style_base"
-        >
-
-      <android.support.design.widget.TextInputEditText
-          android:id="@+id/etPass"
-          android:layout_width="400dp"
-          android:layout_height="50dp"
-          android:layout_marginTop="20dp"
-          android:background="@drawable/login_edittext"
-          android:hint="PIN"
-          android:imeOptions="actionDone"
-          android:inputType="textPassword"
-          android:nextFocusDown="@+id/login_main_div_loginbutton"
-          android:nextFocusRight="@+id/login_main_div_loginbutton"
-          android:paddingLeft="10dp"
-          android:text="kt12345678"
-          android:textColor="@color/white"
-          android:textColorHint="#A6A9A9"
-          android:textSize="24sp"
-          />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_pass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/login_button"
-        android:text="Log in"
+    <TextClock
+        android:id="@+id/lock"
+        android:format12Hour="h:mm a"
         android:textColor="@color/white"
+        android:textSize="18sp"
+        android:timeZone="America/Los_Angeles"
+        tools:ignore="NewApi"
+        style="@style/style_base"
         />
 
-  </com.acuteksolutions.uhotel.libs.view.StateLayout>
+    <TextView
+        android:id="@+id/txt_date"
+        android:gravity="center"
+        android:text="Tuesday, September 27th, 2016"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        style="@style/style_base"
+        />
+    <!--Weather api-->
+    <ImageView
+        android:id="@+id/img_weather"
+        android:layout_width="32dp"
+        android:layout_height="20dp"
+        android:scaleType="centerInside"
+        />
 
-</ScrollView>
+    <TextView
+        android:id="@+id/txt_temp"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:text=""
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        style="@style/style_base"
+        />
+  </LinearLayout>
+
+  <android.support.design.widget.TextInputLayout
+      android:id="@+id/layout_pass"
+      android:layout_below="@+id/layout_clock"
+      android:layout_centerHorizontal="true"
+      style="@style/style_base"
+      >
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/etPass"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/login_edittext"
+        android:hint="PIN"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:nextFocusDown="@+id/login_main_div_loginbutton"
+        android:nextFocusRight="@+id/login_main_div_loginbutton"
+        android:paddingLeft="10dp"
+        android:text="kt12345678"
+        android:textColor="@color/white"
+        android:textColorHint="#A6A9A9"
+        android:textSize="24sp"
+        />
+
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/btn_login"
+      android:layout_width="200dp"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/layout_pass"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="20dp"
+      android:background="@drawable/login_button"
+      android:text="Log in"
+      android:textColor="@color/white"
+      />
+
+</com.acuteksolutions.uhotel.libs.view.StateLayout>

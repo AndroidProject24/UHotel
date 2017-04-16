@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -47,7 +46,7 @@ public class SwagPoints extends View {
 	/**
 	 * The Drawable for the seek arc thumbnail
 	 */
-	private Drawable mIndicatorIcon;
+	//private Drawable mIndicatorIcon;
 
 
 	private int mProgressWidth = 12;
@@ -114,21 +113,21 @@ public class SwagPoints extends View {
 		float density = getResources().getDisplayMetrics().density;
 
 		// Defaults, may need to link this into theme settings
-		int arcColor = ContextCompat.getColor(context, R.color.white);
-		int progressColor = ContextCompat.getColor(context, R.color.yellow);
-		int textColor = ContextCompat.getColor(context, R.color.white);
+		int arcColor = ContextCompat.getColor(context, R.color.color_arc);
+		int progressColor = ContextCompat.getColor(context, R.color.color_progress);
+		int textColor = ContextCompat.getColor(context, R.color.color_text);
 		mProgressWidth = (int) (mProgressWidth * density);
 		mArcWidth = (int) (mArcWidth * density);
 		mTextSize = (int) (mTextSize * density);
 
-		mIndicatorIcon = ContextCompat.getDrawable(context, R.drawable.ic_arrow_back);
+		//mIndicatorIcon = ContextCompat.getDrawable(context, R.drawable.indicator);
 
 		if (attrs != null) {
 			// Attribute initialization
 			final TypedArray a = context.obtainStyledAttributes(attrs,
 					R.styleable.SwagPoints, 0, 0);
 
-			Drawable indicatorIcon = a.getDrawable(R.styleable.SwagPoints_indicatorIcon);
+			/*Drawable indicatorIcon = a.getDrawable(R.styleable.SwagPoints_indicatorIcon);
 			if (indicatorIcon != null)
 				mIndicatorIcon = indicatorIcon;
 
@@ -136,7 +135,7 @@ public class SwagPoints extends View {
 			int indicatorIconHalfHeight = mIndicatorIcon.getIntrinsicHeight() / 2;
 			mIndicatorIcon.setBounds(-indicatorIconHalfWidth, -indicatorIconHalfHeight, indicatorIconHalfWidth,
 					indicatorIconHalfHeight);
-
+*/
 			mPoints = a.getInteger(R.styleable.SwagPoints_points, mPoints);
 			mMin = a.getInteger(R.styleable.SwagPoints_min, mMin);
 			mMax = a.getInteger(R.styleable.SwagPoints_max, mMax);
@@ -220,12 +219,12 @@ public class SwagPoints extends View {
 		// draw the arc and progress
 		canvas.drawArc(mArcRect, ANGLE_OFFSET, 360, false, mArcPaint);
 		canvas.drawArc(mArcRect, ANGLE_OFFSET, mProgressSweep, false, mProgressPaint);
-
+/*
 		if (mEnabled) {
 			// draw the indicator icon
 			canvas.translate(mTranslateX - mIndicatorIconX, mTranslateY - mIndicatorIconY);
 			mIndicatorIcon.draw(canvas);
-		}
+		}*/
 	}
 
 	@Override
@@ -264,10 +263,10 @@ public class SwagPoints extends View {
 	@Override
 	protected void drawableStateChanged() {
 		super.drawableStateChanged();
-		if (mIndicatorIcon != null && mIndicatorIcon.isStateful()) {
+		/*if (mIndicatorIcon != null && mIndicatorIcon.isStateful()) {
 			int[] state = getDrawableState();
 			mIndicatorIcon.setState(state);
-		}
+		}*/
 		invalidate();
 	}
 

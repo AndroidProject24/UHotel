@@ -1,452 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--MAIN PAGE LAYOUT-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_room_control"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText"
     >
 
-
-  <!--&lt;!&ndash;MAIN PAGE LAYOUT&ndash;&gt;
-  <LinearLayout
-      android:id="@+id/room_control_main"
+  <TextView
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_gravity="center"
-      android:background="@drawable/bg_room_control"
+      android:layout_height="wrap_content"
       android:gravity="center"
-      android:orientation="vertical"
+      android:lineSpacingExtra="10dp"
+      android:paddingBottom="30dp"
+      android:paddingTop="30dp"
+      android:text="PRESETS"
+      android:textColor="@color/room_presets_text"
+      android:textSize="30sp"
+      />
+  <!--PRESET MENU ITEM-->
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:orientation="horizontal"
       >
 
-    <TextView
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/room_control_preset_home"
+        android:text="Home"
+        style="@style/RoomControl.Button"
+        />
+
+    <Button
+        android:id="@+id/room_control_preset_away"
+        android:text="Away"
+        style="@style/RoomControl.Button"
+        />
+
+    <Button
+        android:id="@+id/room_control_preset_read"
+        android:text="Read"
+        style="@style/RoomControl.Button"
+        />
+
+    <Button
+        android:id="@+id/room_control_preset_sleep"
+        android:text="Sleep"
+        style="@style/RoomControl.Button"
+        />
+  </LinearLayout>
+
+  <!--MAIN PAGE CONTENT-->
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingTop="20dp"
+      >
+
+    <!--TEMP LAYOUT-->
+    <RelativeLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:lineSpacingExtra="10dp"
-        android:paddingBottom="30dp"
-        android:paddingTop="30dp"
-        android:text="PRESETS"
-        android:textColor="@color/roomcontrol_name_spacing"
-        android:textSize="30sp"
-        />
-    &lt;!&ndash;PRESET MENU ITEM&ndash;&gt;
-    <LinearLayout
-        android:id="@+id/room_control_preset_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal"
         >
 
-      <Button
-          android:id="@+id/room_control_preset_home"
-          android:layout_width="wrap_content"
+      <TextView
+          android:id="@+id/room_control_temp_name"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@drawable/roomcontrol_button_selector"
-          android:focusable="true"
-          android:nextFocusDown="@+id/room_control_temp_btnUp"
-          android:nextFocusRight="@+id/room_control_preset_away"
-          android:nextFocusUp="@+id/movies_menu_item1"
-          android:text="Home"
-          android:textColor="@color/room_text_header_selector"
-          style="@style/RoomControl.Button"
+          android:gravity="center_horizontal|top"
+          android:text="TEMP"
+          android:textSize="30sp"
+          style="@style/RoomControl_txt_maincontent_lights"
           />
 
-      <Button
-          android:id="@+id/room_control_preset_away"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/roomcontrol_button_selector"
-          android:focusable="true"
-          android:nextFocusDown="@+id/room_control_temp_btnUp"
-          android:nextFocusLeft="@+id/room_control_preset_home"
-          android:nextFocusRight="@+id/room_control_preset_read"
-          android:nextFocusUp="@+id/movies_menu_item1"
-          android:text="Away"
-          android:textColor="@color/room_text_header_selector"
-          style="@style/RoomControl.Button"
+      <ImageView
+          android:id="@+id/room_control_temp_btnUp"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_below="@+id/room_control_temp_name"
+          android:layout_marginLeft="100dp"
+          android:background="@drawable/roomcontrol_tab_selector"
+          android:src="@drawable/btnup"
           />
 
-      <Button
-          android:id="@+id/room_control_preset_read"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/roomcontrol_button_selector"
+      <ImageView
+          android:id="@+id/room_control_temp_btnDown"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_below="@+id/room_control_temp_seek"
+          android:layout_marginLeft="100dp"
+          android:background="@drawable/roomcontrol_tab_selector"
           android:focusable="true"
-          android:nextFocusDown="@+id/room_control_temp_btnUp"
-          android:nextFocusLeft="@+id/room_control_preset_away"
-          android:nextFocusRight="@+id/room_control_preset_sleep"
-          android:nextFocusUp="@+id/movies_menu_item1"
-          android:text="Read"
-          android:textColor="@color/room_text_header_selector"
-          style="@style/RoomControl.Button"
+          android:nextFocusDown="@+id/room_control_lights_mainseek"
+          android:nextFocusRight="@+id/room_control_lights_mainseek"
+          android:nextFocusUp="@+id/room_control_temp_btnUp"
+          android:scaleType="fitXY"
+          android:src="@drawable/btndown"
           />
 
-      <Button
-          android:id="@+id/room_control_preset_sleep"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/roomcontrol_button_selector"
-          android:focusable="true"
-          android:nextFocusDown="@+id/room_control_temp_btnUp"
-          android:nextFocusLeft="@+id/room_control_preset_read"
-          android:nextFocusUp="@+id/movies_menu_item1"
-          android:text="Sleep"
-          android:textColor="@color/room_text_header_selector"
-          style="@style/RoomControl.Button"
-          />
-    </LinearLayout>
-
-    &lt;!&ndash;MAIN PAGE CONTENT&ndash;&gt;
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
-        >
-
-      &lt;!&ndash;TEMP LAYOUT&ndash;&gt;
-      <RelativeLayout
-          android:id="@+id/room_control_temp"
-          android:layout_width="300dp"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          >
-
-        <TextView
-            android:id="@+id/room_control_temp_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|top"
-            android:text="TEMP"
-            android:textSize="30sp"
-            style="@style/RoomControl_txt_maincontent_lights"
-            />
-
-        <ImageView
-            android:id="@+id/room_control_temp_btnUp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/room_control_temp_name"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/room_control_temp"
-            android:focusable="true"
-            android:nextFocusDown="@+id/room_control_temp_btnDown"
-            android:nextFocusRight="@+id/room_control_lights_mainseek"
-            android:nextFocusUp="@+id/room_control_preset_home"
-            android:src="@drawable/btnup"
-            />
-
-        <ImageView
-            android:id="@+id/room_control_temp_btnDown"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/room_control_temp_seek"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/room_control_temp"
-            android:focusable="true"
-            android:nextFocusDown="@+id/room_control_lights_mainseek"
-            android:nextFocusRight="@+id/room_control_lights_mainseek"
-            android:nextFocusUp="@+id/room_control_temp_btnUp"
-            android:scaleType="fitXY"
-            android:src="@drawable/btndown"
-            />
-
-        <LinearLayout
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/room_control_temp_btnUp"
-            android:layout_marginLeft="60dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="30dp"
-            >
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:padding="10dp"
-              android:text="SET TO"
-              android:textColor="@color/white"
-              android:textSize="16sp"
-              />
-
-          <TextView
-              android:id="@+id/room_control_temp_temptxt"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:lines="1"
-              android:padding="10dp"
-              android:scaleType="center"
-              android:text="27oC"
-              android:textColor="@color/white"
-              android:textSize="40sp"
-              />
-
-          <TextView
-              android:id="@+id/room_control_temp_temptxt1"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:text="68oC"
-              android:textColor="@color/roomcontrol_name_spacing"
-              android:textSize="20sp"
-              />
-        </LinearLayout>
-
-        <com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints
-            android:id="@+id/seekbar_point"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            app:min="0"
-            app:max="100"
-            app:step="1"
-            app:progressColor="@color/yellow"
-            app:progressWidth="8dp"
-            app:arcColor="@color/black"
-            app:arcWidth="8dp"
-            app:textSize="72sp"
-            app:textColor="@color/white"
-            app:indicatorIcon="@drawable/ic_logo_uhotel"
-            />
-&lt;!&ndash;
-        <me.tankery.lib.circularseekbar.CircularSeekBar
-            android:id="@+id/room_control_temp_seek"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/room_control_temp_btnUp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            app:cs_max="100"
-            app:cs_pointer_halo_color_ontouch="@color/roomcontrol_button_background_selected"
-            />&ndash;&gt;
-      </RelativeLayout>
-
-      &lt;!&ndash;LIGHT LAYOUT&ndash;&gt;
       <LinearLayout
-          android:id="@+id/room_control_lights"
-          android:layout_width="300dp"
+          android:layout_width="150dp"
           android:layout_height="wrap_content"
-          android:layout_gravity="center"
+          android:layout_below="@+id/room_control_temp_btnUp"
+          android:layout_marginLeft="60dp"
           android:gravity="center"
           android:orientation="vertical"
+          android:padding="30dp"
           >
 
         <TextView
-            android:id="@+id/room_control_lights_name"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="SET TO"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/room_control_temp_temptxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="10dp"
+            android:scaleType="center"
+            android:text="27oC"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            />
+
+        <TextView
+            android:id="@+id/room_control_temp_temptxt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="68oC"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+      </LinearLayout>
+
+      <com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints
+          android:id="@+id/room_control_temp_seek"
+          android:layout_width="200dp"
+          android:layout_height="200dp"
+          android:layout_gravity="center"
+          android:layout_marginLeft="30dp"
+          android:layout_marginStart="30dp"
+          app:arcColor="@color/color_bg_progress"
+          app:arcWidth="10dp"
+          app:max="100"
+          app:min="0"
+          app:progressColor="@color/color_progress"
+          app:progressWidth="8dp"
+          app:step="1"
+          app:textColor="@color/white"
+          app:textSize="72sp"
+          />
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+      <TableRow>
+        <TextView
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="LIGHTS"
             android:textSize="30sp"
             style="@style/RoomControl_txt_maincontent_lights"
             />
-
         <TextView
-            android:id="@+id/room_control_lights_maintxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MAIN"
-            style="@style/RoomControl_txt_title"
-            />
-        &lt;!&ndash;main&ndash;&gt;
-        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:bsb_bubble_color="@color/yellow"
-            app:bsb_bubble_text_color="@color/colorPrimaryDark"
-            app:bsb_max="10"
-            app:bsb_min="0"
-            app:bsb_progress="0"
-            app:bsb_second_track_color="@color/black"
-            app:bsb_section_count="5"
-            app:bsb_section_text_position="bottom_sides"
-            app:bsb_show_progress_in_float="true"
-            app:bsb_show_section_mark="true"
-            app:bsb_show_section_text="true"
-            app:bsb_show_thumb_text="true"
-            app:bsb_track_color="@color/yellow"/>
-
-       &lt;!&ndash; <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_lights_mainseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusDown="@+id/room_control_lights_overheadseek"
-            android:nextFocusLeft="@+id/room_control_lights_mainseek"
-            android:nextFocusRight="@+id/room_control_lights_mainseek"
-            android:nextFocusUp="@+id/room_control_temp_btnDown"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
-            />&ndash;&gt;
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-          <TextView
-              android:id="@+id/room_control_lights_mainstatus"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="off"
-              style="@style/RoomControl_txt_content"
-              />
-
-          <TextView
-              android:id="@+id/room_control_lights_mainstatus_on"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="end"
-              android:gravity="end"
-              android:text="on"
-              style="@style/RoomControl_txt_content"
-              />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/room_control_lights_overheadtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OVERHEAD"
-            style="@style/RoomControl_txt_title"
-            />
-        &lt;!&ndash;overhead&ndash;&gt;
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_lights_overheadseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusDown="@+id/room_control_lights_wallseek"
-            android:nextFocusLeft="@+id/room_control_lights_overheadseek"
-            android:nextFocusRight="@+id/room_control_lights_overheadseek"
-            android:nextFocusUp="@+id/room_control_lights_mainseek"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-          <TextView
-              android:id="@+id/room_control_lights_overheadstatus"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="off"
-              style="@style/RoomControl_txt_content"
-              />
-
-          <TextView
-              android:id="@+id/room_control_lights_overheadstatus_on"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="end"
-              android:gravity="end"
-              android:text="on"
-              style="@style/RoomControl_txt_content"
-              />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/room_control_lights_walltxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WALL"
-            style="@style/RoomControl_txt_title"
-            />
-        &lt;!&ndash;wall&ndash;&gt;
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_lights_wallseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusDown="@+id/room_control_drapes_sheersseek"
-            android:nextFocusLeft="@+id/room_control_lights_wallseek"
-            android:nextFocusRight="@+id/room_control_lights_wallseek"
-            android:nextFocusUp="@+id/room_control_lights_overheadseek"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-          <TextView
-              android:id="@+id/room_control_lights_walltatus"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="off"
-              style="@style/RoomControl_txt_content"
-              />
-
-          <TextView
-              android:id="@+id/room_control_lights_walltatus_on"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="end"
-              android:gravity="end"
-              android:text="on"
-              style="@style/RoomControl_txt_content"
-              />
-        </LinearLayout>
-
-      </LinearLayout>
-      &lt;!&ndash;DRAPES&ndash;&gt;
-      <LinearLayout
-          android:id="@+id/room_control_drapes"
-          android:layout_width="300dp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:gravity="center"
-          android:orientation="vertical"
-          >
-
-        <TextView
-            android:id="@+id/room_control_drapes_name"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="DRAPES"
             android:textSize="30sp"
             style="@style/RoomControl_txt_maincontent_lights"
             />
-
+      </TableRow>
+      <TableRow>
         <TextView
-            android:id="@+id/room_control_drapes_sheerstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAIN"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
+            />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SHEERS"
-            style="@style/RoomControl_txt_title"
-            />
-        &lt;!&ndash;sheers&ndash;&gt;
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_drapes_sheersseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusDown="@+id/room_control_drapes_blackoutsseek"
-            android:nextFocusLeft="@+id/room_control_drapes_sheersseek"
-            android:nextFocusRight="@+id/room_control_drapes_sheersseek"
-            android:nextFocusUp="@+id/room_control_lights_wallseek"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
             />
 
+      </TableRow>
+      <TableRow>
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
+            />
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_sheers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
+            />
+      </TableRow>
+      <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+          <TextView
+              android:id="@+id/main_status_off"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="off"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
+
+          <TextView
+              android:id="@+id/main_status_on"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end"
+              android:gravity="end"
+              android:text="on"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -454,46 +260,87 @@
             >
 
           <TextView
-              android:id="@+id/room_control_drapes_sheersstatus"
+              android:id="@+id/sheers_status_off"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="close"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
 
           <TextView
-              android:id="@+id/room_control_drapes_sheersstatus_on"
+              android:id="@+id/sheers_status_on"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="end"
               android:gravity="end"
               android:text="open"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
         </LinearLayout>
+      </TableRow>
 
+      <TableRow>
         <TextView
-            android:id="@+id/room_control_drapes_blackoutstxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OVERHEAD"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
+            />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BLACKOUTS"
-            style="@style/RoomControl_txt_title"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
             />
-        &lt;!&ndash;blackout&ndash;&gt;
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_drapes_blackoutsseek"
+      </TableRow>
+      <TableRow>
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_overhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusDown="@+id/room_control_drapes_sliderseek"
-            android:nextFocusLeft="@+id/room_control_drapes_blackoutsseek"
-            android:nextFocusRight="@+id/room_control_drapes_blackoutsseek"
-            android:nextFocusUp="@+id/room_control_drapes_sheersseek"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
             />
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_blackouts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
+            />
+      </TableRow>
+      <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+          <TextView
+              android:id="@+id/overhead_status_off"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="off"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
 
+          <TextView
+              android:id="@+id/overhead_status_on"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end"
+              android:gravity="end"
+              android:text="on"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -501,45 +348,88 @@
             >
 
           <TextView
-              android:id="@+id/room_control_drapes_blackoutsstatus"
+              android:id="@+id/blackouts_status_off"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="close"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
 
           <TextView
-              android:id="@+id/room_control_drapes_blackoutsstatus_on"
+              android:id="@+id/blackouts_status_on"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="end"
               android:gravity="end"
               android:text="open"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
         </LinearLayout>
+      </TableRow>
 
+      <TableRow>
         <TextView
-            android:id="@+id/room_control_drapes_slidertxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WALL"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
+            />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SLIDER"
-            style="@style/RoomControl_txt_title"
-            />
-        &lt;!&ndash;slider&ndash;&gt;
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/room_control_drapes_sliderseek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="10"
-            android:nextFocusLeft="@+id/room_control_drapes_sliderseek"
-            android:nextFocusRight="@+id/room_control_drapes_sliderseek"
-            android:nextFocusUp="@+id/room_control_drapes_blackoutsseek"
-            android:progressDrawable="@drawable/room_control_progess_selector"
-            android:thumb="@drawable/room_control_thumb_selector"
+            style="@style/RoomControl_txt_maincontent_lights_itemtxt"
             />
 
+      </TableRow>
+      <TableRow>
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_wall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
+            />
+        <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+            android:id="@+id/seekBar_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:bsb_bubble_color="@color/yellow"
+            app:bsb_bubble_text_color="@color/colorPrimaryDark"
+            app:bsb_second_track_color="@color/tab_select"
+            app:bsb_thumb_radius="9dp"
+            app:bsb_track_color="@color/room_bg_track"
+            />
+      </TableRow>
+      <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+          <TextView
+              android:id="@+id/wall_status_off"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="off"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
+
+          <TextView
+              android:id="@+id/wall_status_on"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end"
+              android:gravity="end"
+              android:text="on"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
+              />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -547,24 +437,24 @@
             >
 
           <TextView
-              android:id="@+id/room_control_drapes_sliderstatus"
+              android:id="@+id/slider_status_off"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="close"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
 
           <TextView
-              android:id="@+id/room_control_drapes_sliderstatus_on"
+              android:id="@+id/slider_status_on"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="end"
               android:gravity="end"
               android:text="open"
-              style="@style/RoomControl_txt_content"
+              style="@style/RoomControl_txt_maincontent_lights_itemstatus"
               />
         </LinearLayout>
-      </LinearLayout>
-    </LinearLayout>
-  </LinearLayout>-->
-</RelativeLayout>
+      </TableRow>
+    </TableLayout>
+  </LinearLayout>
+</LinearLayout>

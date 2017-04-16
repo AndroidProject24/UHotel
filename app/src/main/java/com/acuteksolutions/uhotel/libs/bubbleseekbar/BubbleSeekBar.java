@@ -593,7 +593,7 @@ public class BubbleSeekBar extends View {
                     invalidate();
 
                     if (mProgressListener != null) {
-                        mProgressListener.onProgressChanged(getProgress(), getProgressFloat());
+                        mProgressListener.onProgressChanged(mBubbleView.getId(),getProgress(), getProgressFloat());
                     }
                 }
 
@@ -630,7 +630,7 @@ public class BubbleSeekBar extends View {
                                             invalidate();
 
                                             if (mProgressListener != null) {
-                                                mProgressListener.onProgressChanged(getProgress(),
+                                                mProgressListener.onProgressChanged(mBubbleView.getId(),getProgress(),
                                                         getProgressFloat());
                                             }
                                         }
@@ -772,7 +772,7 @@ public class BubbleSeekBar extends View {
                     invalidate();
 
                     if (mProgressListener != null) {
-                        mProgressListener.onProgressChanged(getProgress(), getProgressFloat());
+                        mProgressListener.onProgressChanged(mBubbleView.getId(),getProgress(), getProgressFloat());
                     }
                 }
             });
@@ -861,7 +861,7 @@ public class BubbleSeekBar extends View {
         mBubbleCenterRawX = mBubbleCenterRawSolidX + mTrackLength * (mProgress - mMin) / mDelta;
 
         if (mProgressListener != null) {
-            mProgressListener.onProgressChanged(getProgress(), getProgressFloat());
+            mProgressListener.onProgressChanged(mBubbleView.getId(),getProgress(), getProgressFloat());
             mProgressListener.getProgressOnFinally(getProgress(), getProgressFloat());
         }
         if (isAlwaysShowBubble) {
@@ -952,7 +952,7 @@ public class BubbleSeekBar extends View {
         calculateRadiusOfBubble();
 
         if (mProgressListener != null) {
-            mProgressListener.onProgressChanged(getProgress(), getProgressFloat());
+            mProgressListener.onProgressChanged(mBubbleView.getId(),getProgress(), getProgressFloat());
             mProgressListener.getProgressOnFinally(getProgress(), getProgressFloat());
         }
 
@@ -1040,7 +1040,7 @@ public class BubbleSeekBar extends View {
      */
     public interface OnProgressChangedListener {
 
-        void onProgressChanged(int progress, float progressFloat);
+        void onProgressChanged(int viewID,int progress, float progressFloat);
 
         void getProgressOnActionUp(int progress, float progressFloat);
 
@@ -1055,7 +1055,7 @@ public class BubbleSeekBar extends View {
     public static abstract class OnProgressChangedListenerAdapter implements OnProgressChangedListener {
 
         @Override
-        public void onProgressChanged(int progress, float progressFloat) {
+        public void onProgressChanged(int viewId,int progress, float progressFloat) {
         }
 
         @Override

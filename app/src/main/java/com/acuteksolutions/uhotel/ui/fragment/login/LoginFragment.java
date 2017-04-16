@@ -28,7 +28,7 @@ import static com.acuteksolutions.uhotel.utils.Utils.isPasswordValid;
 public class LoginFragment extends BaseFragment implements LoginView {
   @Inject
   LoginPresenter
-          mLoginPresenter;
+  mLoginPresenter;
   @BindView(R.id.img_logo)
   ImageView mImgLogo;
   @BindView(R.id.lock)

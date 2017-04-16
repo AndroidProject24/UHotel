@@ -1,5 +1,6 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,9 +8,11 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
@@ -21,13 +24,8 @@ import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
-import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
-import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
-import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
-import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
-import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -40,6 +38,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) ViewPager viewPagerMain;
+  @BindView(R.id.custom_tab_icon) AppCompatImageView custom_tab_icon;
   @Inject
   PreferencesHelper mPreferencesHelper;
   @Override
@@ -54,7 +53,12 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initViews() {
-    initTabLayout();
+    if(mPreferencesHelper.getJsonLogin()==null)
+      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+    else {
+      initToolbar();
+      initTabLayout();
+    }
   }
 
   @Override
@@ -64,9 +68,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initData() {
-    if(mPreferencesHelper.getJsonLogin()==null) {
-      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
-    }
     viewPagerMain.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabMain));
     tabMain.addOnTabSelectedListener(new OnTabSelectedListener().onTabSelectedListener(viewPagerMain));
   }
@@ -93,39 +94,25 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
         .withSliderBackgroundDrawableRes(R.color.black)
         .withItemAnimator(new DefaultItemAnimator())
         .addDrawerItems(
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.CONCIERGE)).withIcon(R.drawable.menu_concierge).withIdentifier(1).withSetSelected(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.CONCIERGE)).withIcon(R.drawable.menu_concierge).withIdentifier(TabMainDef.TabMain.CONCIERGE).withSetSelected(true),
             new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.LIVETV)).withIcon(R.drawable.menu_livetv).withIdentifier(2).withSetSelected(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.LIVETV)).withIcon(R.drawable.menu_livetv).withIdentifier(TabMainDef.TabMain.LIVETV).withSetSelected(true),
             new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.MOVIES)).withIcon(R.drawable.menu_movies).withIdentifier(3).withSetSelected(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.MOVIES)).withIcon(R.drawable.menu_movies).withIdentifier(TabMainDef.TabMain.MOVIES).withSetSelected(true),
             new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.FOOD)).withIcon(R.drawable.menu_food_activities).withIdentifier(4).withSetSelected(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.FOOD)).withIcon(R.drawable.menu_food_activities).withIdentifier(TabMainDef.TabMain.FOOD).withSetSelected(true),
             new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.ROOMCONTROL)).withIcon(R.drawable.menu_room_control).withIdentifier(5).withSetSelected(true).withEnabled(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.ROOMCONTROL)).withIcon(R.drawable.menu_room_control).withIdentifier(TabMainDef.TabMain.ROOMCONTROL).withSetSelected(true).withEnabled(true),
             new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.home_menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(6).withSetSelected(true),
+            new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.home_menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(TabMainDef.TabMain.HOME).withSetSelected(true),
             new DividerDrawerItem()
         )
         .withOnDrawerItemClickListener((view, position, drawerItem) -> {
           if (drawerItem != null) {
             if (mPreferencesHelper.getJsonLogin()!=null) {
-              if (drawerItem.getIdentifier() == 1) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, LandingFragment.newInstance());
-              } else if (drawerItem.getIdentifier() == 2) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, LiveTVFragment.newInstance());
-              } else if (drawerItem.getIdentifier() == 3) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
-              } else if (drawerItem.getIdentifier() == 4) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, FoodFragment.newInstance());
-              } else if (drawerItem.getIdentifier() == 5) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, RoomServiceFragment.newInstance());
-              }else if (drawerItem.getIdentifier() == 6) {
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, SettingFragment.newInstance());
-              }else{
-                replaceFagment(getSupportFragmentManager(), R.id.fragment, LandingFragment.newInstance());
-              }
+              viewPagerMain.setCurrentItem((int)drawerItem.getIdentifier());
             }else{
-              addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+              replaceFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
               Snackbar.make(mLayout, "Please login!", Snackbar.LENGTH_LONG).show();
             }
           }
@@ -136,7 +123,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     if (Build.VERSION.SDK_INT >= 19) {
       result.getDrawerLayout().setFitsSystemWindows(false);
     }
-    //result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+    result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
   }
 
   private void initTabLayout() {
@@ -154,6 +141,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     }
   }
 
+  private void initToolbar(){
+    setSupportActionBar(mToolbar);
+  }
   @Override
   public void onBackPressed() {
     if (result != null && result.isDrawerOpen()) {
@@ -194,17 +184,18 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   public void hideShowToolBar(boolean isShow) {
-    /*if(mToolbar != null) {
+    if(tabMain != null && mToolbar!=null) {
       if (isShow) {
-        if(getSupportActionBar()!=null)
-          getSupportActionBar().show();
-        tabMain.setVisibility(View.GONE);
-      }else {
-        result.closeDrawer();
         tabMain.setVisibility(View.VISIBLE);
-        if(getSupportActionBar()!=null)
-          getSupportActionBar().hide();
+        custom_tab_icon.setVisibility(View.VISIBLE);
+      }else {
+        tabMain.setVisibility(View.GONE);
+        custom_tab_icon.setVisibility(View.GONE);
+        if(getSupportActionBar()!=null) {
+          mToolbar.setBackgroundColor(Color.TRANSPARENT);
+          mToolbar.getBackground().setAlpha(100);
+        }
       }
-    }*/
+    }
   }
 }

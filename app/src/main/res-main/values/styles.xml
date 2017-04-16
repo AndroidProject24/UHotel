@@ -36,7 +36,9 @@
   <style name="MoviesTabLayoutStyle" parent="Widget.Design.TabLayout">
     <item name="tabMode">fixed</item>
     <item name="tabGravity">fill</item>
+    <item name="tabMaxWidth">0dp</item>
     <item name="tabIndicatorColor">@color/transparent</item>
+    <item name="android:gravity">start</item>
     <item name="android:tabStripEnabled">false</item>
     <item name="tabIndicatorHeight">2dp</item>
     <item name="android:layout_height">@dimen/action_bar_height</item>
@@ -136,10 +138,10 @@
 
   <!--ROOM CONTROL-->
   <style name="RoomControl.Button" parent="Base.Widget.AppCompat.ActionButton">
-    <item name="android:background">@color/yellow</item>
+    <item name="android:background">@drawable/roomcontrol_tab_selector</item>
     <item name="android:textSize">@dimen/textSize20</item>
     <item name="android:textStyle">bold</item>
-    <item name="android:textColor">@color/yellow</item>
+    <item name="android:textColor">@color/main_text_selector</item>
     <item name="android:scaleType">center</item>
     <item name="android:textAllCaps">false</item>
     <item name="android:gravity">center</item>
@@ -150,6 +152,8 @@
     <item name="android:paddingRight">100dp</item>
     <item name="android:layout_marginLeft">5dp</item>
     <item name="android:layout_marginRight">5dp</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
   </style>
   <style name="RoomControl_txt_content">
     <item name="android:textSize">20sp</item>
@@ -170,6 +174,35 @@
     <item name="android:paddingLeft">15dp</item>
   </style>
   <style name="RoomControl_txt_maincontent_lights">
+    <item name="android:textColor">@color/white</item>
+    <item name="android:scaleType">center</item>
+    <item name="android:gravity">center</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:paddingBottom">10dp</item>
+    <item name="android:lineSpacingExtra">20dp</item>
+  </style>
+
+  <style name="RoomControl_txt_maincontent_lights_itemtxt">
+    <item name="android:layout_gravity">left</item>
+    <item name="android:textSize">25sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:scaleType">center</item>
+    <item name="android:gravity">center</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:paddingBottom">10dp</item>
+    <item name="android:paddingLeft">15dp</item>
+  </style>
+
+  <style name="RoomControl_txt_maincontent_lights_itemstatus">
+    <item name="android:textSize">20sp</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:paddingBottom">10dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:paddingLeft">15dp</item>
+  </style>
+
+  <style name="RoomControl_tab_style">
     <item name="android:textColor">@color/white</item>
     <item name="android:scaleType">center</item>
     <item name="android:gravity">center</item>

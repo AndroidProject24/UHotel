@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class ListFoodFragment extends BaseFragment implements FoodView {
   mPresenter;
   @BindView(R.id.recycle_food)
   RecyclerView mRecycleFood;
-  @BindView(R.id.layout_food) LinearLayout mLayoutFood;
+  @BindView(R.id.movies_main_info) ViewGroup mLayoutFood;
   @BindView(R.id.txt_food_category)
   TextView mTxtFoodCategory;
   @BindView(R.id.txt_food_name)
@@ -76,7 +76,7 @@ public class ListFoodFragment extends BaseFragment implements FoodView {
 
   @Override
   protected void initData() {
-    mPresenter.getFakeData();
+    mPresenter.getListFood(mContext,Preconditions.checkNotNull(getArguments().getInt(BundleDef.TAB_INDEX)));
   }
 
   @Override

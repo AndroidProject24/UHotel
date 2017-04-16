@@ -148,22 +148,28 @@ dependencies {
 @SuppressWarnings("GroovyAssignabilityCheck")
 def configApkFileName(variant, defaultConfig) {
   variant.outputs.each { output ->
-    if (variant.buildType.name == android.buildTypes.debug.name) {
-      if (output.zipAlign) {
-        def file = output.outputFile
-        output.outputFile = new File(file.parentFile, variant.buildType.name + "_v"
-            + defaultConfig.versionName + "_"
-            + defaultConfig.versionCode
-            + ".apk")
-      }
-    } else if (variant.buildType.name == android.buildTypes.release.name) {
-      if (output.zipAlign) {
-        def file = output.outputFile
-        output.outputFile = new File(file.parentFile, "uHotel" + variant.buildType.name
-            + "_v" + defaultConfig.versionName + "_"
-            + defaultConfig.versionCode
-            + ".apk")
-      }
+    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+      def name = "${rootDir}/apk/Debug.apk"
+      output.outputFile = file(name)
     }
   }
+//  variant.outputs.each { output ->
+//    if (variant.buildType.name == android.buildTypes.debug.name) {
+//      if (output.zipAlign) {
+//        def file = output.outputFile
+//        output.outputFile = new File(file.parentFile, variant.buildType.name + "_v"
+//            + defaultConfig.versionName + "_"
+//            + defaultConfig.versionCode
+//            + ".apk")
+//      }
+//    } else if (variant.buildType.name == android.buildTypes.release.name) {
+//      if (output.zipAlign) {
+//        def file = output.outputFile
+//        output.outputFile = new File(file.parentFile, "uHotel" + variant.buildType.name
+//            + "_v" + defaultConfig.versionName + "_"
+//            + defaultConfig.versionCode
+//            + ".apk")
+//      }
+//    }
+//  }
 }

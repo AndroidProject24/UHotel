@@ -60,7 +60,7 @@ public class LandingFragment extends BaseFragment {
   }
 
   @Override protected void initViews() {
-    toolbarTitleListener.hideShowToolBar(true);
+    toolbarTitleListener.hideShowToolBar(false);
     ((MainActivity) getActivity()).getActivityComponent().inject(this);
     ImageUtils.loadImage(glide,R.drawable.home_background,imgLanding);
     ImageUtils.loadImage(glide,R.drawable.ic_logo_uhotel,imgLogo);
@@ -119,6 +119,6 @@ public class LandingFragment extends BaseFragment {
 
   @Override public void onDestroyView() {
     super.onDestroyView();
-    toolbarTitleListener.hideShowToolBar(false);
+    toolbarTitleListener.hideShowToolBar(true);
   }
 }
