@@ -48,7 +48,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     injectDependencies();
     initViews();
     initData();
-    //RXThreadConnect();
   }
   private void setButterKnife() {
     ButterKnife.bind(this);

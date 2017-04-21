@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   @Override
   protected void initViews() {
     if(mPreferencesHelper.getJsonLogin()==null)
-      addFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+      addFagment(getSupportFragmentManager(), R.id.fragment_root, LoginFragment.newInstance());
     else {
       initToolbar();
       initTabLayout();
@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
             if (mPreferencesHelper.getJsonLogin()!=null) {
               viewPagerMain.setCurrentItem((int)drawerItem.getIdentifier());
             }else{
-              replaceFagment(getSupportFragmentManager(), R.id.fragment, LoginFragment.newInstance());
+              replaceFagment(getSupportFragmentManager(), R.id.fragment_root, LoginFragment.newInstance());
               Snackbar.make(mLayout, "Please login!", Snackbar.LENGTH_LONG).show();
             }
           }

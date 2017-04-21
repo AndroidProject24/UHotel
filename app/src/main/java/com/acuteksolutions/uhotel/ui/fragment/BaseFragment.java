@@ -114,6 +114,16 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     }
     this.mCompositeSubscription.add(s);
   }
+
+  public void addFagment(@NonNull FragmentManager fragmentManager,@NonNull int frameId, @NonNull Fragment fragment){
+    checkNotNull(fragmentManager);
+    checkNotNull(fragment);
+    FragmentTransaction transaction = fragmentManager.beginTransaction();
+    transaction.add(frameId, fragment,fragment.getClass().getName());
+    transaction.addToBackStack(null);
+    transaction.commit();
+  }
+
   public void replaceFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);

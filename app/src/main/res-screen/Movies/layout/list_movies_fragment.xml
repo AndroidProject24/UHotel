@@ -4,7 +4,7 @@
     tools:ignore="RtlHardcoded"
     style="@style/style_base_fill"
     >
-
+<!--
   <ImageView
       android:id="@+id/img_main"
       android:src="@mipmap/ic_launcher"
@@ -59,7 +59,7 @@
 
   </RelativeLayout>
 
-  <!--MOVIES ITEM RECYCLER VIEW-->
+  &lt;!&ndash;MOVIES ITEM RECYCLER VIEW&ndash;&gt;
   <LinearLayout
       android:id="@+id/layout_list_movies"
       android:layout_width="match_parent"
@@ -101,7 +101,7 @@
         />
   </LinearLayout>
 
-  <!--MOVIES BUTTON FOOTER-->
+  &lt;!&ndash;MOVIES BUTTON FOOTER&ndash;&gt;
   <LinearLayout
       android:id="@+id/layout_all_movies"
       android:layout_width="match_parent"
@@ -126,5 +126,10 @@
         android:textSize="@dimen/textSize22"
         style="@style/Movies.Button.Footerpage"
         />
-  </LinearLayout>
+  </LinearLayout>-->
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recycle_movies"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
 </RelativeLayout>

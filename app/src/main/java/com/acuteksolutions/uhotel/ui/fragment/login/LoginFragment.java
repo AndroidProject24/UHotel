@@ -76,7 +76,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.login_fragment;
+    return R.layout.login_activity;
   }
 
   @Override
@@ -131,7 +131,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   public void loginSucess() {
-    replaceFagment(getFragmentManager(), R.id.fragment, LandingFragment.newInstance());
+    addFagment(getFragmentManager(), R.id.fragment, LandingFragment.newInstance());
   }
 
   @Override

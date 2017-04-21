@@ -4,15 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-import android.widget.TextView;
 import butterknife.BindView;
-import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.ItemClickSupport;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
@@ -20,7 +16,6 @@ import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,15 +24,15 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
   @Inject
   MoviesPresenter
   mPresenter;
-  @BindView(R.id.txt_movies_name)
+  /*@BindView(R.id.txt_movies_name)
   TextView mTxtMoviesName;
   @BindView(R.id.txt_movies_info)
   TextView mTxtMoviesInfo;
+  @BindView(R.id.img_main)
+  ImageView mImageMain;*/
   private Context mContext;
   @BindView(R.id.recycle_movies)
   RecyclerView mRecyclerMovies;
-  @BindView(R.id.img_main)
-  ImageView mImageMain;
 
   public static ListMoviesFragment newInstance(@TabMoviesDef.TabMovies int index) {
     ListMoviesFragment fragment=new ListMoviesFragment();
@@ -125,18 +120,20 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
   public void showInfo(VODInfo info) {
     try {
       Preconditions.checkNotNull(info);
-      ImageUtils.loadImage(glide,info.getDetail().getPoster(), mImageMain);
+     /* ImageUtils.loadImage(glide,info.getDetail().getPoster(), mImageMain);
       mTxtMoviesName.setText(Preconditions.checkNotNull(info.getDetail().getTitle()));
-      mTxtMoviesInfo.setText(Preconditions.checkNotNull(info.getDetail().getDescription()));
+      mTxtMoviesInfo.setText(Preconditions.checkNotNull(info.getDetail().getDescription()));*/
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
+  /*
 
   @OnClick(R.id.btn_all_movies)
   public void ClickAllMovies() {
     replaceFagment(getFragmentManager(), R.id.fragment, MoreMoviesFragment.newInstance());
   }
+  */
 
 }
 
