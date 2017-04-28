@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:id="@+id/fragment_root"
     >
   <android.support.design.widget.AppBarLayout
+      android:id="@+id/appBar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:theme="@style/AppTheme.AppBarOverlay"
+      android:background="@color/tab_background"
       >
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,20 +36,17 @@
     </LinearLayout>
 
   </android.support.design.widget.AppBarLayout>
-
-  <FrameLayout
-      android:id="@+id/drawer_container"
+  <!-- the layout which will be the content of the activity (which will be hosted inside the drawer (NOT the list of the drawer)) -->
+  <RelativeLayout
+      android:id="@+id/layout_root"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
-
-    <!-- the layout which will be the content of the activity (which will be hosted inside the drawer (NOT the list of the drawer)) -->
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
       <FrameLayout
           android:id="@+id/fragment"
@@ -56,6 +54,5 @@
           android:layout_height="match_parent"
           />
     </android.support.v4.view.ViewPager>
-  </FrameLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+  </RelativeLayout>
+</RelativeLayout>

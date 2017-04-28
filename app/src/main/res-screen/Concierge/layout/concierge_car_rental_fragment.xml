@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concierge_right_main_carrental"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_toRightOf="@+id/concierge_leftmenu_bar"
+    android:orientation="vertical"
+    android:paddingLeft="100dp"
+    android:paddingRight="50dp"
+
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="30dp"
+      android:text="Car Rental"
+      android:textColor="@color/white"
+      android:textColorHighlight="@color/grey"
+      android:textSize="40sp"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:focusable="true"
+      android:nextFocusLeft="@+id/concierge_leftmenu_bar_item_carrental"
+      android:paddingBottom="20dp"
+      android:paddingLeft="30dp"
+      android:paddingRight="30dp"
+      android:paddingTop="20dp"
+      />
+</LinearLayout>

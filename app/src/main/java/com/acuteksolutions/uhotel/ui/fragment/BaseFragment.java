@@ -67,11 +67,16 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    unbinder = ButterKnife.bind(this, mContentView);
-    mContext = getContext();
-    initProgress();
-    initViews();
-    initData();
+    try {
+      unbinder = ButterKnife.bind(this, mContentView);
+      mContext = getContext();
+      initProgress();
+      initViews();
+      initData();
+      Logger.wtf(TAG);
+    }catch (Exception e){
+      e.printStackTrace();
+    }
   }
 
   protected abstract void initViews();
@@ -131,11 +136,6 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     transaction.replace(frameId, fragment, fragment.getClass().getName());
     transaction.addToBackStack(null);
     transaction.commit();
-    /*String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
-    Logger.e("currenttag="+currenttag+"fragment="+fragment.getTag());
-    if(!currenttag.equalsIgnoreCase(fragment.getTag())) {
-
-    }*/
   }
 
 
@@ -143,6 +143,7 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   public void onDestroyView() {
     super.onDestroyView();
     unbinder.unbind();
+    Logger.wtf(TAG);
   }
 
   @Override
@@ -225,21 +226,19 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
 
   @Override
   public void onBackPress() {
-    String currenttag=getFragmentManager().findFragmentById(R.id.fragment).getTag();
-    _removeWorkerFragments(currenttag);
-   /* if(currenttag.equalsIgnoreCase(KhosoFragment.class.getName())) {
-      replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
-    }else if(currenttag.equalsIgnoreCase(KhuyenmaiFragment.class.getName())) {
-      replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
-    }else if(currenttag.equalsIgnoreCase(UpanhFragment.class.getName())) {
-      replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
-    }else{
-      replaceFagment(getFragmentManager(),R.id.fragment, MainFragment.newInstance());
-    }*/
+    _removeWorkerFragments();
   }
-  private void _removeWorkerFragments(String fragmentTAG) {
+  private void _removeWorkerFragments() {
+    String fragmentTAG=getFragmentManager().findFragmentById(R.id.fragment).getTag();
+    String fragmentTAGTWO=getFragmentManager().findFragmentById(R.id.drawer_container).getTag();
     if(!fragmentTAG.equalsIgnoreCase("")) {
       Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAG);
+      if(fragment!=null)
+        getFragmentManager().beginTransaction().remove(fragment).commit();
+    }
+
+    if(!fragmentTAGTWO.equalsIgnoreCase("")) {
+      Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAGTWO);
       if(fragment!=null)
         getFragmentManager().beginTransaction().remove(fragment).commit();
     }

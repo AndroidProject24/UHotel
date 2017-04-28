@@ -14,6 +14,4 @@ public interface MoviesView extends BaseView {
     void listCategory(List<Category> categoryList);
 
     void listMovies(List<VODInfo> moviesList);
-
-    void showInfo(VODInfo info);
 }

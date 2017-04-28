@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="rippelColor">#FFFFFF</color>
-  <color name="primary_dark">#1d1d1d</color>
+  <color name="primary_dark">#FFFFFF</color>
   <color name="backgroundPrimary">#EEEEEE</color>
-  <color name="colorPrimary">#1d1d1d</color>
-  <color name="colorPrimaryDark">#1d1d1d</color>
+  <color name="colorPrimary">#FFFFFF</color>
+  <color name="colorPrimaryDark">#FFFFFF</color>
   <color name="colorAccent">#FFFFFF</color>
-  <color name="background_item">#5F000000</color> <!-- 12% -->
+  <color name="background_item">#000000</color> <!-- 12% -->
   <color name="white">#FFFFFF</color>
   <color name="black">#000000</color>
   <color name="transparent">#00000000</color>
   <color name="black_overlay">#99000000</color>
-
+  <color name="grey">#737C81</color>
   <!--HOME-->
   <color name="yellow">#eaa903</color>
 
@@ -29,4 +29,8 @@
   <color name="color_text">@android:color/white</color>
   <color name="color_progress">#f89c09</color>
   <color name="color_bg_progress">#2e2d2d</color>
+
+  <!--CONCIERGE PAGE-->
+  <color name="bg_item_choose">#7c132d</color>
+  <color name="concierge_right_bussiness_promotions_txtcolor">#8B8B8B</color>
 </resources>

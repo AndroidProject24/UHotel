@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
+import com.acuteksolutions.uhotel.ui.fragment.concierge.ConciergeFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.FoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
-import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
 
 /**
@@ -35,7 +35,7 @@ public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter<LandingF
         fragment= LandingFragment.newInstance();
         break;
       case TabMainDef.TabMain.CONCIERGE:
-        fragment= ParentalControlFragment.newInstance();
+        fragment= ConciergeFragment.newInstance();
         break;
       case TabMainDef.TabMain.FOOD:
         fragment= FoodFragment.newInstance();

@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concierge_right_main_bussinesscenter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_toRightOf="@+id/concierge_leftmenu_bar"
+    android:orientation="horizontal"
+    android:paddingLeft="100dp"
+    android:paddingRight="50dp"
+
+
+    >
+  <!--MAIN DIV-->
+  <LinearLayout
+      android:id="@+id/concierge_right_main_bussinesscenter_main"
+      android:layout_width="550dp"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:text="Business Center"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/grey"
+        android:textSize="40dp"
+        />
+
+    <ImageView
+        android:id="@+id/concierge_right_main_bussinesscenter_img"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fedex"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Fairmount Hotel"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40 Bellevue Way NE \nBellevue, WA 98004\n3rd Floor\n(425) 451-1055"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        />
+  </LinearLayout>
+
+  <!--Promotion div-->
+  <LinearLayout
+      android:id="@+id/concierge_right_main_bussinesscenter_promotions"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="0dp"
+        android:paddingTop="50dp"
+        android:text="Promotions"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="24dp"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="20dp"
+        android:text="20% off yourpurchase of $10 or more"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Present this promotion code to your cashier upon checkout: z34srtL"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="16dp"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="20dp"
+        android:text="FREE notebook with purchase of $5 or more"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Present this promotion code to your cashier upon checkout: xfreebieX"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="16dp"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="20dp"
+        android:text="40% off your purchase of $5 or more"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_bussinesscenter_promotions_txt6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Present this promotion code to your cashier upon checkout: FortyofiveO"
+        android:textColor="@color/concierge_right_bussiness_promotions_txtcolor"
+        android:textColorHighlight="@color/grey"
+        android:textSize="16dp"
+        />
+  </LinearLayout>
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
@@ -34,18 +36,22 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private Drawer result = null;
   private boolean doubleBackToExitPressedOnce;
-  @BindView(R.id.drawer_container) FrameLayout mLayout;
+  @BindView(R.id.drawer_container) ViewGroup mLayout;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) ViewPager viewPagerMain;
   @BindView(R.id.custom_tab_icon) AppCompatImageView custom_tab_icon;
+  @BindView(R.id.appBar) AppBarLayout layout_tab;
+  @BindView(R.id.layout_root) RelativeLayout layout_root;
   @Inject
   PreferencesHelper mPreferencesHelper;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initDrawer(savedInstanceState);
   }
+
   @Override
   protected String getTAG() {
     return this.getClass().getSimpleName();
@@ -54,7 +60,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   @Override
   protected void initViews() {
     if(mPreferencesHelper.getJsonLogin()==null)
-      addFagment(getSupportFragmentManager(), R.id.fragment_root, LoginFragment.newInstance());
+      addFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
     else {
       initToolbar();
       initTabLayout();
@@ -112,7 +118,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
             if (mPreferencesHelper.getJsonLogin()!=null) {
               viewPagerMain.setCurrentItem((int)drawerItem.getIdentifier());
             }else{
-              replaceFagment(getSupportFragmentManager(), R.id.fragment_root, LoginFragment.newInstance());
+              replaceFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
               Snackbar.make(mLayout, "Please login!", Snackbar.LENGTH_LONG).show();
             }
           }
@@ -165,6 +171,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
       }
     }
   }
+
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     if(event.getKeyCode()==KeyEvent.KEYCODE_BACK ) {
@@ -188,13 +195,15 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
       if (isShow) {
         tabMain.setVisibility(View.VISIBLE);
         custom_tab_icon.setVisibility(View.VISIBLE);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
+        params.addRule(RelativeLayout.BELOW,layout_tab.getId());
       }else {
         tabMain.setVisibility(View.GONE);
         custom_tab_icon.setVisibility(View.GONE);
-        if(getSupportActionBar()!=null) {
-          mToolbar.setBackgroundColor(Color.TRANSPARENT);
-          mToolbar.getBackground().setAlpha(100);
-        }
+        layout_tab.setBackgroundColor(Color.TRANSPARENT);
+        layout_tab.getBackground().setAlpha(0);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
+        params.addRule(RelativeLayout.BELOW,0);
       }
     }
   }

@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concierge_right_main_roomservice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="70dp"
+    android:paddingRight="50dp">
+<!--
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingTop="30dp"
+        android:text="Room Amenities"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/grey_landing"
+        android:textSize="40dp" />
+
+    &lt;!&ndash;left main menu&ndash;&gt;
+
+    <android.support.v17.leanback.widget.VerticalGridView
+        android:id="@+id/rcv_master"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txt_title"
+        android:layout_marginTop="50dp" />
+
+    &lt;!&ndash;right sub menu&ndash;&gt;
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/rcv_master"
+        android:background="@color/backtransparent"
+        android:orientation="vertical"
+        android:paddingLeft="40dp">
+
+        <LinearLayout
+            android:id="@+id/ll_request_sent"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/concierge_room_right_button_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txt_request_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="Request items"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_item_total"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/confirm_request_text"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <android.support.v17.leanback.widget.VerticalGridView
+            android:id="@+id/rcv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+-->
+
+</RelativeLayout>

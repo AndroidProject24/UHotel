@@ -78,6 +78,13 @@
     <item>Dental</item>
   </string-array>
 
+  <drawable name="black">@color/black</drawable>
+  <string name="concierge_right_checkout_txt">Payment had been received. Thank you for choosing uHotel</string>
+  <string name="concierge_right_housekeeping_txt">Housekeeping, Please!</string>
+  <string name="concierge_right_housekeeping_txtclicked">Housekeeping Coming!</string>
+  <string name="concierge_right_valet_details">Our records show that you have a car checked at valet service. Please hit the \'Valet\' button below to retrieve your vehicle at the front.</string>
+  <string name="concierge_right_valet_txt">Please grab my car, thanks!</string>
+  <string name="concierge_right_valet_txtclicked">Your car will be right up!\nPlease come right to the valet counter with\nyour name and room number\n to get your vehicle.</string>
   <!--GUEST SERVICES-->
   <string-array name="guest_menu_array">
     <item>Check-out</item>

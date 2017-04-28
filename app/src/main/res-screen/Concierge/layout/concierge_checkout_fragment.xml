@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concierge_right_main_checkout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:layout_toRightOf="@+id/concierge_leftmenu_bar"
+    android:gravity="left"
+    android:orientation="vertical"
+    android:paddingLeft="100dp"
+    android:paddingRight="100dp"
+    >
+
+  <TextView
+      android:id="@+id/concierge_right_main_checkout_txt"
+      android:text="Checkout"
+      style="@style/title"
+      />
+
+  <TextView
+      android:id="@+id/concierge_right_main_checkout_txt2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Thanks for staying with us!\nHere's a receipt for ypur stay."
+      android:textColor="@color/white"
+      android:textSize="22sp"
+      android:textStyle="bold"
+      />
+
+  <TextView
+      android:id="@+id/concierge_right_main_checkout_txt3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingBottom="15dp"
+      android:paddingTop="15dp"
+      android:text="We charged $1621.70 to your American Express card ending in *7890 under the name Brian Johnson."
+      android:textColor="@color/white"
+      android:textSize="@dimen/concierge_right_checkout_txtsize"
+      />
+
+  <TextView
+      android:id="@+id/concierge_right_main_checkout_txt4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingBottom="10dp"
+      android:paddingTop="0dp"
+      android:text="Check in: 30/04/2016\nCheck out: 04/05/2016\n1 room, 4 night"
+      android:textColor="@color/white"
+      android:textSize="@dimen/concierge_right_checkout_txtsize"
+      />
+
+  <LinearLayout
+      android:id="@+id/concierge_right_main_checkout_txtdiv"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt5"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="0dp"
+        android:text="3 in room refreshments\n2 on-demand movies"
+        android:textColor="@color/white"
+        android:textSize="@dimen/concierge_right_checkout_txtsize"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="0dp"
+        android:text="$36\n$25"
+        android:textColor="@color/white"
+        android:textSize="@dimen/concierge_right_checkout_txtsize"
+        />
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/concierge_right_main_checkout_txtdiv2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingTop="20dp"
+      >
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt7"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingRight="200dp"
+        android:paddingTop="0dp"
+        android:text="Room\nSubtotal\nTaxes &amp; Fees"
+        android:textColor="@color/white"
+        android:textSize="@dimen/concierge_right_checkout_txtsize"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="0dp"
+        android:text="$1420\n$1481\n$140.70"
+        android:textColor="@color/white"
+        android:textSize="@dimen/concierge_right_checkout_txtsize"
+        />
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/concierge_right_main_checkout_txtdiv3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingTop="20dp"
+      >
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt9"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingRight="200dp"
+        android:paddingTop="0dp"
+        android:text="Total"
+        android:textColor="#be1941"
+        android:textSize="@dimen/concierge_right_checkout_txtsizetotal"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/concierge_right_main_checkout_txt10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="0dp"
+        android:text="$1621.70"
+        android:textColor="#be1941"
+        android:textSize="@dimen/concierge_right_checkout_txtsizetotal"
+        android:textStyle="bold"
+        />
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/concierge_right_main_checkout_txtshow"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text=""
+      android:textColor="@color/yellow"
+      android:textSize="20dp"
+      />
+
+  <Button
+      android:id="@+id/concierge_right_main_checkout_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:background="@drawable/button_checkout_selector"
+      android:focusable="true"
+      android:nextFocusLeft="@+id/concierge_leftmenu_bar_item_checkout"
+      android:padding="5dp"
+      android:text="Check Out"
+      android:textColor="@color/white"
+      android:textStyle="bold"
+      />
+</LinearLayout>

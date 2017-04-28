@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -32,6 +33,7 @@ public class FoodPresenter extends BasePresenter<FoodView> {
     this.mRestData=restData;
     this.mPreferencesHelper=preferencesHelper;
   }
+
   public JSONObject getFakeData() {
    return Preconditions.checkNotNull(FakeDataUtils.initFakeData());
   }
@@ -77,6 +79,7 @@ public class FoodPresenter extends BasePresenter<FoodView> {
           listFood.setFoodList(foodList);
           return listFood;
         })
+        .observeOn(AndroidSchedulers.mainThread())
         .doOnSubscribe(() -> getMvpView().showLoading())
         .doOnCompleted(() -> getMvpView().hideLoading())
         .subscribe(new DefaultObserver<ListFood>() {
@@ -92,6 +95,7 @@ public class FoodPresenter extends BasePresenter<FoodView> {
           }
         }));
   }
+
   public PreferencesHelper getPreferencesHelper(){
     return mPreferencesHelper;
   }

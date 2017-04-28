@@ -34,7 +34,7 @@ public class ParentalControlFragment extends BaseFragment implements ParentalCon
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.movies_fragment;
+    return R.layout.list_food_fragment;
   }
 
   @Override

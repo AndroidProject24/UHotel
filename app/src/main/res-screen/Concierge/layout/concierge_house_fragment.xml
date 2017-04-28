@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/concierge_right_main_housekeeping"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="100dp"
+    android:paddingRight="50dp"
+    >
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="50dp"
+      android:text="Housekeeping"
+      android:textColor="@color/white"
+      android:textColorHighlight="@color/grey"
+      android:textSize="40sp"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="20dp"
+      android:text="For any assistance you may require from our Room Attendants, please touch the 'Housekeeping' button below."
+      android:textColor="@color/white"
+      android:textSize="20sp"
+      />
+
+  <ImageView
+      android:id="@+id/img_house"
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      android:layout_gravity="center"
+      android:background="@drawable/concierge_image_select_selector"
+      android:focusable="true"
+      android:focusableInTouchMode="true"
+      android:src="@drawable/housekeeping"
+      />
+
+  <TextView
+      android:id="@+id/txt_bottom"
+      android:layout_width="200dp"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:text="@string/concierge_right_housekeeping_txt"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      />
+</LinearLayout>
