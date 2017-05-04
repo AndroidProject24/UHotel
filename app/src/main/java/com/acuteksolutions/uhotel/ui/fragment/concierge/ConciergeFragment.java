@@ -53,7 +53,7 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
-    addFagment(getFragmentManager(), R.id.fragment, RoomFragment.newInstance());
+    replaceFagment(getFragmentManager(), R.id.fragment, RoomFragment.newInstance());
   }
 
   private void showScreen(int index) {

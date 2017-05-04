@@ -131,7 +131,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enjoy in-room spa treatment"
+                android:text="Enjoy in-roomItem spa treatment"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textSize22"
                 />

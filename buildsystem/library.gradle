@@ -39,7 +39,7 @@ ext {
     reactivenetworkVersion = '0.9.0'
     drawerVersion         ='5.8.2@aar'
     networking  ='0.4.0'
-    exoVersion='r2.2.0'
+    exoVersion='r2.4.0'
     mutidexVersion = '1.0.1'
 
     //Testing
@@ -96,6 +96,7 @@ ext {
             baseRecyclerView       : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${baseRecyclerVersion}",
             drawer                 : "com.mikepenz:materialdrawer:${drawerVersion}",
             exoPlayer              : "com.google.android.exoplayer:exoplayer:${exoVersion}",
+            exoPlayerOkhttp        : "com.google.android.exoplayer:extension-okhttp:${exoVersion}",
     ]
 
     developmentDependencies = [

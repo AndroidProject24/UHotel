@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+  <TextView
+      android:id="@+id/list_item_artist_name"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="16dp"
+      android:gravity="center_vertical"
+      tools:text="Artist Name" />
+
+  <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+      android:id="@+id/seekBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:bsb_bubble_color="@color/yellow"
+      app:bsb_bubble_text_color="@color/colorPrimaryDark"
+      app:bsb_second_track_color="@color/tab_select"
+      app:bsb_thumb_radius="9dp"
+      app:bsb_track_color="@color/room_bg_track"
+      />
+
+</FrameLayout>

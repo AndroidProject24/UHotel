@@ -1,9 +1,11 @@
 package com.acuteksolutions.uhotel.ui.fragment.roomService;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
@@ -43,6 +45,8 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   @BindView(R.id.wall_status_on) TextView wallStatusOn;
   @BindView(R.id.slider_status_off) TextView sliderStatusOff;
   @BindView(R.id.slider_status_on) TextView sliderStatusOn;
+  @BindColor(R.color.status_item_on) int colorOn;
+  @BindColor(R.color.status_item_off) int colorOff;
   /* @Inject
     MoviesPresenter
     mPresenter;*/
@@ -84,11 +88,11 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   }
 
   @OnClick({R.id.room_control_preset_home,R.id.room_control_preset_away,R.id.room_control_preset_read,R.id.room_control_preset_sleep})
-  void getRandom() {
+  void randomPreset() {
     getAllSeekRandomValue();
   }
 
-  @OnClick({R.id.room_control_temp_btnUp})
+  @OnClick(R.id.room_control_temp_btnUp)
   void clickTempUp() {
     if (progressValue < 100) {
       progressValue = progressValue + 1;
@@ -96,7 +100,7 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
     }
   }
 
-  @OnClick({R.id.room_control_temp_btnDown})
+  @OnClick(R.id.room_control_temp_btnDown)
   void clickTempDown() {
     if (progressValue > 0) {
       progressValue = progressValue - 1;
@@ -109,6 +113,7 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
     return (r.nextInt(max - min + 1) + min);
   }
 
+  @SuppressLint("SetTextI18n")
   public void getAllSeekRandomValue() {
     int min = (int)seekBarMain.getMin();
     int max = (int)seekBarMain.getMax();
@@ -126,22 +131,28 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   @Override public void onProgressChanged(int viewID, int progress, float progressFloat) {
     switch (viewID){
       case R.id.seekBar_main:
-        Logger.e("seekBar_main");
+        Logger.e("seekBar_main:"+progressFloat);
+        setColorOnOff(mainStatusOff,mainStatusOn,progressFloat);
         break;
       case R.id.seekBar_blackouts:
-        Logger.e("seekBar_blackouts");
+        Logger.e("seekBar_blackouts:"+progressFloat);
+        setColorOnOff(blackoutsStatusOff,blackoutsStatusOn,progressFloat);
         break;
       case R.id.seekBar_overhead:
-        Logger.e("seekBar_overhead");
+        Logger.e("seekBar_overhead:"+progressFloat);
+        setColorOnOff(overheadStatusOff,overheadStatusOn,progressFloat);
         break;
       case R.id.seekBar_sheers:
-        Logger.e("seekBar_sheers");
+        Logger.e("seekBar_sheers:"+progressFloat);
+        setColorOnOff(sheersStatusOff,sheersStatusOn,progressFloat);
         break;
       case R.id.seekBar_slider:
-        Logger.e("seekBar_slider");
+        Logger.e("seekBar_slider:"+progressFloat);
+        setColorOnOff(sliderStatusOff,sliderStatusOn,progressFloat);
         break;
       case R.id.seekBar_wall:
-        Logger.e("seekBar_wall");
+        Logger.e("seekBar_wall:"+progressFloat);
+        setColorOnOff(wallStatusOff,wallStatusOn,progressFloat);
         break;
     }
   }
@@ -152,6 +163,16 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
 
   @Override public void getProgressOnFinally(int progress, float progressFloat) {
 
+  }
+
+  private void setColorOnOff(TextView txtViewLeft,TextView txtViewRight,float progress){
+    if (progress == 0) {
+      txtViewLeft.setTextColor(colorOn);
+      txtViewRight.setTextColor(colorOff);
+    } else {
+      txtViewLeft.setTextColor(colorOff);
+      txtViewRight.setTextColor(colorOn);
+    }
   }
 }
 

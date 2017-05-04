@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Uhotel</string>
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -84,7 +84,7 @@
   <string name="concierge_right_housekeeping_txtclicked">Housekeeping Coming!</string>
   <string name="concierge_right_valet_details">Our records show that you have a car checked at valet service. Please hit the \'Valet\' button below to retrieve your vehicle at the front.</string>
   <string name="concierge_right_valet_txt">Please grab my car, thanks!</string>
-  <string name="concierge_right_valet_txtclicked">Your car will be right up!\nPlease come right to the valet counter with\nyour name and room number\n to get your vehicle.</string>
+  <string name="concierge_right_valet_txtclicked">Your car will be right up!\nPlease come right to the valet counter with\nyour name and roomItem number\n to get your vehicle.</string>
   <!--GUEST SERVICES-->
   <string-array name="guest_menu_array">
     <item>Check-out</item>
@@ -114,5 +114,12 @@
   <string name="no_internet">No Internet!</string>
   <string name="are_you_online_please_check_your_device_connection_settings">Are you online? Please check your device connection settings.</string>
 
-
+  <!--EXOPLAYER-->
+  <string name="exo_controls_previous_description">Previous track</string>
+  <string name="exo_controls_next_description">Next track</string>
+  <string name="exo_controls_pause_description">Pause</string>
+  <string name="exo_controls_play_description">Play</string>
+  <string name="exo_controls_stop_description">Stop</string>
+  <string name="exo_controls_rewind_description">Rewind</string>
+  <string name="exo_controls_fastforward_description">Fast forward</string>
 </resources>

@@ -164,7 +164,7 @@ public class FakeDataUtils {
       hotelObj.put("hasRating", false);
 
       hotelObj.put("img1Path", R.drawable.hotelexclusive_1);
-      hotelObj.put("img1Name", "In-Room Spa Treatment");
+      hotelObj.put("img1Name", "In-RoomItem Spa Treatment");
       hotelObj.put("img1Rating", "");
       hotelObj.put("img1Type", "");
       hotelObj.put("img1Desc", "Step into an urban oasis of water basalt rock, glass tile and signature rituals inspired by the rugged natural beauty  of the Northwest in our hotel. Reserver today for 50% off.");

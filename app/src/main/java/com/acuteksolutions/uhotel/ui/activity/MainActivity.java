@@ -191,20 +191,18 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   public void hideShowToolBar(boolean isShow) {
-    if(tabMain != null && mToolbar!=null) {
-      if (isShow) {
-        tabMain.setVisibility(View.VISIBLE);
-        custom_tab_icon.setVisibility(View.VISIBLE);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
-        params.addRule(RelativeLayout.BELOW,layout_tab.getId());
-      }else {
-        tabMain.setVisibility(View.GONE);
-        custom_tab_icon.setVisibility(View.GONE);
-        layout_tab.setBackgroundColor(Color.TRANSPARENT);
-        layout_tab.getBackground().setAlpha(0);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
-        params.addRule(RelativeLayout.BELOW,0);
-      }
+    if (isShow) {
+      tabMain.setVisibility(View.VISIBLE);
+      custom_tab_icon.setVisibility(View.VISIBLE);
+      RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
+      params.addRule(RelativeLayout.BELOW,layout_tab.getId());
+    }else {
+      tabMain.setVisibility(View.GONE);
+      custom_tab_icon.setVisibility(View.GONE);
+      layout_tab.setBackgroundColor(Color.TRANSPARENT);
+      layout_tab.getBackground().setAlpha(0);
+      RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
+      params.addRule(RelativeLayout.BELOW,0);
     }
   }
 }

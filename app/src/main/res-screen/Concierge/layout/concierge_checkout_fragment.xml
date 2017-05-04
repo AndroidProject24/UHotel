@@ -43,7 +43,7 @@
       android:layout_height="wrap_content"
       android:paddingBottom="10dp"
       android:paddingTop="0dp"
-      android:text="Check in: 30/04/2016\nCheck out: 04/05/2016\n1 room, 4 night"
+      android:text="Check in: 30/04/2016\nCheck out: 04/05/2016\n1 roomItem, 4 night"
       android:textColor="@color/white"
       android:textSize="@dimen/concierge_right_checkout_txtsize"
       />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingTop="0dp"
-        android:text="3 in room refreshments\n2 on-demand movies"
+        android:text="3 in roomItem refreshments\n2 on-demand movies"
         android:textColor="@color/white"
         android:textSize="@dimen/concierge_right_checkout_txtsize"
         />

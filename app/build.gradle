@@ -132,6 +132,7 @@ dependencies {
   //App
   compile appDependencies.baseRecyclerView
   compile appDependencies.exoPlayer
+  compile appDependencies.exoPlayerOkhttp
   compile(appDependencies.drawer) {
     transitive = true
   }

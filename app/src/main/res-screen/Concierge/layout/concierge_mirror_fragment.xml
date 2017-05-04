@@ -15,7 +15,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:paddingTop="50dp"
-      android:text="Connect to your room wifi to enable our fling feature."
+      android:text="Connect to your roomItem wifi to enable our fling feature."
       android:textColor="@color/white"
       android:textColorHighlight="@color/grey"
       android:textSize="60sp"

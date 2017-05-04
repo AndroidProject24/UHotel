@@ -42,7 +42,7 @@ public class ValetFragment extends BaseFragment {
 
   }
 
-  @OnClick(R.id.imageView)
+  @OnClick(R.id.img_valet)
   void imageClick() {
     if (!isClicked) {
       ImageUtils.loadImage(glide,R.drawable.valet_bold,imgValet);

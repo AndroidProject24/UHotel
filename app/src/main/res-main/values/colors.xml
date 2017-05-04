@@ -12,6 +12,8 @@
   <color name="transparent">#00000000</color>
   <color name="black_overlay">#99000000</color>
   <color name="grey">#737C81</color>
+  <color name="bg_item_select">#501321</color>
+
   <!--HOME-->
   <color name="yellow">#eaa903</color>
 
@@ -29,8 +31,11 @@
   <color name="color_text">@android:color/white</color>
   <color name="color_progress">#f89c09</color>
   <color name="color_bg_progress">#2e2d2d</color>
+  <color name="status_item_off">#6B6464</color>
+  <color name="status_item_on">@color/white</color>
 
   <!--CONCIERGE PAGE-->
   <color name="bg_item_choose">#7c132d</color>
   <color name="concierge_right_bussiness_promotions_txtcolor">#8B8B8B</color>
+  <color name="nav_menu_background">#c7c7c7</color>
 </resources>

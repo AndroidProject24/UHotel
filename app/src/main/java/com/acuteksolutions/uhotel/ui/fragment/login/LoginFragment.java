@@ -131,7 +131,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
   @Override
   public void loginSucess() {
-    addFagment(getFragmentManager(), R.id.fragment, LandingFragment.newInstance());
+    replaceFagment(getFragmentManager(), R.id.fragment, LandingFragment.newInstance());
   }
 
   @Override

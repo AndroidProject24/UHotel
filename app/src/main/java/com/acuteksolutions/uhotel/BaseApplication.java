@@ -10,6 +10,10 @@ import com.acuteksolutions.uhotel.injector.component.ApplicationComponent;
 import com.acuteksolutions.uhotel.injector.component.DaggerApplicationComponent;
 import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.HttpDataSource;
+import com.google.android.exoplayer2.util.Util;
 import com.letv.sarrsdesktop.blockcanaryex.jrt.BlockCanaryEx;
 import com.letv.sarrsdesktop.blockcanaryex.jrt.Config;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -18,6 +22,7 @@ import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by Toan.IT
@@ -28,7 +33,8 @@ public class BaseApplication extends Application {
   private static BaseApplication mInstance;
   private ApplicationComponent applicationComponent;
   private RefWatcher refWatcher;
-
+  protected String userAgent;
+  private OkHttpClient okHttpClient;
   @Override
   protected void attachBaseContext(Context base) {
     super.attachBaseContext(base);
@@ -41,8 +47,19 @@ public class BaseApplication extends Application {
     setupTest();
     initInjector();
     initData();
+    initExoPlayer();
     mInstance = this;
   }
+
+  private void initExoPlayer(){
+    userAgent = Util.getUserAgent(this, getString(R.string.app_name));
+    okHttpClient = new OkHttpClient.Builder().build();
+  }
+
+  public HttpDataSource.Factory buildHttpDataSourceFactory(DefaultBandwidthMeter bandwidthMeter) {
+    return new OkHttpDataSourceFactory(okHttpClient, userAgent, bandwidthMeter);
+  }
+
   private void initInjector(){
     applicationComponent = DaggerApplicationComponent.builder()
         .applicationModule(new ApplicationModule(this))
