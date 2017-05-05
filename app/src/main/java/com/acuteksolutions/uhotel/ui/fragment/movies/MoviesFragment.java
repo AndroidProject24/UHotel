@@ -8,7 +8,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
+import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 
 public class MoviesFragment extends BaseFragment{
   @BindView(R.id.tabLayout)

@@ -53,34 +53,34 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
-    replaceFagment(getFragmentManager(), R.id.fragment, RoomFragment.newInstance());
+    replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
   }
 
   private void showScreen(int index) {
     switch (index) {
       case ConciergeMenuDef.ROOM:
-        replaceFagment(getFragmentManager(), R.id.fragment, RoomFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
         break;
       case ConciergeMenuDef.CAR_RENTAL:
-        replaceFagment(getFragmentManager(), R.id.fragment, CarRentalFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, CarRentalFragment.newInstance());
         break;
       case ConciergeMenuDef.CHECK_OUT:
-        replaceFagment(getFragmentManager(), R.id.fragment, CheckoutFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, CheckoutFragment.newInstance());
         break;
       case ConciergeMenuDef.BUSINESS:
-        replaceFagment(getFragmentManager(), R.id.fragment, BusinessFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, BusinessFragment.newInstance());
         break;
       case ConciergeMenuDef.HOUSE:
-        replaceFagment(getFragmentManager(), R.id.fragment, HouseFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, HouseFragment.newInstance());
         break;
       case ConciergeMenuDef.VALET:
-        replaceFagment(getFragmentManager(), R.id.fragment, ValetFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, ValetFragment.newInstance());
         break;
       case ConciergeMenuDef.MIRROR:
-        replaceFagment(getFragmentManager(), R.id.fragment, MirrorFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, MirrorFragment.newInstance());
         break;
       case ConciergeMenuDef.PARENTAL:
-        replaceFagment(getFragmentManager(), R.id.fragment, ParentalFragment.newInstance());
+        replaceFagment(getFragmentManager(), R.id.fragment_concierge, ParentalFragment.newInstance());
         break;
     }
   }

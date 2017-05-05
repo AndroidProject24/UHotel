@@ -76,5 +76,9 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
     moviesAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(moviesAdapter);
   }
+
+  @Override public void showEmty() {
+
+  }
 }
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#2A2A2A">
+    <TextView
+        android:text="Enter your 4-digit PIN to \naccess this locked content"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:id="@+id/textView"
+        android:layout_width="450dp" />
+
+    <com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView
+        android:layout_below="@+id/textView"
+        android:id="@+id/txtUnLockPin"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:accentType="character"
+        app:digitBackground="@drawable/bg_lock_dialog"
+        app:digitHeight="100dp"
+        app:pinAccentColor="@color/yellow"
+        app:digitSpacing="10dp"
+        app:digitTextSize="60sp"
+        app:digitWidth="100dp"
+        android:nextFocusDown="@+id/btnUnlock">
+        <requestFocus/>
+    </com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView>
+
+    <Button
+        android:id="@+id/btnUnlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:width="160dp"
+        android:text="Unlock"
+        android:textColor="@color/lock_button_color"
+        android:background="#2A2A2A"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/txtUnLockPin"
+        android:layout_toRightOf="@+id/btnHome"
+        android:focusable="true"
+        android:nextFocusRight="@+id/btnHome"/>
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Live TV"
+        android:textSize="24sp"
+        android:width="160dp"
+        android:textColor="@color/lock_button_color"
+        android:background="#2A2A2A"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/txtUnLockPin"
+        android:layout_alignLeft="@+id/txtUnLockPin"
+        android:layout_marginLeft="32dp"
+        android:focusable="true"
+        android:nextFocusUp="@+id/txtUnLockPin"
+        android:nextFocusLeft="@+id/btnUnlock"/>
+
+
+</RelativeLayout>

@@ -150,4 +150,44 @@ public class Login {
     public void setRegionId(int regionId) {
         this.regionId = regionId;
     }
+
+
+    @Override public String toString() {
+        return "Login{"
+            + "subscriberUid='"
+            + subscriberUid
+            + '\''
+            + ", profileUid='"
+            + profileUid
+            + '\''
+            + ", name='"
+            + name
+            + '\''
+            + ", gender='"
+            + gender
+            + '\''
+            + ", languageId="
+            + languageId
+            + ", parentalRating="
+            + parentalRating
+            + ", autoSubtitlesEnabled="
+            + autoSubtitlesEnabled
+            + ", autoAudioEnabled="
+            + autoAudioEnabled
+            + ", tvRecommendationsEnabled="
+            + tvRecommendationsEnabled
+            + ", vodRecommendationsEnabled="
+            + vodRecommendationsEnabled
+            + ", sipPhoneNotificationsEnabled="
+            + sipPhoneNotificationsEnabled
+            + ", setting='"
+            + setting
+            + '\''
+            + ", userId="
+            + userId
+            + ", regionId="
+            + regionId
+            + '}';
+    }
+
 }

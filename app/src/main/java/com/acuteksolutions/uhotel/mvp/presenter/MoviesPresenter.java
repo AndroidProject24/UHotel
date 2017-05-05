@@ -7,7 +7,6 @@ import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
-import com.acuteksolutions.uhotel.utils.Preconditions;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -23,8 +22,9 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
     this.mRestData=restData;
     this.mPreferencesHelper=preferencesHelper;
   }
+
   public void getCategory() {
-    addSubscribe(mRestData.getCategory(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())
+    addSubscribe(mRestData.getCategory()
             .doOnSubscribe(() -> getMvpView().showLoading())
             .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<Category>>() {
@@ -37,10 +37,10 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
               @Override
               public void onNext(List<Category> list) {
                 try {
-                  if(!list.isEmpty()) {
+                  if(list!=null && !list.isEmpty()) {
                     getMvpView().listCategory(list);
                   }else
-                    getMvpView().listMovies(null);
+                    getMvpView().showEmty();
                 }catch (Exception e){
                   e.printStackTrace();
                 }
@@ -49,7 +49,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   }
 
   public void getMoviesDetails(String catID) {
-    addSubscribe(mRestData.getMoviesDetails(String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId()),catID)
+    addSubscribe(mRestData.getMoviesDetails(catID)
             .doOnSubscribe(() -> getMvpView().showLoading())
             .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<VODInfo>>() {
@@ -65,7 +65,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
                   if(!list.isEmpty()) {
                     getMvpView().listMovies(list);
                   }else
-                    getMvpView().listMovies(null);
+                    getMvpView().showEmty();
                 }catch (Exception e){
                   e.printStackTrace();
                 }

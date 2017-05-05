@@ -73,10 +73,10 @@ public class RoomFragment extends BaseFragment {
         new RoomExpand("Toan3", makeRockArtists(), R.drawable.ic_logo_uhotel));
   }
   private static List<RoomItem> makeRockArtists() {
-    RoomItem queen = new RoomItem("Queen", true);
-    RoomItem styx = new RoomItem("Styx", false);
-    RoomItem reoSpeedwagon = new RoomItem("REO Speedwagon", false);
-    RoomItem boston = new RoomItem("Boston", true);
+    RoomItem queen = new RoomItem("Queen", 20f);
+    RoomItem styx = new RoomItem("Styx", 30f);
+    RoomItem reoSpeedwagon = new RoomItem("REO Speedwagon", 40f);
+    RoomItem boston = new RoomItem("Boston", 50f);
 
     return Arrays.asList(queen, styx, reoSpeedwagon, boston);
   }

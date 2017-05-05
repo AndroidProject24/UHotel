@@ -8,5 +8,7 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
  */
 public interface LiveTvView extends BaseView {
 
+  void listLiveTv();
 
+  void showEmty();
 }

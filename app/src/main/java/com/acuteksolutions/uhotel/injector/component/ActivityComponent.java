@@ -3,6 +3,9 @@ package com.acuteksolutions.uhotel.injector.component;
 import com.acuteksolutions.uhotel.injector.module.ActivityModule;
 import com.acuteksolutions.uhotel.injector.qualifier.PerActivity;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
+import com.acuteksolutions.uhotel.ui.dialog.LockDialog;
+import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
+import com.acuteksolutions.uhotel.ui.dialog.PinVerifyDialog;
 import com.acuteksolutions.uhotel.ui.fragment.food.ListFoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
@@ -24,7 +27,6 @@ public interface ActivityComponent {
 
   /*void inject(RegisterFragment registerFragment);*/
 
-
   /*LIVETV*/
   void inject(LiveTVFragment liveTVFragment);
 
@@ -35,4 +37,11 @@ public interface ActivityComponent {
 
   /*FOOD*/
   void inject(ListFoodFragment listFoodFragment);
+
+  /*DIALOG*/
+  void inject(LockDialog lockDialog);
+
+  void inject(PinVerifyDialog pinVerifyDialog);
+
+  void inject(PinChangeDialog pinChangeDialog);
 }

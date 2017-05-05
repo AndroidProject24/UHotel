@@ -2,26 +2,26 @@ package com.acuteksolutions.uhotel.ui.adapter;
 
 import android.widget.ImageView;
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.model.food.Food;
+import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
-public class FoodAdapter extends BaseQuickAdapter<Food, BaseViewHolder> {
+public class LiveTVAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
   private RequestManager glide;
-    public FoodAdapter(RequestManager glide,List<Food> datas) {
-        super(R.layout.food_item,datas);
+    public LiveTVAdapter(RequestManager glide,List<VODInfo> datas) {
+        super(R.layout.livetv_item,datas);
         this.glide=glide;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Food data) {
+    protected void convert(BaseViewHolder helper, VODInfo data) {
       try {
-        helper.setText(R.id.txt_food_name, data.getName())
+        helper.setText(R.id.txt_liveTV_name, data.getDetail().getTitle())
                 .addOnClickListener(R.id.layout_item);
-        ImageUtils.loadImage(glide,data.getUrl(),(ImageView) helper.getView(R.id.img_food));
+        ImageUtils.loadImage(glide,data.getDetail().getPoster(),(ImageView) helper.getView(R.id.img_liveTV));
       }catch (Exception e){
         e.printStackTrace();
       }

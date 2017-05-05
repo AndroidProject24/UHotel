@@ -82,5 +82,8 @@ public class ListMoviesFragment extends BaseFragment implements MoviesView {
     mRecyclerMovies.setAdapter(moviesAdapter);
   }
 
+  @Override public void showEmty() {
+    showEmptyView(getString(R.string.common_empty_msg));
+  }
 }
 

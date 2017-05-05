@@ -56,7 +56,7 @@ public class CustomPlaybackControlView extends FrameLayout {
 
   private final CustomPlaybackControlView.ComponentListener componentListener;
   private final ImageView playButton;
-  private final TextView timeCurrent;
+  private final TextView timeCurrent,timeDuration,txtChannel,txtChannel1;
   public final SeekBar progressBar;
   private final StringBuilder formatBuilder;
   private final Formatter formatter;
@@ -119,7 +119,10 @@ public class CustomPlaybackControlView extends FrameLayout {
     componentListener = new CustomPlaybackControlView.ComponentListener();
     LayoutInflater.from(context).inflate(R.layout.exo_playback_control_view, this);
     timeCurrent = (TextView) findViewById(R.id.time_current);
-    progressBar = (SeekBar) findViewById(R.id.mediacontroller_progress);
+    timeDuration = (TextView) findViewById(R.id.time_duration);
+    txtChannel = (TextView) findViewById(R.id.txt_channel);
+    txtChannel1 = (TextView) findViewById(R.id.txt_channel1);
+    progressBar = (SeekBar) findViewById(R.id.seek_progress);
     progressBar.setOnSeekBarChangeListener(componentListener);
     progressBar.setMax(PROGRESS_BAR_MAX);
     playButton = (ImageView) findViewById(R.id.play);
@@ -268,7 +271,7 @@ public class CustomPlaybackControlView extends FrameLayout {
         playing ? com.google.android.exoplayer2.R.string.exo_controls_pause_description : com.google.android.exoplayer2.R.string.exo_controls_play_description);
     playButton.setContentDescription(contentDescription);
     playButton.setImageResource(
-        playing ? R.drawable.ic_pause : R.drawable.ic_play_arrow);
+        playing ? R.drawable.ic_pause : R.drawable.ic_play);
   }
 
   private void updateNavigation() {
@@ -298,6 +301,7 @@ public class CustomPlaybackControlView extends FrameLayout {
     }
     long duration = player == null ? 0 : player.getDuration();
     long position = player == null ? 0 : player.getCurrentPosition();
+    timeDuration.setText(stringForTime(duration));
     if (!dragging) {
       timeCurrent.setText(stringForTime(position));
     }

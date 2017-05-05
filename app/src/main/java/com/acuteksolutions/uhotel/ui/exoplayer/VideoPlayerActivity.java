@@ -33,7 +33,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
   private SimpleExoPlayer player;
   private Handler mainHandler;
   private boolean shouldAutoPlay;
-  private int playerWindow;
   private DefaultTrackSelector trackSelector;
   private long playerPosition;
   @Override
@@ -89,7 +88,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
   private void releasePlayer() {
     if (player != null) {
       shouldAutoPlay = player.getPlayWhenReady();
-      playerWindow = player.getCurrentWindowIndex();
+      int playerWindow = player.getCurrentWindowIndex();
       playerPosition = C.TIME_UNSET;
       Timeline timeline = player.getCurrentTimeline();
       if (timeline != null && timeline.getWindow(playerWindow, window).isSeekable) {

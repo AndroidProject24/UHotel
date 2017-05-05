@@ -23,7 +23,6 @@
           android:layout_width="40dp"
           android:layout_height="@dimen/action_bar_height"
           android:layout_marginTop="10dp"
-          android:background="@color/tab_background"
           />
       <include layout="@layout/icon_tab" />
 

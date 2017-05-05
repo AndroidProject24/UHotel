@@ -1,0 +1,89 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#2a2a2a"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+<!--
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/orange" />
+-->
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lines="3"
+        android:text="Create a 4 digit-PIN for all\npurchased and locked content"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView
+        android:layout_below="@+id/textView"
+        android:id="@+id/txtUnLockPin"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        app:accentType="character"
+        app:digitBackground="@drawable/bg_lock_dialog"
+        app:digitHeight="100dp"
+        app:pinAccentColor="@color/yellow"
+        app:digitSpacing="10dp"
+        app:digitTextSize="60sp"
+        app:digitWidth="100dp"
+        android:nextFocusDown="@+id/btnUnlock">
+        <requestFocus/>
+    </com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClose"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/concierge_parental_button_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/concierge_parental_button_selector"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/concierge_parental_button_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:text="Authorize"
+            android:textAllCaps="false"
+            android:textColor="@color/concierge_parental_button_selector"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>
+

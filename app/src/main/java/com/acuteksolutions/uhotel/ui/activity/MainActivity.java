@@ -24,10 +24,12 @@ import com.acuteksolutions.uhotel.interfaces.KeyListener;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.OnTabSelectedListener;
+import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -59,6 +61,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initViews() {
+    Logger.d("getJsonLogin="+mPreferencesHelper.getJsonLogin());
     if(mPreferencesHelper.getJsonLogin()==null)
       addFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
     else {
@@ -155,7 +158,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     if (result != null && result.isDrawerOpen()) {
       result.closeDrawer();
     } else {
-      String currentTag = getSupportFragmentManager().findFragmentById(R.id.fragment).getTag();
+      String currentTag = Preconditions.checkNotNull(getSupportFragmentManager().findFragmentById(R.id.fragment)).getTag();
       if (currentTag.equals(LandingFragment.class.getName()) || currentTag.equals(LoginFragment.class.getName())) {
         if (doubleBackToExitPressedOnce) {
           finish();
@@ -194,6 +197,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
     if (isShow) {
       tabMain.setVisibility(View.VISIBLE);
       custom_tab_icon.setVisibility(View.VISIBLE);
+      layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());
     }else {

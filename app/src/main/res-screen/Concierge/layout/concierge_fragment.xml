@@ -22,7 +22,7 @@
   </LinearLayout>
 
   <FrameLayout
-      android:id="@+id/fragment"
+      android:id="@+id/fragment_concierge"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       />

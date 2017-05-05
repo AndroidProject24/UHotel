@@ -99,7 +99,6 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
       mStateLayout.setViewSwitchAnimProvider(new FadeViewAnimProvider());
     }
     glide= Glide.with(this);
-    Logger.e(toString());
   }
 
   public CompositeSubscription getCompositeSubscription() {

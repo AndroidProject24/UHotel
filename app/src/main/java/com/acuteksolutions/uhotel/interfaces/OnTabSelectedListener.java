@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.ui.fragment;
+package com.acuteksolutions.uhotel.interfaces;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
