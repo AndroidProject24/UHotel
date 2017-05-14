@@ -3,8 +3,8 @@ package com.acuteksolutions.uhotel.mvp.presenter;
 import android.content.Context;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
+import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
-import com.acuteksolutions.uhotel.data.service.RestData;
 import com.acuteksolutions.uhotel.mvp.model.food.Food;
 import com.acuteksolutions.uhotel.mvp.model.food.ListFood;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
@@ -27,10 +27,10 @@ import rx.schedulers.Schedulers;
  * Date: 06/06/2016
  */
 public class FoodPresenter extends BasePresenter<FoodView> {
-  private RestData mRestData;
+  private Repository mRepository;
   private PreferencesHelper mPreferencesHelper;
-  @Inject FoodPresenter(RestData restData, PreferencesHelper preferencesHelper){
-    this.mRestData=restData;
+  @Inject FoodPresenter(Repository restData, PreferencesHelper preferencesHelper){
+    this.mRepository=restData;
     this.mPreferencesHelper=preferencesHelper;
   }
 

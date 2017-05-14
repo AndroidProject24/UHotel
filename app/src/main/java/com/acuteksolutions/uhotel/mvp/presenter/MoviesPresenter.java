@@ -1,12 +1,13 @@
 package com.acuteksolutions.uhotel.mvp.presenter;
 
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
+import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
-import com.acuteksolutions.uhotel.data.service.RestData;
 import com.acuteksolutions.uhotel.mvp.model.data.Category;
 import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -15,16 +16,16 @@ import javax.inject.Inject;
  * Date: 06/06/2016
  */
 public class MoviesPresenter extends BasePresenter<MoviesView> {
-  private RestData mRestData;
+  private Repository mRepository;
   private PreferencesHelper mPreferencesHelper;
   @Inject
-  MoviesPresenter(RestData restData, PreferencesHelper preferencesHelper){
-    this.mRestData=restData;
+  MoviesPresenter(Repository mRepository, PreferencesHelper preferencesHelper){
+    this.mRepository=mRepository;
     this.mPreferencesHelper=preferencesHelper;
   }
 
   public void getCategory() {
-    addSubscribe(mRestData.getCategory()
+    addSubscribe(mRepository.getCategory()
             .doOnSubscribe(() -> getMvpView().showLoading())
             .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<Category>>() {
@@ -49,7 +50,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   }
 
   public void getMoviesDetails(String catID) {
-    addSubscribe(mRestData.getMoviesDetails(catID)
+    addSubscribe(mRepository.getMoviesDetails(catID)
             .doOnSubscribe(() -> getMvpView().showLoading())
             .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<VODInfo>>() {
@@ -71,6 +72,31 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
                 }
               }
             }));
+  }
+
+  public void getLinkStream(String cid) {
+    addSubscribe(mRepository.getLinkStream(cid)
+        .doOnSubscribe(() -> getMvpView().showLoading())
+        .doOnCompleted(() -> getMvpView().hideLoading())
+        .subscribe(new DefaultObserver<String>() {
+          @Override
+          public void onError(Throwable e) {
+            e.printStackTrace();
+            getMvpView().showError(e.getMessage());
+          }
+
+          @Override
+          public void onNext(String linkStream) {
+            try {
+              if(!Preconditions.isEmpty(linkStream)) {
+                getMvpView().playStream(linkStream);
+              }else
+                getMvpView().showEmty();
+            }catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }));
   }
   public PreferencesHelper getPreferencesHelper(){
     return mPreferencesHelper;

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomItem;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.RoomAdapter;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by Toan.IT
  * Date:22/04/2017
  */
-public class RoomFragment extends BaseFragment {
+public class RoomFragment extends BaseFragment implements BubbleSeekBar.OnProgressChangedListener{
 
   @BindView(R.id.txt_title) TextView txtTitle;
   @BindView(R.id.recycler_view) RecyclerView recyclerView;
@@ -35,6 +36,10 @@ public class RoomFragment extends BaseFragment {
   public void onAttach(Context context) {
     super.onAttach(context);
     mContext=context;
+  }
+
+  @Override protected void injectDependencies() {
+
   }
 
   @Override protected String getTAG() {
@@ -79,5 +84,17 @@ public class RoomFragment extends BaseFragment {
     RoomItem boston = new RoomItem("Boston", 50f);
 
     return Arrays.asList(queen, styx, reoSpeedwagon, boston);
+  }
+
+  @Override public void onProgressChanged(int progress, float progressFloat) {
+    viewpagerListener.disableSwipe(true);
+  }
+
+  @Override public void getProgressOnActionUp(int progress, float progressFloat) {
+
+  }
+
+  @Override public void getProgressOnFinally(int progress, float progressFloat) {
+    viewpagerListener.disableSwipe(false);
   }
 }

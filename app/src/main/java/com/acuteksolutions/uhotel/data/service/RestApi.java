@@ -47,8 +47,10 @@ public interface RestApi {
   Observable<JsonString<Boolean>> changePin(@Path("mac") String mac,@Path("profileUid") String profileUid,
       @Query("data") String new_pin, @Query("parentalPin") String old_pin);
 
-  @POST("check/Beesmart/PinCodeService//{mac}/{profileId}/update")
+  @POST("check/Beesmart/PinCodeService/{mac}/{profileId}/update")
   Observable<JsonString<Boolean>> saveSetting(@Path("mac") String mac,@Path("profileUid") String profileUid,
       @Query("data") String data, @Query("parentalPin") String pin);
 
+  @GET("request/{mac}/Beesmart")
+  Observable<JsonString<String>> getLinkStream(@Path("mac") String mac, @Query("path") String path);
 }

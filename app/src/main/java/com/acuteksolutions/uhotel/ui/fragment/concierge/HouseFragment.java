@@ -25,6 +25,10 @@ public class HouseFragment extends BaseFragment {
     return null;
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override protected void initViews() {
 
   }

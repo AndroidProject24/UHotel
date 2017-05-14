@@ -7,14 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.annotation.BundleDef;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.extractor.ExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -47,21 +47,15 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
   private void initializePlayer() {
     simpleExoPlayerView.requestFocus();
-    // Measures bandwidth during playback. Can be null if not required.
     DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-    TrackSelection.Factory videoTrackSelectionFactory =
-        new AdaptiveTrackSelection.Factory(bandwidthMeter);
+    TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
     trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-    // 2. Create the player
     player = ExoPlayerFactory.newSimpleInstance(this,trackSelector);
     simpleExoPlayerView.setPlayer(player);
     player.setPlayWhenReady(shouldAutoPlay);
-    // Produces DataSource instances through which media data is loaded.
     DataSource.Factory dataSourceFactory = ((BaseApplication) getApplication()).buildHttpDataSourceFactory(bandwidthMeter);
-    // Produces Extractor instances for parsing the media data.
-    ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-    // This is the MediaSource representing the media to be played.
-    MediaSource videoSource = new ExtractorMediaSource(Uri.parse(""), dataSourceFactory, extractorsFactory, mainHandler, null);
+    MediaSource videoSource = new HlsMediaSource(Uri.parse(Preconditions.checkNotNull(getIntent().getStringExtra(
+        BundleDef.TAB_INDEX))), dataSourceFactory, mainHandler, null);
     // Prepare the player with the source.
     player.prepare(videoSource);
 

@@ -79,4 +79,25 @@ public class Stream implements Parcelable {
         dest.writeString(this.profiles);
         dest.writeString(this.capabilities);
     }
+
+    @Override public String toString() {
+        return "Stream{"
+            + "src='"
+            + src
+            + '\''
+            + ", provider='"
+            + provider
+            + '\''
+            + ", protocolStack='"
+            + protocolStack
+            + '\''
+            + ", profiles='"
+            + profiles
+            + '\''
+            + ", capabilities='"
+            + capabilities
+            + '\''
+            + '}';
+    }
+
 }

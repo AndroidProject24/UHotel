@@ -176,4 +176,11 @@ public class LockDialog extends DialogFragment implements PinView {
 
   }
 
+  @Override public void showEmptyView(String message) {
+
+  }
+
+  @Override public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
+
+  }
 }

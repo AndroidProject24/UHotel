@@ -1,14 +1,12 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import butterknife.ButterKnife;
 import com.acuteksolutions.uhotel.BaseApplication;
@@ -16,9 +14,10 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.injector.component.ActivityComponent;
 import com.acuteksolutions.uhotel.injector.component.DaggerActivityComponent;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.utils.StatusBarUtil;
+import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
 import com.squareup.leakcanary.RefWatcher;
+import me.yokeyword.fragmentation.SupportActivity;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,19 +29,21 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Created by Toan.IT
  * Date: 25/05/2016
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity <T extends BasePresenter> extends SupportActivity{
   private CompositeSubscription mCompositeSubscription;
   private Subscription subscription;
   private ActivityComponent mActivityComponent;
   private AlertDialog alertDialog;
   private AlertDialog.Builder dialog;
+
+  @SuppressWarnings("unchecked")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(setLayoutResourceID());
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+    /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary));
-    }
+    }*/
     setButterKnife();
     initbase();
     injectDependencies();
@@ -132,8 +133,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     if (this.mCompositeSubscription != null) {
       this.mCompositeSubscription.unsubscribe();
     }
-    RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
-    refWatcher.watch(this);
+    if(BaseApplication.getRefWatcher(this)!=null) {
+      RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+      refWatcher.watch(this);
+    }
   }
   @Override
   public String toString() {

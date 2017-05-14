@@ -31,7 +31,8 @@ public class RoomAdapter extends ExpandableRecyclerViewAdapter<RoomExpandViewHol
   @Override public void onBindChildViewHolder(RoomSliderViewHolder holder, int flatPosition,
       ExpandableGroup group, int childIndex) {
     final RoomItem roomItem = ((RoomExpand) group).getItems().get(childIndex);
-    holder.setProgress(Integer.parseInt(roomItem.getName()));
+    holder.setProgress(30);
+    holder.setTitle(roomItem.getName());
   }
 
   @Override public void onBindGroupViewHolder(RoomExpandViewHolder holder, int flatPosition,

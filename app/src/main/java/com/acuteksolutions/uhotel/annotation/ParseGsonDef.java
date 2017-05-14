@@ -10,11 +10,12 @@ import java.lang.annotation.RetentionPolicy;
  * Created by vantoan on 3/26/17.
  * Email: Huynhvantoan.itc@gmail.com
  */
-@StringDef({ParseGsonDef.ID,ParseGsonDef.ARRAY, ParseGsonDef.OBJECT,ParseGsonDef.ITEMS})
+@StringDef({ParseGsonDef.ID,ParseGsonDef.ARRAY, ParseGsonDef.OBJECT,ParseGsonDef.ITEMS, ParseGsonDef.MEDIA_RESOURCES})
 @Retention(RetentionPolicy.SOURCE)
 public @interface ParseGsonDef {
   String ID="id";
   String ARRAY="list";
   String OBJECT="object";
   String ITEMS="purchaseItems";
+  String MEDIA_RESOURCES="mediaResources";
 }

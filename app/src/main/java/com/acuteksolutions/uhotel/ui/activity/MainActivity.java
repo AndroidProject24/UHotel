@@ -1,14 +1,12 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
@@ -22,11 +20,12 @@ import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.interfaces.KeyListener;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
-import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
-import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
+import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
+import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
+import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
+import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
+import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
@@ -35,13 +34,13 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity implements ToolbarTitleListener {
+public class MainActivity extends BaseActivity implements ToolbarTitleListener,ViewpagerListener {
   private Drawer result = null;
   private boolean doubleBackToExitPressedOnce;
   @BindView(R.id.drawer_container) ViewGroup mLayout;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
-  @BindView(R.id.viewPager_main) ViewPager viewPagerMain;
+  @BindView(R.id.viewPager_main) CustomSwipeableViewPager viewPagerMain;
   @BindView(R.id.custom_tab_icon) AppCompatImageView custom_tab_icon;
   @BindView(R.id.appBar) AppBarLayout layout_tab;
   @BindView(R.id.layout_root) RelativeLayout layout_root;
@@ -61,9 +60,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
 
   @Override
   protected void initViews() {
-    Logger.d("getJsonLogin="+mPreferencesHelper.getJsonLogin());
     if(mPreferencesHelper.getJsonLogin()==null)
-      addFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
+      replaceFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
     else {
       initToolbar();
       initTabLayout();
@@ -98,6 +96,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
         .withDisplayBelowStatusBar(true)
         .withTranslucentStatusBar(true)
         .withToolbar(mToolbar)
+        .withHasStableIds(true)
         .withActionBarDrawerToggleAnimated(true)
         .withDrawerWidthDp(400)
         .withSliderBackgroundDrawableRes(R.color.black)
@@ -129,9 +128,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
         })
         .withSavedInstance(savedInstanceState)
         .build();
-    if (Build.VERSION.SDK_INT >= 19) {
-      result.getDrawerLayout().setFitsSystemWindows(false);
-    }
     result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
   }
 
@@ -153,12 +149,12 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
   private void initToolbar(){
     setSupportActionBar(mToolbar);
   }
-  @Override
-  public void onBackPressed() {
+
+  @Override public void onBackPressedSupport() {
     if (result != null && result.isDrawerOpen()) {
       result.closeDrawer();
     } else {
-      String currentTag = Preconditions.checkNotNull(getSupportFragmentManager().findFragmentById(R.id.fragment)).getTag();
+      String currentTag = Preconditions.checkNotNull(getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
       if (currentTag.equals(LandingFragment.class.getName()) || currentTag.equals(LoginFragment.class.getName())) {
         if (doubleBackToExitPressedOnce) {
           finish();
@@ -173,6 +169,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
         }
       }
     }
+    //super.onBackPressedSupport();
   }
 
   @Override
@@ -208,5 +205,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener {
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,0);
     }
+  }
+
+  @Override
+  public void disableSwipe(boolean enable) {
+    viewPagerMain.setPagingEnabled(enable);
   }
 }

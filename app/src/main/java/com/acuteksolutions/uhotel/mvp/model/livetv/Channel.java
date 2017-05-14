@@ -180,4 +180,48 @@ public class Channel implements Comparable<Channel>, Parcelable {
         dest.writeList(this.programs);
     }
 
+
+    @Override public String toString() {
+        return "Channel{"
+            + "dbId="
+            + dbId
+            + ", serviceType="
+            + serviceType
+            + ", isLocalChannel="
+            + isLocalChannel
+            + ", channelId="
+            + channelId
+            + ", activate="
+            + activate
+            + ", deactivate="
+            + deactivate
+            + ", rating="
+            + rating
+            + ", hd="
+            + hd
+            + ", icon='"
+            + icon
+            + '\''
+            + ", instanceRecordable="
+            + instanceRecordable
+            + ", localRecordable="
+            + localRecordable
+            + ", name='"
+            + name
+            + '\''
+            + ", number="
+            + number
+            + ", pauseAndResume="
+            + pauseAndResume
+            + ", programRecordable="
+            + programRecordable
+            + ", timeShift="
+            + timeShift
+            + ", stream="
+            + stream
+            + ", programs="
+            + programs
+            + '}';
+    }
+
 }

@@ -35,6 +35,10 @@ public class ParentalFragment extends BaseFragment {
     mContext=context;
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override protected String getTAG() {
     return null;
   }

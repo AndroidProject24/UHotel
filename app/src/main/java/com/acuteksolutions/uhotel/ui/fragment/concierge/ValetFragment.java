@@ -30,6 +30,10 @@ public class ValetFragment extends BaseFragment {
     return null;
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override protected void initViews() {
 
   }

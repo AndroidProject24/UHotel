@@ -1,12 +1,11 @@
 package com.acuteksolutions.uhotel.mvp.presenter;
 
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
+import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
-import com.acuteksolutions.uhotel.data.service.RestData;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.LoginView;
-
 import javax.inject.Inject;
 
 /**
@@ -14,16 +13,16 @@ import javax.inject.Inject;
  * Date: 06/06/2016
  */
 public class LoginPresenter extends BasePresenter<LoginView> {
-  private RestData mRestData;
+  private Repository mRepository;
   private PreferencesHelper mPreferencesHelper;
   @Inject
-  LoginPresenter(RestData restData, PreferencesHelper preferencesHelper){
-    this.mRestData=restData;
+  LoginPresenter(Repository restData, PreferencesHelper preferencesHelper){
+    this.mRepository=restData;
     this.mPreferencesHelper=preferencesHelper;
   }
 
   public void login(String pass){
-    addSubscribe(mRestData.getLogin(pass)
+    addSubscribe(mRepository.getLogin(pass)
             .doOnSubscribe(() -> getMvpView().showLoading())
             .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<Login>() {

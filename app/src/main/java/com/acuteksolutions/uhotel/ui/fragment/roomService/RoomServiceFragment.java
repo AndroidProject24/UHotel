@@ -2,6 +2,7 @@ package com.acuteksolutions.uhotel.ui.fragment.roomService;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import com.acuteksolutions.uhotel.mvp.view.RomServiceView;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import java.util.Random;
 
-public class RoomServiceFragment extends BaseFragment implements RomServiceView, BubbleSeekBar.OnProgressChangedListener{
+public class RoomServiceFragment extends BaseFragment implements RomServiceView{
   @BindView(R.id.room_control_preset_home) Button roomControlPresetHome;
   @BindView(R.id.room_control_preset_away) Button roomControlPresetAway;
   @BindView(R.id.room_control_preset_read) Button roomControlPresetRead;
@@ -25,7 +26,6 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   @BindView(R.id.room_control_temp_btnUp) ImageView roomControlTempBtnUp;
   @BindView(R.id.room_control_temp_btnDown) ImageView roomControlTempBtnDown;
   @BindView(R.id.room_control_temp_temptxt) TextView roomControlTempTemptxt;
-  @BindView(R.id.room_control_temp_temptxt1) TextView roomControlTempTemptxt1;
   @BindView(R.id.room_control_temp_seek) SwagPoints roomControlTempSeek;
   @BindView(R.id.seekBar_main) BubbleSeekBar seekBarMain;
   @BindView(R.id.seekBar_sheers) BubbleSeekBar seekBarSheers;
@@ -47,9 +47,6 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   @BindView(R.id.slider_status_on) TextView sliderStatusOn;
   @BindColor(R.color.status_item_on) int colorOn;
   @BindColor(R.color.status_item_off) int colorOff;
-  /* @Inject
-    MoviesPresenter
-    mPresenter;*/
   private Context mContext;
   private int progressValue=0;
   public static RoomServiceFragment newInstance() {
@@ -65,13 +62,17 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
     return this.getClass().getSimpleName();
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override protected void initViews() {
-    seekBarMain.setOnProgressChangedListener(this);
-    seekBarSlider.setOnProgressChangedListener(this);
-    seekBarSheers.setOnProgressChangedListener(this);
-    seekBarWall.setOnProgressChangedListener(this);
-    seekBarOverhead.setOnProgressChangedListener(this);
-    seekBarBlackouts.setOnProgressChangedListener(this);
+    seekBarMain.setOnProgressChangedListener(progressChanged(mainStatusOff,mainStatusOn));
+    seekBarSlider.setOnProgressChangedListener(progressChanged(sliderStatusOff,sliderStatusOn));
+    seekBarSheers.setOnProgressChangedListener(progressChanged(sheersStatusOff,sheersStatusOn));
+    seekBarWall.setOnProgressChangedListener(progressChanged(wallStatusOff,wallStatusOn));
+    seekBarOverhead.setOnProgressChangedListener(progressChanged(overheadStatusOff,overheadStatusOn));
+    seekBarBlackouts.setOnProgressChangedListener(progressChanged(blackoutsStatusOff,blackoutsStatusOn));
   }
 
   @Override protected int setLayoutResourceID() {
@@ -79,17 +80,33 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
   }
 
   @Override protected void initData() {
-    //mPresenter.getData(TheloaiDef.HOA_MANG_TRA_TRUOC);
+    getAllSeekRandomValue();
+    roomControlPresetHome.requestFocusFromTouch();
   }
 
-  @Override public void onDestroyView() {
-    super.onDestroyView();
-    //mPresenter.detachView();
+  private BubbleSeekBar.OnProgressChangedListener progressChanged(TextView txtViewLeft,TextView txtViewRight) {
+    return new BubbleSeekBar.OnProgressChangedListener() {
+      @Override public void onProgressChanged(int progress, float progressFloat) {
+        Logger.e("onProgressChanged:"+progress);
+        setColorOnOff(txtViewLeft,txtViewRight,progressFloat);
+        viewpagerListener.disableSwipe(false);
+      }
+
+      @Override public void getProgressOnActionUp(int progress, float progressFloat) {
+
+      }
+
+      @Override public void getProgressOnFinally(int progress, float progressFloat) {
+        viewpagerListener.disableSwipe(true);
+        Logger.e("disableSwipe:true");
+      }
+    };
   }
 
   @OnClick({R.id.room_control_preset_home,R.id.room_control_preset_away,R.id.room_control_preset_read,R.id.room_control_preset_sleep})
-  void randomPreset() {
+  void randomPreset(View view) {
     getAllSeekRandomValue();
+    view.requestFocusFromTouch();
   }
 
   @OnClick(R.id.room_control_temp_btnUp)
@@ -119,50 +136,13 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView,
     int max = (int)seekBarMain.getMax();
     progressValue = getRandomMinMax(20, 75);
     roomControlTempSeek.setPoints(progressValue);
-    roomControlTempTemptxt.setText(progressValue + "°");
+    roomControlTempTemptxt.setText(progressValue-7+"°");
     seekBarMain.setProgress(getRandomMinMax(min, max));
     seekBarOverhead.setProgress(getRandomMinMax(min, max));
     seekBarWall.setProgress(getRandomMinMax(min, max));
     seekBarSheers.setProgress(getRandomMinMax(min, max));
     seekBarSheers.setProgress(getRandomMinMax(min, max));
     seekBarSlider.setProgress(getRandomMinMax(min, max));
-  }
-
-  @Override public void onProgressChanged(int viewID, int progress, float progressFloat) {
-    switch (viewID){
-      case R.id.seekBar_main:
-        Logger.e("seekBar_main:"+progressFloat);
-        setColorOnOff(mainStatusOff,mainStatusOn,progressFloat);
-        break;
-      case R.id.seekBar_blackouts:
-        Logger.e("seekBar_blackouts:"+progressFloat);
-        setColorOnOff(blackoutsStatusOff,blackoutsStatusOn,progressFloat);
-        break;
-      case R.id.seekBar_overhead:
-        Logger.e("seekBar_overhead:"+progressFloat);
-        setColorOnOff(overheadStatusOff,overheadStatusOn,progressFloat);
-        break;
-      case R.id.seekBar_sheers:
-        Logger.e("seekBar_sheers:"+progressFloat);
-        setColorOnOff(sheersStatusOff,sheersStatusOn,progressFloat);
-        break;
-      case R.id.seekBar_slider:
-        Logger.e("seekBar_slider:"+progressFloat);
-        setColorOnOff(sliderStatusOff,sliderStatusOn,progressFloat);
-        break;
-      case R.id.seekBar_wall:
-        Logger.e("seekBar_wall:"+progressFloat);
-        setColorOnOff(wallStatusOff,wallStatusOn,progressFloat);
-        break;
-    }
-  }
-
-  @Override public void getProgressOnActionUp(int progress, float progressFloat) {
-
-  }
-
-  @Override public void getProgressOnFinally(int progress, float progressFloat) {
-
   }
 
   private void setColorOnOff(TextView txtViewLeft,TextView txtViewRight,float progress){

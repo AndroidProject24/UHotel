@@ -5,14 +5,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
+import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
+import com.acuteksolutions.uhotel.mvp.model.livetv.Program;
 import com.acuteksolutions.uhotel.mvp.presenter.LiveTVPresenter;
 import com.acuteksolutions.uhotel.mvp.view.LiveTvView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import javax.inject.Inject;
+import java.util.Calendar;
+import java.util.List;
 
-public class LiveTVFragment extends BaseFragment implements LiveTvView {
-  @Inject LiveTVPresenter mPresenter;
+public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements LiveTvView {
   @BindView(R.id.recycler_main) RecyclerView recyclerMain;
   @BindView(R.id.recycler_right_now) RecyclerView recyclerRightNow;
   @BindView(R.id.recycler_coming_up) RecyclerView recyclerComingUp;
@@ -31,9 +34,13 @@ public class LiveTVFragment extends BaseFragment implements LiveTvView {
     return this.getClass().getSimpleName();
   }
 
-  @Override protected void initViews() {
+
+  @Override
+  protected void injectDependencies() {
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mPresenter.attachView(this);
+  }
+
+  @Override protected void initViews() {
     recyclerMain.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
     recyclerMain.setHasFixedSize(true);
     recyclerRightNow.setLayoutManager(new LinearLayoutManager(mContext));
@@ -47,22 +54,21 @@ public class LiveTVFragment extends BaseFragment implements LiveTvView {
   }
 
   @Override protected void initData() {
-    mPresenter.verifyPin("1234");
-    mPresenter.changePin("1234","1234");
-    mPresenter.saveSetting("kakakaa","1234");
+    mPresenter.getAllChannel();
   }
 
-  @Override public void listLiveTv() {
+  @Override public void listAllChannel(List<Channel> channelList) {
+    Logger.e(channelList.toString());
+    mPresenter.getProgram(channelList.get(0).getChannelId(), Calendar.getInstance().getTime());
+  }
 
+  @Override public void getProgram(List<Program> programList) {
+    Logger.e(programList.toString());
   }
 
   @Override public void showEmty() {
 
   }
 
-  @Override public void onDestroy() {
-    super.onDestroy();
-    mPresenter.detachView();
-  }
 }
 

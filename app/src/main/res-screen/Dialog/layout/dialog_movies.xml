@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--OVERLAY LAYOUT: WATCH MOVIES LAYOUT-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/movies_overlay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_background"
+    android:gravity="center_horizontal|center_vertical">
+
+    <RelativeLayout
+        android:id="@+id/movies_overlay_main"
+        android:layout_width="700dp"
+        android:layout_height="400dp"
+        android:background="#2A2A2A"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/movies_overlay_main_bordertop"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ECAC23" />
+
+        <TextView
+            android:id="@+id/movies_overlay_main_txtnamemovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="30dp"
+            android:layout_below="@+id/movies_overlay_main_bordertop"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="Watch 'Big Bug Bunny'"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <!--left div-->
+        <LinearLayout
+            android:layout_width="wrap_content" android:orientation="horizontal"
+            android:layout_below="@+id/movies_overlay_main_txtnamemovie" android:layout_marginTop="20dp"
+            android:layout_height="wrap_content" android:layout_centerHorizontal="true">
+        <LinearLayout
+            android:id="@+id/movies_overlay_main_leftdiv"
+            android:layout_width="@dimen/overlay_div_width"
+            android:layout_height="@dimen/overlay_div_height"
+            android:layout_below="@+id/movies_overlay_main_txtnamemovie"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_dialog_movies_selector"
+            android:focusable="true"
+            android:gravity="center"
+            android:nextFocusRight="@+id/movies_overlay_main_rightdiv"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/movies_overlay_main_leftdiv_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vp_play" />
+
+            <TextView
+                android:id="@+id/movies_overlay_main_leftdiv_txtrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rent"
+                android:textColor="#ECAC23"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/movies_overlay_main_leftdiv_txtprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(Free)"
+                android:textColor="#ECAC23"
+                android:textSize="24sp" />
+        </LinearLayout>
+        <!--right div-->
+        <LinearLayout
+            android:id="@+id/movies_overlay_main_rightdiv"
+            android:layout_width="@dimen/overlay_div_width"
+            android:layout_height="@dimen/overlay_div_height"
+            android:layout_below="@+id/movies_overlay_main_txtnamemovie"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/movies_overlay_main_leftdiv"
+            android:background="@drawable/btn_dialog_movies_selector"
+            android:focusable="true"
+            android:gravity="center"
+            android:nextFocusLeft="@+id/movies_overlay_main_leftdiv"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/movies_overlay_main_rightdiv_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vp_cancel" />
+
+            <TextView
+                android:id="@+id/movies_overlay_main_rightdiv_txtrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cancel"
+                android:textColor="#ECAC23"
+                android:textSize="24sp" />
+        </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

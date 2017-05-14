@@ -1,8 +1,10 @@
 package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.ConciergeMenuDef;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ConciergeFragment extends BaseFragment{
   @BindView(R.id.recycler_menu) RecyclerView recycler_menu;
   private Context mContext;
+  private MenuAdapter menuAdapter;
   public static ConciergeFragment newInstance() {
     return new ConciergeFragment();
   }
@@ -27,6 +30,10 @@ public class ConciergeFragment extends BaseFragment{
   public void onAttach(Context context) {
     super.onAttach(context);
     mContext=context;
+  }
+
+  @Override protected void injectDependencies() {
+
   }
 
   @Override
@@ -40,10 +47,10 @@ public class ConciergeFragment extends BaseFragment{
     recycler_menu.setHasFixedSize(true);
     String[] arrName = getResources().getStringArray(R.array.concierge_menu_array);
     List<String> listMenu= Arrays.asList(Preconditions.checkNotNull(arrName));
-    MenuAdapter menuAdapter=new MenuAdapter(listMenu);
+    menuAdapter=new MenuAdapter(listMenu);
     menuAdapter.openLoadAnimation();
     recycler_menu.setAdapter(menuAdapter);
-    menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(position));
+    menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view,position));
   }
 
   @Override
@@ -53,10 +60,11 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
-    replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
+    showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);
   }
 
-  private void showScreen(int index) {
+  private void showScreen(@NonNull View view,int index) {
+    view.requestFocusFromTouch();
     switch (index) {
       case ConciergeMenuDef.ROOM:
         replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());

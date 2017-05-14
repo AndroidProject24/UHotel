@@ -21,11 +21,8 @@ import com.acuteksolutions.uhotel.ui.adapter.FoodAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.bumptech.glide.Glide;
-import javax.inject.Inject;
 
-public class ListFoodFragment extends BaseFragment implements FoodView {
-  @Inject FoodPresenter
-  mPresenter;
+public class ListFoodFragment extends BaseFragment<FoodPresenter> implements FoodView {
   @BindView(R.id.recycle_food)
   RecyclerView mRecycleFood;
   @BindView(R.id.movies_main_info) ViewGroup mLayoutFood;
@@ -57,14 +54,17 @@ public class ListFoodFragment extends BaseFragment implements FoodView {
   }
 
   @Override
+  protected void injectDependencies() {
+    ((BaseActivity) getActivity()).getActivityComponent().inject(this);
+  }
+
+  @Override
   protected String getTAG() {
     return this.getClass().getSimpleName();
   }
 
   @Override
   protected void initViews() {
-    ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mPresenter.attachView(this);
     mRecycleFood.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
     mRecycleFood.setHasFixedSize(true);
   }
@@ -80,16 +80,11 @@ public class ListFoodFragment extends BaseFragment implements FoodView {
   }
 
   @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    mPresenter.detachView();
-  }
-
-  @Override
   public void getListFood(ListFood listFood) {
     FoodAdapter foodAdapter = new FoodAdapter(Glide.with(this),listFood.getFoodList());
     foodAdapter.openLoadAnimation();
     mRecycleFood.setAdapter(foodAdapter);
+    showInfo(listFood.getFoodList().get(0),listFood.getTitle());
     ItemClickSupport.addTo(mRecycleFood).setOnItemClickListener((recyclerView, position, v) ->
         showInfo(listFood.getFoodList().get(position),listFood.getTitle()));
   }

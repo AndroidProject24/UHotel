@@ -2,17 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="16dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-  <TextView
-      android:id="@+id/list_item_artist_name"
+  <android.support.v7.widget.AppCompatTextView
+      android:id="@+id/txt_name"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginLeft="16dp"
       android:gravity="center_vertical"
-      tools:text="Artist Name" />
+      tools:text="Artist Name"
+      android:textSize="@dimen/textSize24"/>
 
   <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
       android:id="@+id/seekBar"

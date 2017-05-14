@@ -2,6 +2,7 @@ package com.acuteksolutions.uhotel;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.multidex.MultiDex;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import com.acuteksolutions.uhotel.injector.component.ApplicationComponent;
 import com.acuteksolutions.uhotel.injector.component.DaggerApplicationComponent;
 import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
+import com.acuteksolutions.uhotel.libs.logger.LogLevel;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -22,6 +25,7 @@ import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import io.realm.Realm;
 import okhttp3.OkHttpClient;
 
 /**
@@ -44,7 +48,7 @@ public class BaseApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    setupTest();
+    //setupTest();
     initInjector();
     initData();
     initExoPlayer();
@@ -67,6 +71,22 @@ public class BaseApplication extends Application {
   }
   private void initData(){
     try {
+      Realm.init(this);
+      if((0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE))) {
+     /*   StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+            .detectAll()
+            .penaltyLog()
+            .build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+            .detectLeakedSqlLiteObjects()
+            .detectLeakedClosableObjects()
+            .penaltyLog()
+            .penaltyDeath()
+            .build());*/
+        Logger.init(getString(R.string.app_name));
+      }else{
+        Logger.init(getString(R.string.app_name)).logLevel(LogLevel.NONE);
+      }
       DrawerImageLoader.init(new AbstractDrawerImageLoader() {
         @Override
         public void set(ImageView imageView, Uri uri, Drawable placeholder) {

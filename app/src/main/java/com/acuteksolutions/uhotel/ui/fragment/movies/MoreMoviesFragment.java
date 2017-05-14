@@ -13,12 +13,8 @@ import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import java.util.List;
-import javax.inject.Inject;
 
-public class MoreMoviesFragment extends BaseFragment implements MoviesView {
-  @Inject
-  MoviesPresenter
-  mPresenter;
+public class MoreMoviesFragment extends BaseFragment<MoviesPresenter> implements MoviesView {
   private Context mContext;
   @BindView(R.id.recyclerview)
   RecyclerView mRecyclerview;
@@ -38,9 +34,12 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
   }
 
   @Override
-  protected void initViews() {
+  protected void injectDependencies() {
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mPresenter.attachView(this);
+  }
+
+  @Override
+  protected void initViews() {
     initRecyclerview();
   }
 
@@ -60,12 +59,6 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
   }
 
   @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    mPresenter.detachView();
-  }
-
-  @Override
   public void listCategory(List<Category> categoryList) {
 
   }
@@ -75,6 +68,10 @@ public class MoreMoviesFragment extends BaseFragment implements MoviesView {
     MoviesAdapter moviesAdapter =new MoviesAdapter(glide,moviesList);
     moviesAdapter.openLoadAnimation();
     mRecyclerview.setAdapter(moviesAdapter);
+  }
+
+  @Override public void playStream(String linkStream) {
+
   }
 
   @Override public void showEmty() {

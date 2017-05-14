@@ -111,4 +111,32 @@ public class Program implements Comparable<Program>, Parcelable {
         dest.writeByte(this.recordable ? (byte) 1 : (byte) 0);
         dest.writeInt(this.duration);
     }
+
+
+    @Override public String toString() {
+        return "Program{"
+            + "duration="
+            + duration
+            + ", channelId="
+            + channelId
+            + ", title='"
+            + title
+            + '\''
+            + ", description='"
+            + description
+            + '\''
+            + ", start="
+            + start
+            + ", end="
+            + end
+            + ", rating="
+            + rating
+            + ", picture='"
+            + picture
+            + '\''
+            + ", recordable="
+            + recordable
+            + '}';
+    }
+
 }

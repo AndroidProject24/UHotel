@@ -22,6 +22,10 @@ public class SettingFragment extends BaseFragment implements SettingView {
     mContext=context;
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override
   protected String getTAG() {
     return this.getClass().getSimpleName();

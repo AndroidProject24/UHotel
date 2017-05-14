@@ -8,6 +8,7 @@ import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
+import com.acuteksolutions.uhotel.mvp.presenter.LandingPresenter;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
@@ -23,7 +24,7 @@ import javax.inject.Inject;
  * Date: 11/06/2016
  */
 
-public class LandingFragment extends BaseFragment {
+public class LandingFragment extends BaseFragment<LandingPresenter> {
   @Inject PreferencesHelper mPreferencesHelper;
   @BindView(R.id.txt_welcome) TextView mTxtWelcome;
   @BindView(R.id.txt_marquee_bottom) TextView mTxtMarqueeBottom;
@@ -59,9 +60,12 @@ public class LandingFragment extends BaseFragment {
     mTxtMarqueeBottom.setSelected(true);
   }
 
+  @Override protected void injectDependencies() {
+    ((MainActivity) getActivity()).getActivityComponent().inject(this);
+  }
+
   @Override protected void initViews() {
     toolbarTitleListener.hideShowToolBar(false);
-    ((MainActivity) getActivity()).getActivityComponent().inject(this);
     ImageUtils.loadImage(glide,R.drawable.home_background,imgLanding);
     ImageUtils.loadImage(glide,R.drawable.ic_logo_uhotel,imgLogo);
     ImageUtils.loadImage(glide,R.drawable.home_message,imgMessage);

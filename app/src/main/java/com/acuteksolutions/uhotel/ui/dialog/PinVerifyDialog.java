@@ -90,7 +90,7 @@ public class PinVerifyDialog extends DialogFragment implements PinView{
 
   @OnClick(R.id.btnOk)
   void okClick() {
-    mPresenter.saveSetting("","");
+    mPresenter.saveSetting("","1234");
   }
 
 
@@ -125,4 +125,11 @@ public class PinVerifyDialog extends DialogFragment implements PinView{
 
   }
 
+  @Override public void showEmptyView(String message) {
+
+  }
+
+  @Override public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
+
+  }
 }

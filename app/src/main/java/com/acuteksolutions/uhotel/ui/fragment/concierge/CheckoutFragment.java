@@ -17,6 +17,10 @@ public class CheckoutFragment extends BaseFragment {
         return this.getClass().getSimpleName();
     }
 
+    @Override protected void injectDependencies() {
+
+    }
+
     @Override protected void initViews() {
 
     }

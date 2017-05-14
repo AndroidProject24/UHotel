@@ -127,15 +127,6 @@ public class SwagPoints extends View {
 			final TypedArray a = context.obtainStyledAttributes(attrs,
 					R.styleable.SwagPoints, 0, 0);
 
-			/*Drawable indicatorIcon = a.getDrawable(R.styleable.SwagPoints_indicatorIcon);
-			if (indicatorIcon != null)
-				mIndicatorIcon = indicatorIcon;
-
-			int indicatorIconHalfWidth = mIndicatorIcon.getIntrinsicWidth() / 2;
-			int indicatorIconHalfHeight = mIndicatorIcon.getIntrinsicHeight() / 2;
-			mIndicatorIcon.setBounds(-indicatorIconHalfWidth, -indicatorIconHalfHeight, indicatorIconHalfWidth,
-					indicatorIconHalfHeight);
-*/
 			mPoints = a.getInteger(R.styleable.SwagPoints_points, mPoints);
 			mMin = a.getInteger(R.styleable.SwagPoints_min, mMin);
 			mMax = a.getInteger(R.styleable.SwagPoints_max, mMax);
@@ -214,7 +205,7 @@ public class SwagPoints extends View {
 		int xPos = canvas.getWidth() / 2 - mTextRect.width() / 2;
 		int yPos = (int) ((mArcRect.centerY()) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2));
 //		Log.d("onDraw", String.valueOf(mPoints));
-		canvas.drawText(String.valueOf(mPoints), xPos, yPos, mTextPaint);
+		canvas.drawText(String.valueOf(mPoints)+"°", xPos, yPos, mTextPaint);
 
 		// draw the arc and progress
 		canvas.drawArc(mArcRect, ANGLE_OFFSET, 360, false, mArcPaint);
@@ -313,7 +304,7 @@ public class SwagPoints extends View {
 		// detect points change closed to max or min
 		final int maxDetectValue = (int) ((double) mMax * 0.95);
 		final int minDetectValue = (int) ((double) mMax * 0.05) + mMin;
-//		System.out.printf("(%d, %d) / (%d, %d)\n", mMax, mMin, maxDetectValue, minDetectValue);
+		//System.out.printf("(%d, %d) / (%d, %d)\n", mMax, mMin, maxDetectValue, minDetectValue);
 
 		mUpdateTimes++;
 		if (progress == INVALID_VALUE) {
@@ -374,7 +365,7 @@ public class SwagPoints extends View {
 			} else if ((mCurrentProgress >= maxDetectValue
 					&& mPreviousProgress <= minDetectValue
 					&& mCurrentProgress > mPreviousProgress) || mCurrentProgress <= mMin) {
-				isMin = true;
+				isMin = false;//true;
 				progress = mMin;
 				mPoints = mMin;
 //				Log.d("Reach", "Reach Min " + progress);
@@ -415,7 +406,7 @@ public class SwagPoints extends View {
 
 			mProgressSweep = (float) progress / valuePerDegree();
 //			if (mPreviousProgress != mCurrentProgress)
-//				System.out.printf("-- %d, %d, %f\n", progress, mPoints, mProgressSweep);
+				//System.out.printf("-- %d, %d, %f\n", progress, mPoints, mProgressSweep);
 			updateIndicatorIconPosition();
 			invalidate();
 		}

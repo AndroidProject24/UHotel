@@ -17,6 +17,10 @@ public class MirrorFragment extends BaseFragment {
         return this.getClass().getSimpleName();
     }
 
+    @Override protected void injectDependencies() {
+
+    }
+
     @Override protected void initViews() {
 
     }

@@ -67,97 +67,76 @@
 
     <!--TEMP LAYOUT-->
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        >
-
-      <TextView
-          android:id="@+id/room_control_temp_name"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center_horizontal|top"
-          android:text="TEMP"
-          android:textSize="30sp"
-          style="@style/RoomControl_txt_maincontent_lights"
-          />
-
-      <ImageView
-          android:id="@+id/room_control_temp_btnUp"
-          android:layout_width="50dp"
-          android:layout_height="50dp"
-          android:layout_below="@+id/room_control_temp_name"
-          android:layout_marginLeft="100dp"
-          android:background="@drawable/roomcontrol_tab_selector"
-          android:src="@drawable/btnup"
-          />
-
-      <ImageView
-          android:id="@+id/room_control_temp_btnDown"
-          android:layout_width="50dp"
-          android:layout_height="50dp"
-          android:layout_below="@+id/room_control_temp_seek"
-          android:layout_marginLeft="100dp"
-          android:background="@drawable/roomcontrol_tab_selector"
-          android:focusable="true"
-          android:nextFocusDown="@+id/room_control_lights_mainseek"
-          android:nextFocusRight="@+id/room_control_lights_mainseek"
-          android:nextFocusUp="@+id/room_control_temp_btnUp"
-          android:scaleType="fitXY"
-          android:src="@drawable/btndown"
-          />
-
+        android:id="@+id/layout_temp"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:gravity="center">
       <LinearLayout
-          android:layout_width="150dp"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/room_control_temp_btnUp"
-          android:layout_marginLeft="60dp"
-          android:gravity="center"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
           android:orientation="vertical"
-          android:padding="30dp"
-          >
+          android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/room_control_temp_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|top"
+            android:text="TEMP"
+            android:textSize="30sp"
+            style="@style/RoomControl_txt_maincontent_lights"
+            />
+
+        <ImageView
+            android:id="@+id/room_control_temp_btnUp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/roomcontrol_tab_selector"
+            android:src="@drawable/btnup"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="45dp"
             android:padding="10dp"
             android:text="SET TO"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/textSize20"
             />
 
         <TextView
             android:id="@+id/room_control_temp_temptxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
             android:gravity="center"
-            android:lines="1"
-            android:padding="10dp"
-            android:scaleType="center"
-            android:text="27oC"
+            android:text="68°C"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="@dimen/textSize26"
+            />
+        <ImageView
+            android:id="@+id/room_control_temp_btnDown"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/roomcontrol_tab_selector"
+            android:focusable="true"
+            android:nextFocusDown="@+id/room_control_lights_mainseek"
+            android:nextFocusRight="@+id/room_control_lights_mainseek"
+            android:nextFocusUp="@+id/room_control_temp_btnUp"
+            android:scaleType="fitXY"
+            android:src="@drawable/btndown"
             />
 
-        <TextView
-            android:id="@+id/room_control_temp_temptxt1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="68oC"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            />
       </LinearLayout>
 
       <com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints
           android:id="@+id/room_control_temp_seek"
-          android:layout_width="200dp"
-          android:layout_height="200dp"
-          android:layout_gravity="center"
-          android:layout_marginLeft="30dp"
-          android:layout_marginStart="30dp"
+          android:layout_width="250dp"
+          android:layout_height="250dp"
+          android:layout_centerInParent="true"
+          android:padding="16dp"
           app:arcColor="@color/color_bg_progress"
           app:arcWidth="10dp"
           app:max="100"
@@ -222,6 +201,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:bsb_auto_adjust_section_mark="true"
             app:bsb_bubble_color="@color/yellow"
             app:bsb_bubble_text_color="@color/colorPrimaryDark"
             app:bsb_second_track_color="@color/tab_select"
@@ -299,6 +279,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:bsb_auto_adjust_section_mark="true"
             app:bsb_bubble_color="@color/yellow"
             app:bsb_bubble_text_color="@color/colorPrimaryDark"
             app:bsb_second_track_color="@color/tab_select"
@@ -310,6 +291,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:bsb_auto_adjust_section_mark="true"
             app:bsb_bubble_color="@color/yellow"
             app:bsb_bubble_text_color="@color/colorPrimaryDark"
             app:bsb_second_track_color="@color/tab_select"
@@ -388,6 +370,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:bsb_auto_adjust_section_mark="true"
             app:bsb_bubble_color="@color/yellow"
             app:bsb_bubble_text_color="@color/colorPrimaryDark"
             app:bsb_second_track_color="@color/tab_select"
@@ -399,6 +382,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:bsb_auto_adjust_section_mark="true"
             app:bsb_bubble_color="@color/yellow"
             app:bsb_bubble_text_color="@color/colorPrimaryDark"
             app:bsb_second_track_color="@color/tab_select"

@@ -21,14 +21,10 @@ import com.acuteksolutions.uhotel.mvp.view.LoginView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
-import javax.inject.Inject;
 
 import static com.acuteksolutions.uhotel.utils.Utils.isPasswordValid;
 
-public class LoginFragment extends BaseFragment implements LoginView {
-  @Inject
-  LoginPresenter
-  mLoginPresenter;
+public class LoginFragment extends BaseFragment<LoginPresenter> implements LoginView {
   @BindView(R.id.img_logo)
   ImageView mImgLogo;
   @BindView(R.id.lock)
@@ -68,9 +64,12 @@ public class LoginFragment extends BaseFragment implements LoginView {
   }
 
   @Override
-  protected void initViews() {
+  protected void injectDependencies() {
     ((BaseActivity) getActivity()).getActivityComponent().inject(this);
-    mLoginPresenter.attachView(this);
+  }
+
+  @Override
+  protected void initViews() {
     mEtPass.addTextChangedListener(textWatcher);
   }
 
@@ -125,7 +124,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
       focusView.requestFocus();
     } else {
       mLayoutPass.setErrorEnabled(false);
-      mLoginPresenter.login(mEtPass.getText().toString());
+      mPresenter.login(mEtPass.getText().toString());
     }
   }
 

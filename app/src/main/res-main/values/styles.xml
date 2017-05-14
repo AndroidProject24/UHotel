@@ -23,7 +23,7 @@
     <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
   </style>
 
-  <style name="ExoPlayerTheme" parent="android:Theme.Holo">
+  <style name="ExoPlayerTheme" parent="Theme.Design.NoActionBar">
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowBackground">@android:color/black</item>
   </style>
@@ -165,6 +165,7 @@
     <item name="android:layout_marginRight">5dp</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:focusable">true</item>
   </style>
   <style name="RoomControl_txt_content">
     <item name="android:textSize">20sp</item>
@@ -224,7 +225,6 @@
 
   <!--CONCIERGE PAGE-->
   <style name="concierge_menu_normal">
-    <item name="android:focusableInTouchMode">true</item>
     <item name="android:focusable">true</item>
     <item name="android:background">@drawable/concierge_menu_item_bg</item>
     <item name="android:textSize">20sp</item>

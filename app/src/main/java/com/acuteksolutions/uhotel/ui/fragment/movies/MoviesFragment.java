@@ -6,11 +6,12 @@ import android.support.v4.view.ViewPager;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
+import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
+import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 
-public class MoviesFragment extends BaseFragment{
+public class MoviesFragment extends BaseFragment<BasePresenter>{
   @BindView(R.id.tabLayout)
   TabLayout mTabLayout;
   @BindView(R.id.view_pager)
@@ -27,6 +28,10 @@ public class MoviesFragment extends BaseFragment{
     mContext = context;
   }
 
+  @Override protected void injectDependencies() {
+
+  }
+
   @Override
   protected String getTAG() {
     return this.getClass().getSimpleName();
@@ -35,7 +40,7 @@ public class MoviesFragment extends BaseFragment{
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.tab_viewpager_fragment;
+    return R.layout.movies_fragment;
   }
 
   @Override

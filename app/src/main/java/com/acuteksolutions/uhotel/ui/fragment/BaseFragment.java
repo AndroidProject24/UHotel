@@ -16,13 +16,17 @@ import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
+import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.libs.view.FadeViewAnimProvider;
 import com.acuteksolutions.uhotel.libs.view.StateLayout;
+import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.squareup.leakcanary.RefWatcher;
+import javax.inject.Inject;
+import me.yokeyword.fragmentation.SupportFragment;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
@@ -33,7 +37,7 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Created by Toan.IT
  * Date:22/5/2016
  */
-public abstract class BaseFragment extends Fragment implements OnBackListener,BaseView {
+public abstract class BaseFragment <T extends BasePresenter> extends SupportFragment implements OnBackListener,BaseView {
   private View mContentView;
   private Context mContext;
   protected Subscription subscription = Subscriptions.empty();
@@ -43,18 +47,29 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   private String TAG = getTAG();
   protected abstract String getTAG();
   protected ToolbarTitleListener toolbarTitleListener;
+  protected ViewpagerListener viewpagerListener;
   protected RequestManager glide;
-
+  @Inject
+  protected T mPresenter;
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
     try {
       toolbarTitleListener = (ToolbarTitleListener) getActivity();
+      viewpagerListener = (ViewpagerListener) getActivity();
     } catch (ClassCastException e) {
       throw new ClassCastException(context.toString()
           + " must implement OnHeadlineSelectedListener");
     }
   }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setRetainInstance(true);
+    injectDependencies();
+  }
+
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,10 +79,13 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     return mContentView;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     try {
+      if(mPresenter!=null)
+        mPresenter.attachView(this);
       unbinder = ButterKnife.bind(this, mContentView);
       mContext = getContext();
       initProgress();
@@ -78,6 +96,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
       e.printStackTrace();
     }
   }
+
+  protected abstract void injectDependencies();
 
   protected abstract void initViews();
 
@@ -148,6 +168,8 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
   @Override
   public void onDestroy() {
     super.onDestroy();
+    if (mPresenter != null)
+      mPresenter.detachView();
     unsubscribe();
     Glide.get(getmContext()).clearMemory();
     glide.onDestroy();
@@ -215,8 +237,10 @@ public abstract class BaseFragment extends Fragment implements OnBackListener,Ba
     if (this.mCompositeSubscription != null) {
       this.mCompositeSubscription.unsubscribe();
     }
-    RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
-    refWatcher.watch(this);
+    if(BaseApplication.getRefWatcher(mContext)!=null) {
+      RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
+      refWatcher.watch(this);
+    }
   }
   @Override
   public String toString() {

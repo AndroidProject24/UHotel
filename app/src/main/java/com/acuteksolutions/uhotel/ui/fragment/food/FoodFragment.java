@@ -6,9 +6,9 @@ import android.support.v4.view.ViewPager;
 import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
+import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerFoodAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 
 public class FoodFragment extends BaseFragment{
   @BindView(R.id.tabLayout)
@@ -35,7 +35,11 @@ public class FoodFragment extends BaseFragment{
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.tab_viewpager_fragment;
+    return R.layout.food_fragment;
+  }
+
+  @Override protected void injectDependencies() {
+
   }
 
   @Override

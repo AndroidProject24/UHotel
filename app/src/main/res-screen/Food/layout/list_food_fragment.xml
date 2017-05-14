@@ -4,86 +4,90 @@
     android:id="@+id/movies_main_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/landing_gradient"
-    android:paddingLeft="30dp"
-    android:paddingRight="200dp"
-    android:paddingTop="20dp"
-    >
+    android:background="@drawable/landing_gradient">
 
-  <!--txt category-->
-  <TextView
-      android:id="@+id/txt_food_category"
-      android:layout_width="wrap_content"
+  <RelativeLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:paddingBottom="10dp"
-      android:paddingTop="30dp"
-      android:textColor="@color/white"
-      android:textSize="24sp"
-      />
-  <!--txt item name-->
-  <TextView
-      android:id="@+id/txt_food_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/txt_food_category"
-      android:text="Zazie"
-      android:textColor="@color/white"
-      android:textSize="30sp"
-      />
-  <!--txt rating-->
-  <LinearLayout
-      android:id="@+id/layout_rating"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/txt_food_name"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-
-    <RatingBar
-        android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="15dp"
-        android:numStars="5"
-        android:rating="4"
-        style="?android:attr/ratingBarStyleSmall"
-        />
-
+      android:layout_marginTop="50dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginRight="50dp">
+    <!--txt category-->
     <TextView
-        android:id="@+id/txt_food_rating"
+        android:id="@+id/txt_food_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:text="$$ - French Restaurant"
+        android:paddingBottom="10dp"
+        android:paddingTop="30dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="24sp"
         />
-  </LinearLayout>
+    <!--txt item name-->
+    <TextView
+        android:id="@+id/txt_food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_food_category"
+        android:text="Zazie"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        />
+    <!--txt rating-->
+    <LinearLayout
+        android:id="@+id/layout_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_food_name"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
 
-  <!--txt description-->
-  <TextView
-      android:id="@+id/txt_food_des"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/layout_rating"
-      android:paddingTop="5dp"
-      android:text="Petite French bistro &amp; popular brunch spot with an outdoor patio &amp; weekly Bring Your Dog dinners."
-      android:textColor="@color/white"
-      android:textSize="24sp"
-      />
-  <!--txt address-->
-  <TextView
-      android:id="@+id/txt_food_address"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/txt_food_des"
-      android:paddingBottom="30dp"
-      android:paddingTop="5dp"
-      android:text="941 Cole St, San Francisco, CA 94117. Open today · 8AM-2PM, 5-9:30PM (415) 564-5332"
-      android:textColor="@color/white"
-      android:textSize="24sp"
-      />
+      <RatingBar
+          android:id="@+id/rating"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="15dp"
+          android:numStars="5"
+          android:rating="4"
+          style="?android:attr/ratingBarStyleSmall"
+          />
+
+      <TextView
+          android:id="@+id/txt_food_rating"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingTop="5dp"
+          android:text="$$ - French Restaurant"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          />
+    </LinearLayout>
+
+    <!--txt description-->
+    <TextView
+        android:id="@+id/txt_food_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_rating"
+        android:paddingTop="5dp"
+        android:text="Petite French bistro &amp; popular brunch spot with an outdoor patio &amp; weekly Bring Your Dog dinners."
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        />
+    <!--txt address-->
+    <TextView
+        android:id="@+id/txt_food_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_food_des"
+        android:paddingBottom="30dp"
+        android:paddingTop="5dp"
+        android:text="941 Cole St, San Francisco, CA 94117. Open today · 8AM-2PM, 5-9:30PM (415) 564-5332"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        />
+  </RelativeLayout>
+
   <!--FOOTER ITEM LIST VIEW-->
   <android.support.v7.widget.RecyclerView
       android:id="@+id/recycle_food"
@@ -91,7 +95,11 @@
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
       android:layout_width="match_parent"
-      android:layout_height="200dp"
+      android:layout_height="210dp"
+      android:paddingTop="20dp"
+      android:paddingBottom="20dp"
+      android:paddingLeft="125dp"
+      android:paddingRight="125dp"
       android:background="@color/black_overlay"
       />
 </RelativeLayout>

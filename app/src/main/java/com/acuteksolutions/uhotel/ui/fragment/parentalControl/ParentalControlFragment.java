@@ -2,15 +2,10 @@ package com.acuteksolutions.uhotel.ui.fragment.parentalControl;
 
 import android.content.Context;
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
 import com.acuteksolutions.uhotel.mvp.view.ParentalControlView;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import javax.inject.Inject;
 
 public class ParentalControlFragment extends BaseFragment implements ParentalControlView {
-  @Inject
-  MoviesPresenter
-  mPresenter;
   private Context mContext;
   public static ParentalControlFragment newInstance() {
     return new ParentalControlFragment();
@@ -25,6 +20,10 @@ public class ParentalControlFragment extends BaseFragment implements ParentalCon
   @Override
   protected String getTAG() {
     return this.getClass().getSimpleName();
+  }
+
+  @Override protected void injectDependencies() {
+
   }
 
   @Override

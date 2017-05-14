@@ -86,7 +86,7 @@ public class PinChangeDialog extends DialogFragment implements PinView {
 
   @OnClick(R.id.btnOk)
   void okClick() {
-    mPresenter.changePin("","");
+    mPresenter.changePin("1234","1234");
   }
 
 
@@ -121,4 +121,11 @@ public class PinChangeDialog extends DialogFragment implements PinView {
 
   }
 
+  @Override public void showEmptyView(String message) {
+
+  }
+
+  @Override public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
+
+  }
 }
