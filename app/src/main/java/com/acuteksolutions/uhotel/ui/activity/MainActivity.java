@@ -154,18 +154,21 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     if (result != null && result.isDrawerOpen()) {
       result.closeDrawer();
     } else {
-      String currentTag = Preconditions.checkNotNull(getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
-      if (currentTag.equals(LandingFragment.class.getName()) || currentTag.equals(LoginFragment.class.getName())) {
-        if (doubleBackToExitPressedOnce) {
-          finish();
-        }
-        this.doubleBackToExitPressedOnce = true;
-        Snackbar.make(mLayout,R.string.msg_exit,Snackbar.LENGTH_SHORT).show();
-        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-      } else {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
-        if (fragment instanceof OnBackListener) {
-          ((OnBackListener) fragment).onBackPress();
+      if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
+        String currentTag = Preconditions.checkNotNull(
+            getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
+        if (currentTag.equals(LandingFragment.class.getName()) || currentTag.equals(LoginFragment.class.getName())) {
+          if (doubleBackToExitPressedOnce) {
+            finish();
+          }
+          this.doubleBackToExitPressedOnce = true;
+          Snackbar.make(mLayout, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
+          new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+        } else {
+          Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+          if (fragment instanceof OnBackListener) {
+            ((OnBackListener) fragment).onBackPress();
+          }
         }
       }
     }
@@ -194,6 +197,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     if (isShow) {
       tabMain.setVisibility(View.VISIBLE);
       custom_tab_icon.setVisibility(View.VISIBLE);
+      //StatusBarUtil.setColorNoTranslucent(this,getResources().getColor(R.color.tab_background));
       layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());

@@ -18,8 +18,6 @@ import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.libs.view.FadeViewAnimProvider;
-import com.acuteksolutions.uhotel.libs.view.StateLayout;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
@@ -42,7 +40,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
   private Context mContext;
   protected Subscription subscription = Subscriptions.empty();
   private CompositeSubscription mCompositeSubscription;
-  private StateLayout mStateLayout = null;
   private Unbinder unbinder;
   private String TAG = getTAG();
   protected abstract String getTAG();
@@ -88,7 +85,7 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         mPresenter.attachView(this);
       unbinder = ButterKnife.bind(this, mContentView);
       mContext = getContext();
-      initProgress();
+      glide= Glide.with(this);
       initViews();
       initData();
       Logger.wtf(TAG);
@@ -111,14 +108,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
 
   protected Context getmContext() {
     return mContext;
-  }
-
-  private void initProgress(){
-    if (null != (StateLayout)ButterKnife.findById(getActivity(),R.id.stateLayout)) {
-      mStateLayout = ButterKnife.findById(getActivity(),R.id.stateLayout);
-      mStateLayout.setViewSwitchAnimProvider(new FadeViewAnimProvider());
-    }
-    glide= Glide.with(this);
   }
 
   public CompositeSubscription getCompositeSubscription() {
@@ -175,30 +164,15 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     glide.onDestroy();
   }
   protected void toggleShowLoading(boolean toggle) {
-    if (mStateLayout != null) {
-      if (toggle)
-        mStateLayout.showProgressView();
-      else
-        mStateLayout.showContentView();
-    }
+
   }
 
   protected void toggleShowEmpty(String msg, View.OnClickListener onClickListener) {
-    if (mStateLayout != null) {
-      mStateLayout.showEmptyView(msg);
-      if (onClickListener != null) {
-        mStateLayout.setEmptyAction(onClickListener);
-      }
-    }
+
   }
 
   protected void toggleShowError(String msg, View.OnClickListener onClickListener) {
-    if (mStateLayout != null) {
-      mStateLayout.showErrorView(msg);
-      if (onClickListener != null) {
-        mStateLayout.setErrorAction(onClickListener);
-      }
-    }
+
   }
 
   @Override

@@ -7,6 +7,7 @@ import android.view.animation.RotateAnimation;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.expandablerecyclerView.models.ExpandableGroup;
 import com.acuteksolutions.uhotel.libs.expandablerecyclerView.viewholders.GroupViewHolder;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
@@ -39,6 +40,7 @@ public class RoomExpandViewHolder extends GroupViewHolder {
   }
 
   private void animateExpand() {
+    Logger.e("animateExpand");
     RotateAnimation rotate =
         new RotateAnimation(360, 180, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
     rotate.setDuration(300);
@@ -47,6 +49,7 @@ public class RoomExpandViewHolder extends GroupViewHolder {
   }
 
   private void animateCollapse() {
+    Logger.e("animateCollapse");
     RotateAnimation rotate =
         new RotateAnimation(180, 360, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
     rotate.setDuration(300);

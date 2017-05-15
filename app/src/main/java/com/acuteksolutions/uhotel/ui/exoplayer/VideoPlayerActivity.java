@@ -55,7 +55,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     player.setPlayWhenReady(shouldAutoPlay);
     DataSource.Factory dataSourceFactory = ((BaseApplication) getApplication()).buildHttpDataSourceFactory(bandwidthMeter);
     MediaSource videoSource = new HlsMediaSource(Uri.parse(Preconditions.checkNotNull(getIntent().getStringExtra(
-        BundleDef.TAB_INDEX))), dataSourceFactory, mainHandler, null);
+        BundleDef.BUNDLE_KEY))), dataSourceFactory, mainHandler, null);
     // Prepare the player with the source.
     player.prepare(videoSource);
 

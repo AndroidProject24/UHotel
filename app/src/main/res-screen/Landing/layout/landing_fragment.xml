@@ -60,7 +60,7 @@
           android:id="@+id/txt_temp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:drawableLeft="@mipmap/walanding_temp"
+          android:drawableLeft="@drawable/walanding_temp"
           android:drawablePadding="5dp"
           android:text="78°C"
           android:textColor="@color/white"

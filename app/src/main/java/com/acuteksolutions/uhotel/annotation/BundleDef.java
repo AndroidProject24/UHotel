@@ -9,8 +9,9 @@ import java.lang.annotation.RetentionPolicy;
  * Email: huynhvantoan.itc@gmail.com
  */
 
-@StringDef({BundleDef.TAB_INDEX})
+@StringDef({BundleDef.BUNDLE_KEY, BundleDef.IS_CORRECT})
 @Retention(RetentionPolicy.SOURCE)
 public @interface BundleDef {
-  String TAB_INDEX="TAB_INDEX";
+  String BUNDLE_KEY="BUNDLE_KEY";
+  String IS_CORRECT="isCorrect";
 }

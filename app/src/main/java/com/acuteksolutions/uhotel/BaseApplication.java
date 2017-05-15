@@ -12,6 +12,7 @@ import com.acuteksolutions.uhotel.injector.component.DaggerApplicationComponent;
 import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
 import com.acuteksolutions.uhotel.libs.logger.LogLevel;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
+import com.acuteksolutions.uhotel.utils.FakeDataUtils;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -49,6 +50,7 @@ public class BaseApplication extends Application {
   public void onCreate() {
     super.onCreate();
     //setupTest();
+    Realm.init(this);
     initInjector();
     initData();
     initExoPlayer();
@@ -71,7 +73,7 @@ public class BaseApplication extends Application {
   }
   private void initData(){
     try {
-      Realm.init(this);
+      FakeDataUtils.initDataRoom(this);
       if((0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE))) {
      /*   StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
             .detectAll()

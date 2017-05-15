@@ -42,7 +42,7 @@ public class ListFoodFragment extends BaseFragment<FoodPresenter> implements Foo
   public static ListFoodFragment newInstance(@TabFoodDef.TabFood int index) {
     ListFoodFragment fragment=new ListFoodFragment();
     Bundle bundle=new Bundle();
-    bundle.putInt(BundleDef.TAB_INDEX,index);
+    bundle.putInt(BundleDef.BUNDLE_KEY,index);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -76,7 +76,7 @@ public class ListFoodFragment extends BaseFragment<FoodPresenter> implements Foo
 
   @Override
   protected void initData() {
-    mPresenter.getListFood(mContext,Preconditions.checkNotNull(getArguments().getInt(BundleDef.TAB_INDEX)));
+    mPresenter.getListFood(mContext,Preconditions.checkNotNull(getArguments().getInt(BundleDef.BUNDLE_KEY)));
   }
 
   @Override

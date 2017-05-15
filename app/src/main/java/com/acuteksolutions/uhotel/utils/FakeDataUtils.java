@@ -1,6 +1,13 @@
 package com.acuteksolutions.uhotel.utils;
 
+import android.content.Context;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.mvp.model.conciege.ListRoom;
+import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
+import io.realm.Realm;
+import io.realm.RealmList;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +18,47 @@ import org.json.JSONObject;
  */
 
 public class FakeDataUtils {
+  public static void initDataRoom(Context context){
+    Realm.getDefaultInstance().executeTransactionAsync(realm -> {
+      if(realm.where(ListRoom.class).count()==0) {
+        String[] arrName = context.getResources().getStringArray(R.array.concierge_room_left_array);
+        List<ListRoom> masterList = new ArrayList<>();
+        for (int i = 0; i < arrName.length; i++) {
+          RealmList<Room> detailInfoList = new RealmList<>();
+          switch (i) {
+            case 0:
+              detailInfoList.add(new Room("Bath Towels"));
+              detailInfoList.add(new Room("Wash Cloths"));
+              detailInfoList.add(new Room("Bathwash"));
+              detailInfoList.add(new Room("Shampoo"));
+              detailInfoList.add(new Room("Conditioner"));
+              break;
+            case 1:
+              detailInfoList.add(new Room("Hygiene Type 1"));
+              detailInfoList.add(new Room("Hygiene Type 2"));
+              detailInfoList.add(new Room("Hygiene Type 3"));
+              break;
+            case 2:
+              detailInfoList.add(new Room("Office Type 1"));
+              detailInfoList.add(new Room("Office Type 2"));
+              detailInfoList.add(new Room("Office Type 3"));
+              break;
+            case 3:
+              detailInfoList.add(new Room("Apps Gen 1"));
+              detailInfoList.add(new Room("Apps Gen 2"));
+              break;
+            default:
+              detailInfoList.add(new Room("Dental Type 1"));
+              detailInfoList.add(new Room("Dental Type 2"));
+              break;
+          }
+          masterList.add(new ListRoom(arrName[i], detailInfoList));
+          realm.copyToRealmOrUpdate(masterList);
+        }
+      }
+    });
+  }
+
   public static JSONObject initFakeData() {
     JSONArray jsonArray = new JSONArray();
     JSONObject coffeeObject = new JSONObject();

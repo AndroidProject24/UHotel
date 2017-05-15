@@ -25,13 +25,13 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   }
 
   public void getCategory() {
+    getMvpView().showLoading();
     addSubscribe(mRepository.getCategory()
-            .doOnSubscribe(() -> getMvpView().showLoading())
-            .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<Category>>() {
               @Override
               public void onError(Throwable e) {
                 e.printStackTrace();
+                getMvpView().hideLoading();
                 getMvpView().showError(e.getMessage());
               }
 
@@ -51,18 +51,18 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
 
   public void getMoviesDetails(String catID) {
     addSubscribe(mRepository.getMoviesDetails(catID)
-            .doOnSubscribe(() -> getMvpView().showLoading())
-            .doOnCompleted(() -> getMvpView().hideLoading())
             .subscribe(new DefaultObserver<List<VODInfo>>() {
               @Override
               public void onError(Throwable e) {
                 e.printStackTrace();
+                getMvpView().hideLoading();
                 getMvpView().showError(e.getMessage());
               }
 
               @Override
               public void onNext(List<VODInfo> list) {
                 try {
+                  getMvpView().hideLoading();
                   if(!list.isEmpty()) {
                     getMvpView().listMovies(list);
                   }else
@@ -75,19 +75,20 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   }
 
   public void getLinkStream(String cid) {
+    getMvpView().showLoading();
     addSubscribe(mRepository.getLinkStream(cid)
-        .doOnSubscribe(() -> getMvpView().showLoading())
-        .doOnCompleted(() -> getMvpView().hideLoading())
         .subscribe(new DefaultObserver<String>() {
           @Override
           public void onError(Throwable e) {
             e.printStackTrace();
+            getMvpView().hideLoading();
             getMvpView().showError(e.getMessage());
           }
 
           @Override
           public void onNext(String linkStream) {
             try {
+              getMvpView().hideLoading();
               if(!Preconditions.isEmpty(linkStream)) {
                 getMvpView().playStream(linkStream);
               }else

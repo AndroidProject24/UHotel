@@ -37,7 +37,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
   public static ListMoviesFragment newInstance(@TabMoviesDef.TabMovies int index) {
     ListMoviesFragment fragment=new ListMoviesFragment();
     Bundle bundle=new Bundle();
-    bundle.putInt(BundleDef.TAB_INDEX,index);
+    bundle.putInt(BundleDef.BUNDLE_KEY,index);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -76,7 +76,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
 
   @Override
   public void listCategory(List<Category> categoryList) {
-    mPresenter.getMoviesDetails(Preconditions.checkNotNull(categoryList.get(Preconditions.checkNotNull(getArguments().getInt(BundleDef.TAB_INDEX)))).getId());
+    mPresenter.getMoviesDetails(Preconditions.checkNotNull(categoryList.get(Preconditions.checkNotNull(getArguments().getInt(BundleDef.BUNDLE_KEY)))).getId());
   }
 
   @Override
@@ -121,7 +121,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
     Logger.e(linkStream);
     Intent player = new Intent(mContext, VideoPlayerActivity.class)
         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    player.putExtra(BundleDef.TAB_INDEX,linkStream);
+    player.putExtra(BundleDef.BUNDLE_KEY,linkStream);
     startActivity(player);
   }
 

@@ -13,11 +13,7 @@ public class RealmManager {
   public RealmConfiguration mRealmConfigDB;
   @Inject
   public RealmManager() {
-    mRealmConfigDB = new RealmConfiguration.Builder()
-            .schemaVersion(1)
-            .migration(migrationDB)
-            .deleteRealmIfMigrationNeeded()
-            .build();
+    mRealmConfigDB = new RealmConfiguration.Builder().build();
     Realm.setDefaultConfiguration(mRealmConfigDB);
   }
 

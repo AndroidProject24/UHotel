@@ -11,9 +11,11 @@ import java.util.List;
 
 public class ParentalAdapter extends BaseQuickAdapter<ParentalItem, BaseViewHolder> {
   private RequestManager glide;
+  private List<ParentalItem> list;
     public ParentalAdapter(RequestManager glide,List<ParentalItem> datas) {
         super(R.layout.concierge_parental_control_item,datas);
         this.glide=glide;
+        this.list=datas;
     }
 
   @Override
@@ -24,5 +26,15 @@ public class ParentalAdapter extends BaseQuickAdapter<ParentalItem, BaseViewHold
     }catch (Exception e){
       e.printStackTrace();
     }
+  }
+  public void setEnable(boolean isEnable) {
+    for (ParentalItem itemInfo : list) {
+      itemInfo.setLocked(isEnable);
+    }
+    notifyDataSetChanged();
+  }
+
+  public List<ParentalItem> getList() {
+    return list;
   }
 }

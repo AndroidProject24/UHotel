@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MoreMoviesFragment extends BaseFragment<MoviesPresenter> implements MoviesView {
   private Context mContext;
-  @BindView(R.id.recyclerview)
+  @BindView(R.id.recycle_movies)
   RecyclerView mRecyclerview;
   public static MoreMoviesFragment newInstance() {
     return new MoreMoviesFragment();

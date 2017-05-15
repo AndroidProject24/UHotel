@@ -6,6 +6,8 @@ import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.dialog.LockDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinVerifyDialog;
+import com.acuteksolutions.uhotel.ui.fragment.concierge.ParentalFragment;
+import com.acuteksolutions.uhotel.ui.fragment.concierge.RoomFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.ListFoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
@@ -25,7 +27,10 @@ public interface ActivityComponent {
   /*LOGIN*/
   void inject(LoginFragment loginFragment);
 
-  /*void inject(RegisterFragment registerFragment);*/
+  /*CONCIERGE*/
+  void inject(RoomFragment roomFragment);
+
+  void inject(ParentalFragment parentalFragment);
 
   /*LIVETV*/
   void inject(LiveTVFragment liveTVFragment);

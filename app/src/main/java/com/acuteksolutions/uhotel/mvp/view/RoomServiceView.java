@@ -6,7 +6,7 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
  * Created by Toan.IT
  * Date: 28/05/2016
  */
-public interface RomServiceView extends BaseView {
+public interface RoomServiceView extends BaseView {
 
 
 }

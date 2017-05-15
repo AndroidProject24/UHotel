@@ -13,11 +13,11 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints;
-import com.acuteksolutions.uhotel.mvp.view.RomServiceView;
+import com.acuteksolutions.uhotel.mvp.view.RoomServiceView;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import java.util.Random;
 
-public class RoomServiceFragment extends BaseFragment implements RomServiceView{
+public class RoomServiceFragment extends BaseFragment implements RoomServiceView {
   @BindView(R.id.room_control_preset_home) Button roomControlPresetHome;
   @BindView(R.id.room_control_preset_away) Button roomControlPresetAway;
   @BindView(R.id.room_control_preset_read) Button roomControlPresetRead;
@@ -81,6 +81,7 @@ public class RoomServiceFragment extends BaseFragment implements RomServiceView{
 
   @Override protected void initData() {
     getAllSeekRandomValue();
+    roomControlPresetHome.requestFocus();
     roomControlPresetHome.requestFocusFromTouch();
   }
 

@@ -14,7 +14,6 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.injector.component.ActivityComponent;
 import com.acuteksolutions.uhotel.injector.component.DaggerActivityComponent;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
 import com.squareup.leakcanary.RefWatcher;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -29,7 +28,7 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Created by Toan.IT
  * Date: 25/05/2016
  */
-public abstract class BaseActivity <T extends BasePresenter> extends SupportActivity{
+public abstract class BaseActivity extends SupportActivity{
   private CompositeSubscription mCompositeSubscription;
   private Subscription subscription;
   private ActivityComponent mActivityComponent;
@@ -41,8 +40,8 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(setLayoutResourceID());
-    /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      StatusBarUtil.setColor(this,getResources().getColor(R.color.colorPrimary));
+   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      StatusBarUtil.setTranslucent(this);
     }*/
     setButterKnife();
     initbase();

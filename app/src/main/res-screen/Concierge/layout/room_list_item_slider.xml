@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
-  <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/txt_name"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginLeft="16dp"
-      android:gravity="center_vertical"
-      tools:text="Artist Name"
-      android:textSize="@dimen/textSize24"/>
 
   <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
       android:id="@+id/seekBar"
@@ -27,4 +19,14 @@
       app:bsb_track_color="@color/room_bg_track"
       />
 
-</FrameLayout>
+  <android.support.v7.widget.AppCompatTextView
+      android:id="@+id/txt_name"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="16dp"
+      android:gravity="center_vertical"
+      tools:text="Artist Name"
+      android:textSize="@dimen/textSize24"/>
+
+</LinearLayout>

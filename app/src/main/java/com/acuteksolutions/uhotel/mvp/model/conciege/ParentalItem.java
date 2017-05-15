@@ -24,6 +24,10 @@ public class ParentalItem {
     return name;
   }
 
+  public void setLocked(boolean locked) {
+    isLocked = locked;
+  }
+
   public boolean isLocked() {
     return isLocked;
   }

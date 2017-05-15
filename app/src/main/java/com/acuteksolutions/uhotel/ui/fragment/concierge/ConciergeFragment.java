@@ -60,6 +60,8 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
+    menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu).requestFocus();
+    menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu).requestFocusFromTouch();
     showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);
   }
 

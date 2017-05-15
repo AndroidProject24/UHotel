@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
 import com.acuteksolutions.uhotel.mvp.view.PinView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
@@ -31,9 +32,10 @@ public class PinChangeDialog extends DialogFragment implements PinView {
   @Inject PinPresenter mPresenter;
   private Context context;
   private Unbinder unbinder;
-  public static PinVerifyDialog init() {
-    PinVerifyDialog pinDialogFragment = new PinVerifyDialog();
+  public static PinChangeDialog newInstance(String currentPIN) {
+    PinChangeDialog pinDialogFragment = new PinChangeDialog();
     Bundle bundle = new Bundle();
+    bundle.putString(BundleDef.BUNDLE_KEY,currentPIN);
     pinDialogFragment.setArguments(bundle);
     return pinDialogFragment;
   }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.acuteksolutions.uhotel.libs.view.StateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/stateLayout"
     android:layout_width="match_parent"
@@ -59,4 +59,4 @@
         android:layout_weight="1"
         />
   </LinearLayout>
-</com.acuteksolutions.uhotel.libs.view.StateLayout>
+</RelativeLayout>

@@ -62,5 +62,11 @@ public class RoomItem implements Parcelable {
       return new RoomItem[size];
     }
   };
+
+
+  @Override public String toString() {
+    return "RoomItem{" + "name='" + name + '\'' + ", progress=" + progress + '}';
+  }
+
 }
 

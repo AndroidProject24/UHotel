@@ -31,11 +31,8 @@ public class PinVerifyDialog extends DialogFragment implements PinView{
   @Inject PinPresenter mPresenter;
   private Context context;
   private Unbinder unbinder;
-  public static PinVerifyDialog init() {
-    PinVerifyDialog pinDialogFragment = new PinVerifyDialog();
-    Bundle bundle = new Bundle();
-    pinDialogFragment.setArguments(bundle);
-    return pinDialogFragment;
+  public static PinVerifyDialog newInstance() {
+    return new PinVerifyDialog();
   }
 
   @Override
