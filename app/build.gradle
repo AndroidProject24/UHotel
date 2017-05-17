@@ -146,6 +146,9 @@ dependencies {
   debugCompile   developmentDependencies.blockCanaryEx
   releaseCompile developmentDependencies.blockCanaryExRelease
   testCompile    developmentDependencies.blockCanaryExRelease
+  compile ('com.github.niorgai:StatusBarCompat:2.1.3', {
+    exclude group: 'com.android.support'
+  })
 }
 
 @SuppressWarnings("GroovyAssignabilityCheck")

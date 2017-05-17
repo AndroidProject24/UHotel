@@ -33,6 +33,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import javax.inject.Inject;
+import qiu.niorgai.StatusBarCompat;
 
 public class MainActivity extends BaseActivity implements ToolbarTitleListener,ViewpagerListener {
   private Drawer result = null;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
 
   @Override
   protected void initViews() {
+    StatusBarCompat.translucentStatusBar(this, true);
     if(mPreferencesHelper.getJsonLogin()==null)
       replaceFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
     else {
@@ -95,6 +97,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
         .withHeader(R.layout.layout_logo)
         .withDisplayBelowStatusBar(true)
         .withTranslucentStatusBar(true)
+        .withTranslucentNavigationBar(true)
         .withToolbar(mToolbar)
         .withHasStableIds(true)
         .withActionBarDrawerToggleAnimated(true)
@@ -172,7 +175,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
         }
       }
     }
-    //super.onBackPressedSupport();
   }
 
   @Override
@@ -197,10 +199,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     if (isShow) {
       tabMain.setVisibility(View.VISIBLE);
       custom_tab_icon.setVisibility(View.VISIBLE);
-      //StatusBarUtil.setColorNoTranslucent(this,getResources().getColor(R.color.tab_background));
       layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());
+     // StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.tab_background));
     }else {
       tabMain.setVisibility(View.GONE);
       custom_tab_icon.setVisibility(View.GONE);
@@ -208,6 +210,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       layout_tab.getBackground().setAlpha(0);
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,0);
+     // StatusBarCompat.translucentStatusBar(this, true);
+     // qiu.niorgai.StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT,0);
     }
   }
 
