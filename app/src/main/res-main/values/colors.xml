@@ -10,12 +10,14 @@
   <color name="white">#FFFFFF</color>
   <color name="black">#000000</color>
   <color name="transparent">#00000000</color>
+  <color name="transparent60">#ce000000</color>
   <color name="black_overlay">#99000000</color>
   <color name="grey">#737C81</color>
   <color name="bg_item_select">#501321</color>
   <color name="black_background">#CC000000</color>
   <!--HOME-->
   <color name="yellow">#eaa903</color>
+  <color name="red">#ff000d</color>
 
   <!--TAB-->
   <color name="tab_background">#1d1d1d</color>

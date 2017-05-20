@@ -3,21 +3,23 @@ package com.acuteksolutions.uhotel.ui.fragment.landing;
 import android.annotation.SuppressLint;
 import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.presenter.LandingPresenter;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Utils;
+
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Toan.IT
@@ -58,6 +60,7 @@ public class LandingFragment extends BaseFragment<LandingPresenter> {
     mTxtTemp.setText("70");
     mTxtMarqueeBottom.setText("");
     mTxtMarqueeBottom.setSelected(true);
+    //StatusBarUtil.setTranslucentForImageView(getActivity(),imgLanding);
   }
 
   @Override protected void injectDependencies() {
@@ -112,8 +115,6 @@ public class LandingFragment extends BaseFragment<LandingPresenter> {
         }
         builder.append(login.getName());
         return builder.toString();
-      }else{
-        replaceFagment(getFragmentManager(), R.id.fragment, LoginFragment.newInstance());
       }
     } catch (Exception e) {
       e.printStackTrace();

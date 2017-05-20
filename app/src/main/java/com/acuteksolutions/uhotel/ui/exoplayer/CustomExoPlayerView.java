@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.utils.AudioUtil;
+import com.acuteksolutions.uhotel.utils.Utils;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -31,8 +32,6 @@ import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SubtitleView;
 import java.util.List;
-
-import static com.mikepenz.materialize.util.UIUtils.getScreenWidth;
 
 /**
  * Created by Toan.IT on 5/3/17.
@@ -283,7 +282,7 @@ public class CustomExoPlayerView extends FrameLayout
                 controller.show();
             }*/
       if (screenWidth == 0) {
-        screenWidth = getScreenWidth(getContext());
+        screenWidth = Utils.getWidth(getContext());
       }
       ExoPlayer player = controller.getPlayer();
       switch (ev.getAction()) {

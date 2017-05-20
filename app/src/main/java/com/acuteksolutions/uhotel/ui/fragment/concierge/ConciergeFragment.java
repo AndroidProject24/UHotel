@@ -5,14 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.ConciergeMenuDef;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.MenuAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
+
 import java.util.Arrays;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by Toan.IT
@@ -60,9 +63,12 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
-    menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu).requestFocus();
-    menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu).requestFocusFromTouch();
-    showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);
+  /*  if(menuAdapter.getItemCount()>0) {
+      menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM, R.id.btn_menu).requestFocus();
+      menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM, R.id.btn_menu).requestFocusFromTouch();
+    }
+    showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);*/
+    replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
   }
 
   private void showScreen(@NonNull View view,int index) {

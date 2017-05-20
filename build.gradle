@@ -1,8 +1,10 @@
 apply from: 'buildsystem/library.gradle'
 apply from: 'buildsystem/ci.gradle'
 apply from: 'buildsystem/signing.gradle'
+
 buildscript {
     repositories {
+        maven { url 'https://maven.google.com' }
         jcenter()
     }
     dependencies {
@@ -10,7 +12,7 @@ buildscript {
         classpath "io.realm:realm-gradle-plugin:3.1.4"
         classpath "com.fernandocejas.frodo:frodo-plugin:0.8.3"
         classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.5'
-        classpath 'com.letv.sarrsdesktop:BlockCanaryExPlugin:0.9.5.2'
+        classpath 'com.letv.sarrsdesktop:BlockCanaryExPlugin:0.9.6'
     }
 }
 

@@ -7,13 +7,13 @@
 
   <FrameLayout
       android:layout_width="match_parent"
-      android:layout_height="@dimen/materialize_toolbar"
+      android:layout_height="@dimen/action_bar_height"
       android:background="@color/tab_background_child"
       >
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="750dp"
-        android:layout_height="@dimen/materialize_toolbar"
+        android:layout_height="@dimen/action_bar_height"
         style="@style/MoviesTabLayoutStyle"
         />
   </FrameLayout>

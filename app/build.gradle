@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.fernandocejas.frodo'
 //apply plugin: 'com.frogermcs.androiddevmetrics'
-apply plugin: 'blockcanaryex'
+//apply plugin: 'blockcanaryex'
 apply plugin: 'realm-android'
-
 frodo {
   enabled = true
 }
@@ -106,6 +105,7 @@ dependencies {
   compile supportDependencies.supportDesign
   compile supportDependencies.supportRecyclerView
   compile supportDependencies.supportCardView
+  compile supportDependencies.supportPalette
   compile supportDependencies.fragmentation
   compile supportDependencies.mutidex
 
@@ -135,9 +135,6 @@ dependencies {
   compile appDependencies.baseRecyclerView
   compile appDependencies.exoPlayer
   compile appDependencies.exoPlayerOkhttp
-  compile(appDependencies.drawer) {
-    transitive = true
-  }
 
   //developmentDependencies
   debugCompile   developmentDependencies.leakCanary
@@ -153,12 +150,12 @@ dependencies {
 
 @SuppressWarnings("GroovyAssignabilityCheck")
 def configApkFileName(variant, defaultConfig) {
-  variant.outputs.each { output ->
+  /*variant.outputs.each { output ->
     if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
       def name = "${rootDir}/apk/Debug.apk"
       output.outputFile = file(name)
     }
-  }
+  }*/
 //  variant.outputs.each { output ->
 //    if (variant.buildType.name == android.buildTypes.debug.name) {
 //      if (output.zipAlign) {

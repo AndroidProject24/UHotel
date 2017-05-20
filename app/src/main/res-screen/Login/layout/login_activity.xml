@@ -114,7 +114,7 @@
       android:layout_centerHorizontal="true"
       android:layout_below="@+id/btn_login"
       android:textAllCaps="true"
-      android:textColor="@color/md_red_500"
+      android:textColor="@color/red"
       android:textSize="18sp"
       style="@style/style_base"
       />

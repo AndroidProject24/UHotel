@@ -22,28 +22,33 @@ public class LoginPresenter extends BasePresenter<LoginView> {
   }
 
   public void login(String pass){
-    addSubscribe(mRepository.getLogin(pass)
-            .doOnSubscribe(() -> getMvpView().showLoading())
-            .doOnCompleted(() -> getMvpView().hideLoading())
-            .subscribe(new DefaultObserver<Login>() {
-              @Override
-              public void onError(Throwable e) {
-                e.printStackTrace();
-                getMvpView().showError("1");
-              }
+      getMvpView().showLoading();
+      addSubscribe(mRepository.getLogin(pass)
+              .subscribe(new DefaultObserver<Login>() {
+                  @Override
+                  public void onError(Throwable e) {
+                      e.printStackTrace();
+                      getMvpView().hideLoading();
+                      getMvpView().showError("1");
+                  }
 
-              @Override
-              public void onNext(Login login) {
-                try {
-                  if(login!=null) {
-                   getMvpView().loginSucess();
-                    mPreferencesHelper.putJsonLogin(login);
-                  }else
-                    getMvpView().loginError();
-                }catch (Exception e){
-                  e.printStackTrace();
-                }
-              }
-            }));
+                  @Override
+                  public void onNext(Login login) {
+                      try {
+                          getMvpView().hideLoading();
+                          if(login!=null) {
+                              getMvpView().loginSucess();
+                              mPreferencesHelper.putJsonLogin(login);
+                          }else
+                              getMvpView().loginError();
+                      }catch (Exception e){
+                          e.printStackTrace();
+                      }
+                  }
+              }));
   }
+
+    public PreferencesHelper getmPreferencesHelper() {
+        return mPreferencesHelper;
+    }
 }

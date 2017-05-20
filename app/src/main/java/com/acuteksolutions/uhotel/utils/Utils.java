@@ -33,7 +33,9 @@ public class Utils {
     context.getWindowManager().getDefaultDisplay().getMetrics(dm);
     return dm.widthPixels;
   }
-
+  public static int getWidth(Context context){
+    return context.getResources().getDisplayMetrics().widthPixels;
+  }
   public static int getHeight(Activity context) {
     DisplayMetrics dm = new DisplayMetrics();
     context.getWindowManager().getDefaultDisplay().getMetrics(dm);

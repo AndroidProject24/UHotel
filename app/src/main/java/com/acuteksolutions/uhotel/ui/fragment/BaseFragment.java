@@ -10,8 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
@@ -23,7 +22,11 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.squareup.leakcanary.RefWatcher;
+
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -227,15 +230,8 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
   }
   private void _removeWorkerFragments() {
     String fragmentTAG=getFragmentManager().findFragmentById(R.id.fragment).getTag();
-    String fragmentTAGTWO=getFragmentManager().findFragmentById(R.id.drawer_container).getTag();
     if(!fragmentTAG.equalsIgnoreCase("")) {
       Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAG);
-      if(fragment!=null)
-        getFragmentManager().beginTransaction().remove(fragment).commit();
-    }
-
-    if(!fragmentTAGTWO.equalsIgnoreCase("")) {
-      Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAGTWO);
       if(fragment!=null)
         getFragmentManager().beginTransaction().remove(fragment).commit();
     }

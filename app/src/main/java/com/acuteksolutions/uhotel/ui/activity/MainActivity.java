@@ -1,20 +1,25 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
@@ -23,35 +28,39 @@ import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
-import com.acuteksolutions.uhotel.libs.CustomCenteredPrimaryDrawerItem;
 import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
+import com.acuteksolutions.uhotel.libs.materialdrawer.DrawerView;
+import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerItem;
+import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerProfile;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
-import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import javax.inject.Inject;
+
+import butterknife.BindView;
 import qiu.niorgai.StatusBarCompat;
 
 public class MainActivity extends BaseActivity implements ToolbarTitleListener,ViewpagerListener {
-  private Drawer result = null;
+  private ActionBarDrawerToggle drawerToggle;
   private boolean doubleBackToExitPressedOnce;
-  @BindView(R.id.drawer_container) ViewGroup mLayout;
+  @BindView(R.id.drawer) DrawerView mDrawer;
+  @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) CustomSwipeableViewPager viewPagerMain;
   @BindView(R.id.custom_tab_icon) AppCompatImageView custom_tab_icon;
   @BindView(R.id.appBar) AppBarLayout layout_tab;
   @BindView(R.id.layout_root) RelativeLayout layout_root;
-  @Inject
   PreferencesHelper mPreferencesHelper;
 
+  public static void start(Context context) {
+      Intent starter = new Intent(context, MainActivity.class);
+      context.startActivity(starter);
+  }
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    initDrawer(savedInstanceState);
+    initDrawer();
   }
 
   @Override
@@ -61,9 +70,9 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
 
   @Override
   protected void initViews() {
-    StatusBarCompat.translucentStatusBar(this, true);
+      mPreferencesHelper=new PreferencesHelper(this);
     if(mPreferencesHelper.getJsonLogin()==null)
-      replaceFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
+      LoginActivity.start(this);
     else {
       initToolbar();
       initTabLayout();
@@ -83,55 +92,72 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
 
   @Override
   protected void injectDependencies() {
-    getActivityComponent().inject(this);
-  }
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    outState = result.saveInstanceState(outState);
-    super.onSaveInstanceState(outState);
+
   }
 
-  private void initDrawer(Bundle savedInstanceState){
-    result = new DrawerBuilder(this)
-        .withActivity(this)
-        .withHeader(R.layout.layout_logo)
-        .withDisplayBelowStatusBar(true)
-        .withTranslucentStatusBar(true)
-        .withTranslucentNavigationBar(true)
-        .withToolbar(mToolbar)
-        .withHasStableIds(true)
-        .withActionBarDrawerToggleAnimated(true)
-        .withDrawerWidthDp(400)
-        .withSliderBackgroundDrawableRes(R.color.black)
-        .withItemAnimator(new DefaultItemAnimator())
-        .addDrawerItems(
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.CONCIERGE)).withIcon(R.drawable.menu_concierge).withIdentifier(TabMainDef.TabMain.CONCIERGE).withSetSelected(true),
-            new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.LIVETV)).withIcon(R.drawable.menu_livetv).withIdentifier(TabMainDef.TabMain.LIVETV).withSetSelected(true),
-            new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.MOVIES)).withIcon(R.drawable.menu_movies).withIdentifier(TabMainDef.TabMain.MOVIES).withSetSelected(true),
-            new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.FOOD)).withIcon(R.drawable.menu_food_activities).withIdentifier(TabMainDef.TabMain.FOOD).withSetSelected(true),
-            new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(TabMainDef.ROOMCONTROL)).withIcon(R.drawable.menu_room_control).withIdentifier(TabMainDef.TabMain.ROOMCONTROL).withSetSelected(true).withEnabled(true),
-            new DividerDrawerItem(),
-            new CustomCenteredPrimaryDrawerItem().withName(getString(R.string.home_menu_setting)).withIcon(R.drawable.menu_settings).withIdentifier(TabMainDef.TabMain.HOME).withSetSelected(true),
-            new DividerDrawerItem()
-        )
-        .withOnDrawerItemClickListener((view, position, drawerItem) -> {
-          if (drawerItem != null) {
-            if (mPreferencesHelper.getJsonLogin()!=null) {
-              viewPagerMain.setCurrentItem((int)drawerItem.getIdentifier());
-            }else{
-              replaceFagment(getSupportFragmentManager(), R.id.drawer_container, LoginFragment.newInstance());
-              Snackbar.make(mLayout, "Please login!", Snackbar.LENGTH_LONG).show();
-            }
-          }
-          return false;
-        })
-        .withSavedInstance(savedInstanceState)
-        .build();
-    result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+  private void initDrawer(){
+    drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+      public void onDrawerClosed(View view) {
+        invalidateOptionsMenu();
+      }
+
+      public void onDrawerOpened(View drawerView) {
+        invalidateOptionsMenu();
+      }
+    };
+    //drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.transparent));
+    drawerLayout.addDrawerListener(drawerToggle);
+    drawerLayout.closeDrawer(mDrawer);
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_concierge))
+        .setTextPrimary(getString(TabMainDef.CONCIERGE)));
+    mDrawer.addDivider();
+
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_livetv))
+        .setTextPrimary(getString(TabMainDef.LIVETV)));
+    mDrawer.addDivider();
+
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_movies))
+        .setTextPrimary(getString(TabMainDef.MOVIES)));
+    mDrawer.addDivider();
+
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_food_activities))
+        .setTextPrimary(getString(TabMainDef.FOOD)));
+    mDrawer.addDivider();
+
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_room_control))
+        .setTextPrimary(getString(TabMainDef.ROOMCONTROL)));
+    mDrawer.addDivider();
+
+    mDrawer.addItems(new DrawerItem()
+        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_settings))
+        .setTextPrimary(getString(R.string.home_menu_setting)));
+
+    mDrawer.addProfile(new DrawerProfile()
+        .setId(1)
+        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_exception))
+        .setBackground(ContextCompat.getDrawable(this, R.drawable.ic_error))
+        .setName(getString(R.string.app_name))
+    );
+    mDrawer.setOnItemClickListener((item, id, position) -> {
+      mDrawer.selectItem(position);
+      if (mPreferencesHelper.getJsonLogin()!=null) {
+          Logger.e("position="+position);
+          if(position<2)
+              viewPagerMain.setCurrentItem(1);
+          else
+              viewPagerMain.setCurrentItem(position/2+1);
+      }else{
+          LoginActivity.start(this);
+          Snackbar.make(mDrawer, "Please login!", Snackbar.LENGTH_LONG).show();
+      }
+      drawerLayout.closeDrawer(mDrawer);
+    });
   }
 
   private void initTabLayout() {
@@ -153,25 +179,22 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     setSupportActionBar(mToolbar);
   }
 
-  @Override public void onBackPressedSupport() {
-    if (result != null && result.isDrawerOpen()) {
-      result.closeDrawer();
-    } else {
-      if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
-        String currentTag = Preconditions.checkNotNull(
-            getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
-        if (currentTag.equals(LandingFragment.class.getName()) || currentTag.equals(LoginFragment.class.getName())) {
-          if (doubleBackToExitPressedOnce) {
-            finish();
-          }
-          this.doubleBackToExitPressedOnce = true;
-          Snackbar.make(mLayout, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
-          new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-        } else {
-          Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
-          if (fragment instanceof OnBackListener) {
-            ((OnBackListener) fragment).onBackPress();
-          }
+  @Override
+  public void onBackPressedSupport() {
+    if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
+      String currentTag = Preconditions.checkNotNull(
+          getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
+      if (currentTag.equals(LandingFragment.class.getName())) {
+        if (doubleBackToExitPressedOnce) {
+          finish();
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Snackbar.make(mDrawer, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+      } else {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+        if (fragment instanceof OnBackListener) {
+          ((OnBackListener) fragment).onBackPress();
         }
       }
     }
@@ -190,6 +213,19 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   }
 
   @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    drawerToggle.onConfigurationChanged(newConfig);
+  }
+
+
+  @Override
+  protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    drawerToggle.syncState();
+  }
+
+  @Override
   public void changeTitle(String name) {
     //mToolbar.setTitle(name);
   }
@@ -202,7 +238,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());
-     // StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.tab_background));
+      StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.tab_background));
     }else {
       tabMain.setVisibility(View.GONE);
       custom_tab_icon.setVisibility(View.GONE);
@@ -210,8 +246,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       layout_tab.getBackground().setAlpha(0);
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,0);
-     // StatusBarCompat.translucentStatusBar(this, true);
-     // qiu.niorgai.StatusBarCompat.setStatusBarColor(this, Color.TRANSPARENT,0);
+      StatusBarCompat.translucentStatusBar(this, true);
     }
   }
 
@@ -219,4 +254,5 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   public void disableSwipe(boolean enable) {
     viewPagerMain.setPagingEnabled(enable);
   }
+
 }

@@ -2,7 +2,7 @@ package com.acuteksolutions.uhotel.injector.component;
 
 import com.acuteksolutions.uhotel.injector.module.ActivityModule;
 import com.acuteksolutions.uhotel.injector.qualifier.PerActivity;
-import com.acuteksolutions.uhotel.ui.activity.MainActivity;
+import com.acuteksolutions.uhotel.ui.activity.LoginActivity;
 import com.acuteksolutions.uhotel.ui.dialog.LockDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinVerifyDialog;
@@ -11,21 +11,18 @@ import com.acuteksolutions.uhotel.ui.fragment.concierge.RoomFragment;
 import com.acuteksolutions.uhotel.ui.fragment.food.ListFoodFragment;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.liveTV.LiveTVFragment;
-import com.acuteksolutions.uhotel.ui.fragment.login.LoginFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoreMoviesFragment;
+
 import dagger.Component;
 
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
 
-  void inject(MainActivity mainActivity);
+  void inject(LoginActivity loginActivity);
 
   void inject(LandingFragment landingFragment);
-
-  /*LOGIN*/
-  void inject(LoginFragment loginFragment);
 
   /*CONCIERGE*/
   void inject(RoomFragment roomFragment);

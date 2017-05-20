@@ -21,7 +21,8 @@ public class LiveTVAdapter extends BaseQuickAdapter<Program, BaseViewHolder> {
       try {
         helper.setText(R.id.txt_liveTV_name, data.getTitle())
                 .addOnClickListener(R.id.layout_item);
-        ImageUtils.loadImage(glide,data.getPicture(),(ImageView) helper.getView(R.id.img_liveTV));
+        if(data.getPicture()!=null)
+          ImageUtils.loadImage(glide,data.getPicture(),(ImageView) helper.getView(R.id.img_liveTV));
       }catch (Exception e){
         e.printStackTrace();
       }

@@ -1,25 +1,25 @@
 package com.acuteksolutions.uhotel.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
-import butterknife.ButterKnife;
+
 import com.acuteksolutions.uhotel.BaseApplication;
-import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.injector.component.ActivityComponent;
 import com.acuteksolutions.uhotel.injector.component.DaggerActivityComponent;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.github.pwittchen.reactivenetwork.library.ReactiveNetwork;
+import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
+import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.squareup.leakcanary.RefWatcher;
+
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import static dagger.internal.Preconditions.checkNotNull;
@@ -28,30 +28,29 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Created by Toan.IT
  * Date: 25/05/2016
  */
-public abstract class BaseActivity extends SupportActivity{
+public abstract class BaseActivity <T extends BasePresenter> extends SupportActivity implements BaseView{
   private CompositeSubscription mCompositeSubscription;
   private Subscription subscription;
   private ActivityComponent mActivityComponent;
-  private AlertDialog alertDialog;
-  private AlertDialog.Builder dialog;
-
+  @Inject
+  protected T mPresenter;
   @SuppressWarnings("unchecked")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(setLayoutResourceID());
-   /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-      StatusBarUtil.setTranslucent(this);
-    }*/
-    setButterKnife();
-    initbase();
-    injectDependencies();
-    initViews();
-    initData();
+      super.onCreate(savedInstanceState);
+      setContentView(setLayoutResourceID());
+      setButterKnife();
+      initbase();
+      injectDependencies();
+      if(mPresenter!=null)
+          mPresenter.attachView(this);
+      initViews();
+      initData();
   }
   private void setButterKnife() {
     ButterKnife.bind(this);
   }
+
   private void initbase() {
     if (mActivityComponent == null) {
       mActivityComponent= DaggerActivityComponent.builder()
@@ -74,17 +73,6 @@ public abstract class BaseActivity extends SupportActivity{
 
   protected abstract void injectDependencies();
 
-  protected void startActivityWithoutExtras(Class<?> clazz) {
-    Intent intent = new Intent(this, clazz);
-    startActivity(intent);
-  }
-
-  protected void startActivityWithExtras(Class<?> clazz, Bundle extras) {
-    Intent intent = new Intent(this, clazz);
-    intent.putExtras(extras);
-    startActivity(intent);
-
-  }
   void addFagment(@NonNull FragmentManager fragmentManager,@NonNull int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
@@ -121,7 +109,7 @@ public abstract class BaseActivity extends SupportActivity{
   @Override
   protected void onStart() {
     super.onStart();
-    Logger.d(TAG);
+      Logger.d(TAG);
        /* Logger.e(Utils.getDeviceIMEI(this));
         Logger.e(Utils.getDeviceName());
         Logger.e(Utils.getDeviceVersion());*/
@@ -132,36 +120,41 @@ public abstract class BaseActivity extends SupportActivity{
     if (this.mCompositeSubscription != null) {
       this.mCompositeSubscription.unsubscribe();
     }
+    if (mPresenter != null)
+      mPresenter.detachView();
     if(BaseApplication.getRefWatcher(this)!=null) {
       RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
       refWatcher.watch(this);
     }
   }
-  @Override
-  public String toString() {
-    return getClass().getSimpleName();
-  }
+    @Override
+    public String toString() {
+        return getClass().getSimpleName();
+    }
 
-  private void RXThreadConnect(){
-    addSubscription(ReactiveNetwork.observeInternetConnectivity(10000, "http://n3t.top/test/api/", 80,30000)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(isConnectedToInternet -> {
-          try {
-            if(!isConnectedToInternet) {
-              View dialogView = this.getLayoutInflater().inflate(R.layout.layout_no_connect, null);
-              dialog = new AlertDialog.Builder(BaseActivity.this,R.style.AppCompatAlertDialogStyle);
-              dialog.setCancelable(false);
-              dialog.setView(dialogView);
-              alertDialog = dialog.create();
-              alertDialog.show();
-            }else if(alertDialog!=null){
-              alertDialog.dismiss();
-              alertDialog.cancel();
-            }
-          }catch (Exception e){
-            e.printStackTrace();
-          }
-        }));
-  }
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void showEmptyView(String message) {
+
+    }
+
+    @Override
+    public void showEmptyViewAction(String message, View.OnClickListener onClickListener) {
+
+    }
+
 }
