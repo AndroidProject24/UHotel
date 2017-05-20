@@ -12,6 +12,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
+      app:bsb_max="10"
       app:bsb_bubble_color="@color/yellow"
       app:bsb_bubble_text_color="@color/colorPrimaryDark"
       app:bsb_second_track_color="@color/tab_select"

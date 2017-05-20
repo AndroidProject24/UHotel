@@ -1,12 +1,15 @@
 package com.acuteksolutions.uhotel.ui.adapter.concierge;
 
 import android.widget.ImageView;
+
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ParentalItem;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
 import java.util.List;
 
 public class ParentalAdapter extends BaseQuickAdapter<ParentalItem, BaseViewHolder> {
@@ -21,8 +24,14 @@ public class ParentalAdapter extends BaseQuickAdapter<ParentalItem, BaseViewHold
   @Override
   protected void convert(BaseViewHolder helper, ParentalItem data) {
     try {
-      helper.setText(R.id.txtName, data.getName());
-      ImageUtils.loadImage(glide,data.getResId(),(ImageView) helper.getView(R.id.imageView));
+        helper.setText(R.id.txtName, data.getName());
+        Logger.e("name"+data.getName()+"isLocked:"+data.isLocked());
+        ImageUtils.loadImage(glide,data.isLocked()?R.drawable.locked : R.drawable.opened,(ImageView) helper.getView(R.id.imageView));
+        helper.getView(R.id.llBackground).setBackgroundResource(data.isLocked()? R.drawable.concierge_parental_circle_select_focus : R.drawable.concierge_parental_circle_no_focus);
+        helper.getView(R.id.llBackground).setOnClickListener(v -> {
+            data.setLocked(!data.isLocked());
+            notifyItemChanged(helper.getAdapterPosition());
+        });
     }catch (Exception e){
       e.printStackTrace();
     }

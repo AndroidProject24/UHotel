@@ -68,7 +68,7 @@ public class ConciergeFragment extends BaseFragment{
       menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM, R.id.btn_menu).requestFocusFromTouch();
     }
     showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);*/
-    replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
+    //replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
   }
 
   private void showScreen(@NonNull View view,int index) {

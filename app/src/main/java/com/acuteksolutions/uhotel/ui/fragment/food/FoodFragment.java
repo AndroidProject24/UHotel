@@ -3,12 +3,14 @@ package com.acuteksolutions.uhotel.ui.fragment.food;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerFoodAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+
+import butterknife.BindView;
 
 public class FoodFragment extends BaseFragment{
   @BindView(R.id.tabLayout)
@@ -51,7 +53,6 @@ public class FoodFragment extends BaseFragment{
     TabPagerFoodAdapter tabPagerFoodAdapter=new TabPagerFoodAdapter(mContext,tabFoodDef,getChildFragmentManager());
     mViewPager.setAdapter(tabPagerFoodAdapter);
     mTabLayout.setupWithViewPager(mViewPager);
-    tabPagerFoodAdapter.getRegisteredFragment(mViewPager.getCurrentItem());
   }
 
   @Override

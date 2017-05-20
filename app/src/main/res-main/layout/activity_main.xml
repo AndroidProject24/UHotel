@@ -15,17 +15,17 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/action_bar_height">
+            android:layout_height="?attr/actionBarSize">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/action_bar_height"
+                android:layout_height="?attr/actionBarSize"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="40dp"
-                    android:layout_height="@dimen/action_bar_height" />
+                    android:layout_height="?attr/actionBarSize" />
 
                 <include layout="@layout/icon_tab" />
 
@@ -33,7 +33,7 @@
                     android:id="@+id/tab_main"
                     style="@style/MainTabLayoutStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/action_bar_height" />
+                    android:layout_height="?attr/actionBarSize" />
             </LinearLayout>
 
         </android.support.design.widget.AppBarLayout>

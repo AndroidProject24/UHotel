@@ -3,13 +3,15 @@ package com.acuteksolutions.uhotel.ui.fragment.movies;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+
+import butterknife.BindView;
 
 public class MoviesFragment extends BaseFragment<BasePresenter>{
   @BindView(R.id.tabLayout)
@@ -52,7 +54,6 @@ public class MoviesFragment extends BaseFragment<BasePresenter>{
     TabPagerMoviesAdapter tabPagerMoviesAdapter=new TabPagerMoviesAdapter(mContext,tabMoviesDef,getChildFragmentManager());
     mViewPager.setAdapter(tabPagerMoviesAdapter);
     mTabLayout.setupWithViewPager(mViewPager);
-    tabPagerMoviesAdapter.getRegisteredFragment(mViewPager.getCurrentItem());
   }
 
   @Override

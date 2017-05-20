@@ -14,8 +14,10 @@ import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.libs.loading.AVLoadingIndicatorView;
 import com.acuteksolutions.uhotel.mvp.presenter.LoginPresenter;
 import com.acuteksolutions.uhotel.mvp.view.LoginView;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -45,7 +47,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     TextInputLayout mLayoutPass;
     @BindView(R.id.btn_login)
     AppCompatButton mBtnLogin;
-
+    @BindView(R.id.loading_view)
+    AVLoadingIndicatorView loading_view;
+    @BindView(R.id.txt_error)
+    TextView txtError;
     public static void start(Context context) {
         Intent starter = new Intent(context, LoginActivity.class);
         context.startActivity(starter);
@@ -131,5 +136,20 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             mLayoutPass.setErrorEnabled(false);
             mPresenter.login(mEtPass.getText().toString());
         }
+    }
+
+    @Override
+    public void showError(String message) {
+        txtError.setText(Preconditions.checkNotNull(message));
+    }
+
+    @Override
+    public void showLoading() {
+        loading_view.smoothToShow();
+    }
+
+    @Override
+    public void hideLoading() {
+        loading_view.smoothToHide();
     }
 }

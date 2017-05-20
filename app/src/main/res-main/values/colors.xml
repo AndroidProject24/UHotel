@@ -2,10 +2,10 @@
 <resources>
   <color name="rippelColor">#FFFFFF</color>
   <color name="primary_dark">#00000000</color>
-  <color name="backgroundPrimary">#FFFFFF</color>
-  <color name="colorPrimary">#FFFFFF</color>
-  <color name="colorPrimaryDark">#FFFFFF</color>
-  <color name="colorAccent">#FFFFFF</color>
+  <color name="backgroundPrimary">#000000</color>
+  <color name="colorPrimary">#000000</color>
+  <color name="colorPrimaryDark">#000000</color>
+  <color name="colorAccent">#000000</color>
   <color name="background_item">#000000</color> <!-- 12% -->
   <color name="white">#FFFFFF</color>
   <color name="black">#000000</color>

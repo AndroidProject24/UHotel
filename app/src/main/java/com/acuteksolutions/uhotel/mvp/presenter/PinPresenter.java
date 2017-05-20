@@ -12,67 +12,70 @@ import javax.inject.Inject;
  * Date: 06/06/2016
  */
 public class PinPresenter extends BasePresenter<PinView> {
-  private Repository mRepository;
-  private PreferencesHelper mPreferencesHelper;
-  @Inject PinPresenter(Repository restData, PreferencesHelper preferencesHelper){
-    this.mRepository=restData;
-    this.mPreferencesHelper=preferencesHelper;
-  }
+    private Repository mRepository;
+    private PreferencesHelper mPreferencesHelper;
+    @Inject PinPresenter(Repository restData, PreferencesHelper preferencesHelper){
+        this.mRepository=restData;
+        this.mPreferencesHelper=preferencesHelper;
+    }
 
-  public void verifyPin(String pin) {
-    addSubscribe(mRepository.verifyPin(pin)
-        .doOnSubscribe(() -> getMvpView().showLoading())
-        .doOnCompleted(() -> getMvpView().hideLoading())
-        .subscribe(new DefaultObserver<Boolean>() {
-          @Override
-          public void onError(Throwable e) {
-            e.printStackTrace();
-            getMvpView().showError(e.getMessage());
-          }
+    public void verifyPin(String pin) {
+        getMvpView().showLoading();
+        addSubscribe(mRepository.verifyPin(pin)
+                .subscribe(new DefaultObserver<Boolean>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        getMvpView().hideLoading();
+                        getMvpView().showError(e.getMessage());
+                    }
 
-          @Override
-          public void onNext(Boolean aBoolean) {
-            getMvpView().verifyPin(aBoolean);
-          }
-        }));
-  }
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        getMvpView().hideLoading();
+                        getMvpView().verifyPin(aBoolean);
+                    }
+                }));
+    }
 
-  public void changePin(String pinNew,String pinOld) {
-    addSubscribe(mRepository.changePin(pinNew,pinOld)
-        .doOnSubscribe(() -> getMvpView().showLoading())
-        .doOnCompleted(() -> getMvpView().hideLoading())
-        .subscribe(new DefaultObserver<Boolean>() {
-          @Override
-          public void onError(Throwable e) {
-            e.printStackTrace();
-            getMvpView().showError(e.getMessage());
-          }
+    public void changePin(String pinNew,String pinOld) {
+        getMvpView().showLoading();
+        addSubscribe(mRepository.changePin(pinNew,pinOld)
+                .subscribe(new DefaultObserver<Boolean>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        getMvpView().hideLoading();
+                        getMvpView().showError(e.getMessage());
+                    }
 
-          @Override
-          public void onNext(Boolean aBoolean) {
-            getMvpView().changePin(aBoolean);
-          }
-        }));
-  }
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        getMvpView().hideLoading();
+                        getMvpView().changePin(aBoolean);
+                    }
+                }));
+    }
 
-  public void saveSetting(String data,String pin) {
-    addSubscribe(mRepository.saveSetting(data,pin)
-        .doOnSubscribe(() -> getMvpView().showLoading())
-        .doOnCompleted(() -> getMvpView().hideLoading())
-        .subscribe(new DefaultObserver<Boolean>() {
-          @Override
-          public void onError(Throwable e) {
-            e.printStackTrace();
-            getMvpView().showError(e.getMessage());
-          }
+    public void saveSetting(String data,String pin) {
+        getMvpView().showLoading();
+        addSubscribe(mRepository.saveSetting(data,pin)
+                .subscribe(new DefaultObserver<Boolean>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        getMvpView().hideLoading();
+                        getMvpView().showError(e.getMessage());
+                    }
 
-          @Override
-          public void onNext(Boolean aBoolean) {
-            getMvpView().saveSetting(aBoolean);
-          }
-        }));
-  }
-  public PreferencesHelper getPreferencesHelper(){
-    return mPreferencesHelper;
-  }
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        getMvpView().hideLoading();
+                        getMvpView().saveSetting(aBoolean);
+                    }
+                }));
+    }
+    public PreferencesHelper getPreferencesHelper(){
+        return mPreferencesHelper;
+    }
 }

@@ -169,7 +169,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       TabPagerMainAdapter tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
       viewPagerMain.setAdapter(tabPagerAdapter);
       tabMain.setupWithViewPager(viewPagerMain);
-      tabPagerAdapter.getRegisteredFragment(viewPagerMain.getCurrentItem());
     }catch (Exception e){
       e.printStackTrace();
     }
