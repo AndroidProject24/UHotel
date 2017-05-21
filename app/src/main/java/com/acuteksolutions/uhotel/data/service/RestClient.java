@@ -44,14 +44,14 @@ public class RestClient {
     }
 
     private static LoggingInterceptor makeLoggingInterceptor() {
-      return new LoggingInterceptor.Builder()
-              .loggable(BuildConfig.DEBUG)
-              .setLevel(Level.BASIC)
-              .log(Log.INFO)
-              .request("Request")
-              .response("Response")
-              .addHeader("version", BuildConfig.VERSION_NAME)
-              .build();
+        return new LoggingInterceptor.Builder()
+                .loggable(BuildConfig.DEBUG)
+                .setLevel(Level.BASIC)
+                .log(Log.INFO)
+                .request("Request")
+                .response("Response")
+                .addHeader("version", BuildConfig.VERSION_NAME)
+                .build();
     }
 
 }

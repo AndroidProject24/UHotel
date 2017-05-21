@@ -25,8 +25,6 @@
 package com.acuteksolutions.uhotel.libs.materialdrawer.adapter;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -38,10 +36,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerHeaderItem;
 import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerItem;
 import com.acuteksolutions.uhotel.libs.materialdrawer.theme.DrawerTheme;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,24 +74,15 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
 
             final HeaderViewHolder viewHolder = new HeaderViewHolder(convertView);
 
-            if (drawerTheme.isLightTheme()) {
-                viewHolder.getHeaderDivider().setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.md_divider_light));
-            } else {
-                viewHolder.getHeaderDivider().setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.md_divider_dark));
-            }
-
             DrawerHeaderItem drawerHeaderItem = (DrawerHeaderItem) drawerItem;
 
 
-            viewHolder.getHeaderRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
+           // viewHolder.getHeaderRoot().setBackgroundColor(drawerTheme.getBackgroundColor());
 
             if (drawerHeaderItem.hasTitle()) {
                 viewHolder.getHeaderTitleRoot().setVisibility(View.VISIBLE);
                 viewHolder.getHeaderRoot().setPadding(0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin), 0, 0);
                 viewHolder.getHeaderTitle().setText(drawerHeaderItem.getTitle());
-                viewHolder.getHeaderTitle().setTextColor(drawerTheme.getTextColorSecondary());
             } else {
                 viewHolder.getHeaderTitleRoot().setVisibility(View.GONE);
                 viewHolder.getHeaderRoot().setPadding(0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin), 0, getContext().getResources().getDimensionPixelSize(R.dimen.md_divider_margin));
@@ -131,40 +122,13 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
             if (drawerItem.hasImage()) {
                 viewHolder.getImageView().setVisibility(View.VISIBLE);
                 viewHolder.getImageView().setImageDrawable(drawerItem.getImage());
-
-                int imageSize;
-
-                if (drawerItem.getImageMode() == DrawerItem.AVATAR) {
-                    imageSize = getContext().getResources().getDimensionPixelSize(R.dimen.md_avatar_size);
-                } else {
-                    imageSize = getContext().getResources().getDimensionPixelSize(R.dimen.md_icon_size);
-
-                    if (iconTint != -1 && drawerItem.getImageMode() == DrawerItem.ICON) {
-                        viewHolder.getImageView().setColorFilter(iconTint, PorterDuff.Mode.SRC_IN);
-                    } else {
-                        viewHolder.getImageView().getDrawable().clearColorFilter();
-                    }
-                }
-
-                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) viewHolder.getImageView().getLayoutParams();
-                layoutParams.height = imageSize;
-                layoutParams.width = getContext().getResources().getDimensionPixelSize(R.dimen.md_baseline_content) - getContext().getResources().getDimensionPixelSize(R.dimen.md_baseline);
-
-                int imagePaddingEnd = getContext().getResources().getDimensionPixelSize(R.dimen.md_baseline_content) - getContext().getResources().getDimensionPixelSize(R.dimen.md_baseline) - imageSize;
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    viewHolder.getImageView().setPaddingRelative(0, 0, imagePaddingEnd, 0);
-                } else {
-                    viewHolder.getImageView().setPadding(0, 0, imagePaddingEnd, 0);
-                }
-
             } else {
                 viewHolder.getImageView().setVisibility(View.GONE);
             }
 
             if (drawerItem.hasTextPrimary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
-                viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
+                //viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
                 if (drawerItem.hasTextSecondary() && (drawerItem.getTextMode() == DrawerItem.TWO_LINE || drawerItem.getTextMode() == DrawerItem.THREE_LINE)) {
                     viewHolder.getTextViewSecondary().setText(drawerItem.getTextSecondary());
@@ -182,7 +146,7 @@ public class DrawerAdapter extends ArrayAdapter<DrawerItem> {
                 }
             } else if (drawerItem.hasTextSecondary()) {
                 viewHolder.getTextViewPrimary().setText(drawerItem.getTextPrimary());
-                viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
+               // viewHolder.getTextViewPrimary().setTextColor(textColorPrimary);
 
                 viewHolder.getTextViewSecondary().setVisibility(View.GONE);
             }

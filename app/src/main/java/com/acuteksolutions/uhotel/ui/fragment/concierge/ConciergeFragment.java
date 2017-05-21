@@ -46,14 +46,13 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initViews() {
-    recycler_menu.setLayoutManager(new LinearLayoutManager(mContext));
-    recycler_menu.setHasFixedSize(true);
     String[] arrName = getResources().getStringArray(R.array.concierge_menu_array);
     List<String> listMenu= Arrays.asList(Preconditions.checkNotNull(arrName));
     menuAdapter=new MenuAdapter(listMenu);
     menuAdapter.openLoadAnimation();
     recycler_menu.setAdapter(menuAdapter);
-    menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view,position));
+    recycler_menu.setLayoutManager(new LinearLayoutManager(mContext));
+    recycler_menu.setHasFixedSize(true);
   }
 
   @Override
@@ -63,12 +62,8 @@ public class ConciergeFragment extends BaseFragment{
 
   @Override
   protected void initData() {
-  /*  if(menuAdapter.getItemCount()>0) {
-      menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM, R.id.btn_menu).requestFocus();
-      menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM, R.id.btn_menu).requestFocusFromTouch();
-    }
-    showScreen(menuAdapter.getViewByPosition(ConciergeMenuDef.ROOM,R.id.btn_menu),ConciergeMenuDef.ROOM);*/
-    //replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
+      menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view,position));
+      new android.os.Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu,ConciergeMenuDef.ROOM, R.id.btn_menu),0),500);
   }
 
   private void showScreen(@NonNull View view,int index) {

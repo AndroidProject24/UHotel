@@ -74,8 +74,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected void initData() {
-        if(mPresenter.getmPreferencesHelper().getJsonLogin()!=null)
+        if(mPresenter.getmPreferencesHelper().getJsonLogin()!=null) {
+            finish();
             MainActivity.start(this);
+        }
     }
 
     @Override
@@ -85,6 +87,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void loginSucess() {
+        finish();
         MainActivity.start(this);
     }
 

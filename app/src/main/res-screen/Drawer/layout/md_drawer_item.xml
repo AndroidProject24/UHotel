@@ -39,15 +39,16 @@
         android:paddingLeft="@dimen/md_baseline"
         android:paddingRight="@dimen/md_baseline"
         android:paddingStart="@dimen/md_baseline"
-        android:paddingTop="@dimen/md_list_item_margin">
+        android:paddingTop="@dimen/md_list_item_margin"
+        android:layout_marginLeft="30dp">
 
         <ImageView
             android:id="@id/mdImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
             android:clickable="false"
             android:cropToPadding="false"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
@@ -60,13 +61,15 @@
             <TextView
                 android:id="@id/mdTextPrimary"
                 style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_marginLeft="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:layout_marginLeft="40dp"
                 android:ellipsize="marquee"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="start"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize20"
                 android:textAlignment="textStart"
                 tools:ignore="UnusedAttribute"
                 android:maxLines="1" />
@@ -82,7 +85,8 @@
                 android:gravity="start"
                 android:maxLines="2"
                 android:textAlignment="textStart"
-                tools:ignore="UnusedAttribute" />
+                tools:ignore="UnusedAttribute"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

@@ -1,5 +1,8 @@
 package com.acuteksolutions.uhotel.mvp.model.conciege;
 
+import com.acuteksolutions.uhotel.ui.adapter.concierge.RoomAdapter;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -8,36 +11,53 @@ import io.realm.annotations.PrimaryKey;
  * Email: huynhvantoan.itc@gmail.com
  */
 
-public class Room extends RealmObject {
-  @PrimaryKey
-  private String name;
+public class Room extends RealmObject implements MultiItemEntity {
 
-  @Override public String toString() {
-    return "Room{" + "name='" + name + '\'' + ", amount=" + amount + '}';
-  }
+    public String getName() {
+        return name;
+    }
 
-  private int amount;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public Room(){}
+    public int getValue() {
+        return value;
+    }
 
-  public Room(String name) {
-    this.name = name;
-  }
+    public void setValue(int value) {
+        this.value = value;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public int getPosition() {
+        return position;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
-  public int getAmount() {
-    return amount;
-  }
+    public Room(String name, int value, int position) {
+        this.name = name;
+        this.value = value;
+        this.position = position;
+    }
 
-  public void setAmount(int amount) {
-    this.amount = amount;
-  }
+    public Room(String name) {
+        this.name = name;
+    }
 
+    @PrimaryKey
+    private String name;
+
+    private int value;
+
+    private int position;
+
+    public Room(){}
+
+    @Override
+    public int getItemType() {
+        return RoomAdapter.TYPE_ROOM;
+    }
 }

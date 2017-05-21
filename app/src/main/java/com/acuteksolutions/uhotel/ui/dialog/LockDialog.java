@@ -16,17 +16,20 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
 import com.acuteksolutions.uhotel.mvp.view.PinView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.utils.Preconditions;
+
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Toan.IT on 5/5/17.

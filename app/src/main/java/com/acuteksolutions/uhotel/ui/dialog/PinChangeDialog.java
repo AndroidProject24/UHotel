@@ -12,16 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
 import com.acuteksolutions.uhotel.mvp.view.PinView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.utils.Preconditions;
+
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by Toan.IT on 5/5/17.
@@ -104,7 +107,9 @@ public class PinChangeDialog extends DialogFragment implements PinView {
   }
 
   @Override public void changePin(boolean checkChangePin) {
-
+      this.dismiss();
+      if(!checkChangePin)
+          showError("Error");
   }
 
   @Override public void saveSetting(boolean checkSave) {

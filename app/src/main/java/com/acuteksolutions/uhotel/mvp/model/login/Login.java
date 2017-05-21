@@ -1,5 +1,7 @@
 package com.acuteksolutions.uhotel.mvp.model.login;
 
+import com.google.gson.Gson;
+
 /**
  * Created by Toan.IT
  * Date: 12/06/2016
@@ -189,5 +191,17 @@ public class Login {
             + regionId
             + '}';
     }
+
+
+    public SettingInfo getSettingObject() {
+        try {
+            String result = setting.replace("\\", "");
+            return new Gson().fromJson(result, SettingInfo.class);
+        } catch (Exception exp) {
+            return new SettingInfo();
+        }
+    }
+
+    public SettingInfo settingObject;
 
 }

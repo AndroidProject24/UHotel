@@ -32,25 +32,25 @@
     <View
         android:id="@id/mdDivider"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/md_divider_height" />
+        android:layout_height="0.5dp"
+        android:background="@color/tab_select"/>
 
     <LinearLayout
         android:id="@id/mdHeaderTitleRoot"
         android:layout_width="match_parent"
         android:layout_height="@dimen/md_list_item_height"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp">
 
         <TextView
             android:id="@id/mdHeaderTitle"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="start"
+            android:gravity="center"
             android:paddingLeft="@dimen/md_baseline"
             android:paddingRight="@dimen/md_baseline"
-            android:textAlignment="textStart"
+            android:textColor="@color/white"
             tools:ignore="UnusedAttribute"
             android:maxLines="1" />
 

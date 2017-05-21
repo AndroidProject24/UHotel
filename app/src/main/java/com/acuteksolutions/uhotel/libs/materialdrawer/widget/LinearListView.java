@@ -234,10 +234,12 @@ public class LinearListView extends IcsLinearLayout {
 
         for (int i = 0; i < mAdapter.getCount(); i++) {
             View child = mAdapter.getView(i, null, this);
-            if (mAreAllItemsSelectable || mAdapter.isEnabled(i)) {
-                child.setOnClickListener(new InternalOnClickListener(i));
+            if(child!=null) {
+                if (mAreAllItemsSelectable || mAdapter.isEnabled(i)) {
+                    child.setOnClickListener(new InternalOnClickListener(i));
+                }
+                addViewInLayout(child, -1, child.getLayoutParams(), true);
             }
-            addViewInLayout(child, -1, child.getLayoutParams(), true);
         }
     }
 

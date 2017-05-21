@@ -8,6 +8,7 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    <item name="android:windowBackground">@color/black</item>
   </style>
   <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
     <item name="color">@android:color/white</item>
@@ -71,7 +72,7 @@
     <item name="minHeight">48dip</item>
     <item name="maxHeight">48dip</item>
     <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
-    <item name="indicatorColor">@color/primary_dark</item>
+    <item name="indicatorColor">@color/tab_select</item>
   </style>
   <!--STYLE CONFIG-->
   <style name="style_base">

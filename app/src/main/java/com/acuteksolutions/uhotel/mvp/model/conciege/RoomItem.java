@@ -1,3 +1,4 @@
+/*
 package com.acuteksolutions.uhotel.mvp.model.conciege;
 
 import android.os.Parcel;
@@ -74,3 +75,4 @@ public class RoomItem implements Parcelable {
   };
 }
 
+*/

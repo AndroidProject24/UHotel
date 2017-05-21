@@ -155,7 +155,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         findViews();
 
         setClipToPadding(false);
-        setInsetForeground(new ColorDrawable(ContextCompat.getColor(getContext(), R.color.md_inset_foreground)));
+       // setInsetForeground(new ColorDrawable(ContextCompat.getColor(getContext(), R.color.md_inset_foreground)));
 
         setOnInsetsCallback(this);
 
@@ -216,7 +216,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
         });
 
         frameLayoutProfile.setVisibility(GONE);
-        layout.setPadding(0, statusBarHeight, 0, 0);
+        layout.setPadding(0, 25, 0, 0);
         updateListVisibility();
     }
 
@@ -322,7 +322,7 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
 
         if (mProfileAdapter.getCount() > 0) {
             int aspectRatioHeight = Math.round(getLayoutParams().width / 16 * 9) - statusBarHeight;
-            int minHeight = getResources().getDimensionPixelSize(R.dimen.md_baseline);
+            /*int minHeight = getResources().getDimensionPixelSize(R.dimen.md_baseline);
 
             if (mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasAvatar()) {
                 minHeight += getResources().getDimensionPixelSize(R.dimen.md_big_avatar_size);
@@ -333,14 +333,14 @@ public class DrawerView extends ScrimInsetsFrameLayout implements ScrimInsetsFra
             if (mProfileAdapter.getItem(0) != null && mProfileAdapter.getItem(0).hasDescription()) {
                 minHeight += getResources().getDimensionPixelSize(R.dimen.md_baseline);
             }
-
-            frameLayoutProfile.getLayoutParams().height = Math.max(aspectRatioHeight, minHeight) + statusBarHeight;
+*/
+           // frameLayoutProfile.getLayoutParams().height = Math.max(aspectRatioHeight, minHeight) + statusBarHeight;
             frameLayoutProfile.setVisibility(VISIBLE);
-            relativeLayoutProfileContent.getLayoutParams().height = Math.max(aspectRatioHeight, minHeight);
+           // relativeLayoutProfileContent.getLayoutParams().height = Math.max(aspectRatioHeight, minHeight);
             layout.setPadding(0, 0, 0, 0);
         } else {
             frameLayoutProfile.setVisibility(GONE);
-            layout.setPadding(0, statusBarHeight, 0, 0);
+            layout.setPadding(0, 25, 0, 0);
         }
     }
 

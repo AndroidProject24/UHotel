@@ -9,8 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
@@ -21,8 +20,12 @@ import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.LiveTVAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import java.util.Calendar;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements LiveTvView {
   @BindView(R.id.recycler_main) RecyclerView recyclerMain;
@@ -110,9 +113,17 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
       e.printStackTrace();
     }
   }
+
   @Override public void showEmty() {
 
   }
 
+  private Channel getChannelInfoOnId(List<Channel> channelInfoList, int channelId) {
+    for (Channel channelInfo : channelInfoList) {
+      if (channelInfo.getChannelId() == channelId)
+        return channelInfo;
+    }
+    return null;
+  }
 }
 

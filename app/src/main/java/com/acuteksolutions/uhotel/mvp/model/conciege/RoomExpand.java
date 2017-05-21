@@ -1,35 +1,41 @@
 package com.acuteksolutions.uhotel.mvp.model.conciege;
 
-import com.acuteksolutions.uhotel.libs.expandablerecyclerView.models.ExpandableGroup;
-import java.util.List;
+import com.acuteksolutions.uhotel.ui.adapter.concierge.RoomAdapter;
+import com.chad.library.adapter.base.entity.AbstractExpandableItem;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class RoomExpand extends ExpandableGroup<RoomItem> {
+public class RoomExpand extends AbstractExpandableItem<Room> implements MultiItemEntity {
+  private String title;
+  private int total;
 
-  private int iconResId;
-
-  public RoomExpand(String title, List<RoomItem> items, int iconResId) {
-    super(title, items);
-    this.iconResId = iconResId;
+  public RoomExpand( String title, int total) {
+    this.total = total;
+    this.title = title;
   }
 
-  public int getIconResId() {
-    return iconResId;
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public int getTotal() {
+    return total;
+  }
+
+  public void setTotal(int total) {
+    this.total = total;
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof RoomExpand)) return false;
-
-    RoomExpand roomExpand = (RoomExpand) o;
-
-    return getIconResId() == roomExpand.getIconResId();
-
+  public int getItemType() {
+    return RoomAdapter.TYPE_EXPANDABLE;
   }
 
   @Override
-  public int hashCode() {
-    return getIconResId();
+  public int getLevel() {
+    return 0;
   }
 }
-

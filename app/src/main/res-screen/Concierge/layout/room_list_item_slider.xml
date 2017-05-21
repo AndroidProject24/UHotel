@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
 
-  <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
-      android:id="@+id/seekBar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      app:bsb_max="10"
-      app:bsb_bubble_color="@color/yellow"
-      app:bsb_bubble_text_color="@color/colorPrimaryDark"
-      app:bsb_second_track_color="@color/tab_select"
-      app:bsb_thumb_radius="9dp"
-      app:bsb_track_color="@color/room_bg_track"
-      />
+    <com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:bsb_bubble_color="@color/yellow"
+        app:bsb_bubble_text_color="@color/colorPrimaryDark"
+        app:bsb_max="10"
+        app:bsb_second_track_color="@color/tab_select"
+        app:bsb_thumb_radius="9dp"
+        app:bsb_track_color="@color/room_bg_track" />
 
-  <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/txt_name"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginTop="10dp"
-      android:layout_marginLeft="16dp"
-      android:gravity="center_vertical"
-      tools:text="Artist Name"
-      android:textSize="@dimen/textSize24"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_toRightOf="@+id/seekBar"
+        android:gravity="center_vertical"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize24" />
 
-</LinearLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/textSize24"
+        tools:text="Artist Name" />
+
+</RelativeLayout>

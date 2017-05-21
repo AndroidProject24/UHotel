@@ -7,17 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Channel implements Comparable<Channel>, Parcelable {
-    public static final Creator<Channel> CREATOR = new Creator<Channel>() {
-        @Override
-        public Channel createFromParcel(Parcel source) {
-            return new Channel(source);
-        }
-
-        @Override
-        public Channel[] newArray(int size) {
-            return new Channel[size];
-        }
-    };
     //use for DTV player
     public int dbId;
     public int serviceType;
@@ -180,6 +169,17 @@ public class Channel implements Comparable<Channel>, Parcelable {
         dest.writeList(this.programs);
     }
 
+    public static final Creator<Channel> CREATOR = new Creator<Channel>() {
+        @Override
+        public Channel createFromParcel(Parcel source) {
+            return new Channel(source);
+        }
+
+        @Override
+        public Channel[] newArray(int size) {
+            return new Channel[size];
+        }
+    };
 
     @Override public String toString() {
         return "Channel{"

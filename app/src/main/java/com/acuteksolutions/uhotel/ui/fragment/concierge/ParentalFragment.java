@@ -13,18 +13,17 @@ import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.annotation.ParentalItemDef;
 import com.acuteksolutions.uhotel.annotation.ParentalPinDef;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ParentalItem;
+import com.acuteksolutions.uhotel.mvp.model.login.SettingInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.ParentalAdapter;
 import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinVerifyDialog;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import com.acuteksolutions.uhotel.utils.PageLockState;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,10 +71,11 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
   }
 
   @Override protected void initData() {
+    SettingInfo settingInfo = Preconditions.checkNotNull(mPresenter.getPreferencesHelper().getJsonLogin()).getSettingObject();
     List<ParentalItem> arrayList = new ArrayList<>();
     TabMainDef tabMainDef = new TabMainDef();
     for (int i = 0; i < tabMainDef.tabSize(); i++) {
-      boolean isLocked = getValueSetting(i);
+      boolean isLocked = getValueSetting(i,settingInfo);
       arrayList.add(new ParentalItem(isLocked, getString(tabMainDef.getTab(i)), isLocked ? R.drawable.locked : R.drawable.opened));
     }
     parentalAdapter=new ParentalAdapter(glide,arrayList);
@@ -112,24 +112,21 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
     else btnEnableAll.setText("Enable All");
   }
 
-  private boolean getValueSetting(int pos) {
-    JSONObject jsonObject = PageLockState.getInstance().getPageLock();
-    try {
-      switch (pos) {
-        case 0:
-          return jsonObject.getBoolean("watchTvState");
-        case 1:
-          return jsonObject.getBoolean("moviesState");
-        case 2:
-          return jsonObject.getBoolean("conciergeState");
-        case 3:
-          return jsonObject.getBoolean("fnaState");
-        case 4:
-          return jsonObject.getBoolean("roomControlState");
+  private boolean getValueSetting(int pos,SettingInfo settingInfo) {
+      if(settingInfo!=null) {
+          switch (pos) {
+              case 0:
+                  return settingInfo.isWatchTvState();
+              case 1:
+                  return settingInfo.isMoviesState();
+              case 2:
+                  return settingInfo.isConciergeState();
+              case 3:
+                  return settingInfo.isFnaState();
+              case 4:
+                  return settingInfo.isRoomControlState();
+          }
       }
-    } catch (JSONException e) {
-      e.printStackTrace();
-    }
     return false;
   }
 
@@ -161,6 +158,7 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
                 break;
             }
           }
+          Logger.e(jsonObject.toString());
           mPresenter.saveSetting(data.getStringExtra(BundleDef.BUNDLE_KEY),jsonObject.toString());
         }
       }

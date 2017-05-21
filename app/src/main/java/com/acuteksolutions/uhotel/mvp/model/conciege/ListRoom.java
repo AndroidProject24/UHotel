@@ -10,34 +10,44 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class ListRoom extends RealmObject {
-  @Override public String toString() {
-    return "ListRoom{" + "name='" + name + '\'' + ", detailList=" + detailList + '}';
-  }
-  @PrimaryKey
-  private String name;
-  private RealmList<Room> detailList;
+    @PrimaryKey
+    private String name;
 
-  public ListRoom(){}
+    private int total;
+    private RealmList<Room> detailList;
 
-  public ListRoom(String name, RealmList<Room> detailList) {
-    this.name = name;
-    this.detailList = detailList;
-  }
+    public ListRoom(){}
 
-  public String getName() {
-    return name;
-  }
+    public ListRoom(String name, RealmList<Room> detailList) {
+        this.name = name;
+        this.detailList = detailList;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public RealmList<Room> getDetailList() {
-    return detailList;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setDetailList(RealmList<Room> detailList) {
-    this.detailList = detailList;
-  }
+    public int getTotal() {
+        return total;
+    }
 
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public RealmList<Room> getDetailList() {
+        return detailList;
+    }
+
+    public void setDetailList(RealmList<Room> detailList) {
+        this.detailList = detailList;
+    }
+
+    @Override public String toString() {
+        return "ListRoom{" + "name='" + name + '\'' + ", detailList=" + detailList + '}';
+    }
 }

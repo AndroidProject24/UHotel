@@ -109,39 +109,40 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     //drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.transparent));
     drawerLayout.addDrawerListener(drawerToggle);
     drawerLayout.closeDrawer(mDrawer);
+
+    mDrawer.addDivider();
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_concierge))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_concierge))
         .setTextPrimary(getString(TabMainDef.CONCIERGE)));
     mDrawer.addDivider();
 
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_livetv))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_livetv))
         .setTextPrimary(getString(TabMainDef.LIVETV)));
     mDrawer.addDivider();
 
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_movies))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_movies))
         .setTextPrimary(getString(TabMainDef.MOVIES)));
     mDrawer.addDivider();
 
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_food_activities))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_food_activities))
         .setTextPrimary(getString(TabMainDef.FOOD)));
     mDrawer.addDivider();
 
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_room_control))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_room_control))
         .setTextPrimary(getString(TabMainDef.ROOMCONTROL)));
     mDrawer.addDivider();
 
     mDrawer.addItems(new DrawerItem()
-        .setRoundedImage((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.menu_settings))
+        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_settings))
         .setTextPrimary(getString(R.string.home_menu_setting)));
 
     mDrawer.addProfile(new DrawerProfile()
         .setId(1)
         .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_exception))
-        .setBackground(ContextCompat.getDrawable(this, R.drawable.ic_error))
         .setName(getString(R.string.app_name))
     );
     mDrawer.setOnItemClickListener((item, id, position) -> {

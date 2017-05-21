@@ -125,17 +125,21 @@ dependencies {
   //----- Network
   compile networkDependencies.retrofit
   compile networkDependencies.okHttp
-  compile networkDependencies.okHttpLogging
   compile networkDependencies.retrofitGsonConverter
   compile networkDependencies.retrofitRxJavaAdapter
   compile networkDependencies.glide
   compile networkDependencies.reactivenetwork
+  compile (networkDependencies.okHttpLogging) {
+    exclude group: 'org.json', module: 'json'
+  }
 
   //App
   compile appDependencies.baseRecyclerView
   compile appDependencies.exoPlayer
   compile appDependencies.exoPlayerOkhttp
-
+  compile (appDependencies.statusBarCompat) {
+    exclude group: 'com.android.support'
+  }
   //developmentDependencies
   debugCompile   developmentDependencies.leakCanary
   releaseCompile developmentDependencies.leakCanaryRelease
@@ -143,19 +147,16 @@ dependencies {
   debugCompile   developmentDependencies.blockCanaryEx
   releaseCompile developmentDependencies.blockCanaryExRelease
   testCompile    developmentDependencies.blockCanaryExRelease
-  compile ('com.github.niorgai:StatusBarCompat:2.1.3', {
-    exclude group: 'com.android.support'
-  })
 }
 
 @SuppressWarnings("GroovyAssignabilityCheck")
 def configApkFileName(variant, defaultConfig) {
-  /*variant.outputs.each { output ->
+  variant.outputs.each { output ->
     if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
       def name = "${rootDir}/apk/Debug.apk"
       output.outputFile = file(name)
     }
-  }*/
+  }
 //  variant.outputs.each { output ->
 //    if (variant.buildType.name == android.buildTypes.debug.name) {
 //      if (output.zipAlign) {

@@ -4,17 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Stream implements Parcelable {
-    public static final Creator<Stream> CREATOR = new Creator<Stream>() {
-        @Override
-        public Stream createFromParcel(Parcel source) {
-            return new Stream(source);
-        }
-
-        @Override
-        public Stream[] newArray(int size) {
-            return new Stream[size];
-        }
-    };
     private String src;
     private String provider;
     private String protocolStack;
@@ -79,6 +68,18 @@ public class Stream implements Parcelable {
         dest.writeString(this.profiles);
         dest.writeString(this.capabilities);
     }
+
+    public static final Creator<Stream> CREATOR = new Creator<Stream>() {
+        @Override
+        public Stream createFromParcel(Parcel source) {
+            return new Stream(source);
+        }
+
+        @Override
+        public Stream[] newArray(int size) {
+            return new Stream[size];
+        }
+    };
 
     @Override public String toString() {
         return "Stream{"
