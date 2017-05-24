@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:orientation="horizontal">
+
+    <!--<android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:button="@drawable/checkbox_selector" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="Toan device"
+        android:textColor="@color/black" />
+-->
+</LinearLayout>

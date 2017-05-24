@@ -35,6 +35,7 @@ import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerItem;
 import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerProfile;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
+import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import butterknife.BindView;
@@ -151,6 +152,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
           Logger.e("position="+position);
           if(position<2)
               viewPagerMain.setCurrentItem(1);
+          else if(position==6)
+            replaceFagment(getSupportFragmentManager(),R.id.fragment,SettingFragment.newInstance());
           else
               viewPagerMain.setCurrentItem(position/2+1);
       }else{

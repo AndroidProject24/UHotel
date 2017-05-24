@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 
+import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
+import com.acuteksolutions.uhotel.utils.GsonGenericList;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,6 +20,7 @@ public class PreferencesHelper {
     private static SharedPreferences mPref;
     private static final String PREF_FILE_NAME = "PREF_APP_NAME";
     private static final String PREF_USER = "PREF_USER_LOGIN";
+    public static final String PREF_CHANNEL= "PREF_CHANNEL";
     @Inject
     public PreferencesHelper(Context context) {
         mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -35,4 +41,33 @@ public class PreferencesHelper {
         }
         return null;
     }
+
+    public void putJsonChannel(List<Channel> channel) {
+        mPref.edit().putString(PREF_CHANNEL, new Gson().toJson(channel)).apply();
+    }
+
+    @Nullable
+    public List<Channel> getJsonChannel() {
+        String data = mPref.getString(PREF_CHANNEL, null);
+        if (data != null) {
+            return new Gson().fromJson(data, new GsonGenericList(Channel.class));
+        }
+        return null;
+    }
+
+    public void putListObject(String key, List<?> listObject) {
+        Gson gson = new Gson();
+        mPref.edit().putString(key, gson.toJson(listObject)).apply();
+    }
+
+    public <T> ArrayList<T> getListObject(String key, Class<T> classType) {
+        try {
+            String result = mPref.getString(key, "");
+            Gson gson = new Gson();
+            return gson.fromJson(result, new GsonGenericList<T>(classType));
+        } catch (Exception exp) {
+            return null;
+        }
+    }
+
 }

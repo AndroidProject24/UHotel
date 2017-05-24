@@ -99,9 +99,9 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
 
   protected abstract void injectDependencies();
 
-  protected abstract void initViews();
-
   protected abstract int setLayoutResourceID();
+
+  protected abstract void initViews();
 
   protected abstract void initData();
 

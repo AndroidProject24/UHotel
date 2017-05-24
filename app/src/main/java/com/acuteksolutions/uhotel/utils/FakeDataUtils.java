@@ -1,16 +1,23 @@
 package com.acuteksolutions.uhotel.utils;
 
 import android.content.Context;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ListRoom;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
-import io.realm.Realm;
-import io.realm.RealmList;
-import java.util.ArrayList;
-import java.util.List;
+import com.acuteksolutions.uhotel.mvp.model.setting.Account;
+import com.acuteksolutions.uhotel.mvp.model.setting.Device;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 /**
  * Created by Toan.IT on 4/12/17.
@@ -59,6 +66,28 @@ public class FakeDataUtils {
     });
   }
 
+  public static List<Account> fakeDataAccount(){
+    List<Account> list = new ArrayList<>();
+    list.add(new Account("Name", "Michael Jackson", R.drawable.account_locked,Account.ACCOUNT));
+    list.add(new Account("Room", "2005", R.drawable.account_locked,Account.ACCOUNT));
+    list.add(new Account("Email", "user1@test.com", R.drawable.transparent,Account.ACCOUNT_NOTIFY));
+    list.add(new Account("Password", "111111", R.drawable.transparent,Account.ACCOUNT_NOTIFY));
+    list.add(new Account("Phone", "111-2222-3333", R.drawable.transparent,Account.ACCOUNT_NOTIFY));
+    list.add(new Account("Visa", "xxx-xxx-x012", R.drawable.transparent,Account.ACCOUNT_NOTIFY));
+    list.add(new Account("Notifications", "On", R.drawable.transparent,Account.ACCOUNT_NOTIFY));
+    return list;
+  }
+
+  public static List<Device> fakeDataDevices(){
+      List<Device> list = new ArrayList<>();
+      Random random = new Random();
+      Random active = new Random();
+      list.add(new Device(random.nextInt(3) + 1, "device 1", active.nextBoolean()));
+      list.add(new Device(random.nextInt(3) + 1, "device 2", active.nextBoolean()));
+      list.add(new Device(random.nextInt(3) + 1, "device 3", active.nextBoolean()));
+      list.add(new Device(random.nextInt(3) + 1, "device 4", active.nextBoolean()));
+      return list;
+  }
   public static JSONObject initFakeData() {
     JSONArray jsonArray = new JSONArray();
     JSONObject coffeeObject = new JSONObject();

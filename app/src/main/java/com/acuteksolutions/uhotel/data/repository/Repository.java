@@ -21,14 +21,18 @@ import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -101,6 +105,7 @@ public class Repository implements DataSource{
             JSONObject result = new JSONObject(stringJsonString.result);
             JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
             channelList=new Gson().fromJson(list.toString(),new TypeToken<List<Channel>>(){}.getType());
+            mPreferencesHelper.putJsonChannel(channelList);
           } catch (JSONException e) {
             e.printStackTrace();
             return null;
@@ -122,6 +127,18 @@ public class Repository implements DataSource{
             JSONObject result = new JSONObject(stringJsonString.result);
             JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
             programList = new Gson().fromJson(list.toString(),new TypeToken<List<Program>>(){}.getType());
+             /* List<Channel> channelInfo = mPreferencesHelper.getListObject(PreferencesHelper.PREF_CHANNEL,Channel.class);
+              for (Channel channel : channelInfo) {
+                  if (channel.getChannelId() == programList.)
+                      return channelInfo;
+              }
+              if (channelInfo != null) {
+                  tvInfo.channelStreams = channelInfo.streams;
+                  tvInfo.channelName = channelInfo.name;
+                  tvInfo.pictureLink=channelInfo.icon;
+                  tvInfo.channelNo = channelInfo.number;
+              }
+              */
           }catch (JSONException e){
             e.printStackTrace();
             return null;

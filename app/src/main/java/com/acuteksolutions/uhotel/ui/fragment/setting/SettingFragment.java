@@ -1,16 +1,23 @@
 package com.acuteksolutions.uhotel.ui.fragment.setting;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
+import com.acuteksolutions.uhotel.annotation.TabSettingDef;
+import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.mvp.view.SettingView;
+import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerSettingAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
-import javax.inject.Inject;
+
+import butterknife.BindView;
 
 public class SettingFragment extends BaseFragment implements SettingView {
-  @Inject
-  MoviesPresenter
-  mPresenter;
+  @BindView(R.id.tabLayout)
+  TabLayout mTabLayout;
+  @BindView(R.id.view_pager)
+  ViewPager mViewPager;
   private Context mContext;
   public static SettingFragment newInstance() {
     return new SettingFragment();
@@ -33,23 +40,24 @@ public class SettingFragment extends BaseFragment implements SettingView {
 
   @Override
   protected void initViews() {
-
+    TabSettingDef tabSettingDef = new TabSettingDef();
+    for (int i = 0; i < tabSettingDef.tabSize(); i++) {
+      mTabLayout.addTab(mTabLayout.newTab().setText(getString(tabSettingDef.getTab(i))));
+    }
+    TabPagerSettingAdapter tabPagerSettingAdapter=new TabPagerSettingAdapter(mContext,tabSettingDef,getChildFragmentManager());
+    mViewPager.setAdapter(tabPagerSettingAdapter);
+    mTabLayout.setupWithViewPager(mViewPager);
   }
 
   @Override
   protected int setLayoutResourceID() {
-    return R.layout.list_food_fragment;
+    return R.layout.setting_fragment;
   }
 
   @Override
   protected void initData() {
-    //mPresenter.getData(TheloaiDef.HOA_MANG_TRA_TRUOC);
-  }
-
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    mPresenter.detachView();
+    mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+    mTabLayout.addOnTabSelectedListener(new OnTabSelectedListener().onTabSelectedListener(mViewPager));
   }
 
 }

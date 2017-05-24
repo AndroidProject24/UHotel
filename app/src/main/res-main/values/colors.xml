@@ -15,6 +15,7 @@
   <color name="grey">#737C81</color>
   <color name="bg_item_select">#e4960c</color>
   <color name="black_background">#CC000000</color>
+  <color name="dark">#b3b3b3</color>
   <!--HOME-->
   <color name="yellow">#eaa903</color>
   <color name="red">#ff000d</color>

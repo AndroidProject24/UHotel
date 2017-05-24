@@ -105,6 +105,11 @@
     <item>Smoking Policy</item>
   </string-array>
 
+  <!--SETTING-->
+  <string name="tab_account">My Account</string>
+  <string name="tab_devices">Devices</string>
+    <string name="sign_out">Sign out</string>
+  <drawable name="setting_row_focus">#826837</drawable>
   <!--COMMON-->
   <string name="blank"/>
   <string name="common_empty_msg">Oops, failed to resolve data\nPlease hit the screen and try again~</string>

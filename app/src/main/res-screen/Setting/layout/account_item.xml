@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/transparent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="30dp"
+    android:paddingRight="20dp">
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:duplicateParentState="true"
+        android:gravity="center_vertical"
+        android:text="Name"
+        android:textColor="@color/setting_row_selector"
+        android:textSize="@dimen/textSize16" />
+
+    <EditText
+        android:id="@+id/txtValue"
+        style="@style/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/imaLock"
+        android:layout_toRightOf="@+id/txtName"
+        android:duplicateParentState="true"
+        android:enabled="false"
+        android:imeOptions="actionDone"
+        android:text="Michael jackson"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize16" />
+
+    <ImageView
+        android:id="@+id/imaLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/transparent" />
+</RelativeLayout>
