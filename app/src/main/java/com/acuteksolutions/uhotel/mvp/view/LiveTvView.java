@@ -1,8 +1,9 @@
 package com.acuteksolutions.uhotel.mvp.view;
 
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
-import com.acuteksolutions.uhotel.mvp.model.livetv.Program;
+import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
+
 import java.util.List;
 
 /**
@@ -13,7 +14,11 @@ public interface LiveTvView extends BaseView {
 
   void listAllChannel(List<Channel> channelList);
 
-  void getProgram(List<Program> programList);
+  void getProgram(List<TVInfo> tvInfoList);
+
+  void getDataRightNow(List<TVInfo> tvInfoList);
+
+  void getDataComingUp(List<TVInfo> tvInfoList);
 
   void showEmty();
 }

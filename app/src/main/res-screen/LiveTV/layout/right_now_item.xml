@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="210dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/livetv_box_bg"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-4dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/imageView"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Max Mad"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize28"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtChannelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:layout_toRightOf="@+id/imageView"
+        android:gravity="bottom"
+        android:text="Season 1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize24" />
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtChannelName"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/imageView"
+        android:ellipsize="end"
+        android:gravity="bottom"
+        android:maxLines="2"
+        android:text="Mad Max is a 1979 Australian dystopian action film directed by George Miller, produced by Byron Kennedy, Samuel, Hugh Keays-Byrne, Steve Bisley, Tim Burns"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize20" />
+
+    <LinearLayout
+        android:id="@+id/layout_play_now"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/txtDesc"
+        android:layout_toRightOf="@+id/imageView"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_play_now" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Play Now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize20" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_play_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/txtDesc"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/layout_play_now"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_replay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="Play from beginning"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize20" />
+
+    </LinearLayout>
+
+</RelativeLayout>

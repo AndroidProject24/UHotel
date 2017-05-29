@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -127,13 +128,12 @@ public class AddDevice extends DialogFragment {
 
     @OnClick(R.id.btnAdd)
     void addClick() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (DeviceInfo deviceInfo : deviceAdapter.list) {
             if (deviceInfo.checked)
-                result = result + deviceInfo.name;
-
+                result.append(deviceInfo.name);
         }
-        Utility.showMessage(context, result);
+        Snackbar.make(recyclerView, result.toString(),Snackbar.LENGTH_LONG).show();
     }
 
     @Override

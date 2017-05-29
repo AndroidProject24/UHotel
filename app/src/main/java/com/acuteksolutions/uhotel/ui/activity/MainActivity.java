@@ -152,8 +152,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
           Logger.e("position="+position);
           if(position<2)
               viewPagerMain.setCurrentItem(1);
-          else if(position==6)
-            replaceFagment(getSupportFragmentManager(),R.id.fragment,SettingFragment.newInstance());
+          else if(position==11)
+            replaceFagment(getSupportFragmentManager(),R.id.layout_root,SettingFragment.newInstance());
           else
               viewPagerMain.setCurrentItem(position/2+1);
       }else{

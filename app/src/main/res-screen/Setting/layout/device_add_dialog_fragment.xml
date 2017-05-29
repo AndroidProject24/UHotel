@@ -5,11 +5,10 @@
     android:background="#2a2a2a"
     android:orientation="vertical"
     android:paddingBottom="20dp">
-<!--
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/orange" />
+        android:background="@color/yellow" />
 
     <ImageView
         android:id="@+id/btnClose"
@@ -51,5 +50,5 @@
         android:background="@drawable/rectangle_orange"
         android:gravity="center"
         android:text="Add"
-        android:textColor="@color/orange" />-->
+        android:textColor="@color/yellow" />
 </LinearLayout>

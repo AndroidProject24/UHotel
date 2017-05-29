@@ -35,20 +35,17 @@ public interface RestApi {
   Observable<JsonString<String>> getTVProgram(@Path("mac") String mac, @Query("path") String path);
 
   /*Pin*/
-  @POST("check/Beesmart/PinCodeService/{mac}/{profileUid}/{action}")
-  Observable<JsonString<Boolean>> verifyPin(@Path("mac") String mac,@Path("profileUid") String profileUid,
-      @Path("action") String action, @Query("parentalPin") String parentalPin);
 
-  @POST("check/Beesmart/PinCodeService/{mac}/{profileUid}/authorize")
-  Observable<JsonString<Boolean>> verifyPin(@Path("mac") String mac,@Path("profileUid") String profileUid,
-      @Query("parentalPin") String parentalPin);
+  @POST("check/Beesmart/PinCodeService/{mac}/{profileId}/authorize")
+  Observable<JsonString<Boolean>> verifyPin(@Path("mac") String mac,@Path("profileId") String profileUid,
+      @Query("parentalPin") String pin);
 
-  @POST("check/Beesmart/PinCodeService/{mac}/{profileUid}/changepin")
-  Observable<JsonString<Boolean>> changePin(@Path("mac") String mac,@Path("profileUid") String profileUid,
+  @POST("check/Beesmart/PinCodeService/{mac}/{profileId}/changepin")
+  Observable<JsonString<Boolean>> changePin(@Path("mac") String mac,@Path("profileId") String profileUid,
       @Query("data") String new_pin, @Query("parentalPin") String old_pin);
 
-  @POST("check/Beesmart/PinCodeService/{mac}/{profileUid}/update")
-  Observable<JsonString<Boolean>> saveSetting(@Path("mac") String mac,@Path("profileUid") String profileUid,
+  @POST("check/Beesmart/PinCodeService/{mac}/{profileId}/update")
+  Observable<JsonString<Boolean>> saveSetting(@Path("mac") String mac,@Path("profileId") String profileUid,
       @Query("data") String data, @Query("parentalPin") String pin);
 
   @GET("request/{mac}/Beesmart")

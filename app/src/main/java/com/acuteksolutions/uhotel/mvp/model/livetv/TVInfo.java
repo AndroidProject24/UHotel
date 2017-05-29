@@ -16,9 +16,41 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
     private int channelNo;
     private String description;
     private String pictureLink;
+    private List<Stream> channelStreams;
     public TVInfo() {
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setStart(long start) {
+        this.start = start;
+    }
+
+    public void setEnd(long end) {
+        this.end = end;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
+
+    public void setChannelNo(int channelNo) {
+        this.channelNo = channelNo;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
+    }
+
+    public void setChannelStreams(List<Stream> channelStreams) {
+        this.channelStreams = channelStreams;
+    }
 
     public String getTitle() {
         return title;
@@ -52,7 +84,6 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
         return channelStreams;
     }
 
-    private List<Stream> channelStreams;
 
     public String getTimeLeftNow() {
         long diff = end - new Date().getTime();

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
@@ -17,6 +19,9 @@ import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.acuteksolutions.uhotel.BaseApplication;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -129,4 +134,13 @@ public class Utils {
     return sdf.format(date);
   }
 
+  public static String getMacAddess() {
+    //return "00000000ffaa";
+    WifiManager manager = (WifiManager) BaseApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+    WifiInfo info = manager.getConnectionInfo();
+   // Log.d(Utility.class.getName(),info.getMacAddress());
+    return info.getMacAddress() != null ? info.getMacAddress().replace(":","")
+            : "00000000ffaa";
+
+  }
 }

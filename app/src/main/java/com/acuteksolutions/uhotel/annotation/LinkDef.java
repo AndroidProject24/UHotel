@@ -19,6 +19,6 @@ public @interface LinkDef {
   String LINK_MOVIES_DETAILS="/restapi/rest/region_uid/store/products?purchase_category_id=catId";
   String LINK_IMAGE_URL = "http://bsdev.acuteksolutions.com/restapi/rest/regionId/images/";
   String LINK_LIVE_ALL_CHANNEL="/restapi/rest/region_uid/channels";
-  String LINK_LIVE_PROGRAM_BY_ID_PATH="/restapi/rest/region_uid/tvprogram?channel_id=Channel_id&date=Date&page_size=Page_size";
+  String LINK_LIVE_PROGRAM_BY_ID_PATH="/restapi/rest/region_uid/tvprogram?date=Date";
   String LINK_STREAM="/restapi/rest/region_uid/content/media?include_media_resources=true&content_info_id=cid";
 }

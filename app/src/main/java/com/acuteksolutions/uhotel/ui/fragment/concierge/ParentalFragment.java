@@ -17,6 +17,7 @@ import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ParentalItem;
 import com.acuteksolutions.uhotel.mvp.model.login.SettingInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
+import com.acuteksolutions.uhotel.mvp.view.PinView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.ParentalAdapter;
 import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
@@ -36,7 +37,7 @@ import butterknife.OnClick;
  * Date:22/04/2017
  */
 
-public class ParentalFragment extends BaseFragment<PinPresenter> {
+public class ParentalFragment extends BaseFragment<PinPresenter> implements PinView{
   @BindView(R.id.recyclerView) RecyclerView recyclerView;
   private Context mContext;
   private ParentalAdapter parentalAdapter;
@@ -81,6 +82,11 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
     parentalAdapter=new ParentalAdapter(glide,arrayList);
     parentalAdapter.openLoadAnimation();
     recyclerView.setAdapter(parentalAdapter);
+    parentalAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> {
+      Logger.e("setOnClickListener");
+      arrayList.get(i).setLocked(!arrayList.get(i).isLocked());
+      parentalAdapter.notifyItemChanged(i);
+    });
   }
 
   @OnClick(R.id.btnSave)
@@ -158,8 +164,8 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
                 break;
             }
           }
-          Logger.e(jsonObject.toString());
-          mPresenter.saveSetting(data.getStringExtra(BundleDef.BUNDLE_KEY),jsonObject.toString());
+          Logger.e("onActivityResult="+jsonObject.toString());
+          mPresenter.saveSetting(jsonObject.toString(),data.getStringExtra(BundleDef.BUNDLE_KEY));
         }
       }
     } else if (requestCode == ParentalPinDef.VERIFY_CHANGE_PIN) {
@@ -179,4 +185,18 @@ public class ParentalFragment extends BaseFragment<PinPresenter> {
     }
   }
 
+  @Override
+  public void verifyPin(boolean checkVerify) {
+
+  }
+
+  @Override
+  public void changePin(boolean checkChangePin) {
+
+  }
+
+  @Override
+  public void saveSetting(boolean checkSave) {
+
+  }
 }

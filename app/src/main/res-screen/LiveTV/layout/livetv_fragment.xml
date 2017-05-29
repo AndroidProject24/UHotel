@@ -4,11 +4,11 @@
     android:id="@+id/stateLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/tab_background">
   <android.support.v7.widget.RecyclerView
       android:id="@+id/recycler_main"
       android:layout_width="match_parent"
-      android:layout_height="250dp"
+      android:layout_height="200dp"
       />
   <LinearLayout
       android:id="@+id/layout_tab"

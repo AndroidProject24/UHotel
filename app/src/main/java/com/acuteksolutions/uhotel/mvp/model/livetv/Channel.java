@@ -1,103 +1,35 @@
 package com.acuteksolutions.uhotel.mvp.model.livetv;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Channel implements Comparable<Channel>, Parcelable {
-    //use for DTV player
-    public int dbId;
-    public int serviceType;
-    public boolean isLocalChannel;
-    @SerializedName("id")
-    private long channelId;
-    private long activate;
-    private long deactivate;
-    private int rating;
-    private boolean hd;
-    private String icon;
-    private boolean instanceRecordable;
-    private boolean localRecordable;
+public class Channel {
+    private Integer id;
     private String name;
-    private int number;
-    private boolean pauseAndResume;
+    private Integer number;
+    private String type;
+    private boolean hd;
+    private boolean broadcasting;
+    private long activated;
+    private long deactivated;
     private boolean programRecordable;
-    private boolean timeShift;
-    private List<Stream> stream;
-    private List<Program> programs;
-    public Channel() {
-        this.name = name;
+    private boolean timeshift;
+    private boolean pauseAndResume;
+    private boolean instantRecordable;
+    private boolean voidEpgPopup;
+    private Integer ageRating;
+    private String icon;
+    private String poster;
+    private boolean localRecordable;
+    private Object previewDuration;
+    private List<Stream> streams = new ArrayList<Stream>();
+
+    public Integer getId() {
+        return id;
     }
 
-    public Channel(long channelId, long activate, long deactivate, int rating, boolean hd, String icon, boolean instanceRecordable, boolean localRecordable, String name, int number, boolean pauseAndResume, boolean programRecordable, boolean timeShift, List<Stream> stream) {
-        this.channelId = channelId;
-        this.activate = activate;
-        this.deactivate = deactivate;
-        this.rating = rating;
-        this.hd = hd;
-        this.icon = icon;
-        this.instanceRecordable = instanceRecordable;
-        this.localRecordable = localRecordable;
-        this.name = name;
-        this.number = number;
-        this.pauseAndResume = pauseAndResume;
-        this.programRecordable = programRecordable;
-        this.timeShift = timeShift;
-        this.stream = stream;
-    }
-
-    protected Channel(Parcel in) {
-        this.channelId = in.readLong();
-        this.activate = in.readLong();
-        this.deactivate = in.readLong();
-        this.rating = in.readInt();
-        this.hd = in.readByte() != 0;
-        this.icon = in.readString();
-        this.instanceRecordable = in.readByte() != 0;
-        this.localRecordable = in.readByte() != 0;
-        this.name = in.readString();
-        this.number = in.readInt();
-        this.pauseAndResume = in.readByte() != 0;
-        this.programRecordable = in.readByte() != 0;
-        this.timeShift = in.readByte() != 0;
-        this.stream = new ArrayList<Stream>();
-        in.readList(this.stream, Stream.class.getClassLoader());
-        this.programs = new ArrayList<Program>();
-        in.readList(this.programs, Program.class.getClassLoader());
-    }
-
-    public long getChannelId() {
-        return channelId;
-    }
-
-    public long getActivate() {
-        return activate;
-    }
-
-    public long getDeactivate() {
-        return deactivate;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public boolean isHd() {
-        return hd;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public boolean isInstanceRecordable() {
-        return instanceRecordable;
-    }
-
-    public boolean isLocalRecordable() {
-        return localRecordable;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -108,120 +40,165 @@ public class Channel implements Comparable<Channel>, Parcelable {
         this.name = name;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public boolean isPauseAndResume() {
-        return pauseAndResume;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isHd() {
+        return hd;
+    }
+
+    public void setHd(boolean hd) {
+        this.hd = hd;
+    }
+
+    public boolean isBroadcasting() {
+        return broadcasting;
+    }
+
+    public void setBroadcasting(boolean broadcasting) {
+        this.broadcasting = broadcasting;
+    }
+
+    public long getActivated() {
+        return activated;
+    }
+
+    public void setActivated(long activated) {
+        this.activated = activated;
+    }
+
+    public long getDeactivated() {
+        return deactivated;
+    }
+
+    public void setDeactivated(long deactivated) {
+        this.deactivated = deactivated;
     }
 
     public boolean isProgramRecordable() {
         return programRecordable;
     }
 
-    public boolean isTimeShift() {
-        return timeShift;
+    public void setProgramRecordable(boolean programRecordable) {
+        this.programRecordable = programRecordable;
     }
 
-    public List<Stream> getStream() {
-        return stream;
+    public boolean isTimeshift() {
+        return timeshift;
     }
 
-    public List<Program> getPrograms() {
-        return programs;
+    public void setTimeshift(boolean timeshift) {
+        this.timeshift = timeshift;
     }
 
-    public void setPrograms(List<Program> programs) {
-        this.programs = programs;
+    public boolean isPauseAndResume() {
+        return pauseAndResume;
+    }
+
+    public void setPauseAndResume(boolean pauseAndResume) {
+        this.pauseAndResume = pauseAndResume;
+    }
+
+    public boolean isInstantRecordable() {
+        return instantRecordable;
+    }
+
+    public void setInstantRecordable(boolean instantRecordable) {
+        this.instantRecordable = instantRecordable;
+    }
+
+    public boolean isVoidEpgPopup() {
+        return voidEpgPopup;
+    }
+
+    public void setVoidEpgPopup(boolean voidEpgPopup) {
+        this.voidEpgPopup = voidEpgPopup;
+    }
+
+    public Integer getAgeRating() {
+        return ageRating;
+    }
+
+    public void setAgeRating(Integer ageRating) {
+        this.ageRating = ageRating;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public boolean isLocalRecordable() {
+        return localRecordable;
+    }
+
+    public void setLocalRecordable(boolean localRecordable) {
+        this.localRecordable = localRecordable;
+    }
+
+    public Object getPreviewDuration() {
+        return previewDuration;
+    }
+
+    public void setPreviewDuration(Object previewDuration) {
+        this.previewDuration = previewDuration;
+    }
+
+    public List<Stream> getStreams() {
+        return streams;
+    }
+
+    public void setStreams(List<Stream> streams) {
+        this.streams = streams;
     }
 
     @Override
-    public int compareTo(Channel another) {
-        return number - another.getNumber();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.channelId);
-        dest.writeLong(this.activate);
-        dest.writeLong(this.deactivate);
-        dest.writeInt(this.rating);
-        dest.writeByte(this.hd ? (byte) 1 : (byte) 0);
-        dest.writeString(this.icon);
-        dest.writeByte(this.instanceRecordable ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.localRecordable ? (byte) 1 : (byte) 0);
-        dest.writeString(this.name);
-        dest.writeInt(this.number);
-        dest.writeByte(this.pauseAndResume ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.programRecordable ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.timeShift ? (byte) 1 : (byte) 0);
-        dest.writeList(this.stream);
-        dest.writeList(this.programs);
-    }
-
-    public static final Creator<Channel> CREATOR = new Creator<Channel>() {
-        @Override
-        public Channel createFromParcel(Parcel source) {
-            return new Channel(source);
-        }
-
-        @Override
-        public Channel[] newArray(int size) {
-            return new Channel[size];
-        }
-    };
-
-    @Override public String toString() {
-        return "Channel{"
-            + "dbId="
-            + dbId
-            + ", serviceType="
-            + serviceType
-            + ", isLocalChannel="
-            + isLocalChannel
-            + ", channelId="
-            + channelId
-            + ", activate="
-            + activate
-            + ", deactivate="
-            + deactivate
-            + ", rating="
-            + rating
-            + ", hd="
-            + hd
-            + ", icon='"
-            + icon
-            + '\''
-            + ", instanceRecordable="
-            + instanceRecordable
-            + ", localRecordable="
-            + localRecordable
-            + ", name='"
-            + name
-            + '\''
-            + ", number="
-            + number
-            + ", pauseAndResume="
-            + pauseAndResume
-            + ", programRecordable="
-            + programRecordable
-            + ", timeShift="
-            + timeShift
-            + ", stream="
-            + stream
-            + ", programs="
-            + programs
-            + '}';
+    public String toString() {
+        return "ChannelInfo{" +
+                "activated=" + activated +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", number=" + number +
+                ", type='" + type + '\'' +
+                ", hd=" + hd +
+                ", broadcasting=" + broadcasting +
+                ", deactivated=" + deactivated +
+                ", programRecordable=" + programRecordable +
+                ", timeshift=" + timeshift +
+                ", pauseAndResume=" + pauseAndResume +
+                ", instantRecordable=" + instantRecordable +
+                ", voidEpgPopup=" + voidEpgPopup +
+                ", ageRating=" + ageRating +
+                ", icon='" + icon + '\'' +
+                ", poster='" + poster + '\'' +
+                ", localRecordable=" + localRecordable +
+                ", previewDuration=" + previewDuration +
+                ", streams=" + streams +
+                '}';
     }
 
 }
