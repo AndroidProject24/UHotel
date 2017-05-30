@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.LiveTVPresenter;
@@ -74,7 +73,7 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
     }
 
     @Override public void listAllChannel(List<Channel> channelList) {
-        Logger.e(channelList.toString());
+        //Logger.e(channelList.toString());
         mPresenter.getProgram(channelList, Calendar.getInstance().getTime());
     }
 

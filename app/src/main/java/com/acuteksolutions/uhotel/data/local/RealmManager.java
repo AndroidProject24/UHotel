@@ -1,9 +1,9 @@
 package com.acuteksolutions.uhotel.data.local;
 
-import android.text.TextUtils;
-
 import com.acuteksolutions.uhotel.data.repository.DataSource;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.Item;
 import com.acuteksolutions.uhotel.mvp.model.movies.Product;
 import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 
@@ -91,40 +91,49 @@ public class RealmManager implements DataSource{
     }
 
     public void saveListCategory(List<Category> categoryList) {
-        Realm realmDB=null;
-        try{
-            realmDB=getRealmDB();
-            realmDB.executeTransactionAsync(realm -> realm.copyToRealmOrUpdate(categoryList));
-        }finally {
-            if(realmDB!=null)
-                realmDB.close();
-        }
+        getRealmDB().executeTransactionAsync(realm -> realm.copyToRealmOrUpdate(categoryList));
     }
 
-    public void saveListMovies(List<VODInfo> vodInfoList) {
-        Realm realmDB=null;
-        try{
-            realmDB=getRealmDB();
-            realmDB.executeTransactionAsync(realm -> realm.copyToRealmOrUpdate(vodInfoList));
-        }finally {
-            if(realmDB!=null)
-                realmDB.close();
-        }
+    public void saveListMovies(RealmList<VODInfo> vodInfoList,String categoryID) {
+        getRealmDB().executeTransactionAsync(realm -> {
+            Category category=realm.where(Category.class).equalTo("id", categoryID).findFirst();
+            RealmList<VODInfo> list = vodInfoList;
+            if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
+                RealmList<VODInfo> managedImageList = new RealmList<>();
+                for (VODInfo item : list) {
+                    if (item.isManaged()) {
+                        managedImageList.add(item);
+                    } else {
+                        managedImageList.add(realm.copyToRealm(item));
+                    }
+                }
+                list = managedImageList;
+            }
+            category.setVodInfos(list);
+            Logger.e("SaveVODinfoList="+category.toString());
+            realm.copyToRealmOrUpdate(category);
+        });
     }
 
-    public void saveListMoviesDetails(RealmList<Product> productList, String categoryID) {
-        Realm realmDB=null;
-        try{
-            realmDB=getRealmDB();
-            realmDB.executeTransactionAsync(realm -> {
-                Category category=realm.where(Category.class).equalTo("id", categoryID).findFirst();
-                category.setProduct(productList);
-                realm.copyToRealmOrUpdate(category);
-            });
-        }finally {
-            if(realmDB!=null)
-                realmDB.close();
-        }
+    public void saveListMoviesDetails(final RealmList<Product> productList, String categoryID) {
+        getRealmDB().executeTransactionAsync(realm -> {
+            Category category=realm.where(Category.class).equalTo("id", categoryID).findFirst();
+            RealmList<Product> list = productList;
+            if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
+                RealmList<Product> managedImageList = new RealmList<>();
+                for (Product item : list) {
+                    if (item.isManaged()) {
+                        managedImageList.add(item);
+                    } else {
+                        managedImageList.add(realm.copyToRealm(item));
+                    }
+                }
+                list = managedImageList;
+            }
+            category.setProduct(list);
+            Logger.e("SaveproductList="+category.toString());
+            realm.copyToRealmOrUpdate(category);
+        });
     }
 
     @Override
@@ -135,7 +144,15 @@ public class RealmManager implements DataSource{
 
     @Override
     public Observable<List<VODInfo>> getListMovies(String idList,String categoryID) {
-        List<VODInfo> vodInfoList = findAllWithKey(VODInfo.class,categoryID);
+        Realm realmDB=null;
+        List<VODInfo> vodInfoList;
+        try{
+            realmDB=getRealmDB();
+            vodInfoList=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getVodInfos();
+        }finally {
+            if(realmDB!=null)
+                realmDB.close();
+        }
         return Observable.just(vodInfoList);
     }
 
@@ -144,14 +161,23 @@ public class RealmManager implements DataSource{
         String listID ="";
         try{
             realmDB=getRealmDB();
+            Logger.e("getMoviesProduct="+categoryID);
             RealmList<Product> products=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getProduct();
+            Logger.e("products="+products.toString());
             if(products.size()>0){
-                listID=TextUtils.join(",",  products.get(0).getItems());
+                //listID=TextUtils.join(",",  products.get(0).getItems());
+                StringBuilder builder = new StringBuilder();
+                for (Item item : products.get(0).getItems()) {
+                    if (builder.length() == 0) builder.append(item.getItem());
+                    builder.append(",").append(item.getItem());
+                }
+                listID=builder.toString();
             }
         }finally {
             if(realmDB!=null)
                 realmDB.close();
         }
+        Logger.e("listID="+listID);
         return Observable.just(listID);
     }
 

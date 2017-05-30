@@ -283,7 +283,7 @@ public class Repository implements DataSource{
                                    purchasesItem.add(new Item(id.getString(ParseGsonDef.ID)));
                                }
                            }
-                           Product product = new Product(purchasesItem, null);
+                           Product product = new Product(i,purchasesItem, null);
                            productList.add(product);
                            mRealmManager.saveListMoviesDetails(productList,categoryID);
                        }
@@ -296,11 +296,13 @@ public class Repository implements DataSource{
     }
 
     private Observable<List<VODInfo>> getCloudListMovies(String idList,String categoryID) {
+        Logger.e(idList);
         return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID,String.valueOf(idList)))
                 .subscribeOn(Schedulers.io())
                 .doOnNext(stringJsonString -> {
-                    List<VODInfo> vodInfoList = new ArrayList<>();
+                    RealmList<VODInfo> vodInfoList = new RealmList<>();
                     try {
+                        Logger.e(stringJsonString.result);
                         JSONArray result = new JSONArray(stringJsonString.result);
                         for (int i = 0; i < result.length(); i++) {
                             JSONObject item = result.getJSONObject(i);
@@ -327,7 +329,7 @@ public class Repository implements DataSource{
                                     categoryID
                             );
                             vodInfoList.add(vod);
-                            mRealmManager.saveListMovies(vodInfoList);
+                            mRealmManager.saveListMovies(vodInfoList,categoryID);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -339,18 +341,21 @@ public class Repository implements DataSource{
 
     @Override
     public Observable<List<Category>> getCategory() {
-        return Observable.concat(mRealmManager.getCategory(),getCloudCategory())
+        Logger.e("getCategory=");
+        return Observable.concat(getCloudCategory(),mRealmManager.getCategory())
                 .map(list -> {
                     Logger.e("getCategory="+list.toString());
                     return list;
                 })
                 .filter(data -> !data.isEmpty())
-                .first();
+                .first()
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Observable<List<VODInfo>> getListMovies(String idList,String categoryID) {
-        return Observable.concat(mRealmManager.getListMovies(idList,categoryID),getCloudListMovies(idList,categoryID))
+        Logger.e("getListMovies="+categoryID);
+        return Observable.concat(getCloudListMovies(idList,categoryID),mRealmManager.getListMovies(idList,categoryID))
                 .map(list -> {
                     Logger.e("getListMovies="+list.toString());
                     return list;
@@ -361,7 +366,9 @@ public class Repository implements DataSource{
 
     @Override
     public Observable<List<VODInfo>> getMoviesDetails(String categoryID) {
-        return Observable.concat(mRealmManager.getMoviesProduct(categoryID),getCloudMoviesDetails(categoryID))
-                .flatMap(idList -> getListMovies(idList,categoryID));
+        Logger.e("getMoviesDetails="+categoryID);
+        return Observable.concat(getCloudMoviesDetails(categoryID),mRealmManager.getMoviesProduct(categoryID))
+                .flatMap(idList -> getListMovies(idList,categoryID))
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

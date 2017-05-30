@@ -1,5 +1,7 @@
 package com.acuteksolutions.uhotel.mvp.model.movies;
 
+import java.util.Arrays;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -9,24 +11,16 @@ public class Category extends RealmObject {
     private String id;
     private String title;
     private RealmList<Product> product;
-
-    public Category() {
-
-    }
+    private RealmList<VODInfo> vodInfos;
 
     @Override
     public String toString() {
         return "Category{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", product=" + product +
+                ", product=" + Arrays.toString(product.toArray()) +
+                ", vodInfos=" + Arrays.toString(vodInfos.toArray()) +
                 '}';
-    }
-
-    public Category(String id, String title, RealmList<Product> product) {
-        this.id = id;
-        this.title = title;
-        this.product = product;
     }
 
     public String getId() {
@@ -45,8 +39,11 @@ public class Category extends RealmObject {
         return product;
     }
 
-    public Category update(RealmList<Product> product) {
-        this.product = product;
-        return this;
+    public RealmList<VODInfo> getVodInfos() {
+        return vodInfos;
+    }
+
+    public void setVodInfos(RealmList<VODInfo> vodInfos) {
+        this.vodInfos = vodInfos;
     }
 }

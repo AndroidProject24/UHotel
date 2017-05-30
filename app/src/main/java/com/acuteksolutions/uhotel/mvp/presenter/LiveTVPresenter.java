@@ -3,7 +3,6 @@ package com.acuteksolutions.uhotel.mvp.presenter;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
@@ -100,7 +99,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
                 .subscribe(new DefaultObserver<List<TVInfo>>(){
                     @Override
                     public void onNext(List<TVInfo> tvInfoList) {
-                        Logger.e(tvInfoList.toString());
+                        //Logger.e(tvInfoList.toString());
                         getMvpView().getDataRightNow(tvInfoList);
                     }
                 }));
@@ -129,7 +128,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
                 .subscribe(new DefaultObserver<List<TVInfo>>(){
                     @Override
                     public void onNext(List<TVInfo> tvInfoList) {
-                        Logger.e(tvInfoList.toString());
+                       // Logger.e(tvInfoList.toString());
                         getMvpView().getDataComingUp(tvInfoList);
                     }
                 }));
