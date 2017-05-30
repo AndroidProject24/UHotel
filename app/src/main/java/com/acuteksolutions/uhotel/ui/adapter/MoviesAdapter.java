@@ -1,12 +1,16 @@
 package com.acuteksolutions.uhotel.ui.adapter;
 
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
 import java.util.List;
 
 public class MoviesAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
@@ -26,4 +30,12 @@ public class MoviesAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
         e.printStackTrace();
       }
     }
+
+  @Override
+  public void setEmptyView(View emptyView) {
+    ViewGroup.LayoutParams lp = emptyView.getLayoutParams();
+    //lp.height = WindowUtils.getScreenHeight(UiUtils.getContext()) / 2;
+    emptyView.setLayoutParams(lp);
+    super.setEmptyView(emptyView);
+  }
 }

@@ -388,7 +388,7 @@ public class SwagPoints extends View {
 					&& (mPreviousProgress < mCurrentProgress)
 					&& mPreviousProgress <= minDetectValue && mCurrentProgress <= minDetectValue
 					&& mPoints >= mMin) {
-//				Log.d("Unlock", String.format("Unlock min %.0f, %.0f\n", mPreviousProgress, mCurrentProgress));
+//				Log.d("Unlock", Item.format("Unlock min %.0f, %.0f\n", mPreviousProgress, mCurrentProgress));
 				isMin = false;
 			}
 		}

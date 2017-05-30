@@ -1,8 +1,9 @@
 package com.acuteksolutions.uhotel.mvp.view;
 
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
+
 import java.util.List;
 
 /**

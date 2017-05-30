@@ -47,9 +47,9 @@ android {
       applicationIdSuffix '.debug'
       versionNameSuffix '-DEBUG'
     }
-    applicationVariants.all { variant ->
-       configApkFileName(variant, defaultConfig)
-    }
+//    applicationVariants.all { variant ->
+//       configApkFileName(variant, defaultConfig)
+//    }
   }
   packagingOptions {
     exclude 'META-INF/NOTICE'
@@ -148,15 +148,16 @@ dependencies {
   releaseCompile developmentDependencies.blockCanaryExRelease
   testCompile    developmentDependencies.blockCanaryExRelease
 }
-
+/*
 @SuppressWarnings("GroovyAssignabilityCheck")
 def configApkFileName(variant, defaultConfig) {
-  /*variant.outputs.each { output ->
+  variant.outputs.each { output ->
     if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
       def name = "${rootDir}/apk/Debug.apk"
       output.outputFile = file(name)
     }
-  }*/
+  }
+}*/
 //  variant.outputs.each { output ->
 //    if (variant.buildType.name == android.buildTypes.debug.name) {
 //      if (output.zipAlign) {
@@ -176,4 +177,4 @@ def configApkFileName(variant, defaultConfig) {
 //      }
 //    }
 //  }
-}
+

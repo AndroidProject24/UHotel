@@ -46,7 +46,7 @@ final class Helper {
   /**
    * Returns true if a and b are equal, including if they are both null.
    * <p><i>Note: In platform versions 1.1 and earlier, this method only worked well if
-   * both the arguments were instances of String.</i></p>
+   * both the arguments were instances of Item.</i></p>
    *
    * @param a first CharSequence to check
    * @param b second CharSequence to check
@@ -78,7 +78,7 @@ final class Helper {
    * Copied from "android.util.Log.getStackTraceString()" in order to avoid usage of Android stack
    * in unit tests.
    *
-   * @return Stack trace in form of String
+   * @return Stack trace in form of Item
    */
   static String getStackTraceString(Throwable tr) {
     if (tr == null) {

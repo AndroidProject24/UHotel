@@ -1,17 +1,21 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 
-public class Detail {
+public class Detail extends RealmObject {
     private String title;
     private String actors;
     private String director;
     private int duration;
     private String poster;
     private String description;
-    private List<String> genres;
+    private RealmList<Item> genres;
 
-    public Detail(String title, String actors, String director, int duration, String poster, String description, List<String> genres) {
+    public Detail() {
+    }
+
+    public Detail(String title, String actors, String director, int duration, String poster, String description, RealmList<Item> genres) {
         this.title = title;
         this.actors = actors;
         this.director = director;
@@ -45,7 +49,7 @@ public class Detail {
         return description;
     }
 
-    public List<String> getGenres() {
+    public RealmList<Item> getGenres() {
         return genres;
     }
 

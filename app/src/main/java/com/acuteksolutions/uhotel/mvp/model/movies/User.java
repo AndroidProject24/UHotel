@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
 import org.json.JSONException;
 import org.json.JSONObject;

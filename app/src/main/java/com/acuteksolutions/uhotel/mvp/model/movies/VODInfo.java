@@ -1,15 +1,25 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
-public class VODInfo implements Comparable<VODInfo> {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class VODInfo extends RealmObject implements Comparable<VODInfo> {
+    @PrimaryKey
     private int purchaseId;
     private String contentInfoUid;
     private Detail detail;
     private int contentId;
-    public VODInfo(int purchaseId, String contentInfoUid, Detail detail, int contentId) {
+    private String categoryID;
+    public VODInfo(int purchaseId, String contentInfoUid, Detail detail, int contentId,String categoryID) {
         this.purchaseId = purchaseId;
         this.contentInfoUid = contentInfoUid;
         this.detail = detail;
         this.contentId = contentId;
+        this.categoryID=categoryID;
+    }
+
+    public VODInfo() {
+
     }
 
     @Override
@@ -20,6 +30,10 @@ public class VODInfo implements Comparable<VODInfo> {
                 ", detail=" + detail +
                 ", contentId=" + contentId +
                 '}';
+    }
+
+    public String getCategoryID() {
+        return categoryID;
     }
 
     public int getPurchaseId() {

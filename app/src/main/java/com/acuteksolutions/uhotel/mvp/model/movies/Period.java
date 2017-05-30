@@ -1,8 +1,13 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
-public class Period {
+import io.realm.RealmObject;
+
+public class Period extends RealmObject{
     private long start;
     private long end;
+
+    public Period() {
+    }
 
     public Period(long start, long end) {
         this.start = start;

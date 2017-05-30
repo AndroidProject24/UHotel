@@ -244,7 +244,7 @@ public final class Preconditions {
    *    throw new BadException(messageExpression);
    * }
    *
-   * refactored so that messageExpression is moved to a separate String-returning method.
+   * refactored so that messageExpression is moved to a separate Item-returning method.
    *
    * if (guardExpression) {
    *    throw new BadException(badMsg(...));

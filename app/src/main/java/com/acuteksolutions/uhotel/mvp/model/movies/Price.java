@@ -1,6 +1,10 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
-public class Price {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Price extends RealmObject {
+    @PrimaryKey
     private String id;
     private double price;
     private String priceType;
@@ -8,6 +12,10 @@ public class Price {
     private String billingType;
     private String rentalPeriodUnit;
     private long rentalPeriodValue;
+
+    public Price() {
+
+    }
 
     public Price(String id, double price, String priceType, String symbol, String billingType, String rentalPeriodUnit, long rentalPeriodValue) {
         this.id = id;

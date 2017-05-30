@@ -13,6 +13,7 @@ import com.acuteksolutions.uhotel.injector.component.DaggerActivityComponent;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
+import com.acuteksolutions.uhotel.utils.ActivityManager;
 import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
@@ -46,6 +47,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
           mPresenter.attachView(this);
       initViews();
       initData();
+      ActivityManager.getInstance().pushActivity(this);
   }
   private void setButterKnife() {
     ButterKnife.bind(this);
@@ -126,6 +128,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
       RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
       refWatcher.watch(this);
     }
+    ActivityManager.getInstance().popActivity(this);
   }
     @Override
     public String toString() {

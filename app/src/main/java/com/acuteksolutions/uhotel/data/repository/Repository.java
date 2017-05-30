@@ -7,15 +7,17 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.local.RealmManager;
 import com.acuteksolutions.uhotel.data.service.RestApi;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.Detail;
-import com.acuteksolutions.uhotel.mvp.model.data.Product;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.JsonString;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Program;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Stream;
 import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
+import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.Detail;
+import com.acuteksolutions.uhotel.mvp.model.movies.Item;
+import com.acuteksolutions.uhotel.mvp.model.movies.Product;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.utils.Constant;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.Utils;
@@ -34,6 +36,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.realm.RealmList;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -206,11 +209,11 @@ public class Repository implements DataSource{
     }
 
     //Movies
-    public Observable<List<Category>> getCategory() {
+    private Observable<List<Category>> getCloudCategory() {
         return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_CATEGORY.replace(PathDef.REGION_UID,String.valueOf(
                 Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())))
                 .subscribeOn(Schedulers.io())
-                .map(stringJsonString -> {
+                .doOnNext(stringJsonString -> {
                     List<Category> categoryList =null;
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
@@ -218,16 +221,16 @@ public class Repository implements DataSource{
                         categoryList = new Gson().fromJson(list.toString(),new TypeToken<List<Category>>(){}.getType());
                     }catch (JSONException e){
                         e.printStackTrace();
-                        return null;
                     }
-                    return categoryList;
+                    mRealmManager.saveListCategory(categoryList);
                 })
-                .observeOn(AndroidSchedulers.mainThread());
+                .flatMap((Func1<JsonString<String>, Observable<List<Category>>>) stringJsonString -> Observable.just(null))
+                .doOnError(Throwable::printStackTrace);
     }
 
 
-    public Observable<List<VODInfo>> getMoviesDetails(String catID) {
-        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID,catID))
+    private Observable<String> getCloudMoviesDetails(String categoryID) {
+       /* return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID,catID))
                 .subscribeOn(Schedulers.io())
                 .map(stringJsonString -> {
                     List<Product> productList = new ArrayList<>();
@@ -260,64 +263,105 @@ public class Repository implements DataSource{
                         if (builder.length() == 0) builder.append(s);
                         builder.append(",").append(s);
                     }
-                    return getListMovies(builder.toString());
+                    return getCloudListMovies(builder.toString());
                 })
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread());*/
+       return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID,categoryID))
+               .subscribeOn(Schedulers.io())
+               .doOnNext(stringJsonString -> {
+                   RealmList<Product> productList = new RealmList<>();
+                   RealmList<Item> purchasesItem = new RealmList<>();
+                   try {
+                       JSONObject result = new JSONObject(stringJsonString.result);
+                       JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
+                       for (int i = 0; i < list.length(); i++) {
+                           JSONObject items = list.getJSONObject(i);
+                           JSONArray item=items.getJSONArray(ParseGsonDef.ITEMS);
+                           for (int k = 0; k < item.length(); k++) {
+                               JSONObject id = item.getJSONObject(k);
+                               if (null != id) {
+                                   purchasesItem.add(new Item(id.getString(ParseGsonDef.ID)));
+                               }
+                           }
+                           Product product = new Product(purchasesItem, null);
+                           productList.add(product);
+                           mRealmManager.saveListMoviesDetails(productList,categoryID);
+                       }
+                   }catch (JSONException e){
+                       e.printStackTrace();
+                   }
+               })
+               .flatMap((Func1<JsonString<String>, Observable<String>>) stringJsonString -> Observable.just(null))
+               .doOnError(Throwable::printStackTrace);
     }
 
-    private Observable<List<VODInfo>> getListMovies(String idList) {
+    private Observable<List<VODInfo>> getCloudListMovies(String idList,String categoryID) {
         return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID,String.valueOf(idList)))
                 .subscribeOn(Schedulers.io())
-                .map(stringJsonString -> {
+                .doOnNext(stringJsonString -> {
                     List<VODInfo> vodInfoList = new ArrayList<>();
                     try {
                         JSONArray result = new JSONArray(stringJsonString.result);
-                        for(int i=0;i<result.length();i++){
+                        for (int i = 0; i < result.length(); i++) {
                             JSONObject item = result.getJSONObject(i);
                             JSONObject jsonDetail = item.getJSONObject("details");
                             JSONArray jsonGenres = jsonDetail.getJSONArray("genres");
-                            List<String> genres = new ArrayList<>();
+                            RealmList<Item> genres = new RealmList<>();
                             for (int j = 0; j < jsonGenres.length(); j++) {
-                                genres.add(jsonGenres.getString(j));
+                                genres.add(new Item(jsonGenres.getString(j)));
                             }
                             Detail detail = new Detail(
-                                    (jsonDetail.optString("title").equals("")?jsonDetail.getString("title"): "N/A"),
-                                    (jsonDetail.optString("actors").equals("")? jsonDetail.getString("actors") : "N/A"),
+                                    (jsonDetail.optString("title").equals("") ? jsonDetail.getString("title") : "N/A"),
+                                    (jsonDetail.optString("actors").equals("") ? jsonDetail.getString("actors") : "N/A"),
                                     (jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
-                                    jsonDetail.optInt("duration",0),
+                                    jsonDetail.optInt("duration", 0),
                                     LinkDef.LINK_IMAGE_URL.replace("regionId", String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())) + jsonDetail.getString("poster"),
-                                    (jsonDetail.optString("description").equals("") ? jsonDetail.getString("description"): "No description"),
+                                    (jsonDetail.optString("description").equals("") ? jsonDetail.getString("description") : "No description"),
                                     genres
                             );
                             VODInfo vod = new VODInfo(
                                     item.getInt("purchaseId"),
                                     item.getString("contentInfoId"),
                                     detail,
-                                    item.getInt("contentId")
+                                    item.getInt("contentId"),
+                                    categoryID
                             );
                             vodInfoList.add(vod);
+                            mRealmManager.saveListMovies(vodInfoList);
                         }
-                    }catch (JSONException e){
+                    } catch (Exception e) {
                         e.printStackTrace();
-                        return null;
                     }
-                    return vodInfoList;
-                });
+                })
+                .flatMap((Func1<JsonString<String>, Observable<List<VODInfo>>>) stringJsonString -> Observable.just(null))
+                .doOnError(Throwable::printStackTrace);
     }
 
-    private Observable<List<VODInfo>> getDiskListMovies(String idList) {
-        return null;
-    }
     @Override
-    public Observable<List<VODInfo>> getListMoviesNew(String idList) {
-        return Observable.concat(getDiskListMovies(idList),getListMoviesNew(idList))
-                .map(new Func1<List<VODInfo>, List<VODInfo>>() {
-                    @Override public List<VODInfo> call(List<VODInfo> list) {
-                        Logger.e("getListHome="+list.toString());
-                        return list;
-                    }
+    public Observable<List<Category>> getCategory() {
+        return Observable.concat(mRealmManager.getCategory(),getCloudCategory())
+                .map(list -> {
+                    Logger.e("getCategory="+list.toString());
+                    return list;
                 })
                 .filter(data -> !data.isEmpty())
                 .first();
+    }
+
+    @Override
+    public Observable<List<VODInfo>> getListMovies(String idList,String categoryID) {
+        return Observable.concat(mRealmManager.getListMovies(idList,categoryID),getCloudListMovies(idList,categoryID))
+                .map(list -> {
+                    Logger.e("getListMovies="+list.toString());
+                    return list;
+                })
+                .filter(data -> !data.isEmpty())
+                .first();
+    }
+
+    @Override
+    public Observable<List<VODInfo>> getMoviesDetails(String categoryID) {
+        return Observable.concat(mRealmManager.getMoviesProduct(categoryID),getCloudMoviesDetails(categoryID))
+                .flatMap(idList -> getListMovies(idList,categoryID));
     }
 }

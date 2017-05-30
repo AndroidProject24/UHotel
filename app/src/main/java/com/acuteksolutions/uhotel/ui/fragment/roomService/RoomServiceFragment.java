@@ -2,20 +2,23 @@ package com.acuteksolutions.uhotel.ui.fragment.roomService;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindColor;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints;
 import com.acuteksolutions.uhotel.mvp.view.RoomServiceView;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+
 import java.util.Random;
+
+import butterknife.BindColor;
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class RoomServiceFragment extends BaseFragment implements RoomServiceView {
   @BindView(R.id.room_control_preset_home) Button roomControlPresetHome;
@@ -81,14 +84,15 @@ public class RoomServiceFragment extends BaseFragment implements RoomServiceView
 
   @Override protected void initData() {
     getAllSeekRandomValue();
-    roomControlPresetHome.requestFocus();
-    roomControlPresetHome.requestFocusFromTouch();
+    new Handler().postDelayed(() -> {
+      roomControlPresetHome.requestFocus();
+      roomControlPresetHome.requestFocusFromTouch();
+    },500);
   }
 
   private BubbleSeekBar.OnProgressChangedListener progressChanged(TextView txtViewLeft,TextView txtViewRight) {
     return new BubbleSeekBar.OnProgressChangedListener() {
       @Override public void onProgressChanged(int progress, float progressFloat) {
-        Logger.e("onProgressChanged:"+progress);
         setColorOnOff(txtViewLeft,txtViewRight,progressFloat);
         viewpagerListener.disableSwipe(false);
       }
@@ -99,7 +103,6 @@ public class RoomServiceFragment extends BaseFragment implements RoomServiceView
 
       @Override public void getProgressOnFinally(int progress, float progressFloat) {
         viewpagerListener.disableSwipe(true);
-        Logger.e("disableSwipe:true");
       }
     };
   }

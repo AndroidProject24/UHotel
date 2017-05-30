@@ -11,14 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
@@ -26,8 +25,11 @@ import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.exoplayer.VideoPlayerActivity;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements MoviesView {
   private Context mContext;
@@ -84,11 +86,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
     MoviesAdapter moviesAdapter = new MoviesAdapter(glide,moviesList);
     moviesAdapter.openLoadAnimation();
     mRecyclerMovies.setAdapter(moviesAdapter);
-    moviesAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-      @Override public void onItemChildClick(BaseQuickAdapter baseQuickAdapter, View view, int i) {
-        showDialog(moviesList.get(i));
-      }
-    });
+    moviesAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(moviesList.get(i)));
   }
 
   @SuppressLint("SetTextI18n")
@@ -102,12 +100,9 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
       alertDialog.setCancelable(false);
       alertDialog.show();
       ((TextView) ButterKnife.findById(view, R.id.movies_overlay_main_txtnamemovie)).setText("Watch '" + vodInfo.getDetail().getTitle() + "'");
-      ButterKnife.findById(view, R.id.movies_overlay_main_leftdiv).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          alertDialog.dismiss();
-          mPresenter.getLinkStream(vodInfo.getContentInfoUid());
-        }
+      ButterKnife.findById(view, R.id.movies_overlay_main_leftdiv).setOnClickListener(v -> {
+        alertDialog.dismiss();
+        mPresenter.getLinkStream(vodInfo.getContentInfoUid());
       });
       ButterKnife.findById(view, R.id.movies_overlay_main_rightdiv).setOnClickListener(
           v -> alertDialog.dismiss());

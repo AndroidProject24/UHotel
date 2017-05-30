@@ -1,17 +1,24 @@
-package com.acuteksolutions.uhotel.mvp.model.data;
+package com.acuteksolutions.uhotel.mvp.model.movies;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class PurchaseInfo {
+public class PurchaseInfo extends RealmObject{
+    @PrimaryKey
     private String purchaseGroupId;
     private boolean purchasable;
     private String offerVersion;
     private String type;
-    private List<Price> prices;
+    private RealmList<Price> prices;
     private Period purchasePeriod;
     private Period consumptionPeriod;
 
-    public PurchaseInfo(String purchaseGroupId, boolean purchasable, String offerVersion, String type, List<Price> prices, Period purchasePeriod, Period consumptionPeriod) {
+    public PurchaseInfo() {
+
+    }
+
+    public PurchaseInfo(String purchaseGroupId, boolean purchasable, String offerVersion, String type, RealmList<Price> prices, Period purchasePeriod, Period consumptionPeriod) {
         this.purchaseGroupId = purchaseGroupId;
         this.purchasable = purchasable;
         this.offerVersion = offerVersion;
@@ -37,7 +44,7 @@ public class PurchaseInfo {
         return type;
     }
 
-    public List<Price> getPrices() {
+    public RealmList<Price> getPrices() {
         return prices;
     }
 

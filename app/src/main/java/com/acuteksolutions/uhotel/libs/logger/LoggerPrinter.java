@@ -234,7 +234,7 @@ final class LoggerPrinter implements Printer {
     }
     for (int i = 0; i < length; i += CHUNK_SIZE) {
       int count = Math.min(length - i, CHUNK_SIZE);
-      //create a new String with system's default charset (which is UTF-8 for Android)
+      //create a new Item with system's default charset (which is UTF-8 for Android)
       logContent(priority, tag, new String(bytes, i, count));
     }
     logBottomBorder(priority, tag);

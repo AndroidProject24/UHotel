@@ -3,12 +3,14 @@ package com.acuteksolutions.uhotel.mvp.presenter;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.utils.Preconditions;
+
 import java.util.List;
+
 import javax.inject.Inject;
 
 /**

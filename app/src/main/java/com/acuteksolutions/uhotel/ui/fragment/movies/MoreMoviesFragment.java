@@ -3,16 +3,19 @@ package com.acuteksolutions.uhotel.ui.fragment.movies;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.mvp.model.data.Category;
-import com.acuteksolutions.uhotel.mvp.model.data.VODInfo;
+import com.acuteksolutions.uhotel.mvp.model.movies.Category;
+import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+
 import java.util.List;
+
+import butterknife.BindView;
 
 public class MoreMoviesFragment extends BaseFragment<MoviesPresenter> implements MoviesView {
   private Context mContext;

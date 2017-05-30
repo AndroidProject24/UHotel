@@ -1,6 +1,7 @@
 package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,10 +64,11 @@ public class ConciergeFragment extends BaseFragment{
   @Override
   protected void initData() {
       menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view,position));
-      new android.os.Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu,ConciergeMenuDef.ROOM, R.id.btn_menu),0),500);
+      new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu,ConciergeMenuDef.ROOM, R.id.btn_menu),0),500);
   }
 
   private void showScreen(@NonNull View view,int index) {
+    view.requestFocus();
     view.requestFocusFromTouch();
     switch (index) {
       case ConciergeMenuDef.ROOM:

@@ -22,7 +22,7 @@ public class UploadUtils {
   }
 
   /*@NonNull
-  public static MultipartBody.Part prepareFilePart(Context mContext, String partName, Uri fileUri) {
+  public static MultipartBody.Part prepareFilePart(Context mContext, Item partName, Uri fileUri) {
     File file = FileUtils.getFile(mContext, fileUri);
     RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
     return MultipartBody.Part.createFormData(partName, file.getName(), requestFile);
