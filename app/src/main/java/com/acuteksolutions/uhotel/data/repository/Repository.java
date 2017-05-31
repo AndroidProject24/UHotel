@@ -281,12 +281,12 @@ public class Repository implements DataSource{
                                 genres.add(jsonGenres.getString(j));
                             }
                             Detail detail = new Detail(
-                                    (jsonDetail.optString("title").equals("")?jsonDetail.getString("title"): "N/A"),
-                                    (jsonDetail.optString("actors").equals("")? jsonDetail.getString("actors") : "N/A"),
-                                    (jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
+                                    (!jsonDetail.optString("title").equals("")?jsonDetail.getString("title"): "N/A"),
+                                    (!jsonDetail.optString("actors").equals("")? jsonDetail.getString("actors") : "N/A"),
+                                    (!jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
                                     jsonDetail.optInt("duration",0),
                                     LinkDef.LINK_IMAGE_URL.replace("regionId", String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())) + jsonDetail.getString("poster"),
-                                    (jsonDetail.optString("description").equals("") ? jsonDetail.getString("description"): "No description"),
+                                    (!jsonDetail.optString("description").equals("") ? jsonDetail.getString("description"): "No description"),
                                     genres
                             );
                             VODInfo vod = new VODInfo(

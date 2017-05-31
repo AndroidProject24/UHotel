@@ -20,6 +20,9 @@ import com.acuteksolutions.uhotel.mvp.view.LoginView;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.StatusBarUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -64,6 +67,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     protected void initViews() {
         StatusBarUtil.setTranslucent(this);
+        initTime();
         mEtPass.addTextChangedListener(textWatcher);
     }
 
@@ -91,6 +95,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         MainActivity.start(this);
     }
 
+    private void initTime(){
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy");
+        String formattedDate = df.format(c.getTime());
+        mTxtDate.setText(formattedDate);
+    }
     @Override
     public void loginError() {
         showError("");
