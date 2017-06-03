@@ -14,7 +14,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.adapter.setting.AccountAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
 
 import butterknife.BindView;

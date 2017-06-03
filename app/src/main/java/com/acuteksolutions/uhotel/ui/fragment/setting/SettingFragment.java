@@ -9,7 +9,7 @@ import com.acuteksolutions.uhotel.annotation.TabSettingDef;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.mvp.view.SettingView;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerSettingAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import butterknife.BindView;
 

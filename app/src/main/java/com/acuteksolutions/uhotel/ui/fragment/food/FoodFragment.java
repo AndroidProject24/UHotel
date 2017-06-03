@@ -8,7 +8,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerFoodAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import butterknife.BindView;
 

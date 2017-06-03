@@ -1,7 +1,7 @@
 package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 /**
  * Created by Toan.IT
  * Date:22/04/2017

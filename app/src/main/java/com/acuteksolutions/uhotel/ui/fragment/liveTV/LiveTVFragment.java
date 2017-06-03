@@ -22,7 +22,7 @@ import com.acuteksolutions.uhotel.ui.adapter.livetv.ComingUpAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.livetv.LiveTVAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.livetv.RightNowAdapter;
 import com.acuteksolutions.uhotel.ui.exoplayer.VideoPlayerActivity;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import java.util.Calendar;
 import java.util.List;

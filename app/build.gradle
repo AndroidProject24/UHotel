@@ -88,9 +88,9 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-  /*configurations {
-      all*.exclude module: 'rxjava'
-      all*.exclude module: 'rxandroid'
+ /* configurations {
+      compile.exclude group: 'io.reactivex:rxjava', module: 'rxjava'
+      compile.exclude group: 'io.reactivex:rxandroid', module: 'rxandroid'
   }*/
 }
 
@@ -122,12 +122,15 @@ dependencies {
   compile injectDependencies.rxandroid
   compile injectDependencies.rxbinding
 
+  //Load Image
+  compile networkDependencies.glide
+  //annotationProcessor networkDependencies.glideCompiler
+
   //----- Network
   compile networkDependencies.retrofit
   compile networkDependencies.okHttp
   compile networkDependencies.retrofitGsonConverter
   compile networkDependencies.retrofitRxJavaAdapter
-  compile networkDependencies.glide
   compile networkDependencies.reactivenetwork
   compile (networkDependencies.okHttpLogging) {
     exclude group: 'org.json', module: 'json'

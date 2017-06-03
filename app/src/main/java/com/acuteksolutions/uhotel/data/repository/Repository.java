@@ -7,7 +7,6 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.local.RealmManager;
 import com.acuteksolutions.uhotel.data.service.RestApi;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.mvp.model.JsonString;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Program;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Stream;
@@ -36,34 +35,34 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import io.realm.RealmList;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Toan.IT on 5/14/17.
  * Email: huynhvantoan.itc@gmail.com
  */
 @Singleton
-public class Repository implements DataSource{
+public class Repository implements DataSource {
     private final RestApi mRestApi;
     private final RealmManager mRealmManager;
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public Repository(RestApi restApi,RealmManager realmManager,PreferencesHelper preferencesHelper) {
+    public Repository(RestApi restApi, RealmManager realmManager, PreferencesHelper preferencesHelper) {
         this.mRestApi = restApi;
-        this.mRealmManager=realmManager;
-        this.mPreferencesHelper=preferencesHelper;
+        this.mRealmManager = realmManager;
+        this.mPreferencesHelper = preferencesHelper;
     }
 
     //Login
     public Observable<Login> getLogin(String pass) {
-        return mRestApi.getLogin(Constant.DEVICE_MAC,pass,"default","default")
+        return mRestApi.getLogin(Constant.DEVICE_MAC, pass, "default", "default")
                 .subscribeOn(Schedulers.io())
-                .map(data->data.result)
+                .map(data -> data.result)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
@@ -73,34 +72,11 @@ public class Repository implements DataSource{
                 .subscribeOn(Schedulers.io())
                 .map(stringJsonString -> {
                     List<Channel> channelList = null;
-         /* List<Stream> channelStreamList=null;
-          try {
-            JSONObject obj = new JSONObject(stringJsonString.result);
-            JSONArray jsonArray = obj.optJSONArray("list");
-            channelStreamList = new ArrayList<>(jsonArray.length());
-            for (int k = 0; k < jsonArray.length(); k++) {
-              JSONObject jsonChannel = jsonArray.getJSONObject(k);
-              if (jsonChannel != null) {
-                JSONArray jsonStreams = jsonChannel.getJSONArray("streams");
-                if (jsonStreams.length() == 0) {
-                  channelStreamList.add(new Stream());
-                  continue;
-                }
-                final JSONObject jsonStream = jsonStreams.getJSONObject(0);
-                final Stream stream = new Stream(
-                    jsonStream.getString("src"),
-                    jsonStream.getString("provider"),
-                    jsonStream.getString("protocolStack"),
-                    jsonStream.getString("profiles"),
-                    jsonStream.getString("capabilities")
-                );
-                if (!channelStreamList.contains(stream)) channelStreamList.add(stream);
-              }
-            }*/
-                    try{
+                    try {
                         JSONObject result = new JSONObject(stringJsonString.result);
-                        JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
-                        channelList=new Gson().fromJson(list.toString(),new TypeToken<List<Channel>>(){}.getType());
+                        JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
+                        channelList = new Gson().fromJson(list.toString(), new TypeToken<List<Channel>>() {
+                        }.getType());
                     } catch (JSONException e) {
                         e.printStackTrace();
                         return null;
@@ -110,19 +86,20 @@ public class Repository implements DataSource{
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<List<TVInfo>> getProgram(List<Channel> channelList,Date currentDate) {
+    public Observable<List<TVInfo>> getProgram(List<Channel> channelList, Date currentDate) {
         return mRestApi.getTVProgram(Constant.DEVICE_MAC, LinkDef.LINK_LIVE_PROGRAM_BY_ID_PATH
-                .replace(PathDef.REGION_UID,String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getLanguageId()))
+                .replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getLanguageId()))
                 .replace(PathDef.DATE, Utils.parseDate(currentDate, "yyyy-MM-dd")))
                 .subscribeOn(Schedulers.io())
                 .map(stringJsonString -> {
-                    List<TVInfo> listTV=new ArrayList<>();
+                    List<TVInfo> listTV = new ArrayList<>();
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
-                        JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
-                        List<Program> programList = new Gson().fromJson(list.toString(),new TypeToken<List<Program>>(){}.getType());
-                        listTV=setListNowUp(listTV,channelList,programList);
-                    }catch (JSONException e){
+                        JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
+                        List<Program> programList = new Gson().fromJson(list.toString(), new TypeToken<List<Program>>() {
+                        }.getType());
+                        listTV = setListNowUp(listTV, channelList, programList);
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         return null;
                     }
@@ -131,7 +108,7 @@ public class Repository implements DataSource{
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private List<TVInfo> setListNowUp(List<TVInfo> listTV,List<Channel> channelInfoList, List<Program> programInfoList) {
+    private List<TVInfo> setListNowUp(List<TVInfo> listTV, List<Channel> channelInfoList, List<Program> programInfoList) {
         TVInfo tvInfo;
         for (Program programInfo : programInfoList) {
             tvInfo = new TVInfo();
@@ -148,7 +125,7 @@ public class Repository implements DataSource{
             }
             listTV.add(tvInfo);
         }
-        Collections.sort(listTV,new TVInfo());
+        Collections.sort(listTV, new TVInfo());
         return listTV;
     }
 
@@ -162,21 +139,21 @@ public class Repository implements DataSource{
 
     /*PIN*/
     public Observable<Boolean> verifyPin(String pin) {
-        return mRestApi.verifyPin(Constant.DEVICE_MAC,  String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()),pin)
+        return mRestApi.verifyPin(Constant.DEVICE_MAC, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()), pin)
                 .subscribeOn(Schedulers.io())
                 .map(booleanJsonString -> Boolean.valueOf(booleanJsonString.result))
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<Boolean> changePin(String newPin,String oldPin) {
-        return mRestApi.changePin(Constant.DEVICE_MAC,  String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()), newPin, oldPin)
+    public Observable<Boolean> changePin(String newPin, String oldPin) {
+        return mRestApi.changePin(Constant.DEVICE_MAC, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()), newPin, oldPin)
                 .subscribeOn(Schedulers.io())
                 .map(booleanJsonString -> Boolean.valueOf(booleanJsonString.result))
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<Boolean> saveSetting(String data,String pin) {
-        return mRestApi.saveSetting(Constant.DEVICE_MAC,  String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()),data,pin)
+    public Observable<Boolean> saveSetting(String data, String pin) {
+        return mRestApi.saveSetting(Constant.DEVICE_MAC, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getProfileUid()), data, pin)
                 .subscribeOn(Schedulers.io())
                 .map(booleanJsonString -> Boolean.valueOf(booleanJsonString.result))
                 .observeOn(AndroidSchedulers.mainThread());
@@ -184,13 +161,13 @@ public class Repository implements DataSource{
 
     /*GETLINK*/
     public Observable<String> getLinkStream(String cid) {
-        return mRestApi.getLinkStream(Constant.DEVICE_MAC, LinkDef.LINK_STREAM.replace(PathDef.REGION_UID,String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CID,cid))
+        return mRestApi.getLinkStream(Constant.DEVICE_MAC, LinkDef.LINK_STREAM.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CID, cid))
                 .subscribeOn(Schedulers.io())
                 .map(stringJsonString -> {
-                    String linkStream ="";
+                    String linkStream = "";
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
-                        JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
+                        JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
                         for (int i = 0; i < list.length(); i++) {
                             JSONObject items = list.getJSONObject(i);
                             JSONArray item = items.getJSONArray(ParseGsonDef.MEDIA_RESOURCES);
@@ -198,9 +175,9 @@ public class Repository implements DataSource{
                                     new Gson().fromJson(item.toString(), new TypeToken<List<Stream>>() {
                                     }.getType());
                             Logger.e(streamList.toString());
-                            linkStream=streamList.get(0).getSrc();
+                            linkStream = streamList.get(0).getSrc();
                         }
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     return linkStream;
@@ -210,96 +187,70 @@ public class Repository implements DataSource{
 
     //Movies
     private Observable<List<Category>> getCloudCategory() {
-        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_CATEGORY.replace(PathDef.REGION_UID,String.valueOf(
+        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_CATEGORY.replace(PathDef.REGION_UID, String.valueOf(
                 Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())))
                 .subscribeOn(Schedulers.io())
-                .doOnNext(stringJsonString -> {
-                    List<Category> categoryList =null;
+                .flatMap(stringJsonString -> {
+                    List<Category> categoryList = null;
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
-                        JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
-                        categoryList = new Gson().fromJson(list.toString(),new TypeToken<List<Category>>(){}.getType());
-                    }catch (JSONException e){
+                        JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
+                        categoryList = new Gson().fromJson(list.toString(), new TypeToken<List<Category>>() {
+                        }.getType());
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    mRealmManager.saveListCategory(categoryList);
+                    Logger.e("getCloudCategory=" + categoryList);
+                    return Observable.just(categoryList);
                 })
-                .flatMap((Func1<JsonString<String>, Observable<List<Category>>>) stringJsonString -> Observable.just(null))
+                .subscribeOn(Schedulers.computation())
+                .doOnNext(mRealmManager::saveListCategory)
                 .doOnError(Throwable::printStackTrace);
     }
 
-
-    private Observable<String> getCloudMoviesDetails(String categoryID) {
-       /* return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID,catID))
+    private Observable<String> getCloudListIDMovies(String categoryID) {
+        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID, categoryID))
                 .subscribeOn(Schedulers.io())
-                .map(stringJsonString -> {
-                    List<Product> productList = new ArrayList<>();
-                    List<String> purchasesItem = new ArrayList<>();
+                .flatMap(stringJsonString -> {
+                    RealmList<Product> productList = new RealmList<>();
+                    RealmList<Item> purchasesItem = new RealmList<>();
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
-                        JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
+                        JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
                         for (int i = 0; i < list.length(); i++) {
                             JSONObject items = list.getJSONObject(i);
-                            JSONArray item=items.getJSONArray(ParseGsonDef.ITEMS);
+                            JSONArray item = items.getJSONArray(ParseGsonDef.ITEMS);
                             for (int k = 0; k < item.length(); k++) {
                                 JSONObject id = item.getJSONObject(k);
                                 if (null != id) {
-                                    purchasesItem.add(id.getString(ParseGsonDef.ID));
+                                    purchasesItem.add(new Item(id.getString(ParseGsonDef.ID)));
                                 }
                             }
-                            Product product = new Product(purchasesItem, null);
+                            Product product = new Product(i, purchasesItem, null);
                             productList.add(product);
-                            //Logger.e(productList.toString());
                         }
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
-                        return null;
                     }
-                    return Preconditions.checkNotNull(productList).get(0).getItems();
+                    return Observable.just(productList);
                 })
-                .flatMap(strings -> {
+                .observeOn(Schedulers.computation())
+                .doOnNext(products -> mRealmManager.saveListMoviesFromCategory(products, categoryID))
+                .map(products -> {
                     StringBuilder builder = new StringBuilder();
-                    for (String s : strings) {
-                        if (builder.length() == 0) builder.append(s);
-                        builder.append(",").append(s);
+                    for (Item item : products.get(0).getItems()) {
+                        if (builder.length() == 0) builder.append(item.getItem());
+                        builder.append(",").append(item.getItem());
                     }
-                    return getCloudListMovies(builder.toString());
+                    return builder.toString();
                 })
-                .observeOn(AndroidSchedulers.mainThread());*/
-       return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_MOVIES_DETAILS.replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())).replace(PathDef.CAT_ID,categoryID))
-               .subscribeOn(Schedulers.io())
-               .doOnNext(stringJsonString -> {
-                   RealmList<Product> productList = new RealmList<>();
-                   RealmList<Item> purchasesItem = new RealmList<>();
-                   try {
-                       JSONObject result = new JSONObject(stringJsonString.result);
-                       JSONArray list=result.getJSONArray(ParseGsonDef.ARRAY);
-                       for (int i = 0; i < list.length(); i++) {
-                           JSONObject items = list.getJSONObject(i);
-                           JSONArray item=items.getJSONArray(ParseGsonDef.ITEMS);
-                           for (int k = 0; k < item.length(); k++) {
-                               JSONObject id = item.getJSONObject(k);
-                               if (null != id) {
-                                   purchasesItem.add(new Item(id.getString(ParseGsonDef.ID)));
-                               }
-                           }
-                           Product product = new Product(i,purchasesItem, null);
-                           productList.add(product);
-                           mRealmManager.saveListMoviesDetails(productList,categoryID);
-                       }
-                   }catch (JSONException e){
-                       e.printStackTrace();
-                   }
-               })
-               .flatMap((Func1<JsonString<String>, Observable<String>>) stringJsonString -> Observable.just(null))
-               .doOnError(Throwable::printStackTrace);
+                .doOnError(Throwable::printStackTrace);
     }
 
-    private Observable<List<VODInfo>> getCloudListMovies(String idList,String categoryID) {
-        Logger.e(idList);
-        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID,String.valueOf(idList)))
+    private Observable<List<VODInfo>> getCloudMoviesFromCategory(String idList, String categoryID) {
+        return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID, String.valueOf(idList)))
                 .subscribeOn(Schedulers.io())
-                .doOnNext(stringJsonString -> {
+                .flatMap(stringJsonString -> {
                     RealmList<VODInfo> vodInfoList = new RealmList<>();
                     try {
                         Logger.e(stringJsonString.result);
@@ -313,12 +264,12 @@ public class Repository implements DataSource{
                                 genres.add(new Item(jsonGenres.getString(j)));
                             }
                             Detail detail = new Detail(
-                                    (jsonDetail.optString("title").equals("") ? jsonDetail.getString("title") : "N/A"),
-                                    (jsonDetail.optString("actors").equals("") ? jsonDetail.getString("actors") : "N/A"),
-                                    (jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
+                                    (!jsonDetail.optString("title").equals("") ? jsonDetail.getString("title") : "N/A"),
+                                    (!jsonDetail.optString("actors").equals("") ? jsonDetail.getString("actors") : "N/A"),
+                                    (!jsonDetail.optString("director").equals("") ? jsonDetail.getString("director") : "N/A"),
                                     jsonDetail.optInt("duration", 0),
                                     LinkDef.LINK_IMAGE_URL.replace("regionId", String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())) + jsonDetail.getString("poster"),
-                                    (jsonDetail.optString("description").equals("") ? jsonDetail.getString("description") : "No description"),
+                                    (!jsonDetail.optString("description").equals("") ? jsonDetail.getString("description") : "No description"),
                                     genres
                             );
                             VODInfo vod = new VODInfo(
@@ -329,46 +280,63 @@ public class Repository implements DataSource{
                                     categoryID
                             );
                             vodInfoList.add(vod);
-                            mRealmManager.saveListMovies(vodInfoList,categoryID);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    return Observable.just(vodInfoList);
                 })
-                .flatMap((Func1<JsonString<String>, Observable<List<VODInfo>>>) stringJsonString -> Observable.just(null))
+                .observeOn(Schedulers.computation())
+                .doOnNext(vodInfoList -> mRealmManager.saveListMovies(vodInfoList, categoryID))
+                .map((Function<RealmList<VODInfo>, List<VODInfo>>) vodInfos -> vodInfos)
                 .doOnError(Throwable::printStackTrace);
     }
 
     @Override
     public Observable<List<Category>> getCategory() {
-        Logger.e("getCategory=");
-        return Observable.concat(getCloudCategory(),mRealmManager.getCategory())
-                .map(list -> {
-                    Logger.e("getCategory="+list.toString());
-                    return list;
-                })
-                .filter(data -> !data.isEmpty())
-                .first()
+        /*if(mRealmManager.checkCategory())
+            return Observable.concat(mRealmManager.getCategory(),getCloudCategory())
+                    .observeOn(AndroidSchedulers.mainThread());
+        else
+            return getCloudCategory().observeOn(AndroidSchedulers.mainThread());*/
+        Observable<List<Category>> remote = getCloudCategory();
+        Observable<List<Category>> local = mRealmManager.getCategory();
+        return Observable.concat(mRealmManager.getCategory(), getCloudCategory())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public Observable<List<VODInfo>> getListMovies(String idList,String categoryID) {
-        Logger.e("getListMovies="+categoryID);
-        return Observable.concat(getCloudListMovies(idList,categoryID),mRealmManager.getListMovies(idList,categoryID))
-                .map(list -> {
-                    Logger.e("getListMovies="+list.toString());
-                    return list;
-                })
-                .filter(data -> !data.isEmpty())
-                .first();
+    public Observable<List<VODInfo>> getListMovies(String categoryID) {
+        /*if(mRealmManager.checkVodInfo(categoryID))
+            return Observable.concat(mRealmManager.getListIDMovies(categoryID),
+                    getCloudListIDMovies(categoryID))
+                    .flatMap(idList -> getMoviesFromCategory(idList,categoryID))
+                    .observeOn(AndroidSchedulers.mainThread());
+        else
+            return getCloudListIDMovies(categoryID)
+                    .flatMap(idList -> getCloudMoviesFromCategory(idList,categoryID))
+                    .observeOn(AndroidSchedulers.mainThread());*/
+        Logger.e("getListMovies=" + categoryID);
+        return Observable.concat(mRealmManager.getListIDMovies(categoryID),
+                getCloudListIDMovies(categoryID))
+                .flatMap(idList -> getMoviesFromCategory(idList, categoryID))
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
-    public Observable<List<VODInfo>> getMoviesDetails(String categoryID) {
-        Logger.e("getMoviesDetails="+categoryID);
-        return Observable.concat(getCloudMoviesDetails(categoryID),mRealmManager.getMoviesProduct(categoryID))
-                .flatMap(idList -> getListMovies(idList,categoryID))
-                .observeOn(AndroidSchedulers.mainThread());
+    public Observable<List<VODInfo>> getMoviesFromCategory(String idList, String categoryID) {
+       /* if(mRealmManager.checkProduct(categoryID))
+            return Observable.concat(mRealmManager.getMoviesFromCategory(idList,categoryID),
+                    getCloudMoviesFromCategory(idList,categoryID));
+        else
+            return getCloudMoviesFromCategory(idList,categoryID);*/
+        Logger.e("getMoviesFromCategory=" + idList);
+        return Observable.concat(mRealmManager.getMoviesFromCategory(idList, categoryID),
+                getCloudMoviesFromCategory(idList, categoryID));
+    }
+
+    @Override
+    public void clear() {
+
     }
 }

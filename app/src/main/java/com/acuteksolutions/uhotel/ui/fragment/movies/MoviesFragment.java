@@ -9,7 +9,7 @@ import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMoviesAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import butterknife.BindView;
 

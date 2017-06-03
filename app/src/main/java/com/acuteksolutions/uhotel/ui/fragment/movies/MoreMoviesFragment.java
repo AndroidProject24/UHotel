@@ -11,7 +11,7 @@ import com.acuteksolutions.uhotel.mvp.presenter.MoviesPresenter;
 import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import java.util.List;
 

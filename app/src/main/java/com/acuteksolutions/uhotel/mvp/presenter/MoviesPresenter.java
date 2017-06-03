@@ -29,7 +29,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   public void getCategory() {
     getMvpView().showLoading();
     addSubscribe(mRepository.getCategory()
-            .subscribe(new DefaultObserver<List<Category>>() {
+            .subscribeWith(new DefaultObserver<List<Category>>() {
               @Override
               public void onError(Throwable e) {
                 e.printStackTrace();
@@ -40,7 +40,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
               @Override
               public void onNext(List<Category> list) {
                 try {
-                  if(list!=null && !list.isEmpty()) {
+                  if(list!=null && list.size()>0) {
                     getMvpView().listCategory(list);
                   }else
                     getMvpView().showEmty();
@@ -51,9 +51,9 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
             }));
   }
 
-  public void getMoviesDetails(String catID) {
-    addSubscribe(mRepository.getMoviesDetails(catID)
-            .subscribe(new DefaultObserver<List<VODInfo>>() {
+  public void getListMovies(String catID) {
+    addSubscribe(mRepository.getListMovies(catID)
+            .subscribeWith(new DefaultObserver<List<VODInfo>>() {
               @Override
               public void onError(Throwable e) {
                 e.printStackTrace();
@@ -65,7 +65,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
               public void onNext(List<VODInfo> list) {
                 try {
                   getMvpView().hideLoading();
-                  if(!list.isEmpty()) {
+                  if(list!=null && list.size()>0) {
                     getMvpView().listMovies(list);
                   }else
                     getMvpView().showEmty();
@@ -79,7 +79,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
   public void getLinkStream(String cid) {
     getMvpView().showLoading();
     addSubscribe(mRepository.getLinkStream(cid)
-        .subscribe(new DefaultObserver<String>() {
+        .subscribeWith(new DefaultObserver<String>() {
           @Override
           public void onError(Throwable e) {
             e.printStackTrace();

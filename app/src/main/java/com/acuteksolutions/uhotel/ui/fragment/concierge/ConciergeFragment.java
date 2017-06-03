@@ -10,7 +10,7 @@ import android.view.View;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.ConciergeMenuDef;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.MenuAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import java.util.Arrays;

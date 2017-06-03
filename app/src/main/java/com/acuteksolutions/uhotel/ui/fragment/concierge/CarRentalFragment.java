@@ -7,7 +7,7 @@ import butterknife.BindView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.conciege.CarRentalItem;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.CarRentalAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -17,7 +17,7 @@ import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.acuteksolutions.uhotel.mvp.presenter.RoomPresenter;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.RoomAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.ArrayList;

@@ -16,13 +16,12 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.acuteksolutions.uhotel.utils.ActivityManager;
 import com.squareup.leakcanary.RefWatcher;
 
+import org.reactivestreams.Subscription;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
-
 import static dagger.internal.Preconditions.checkNotNull;
 
 /**
@@ -30,8 +29,6 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Date: 25/05/2016
  */
 public abstract class BaseActivity <T extends BasePresenter> extends SupportActivity implements BaseView{
-  private CompositeSubscription mCompositeSubscription;
-  private Subscription subscription;
   private ActivityComponent mActivityComponent;
   @Inject
   protected T mPresenter;
@@ -75,7 +72,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
 
   protected abstract void injectDependencies();
 
-  void addFagment(@NonNull FragmentManager fragmentManager,@NonNull int frameId, @NonNull Fragment fragment){
+  void addFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
     FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -83,7 +80,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     transaction.addToBackStack(null);
     transaction.commit();
   }
-  void replaceFagment(@NonNull FragmentManager fragmentManager,@NonNull int frameId, @NonNull Fragment fragment){
+  void replaceFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
     FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -91,23 +88,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     transaction.addToBackStack(null);
     transaction.commit();
   }
-  public CompositeSubscription getCompositeSubscription() {
-    if (this.mCompositeSubscription == null) {
-      this.mCompositeSubscription = new CompositeSubscription();
-    }
-    return this.mCompositeSubscription;
-  }
 
-  public void addSubscription(Subscription s) {
-    if (s == null) {
-      return;
-    }
-    if (this.mCompositeSubscription == null) {
-      this.mCompositeSubscription = new CompositeSubscription();
-    }
-
-    this.mCompositeSubscription.add(s);
-  }
   @Override
   protected void onStart() {
     super.onStart();
@@ -119,9 +100,6 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    if (this.mCompositeSubscription != null) {
-      this.mCompositeSubscription.unsubscribe();
-    }
     if (mPresenter != null)
       mPresenter.detachView();
     if(BaseApplication.getRefWatcher(this)!=null) {

@@ -22,7 +22,7 @@ public class PinPresenter extends BasePresenter<PinView> {
     public void verifyPin(String pin) {
         getMvpView().showLoading();
         addSubscribe(mRepository.verifyPin(pin)
-                .subscribe(new DefaultObserver<Boolean>() {
+                .subscribeWith(new DefaultObserver<Boolean>() {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
@@ -41,7 +41,7 @@ public class PinPresenter extends BasePresenter<PinView> {
     public void changePin(String pinNew,String pinOld) {
         getMvpView().showLoading();
         addSubscribe(mRepository.changePin(pinNew,pinOld)
-                .subscribe(new DefaultObserver<Boolean>() {
+                .subscribeWith(new DefaultObserver<Boolean>() {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
@@ -60,7 +60,7 @@ public class PinPresenter extends BasePresenter<PinView> {
     public void saveSetting(String data,String pin) {
         getMvpView().showLoading();
         addSubscribe(mRepository.saveSetting(data,pin)
-                .subscribe(new DefaultObserver<Boolean>() {
+                .subscribeWith(new DefaultObserver<Boolean>() {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();

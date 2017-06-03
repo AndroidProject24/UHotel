@@ -23,7 +23,7 @@ import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.exoplayer.VideoPlayerActivity;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
 
   @Override
   public void listCategory(List<Category> categoryList) {
-    mPresenter.getMoviesDetails(Preconditions.checkNotNull(categoryList.get(Preconditions.checkNotNull(getArguments().getInt(BundleDef.BUNDLE_KEY)))).getId());
+    mPresenter.getListMovies(Preconditions.checkNotNull(categoryList.get(Preconditions.checkNotNull(getArguments().getInt(BundleDef.BUNDLE_KEY)))).getId());
   }
 
   @Override

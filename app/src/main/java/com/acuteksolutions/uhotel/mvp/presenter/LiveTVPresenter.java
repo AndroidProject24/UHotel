@@ -14,10 +14,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Toan.IT
@@ -34,7 +34,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
     public void getAllChannel() {
         getMvpView().showLoading();
         addSubscribe(mRepository.getAllChannel()
-                .subscribe(new DefaultObserver<List<Channel>>() {
+                .subscribeWith(new DefaultObserver<List<Channel>>() {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
@@ -59,7 +59,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
 
     public void getProgram(List<Channel> channelList,Date date) {
         addSubscribe(mRepository.getProgram(channelList,date)
-                .subscribe(new DefaultObserver<List<TVInfo>>() {
+                .subscribeWith(new DefaultObserver<List<TVInfo>>() {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
@@ -85,18 +85,18 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
     public void getDataRightNow(List<TVInfo> tvInfoList){
         addSubscribe(Observable.just(tvInfoList)
                 .subscribeOn(Schedulers.newThread())
-                .map((Func1<List<TVInfo>, List<TVInfo>>) tvInfoList1 -> {
-                    if(tvInfoList1 ==null)
+                .map((Function<List<TVInfo>, List<TVInfo>>) tvInfos -> {
+                    if(tvInfos ==null)
                         return new ArrayList<>();
                     List<TVInfo> listNow=new ArrayList<>();
-                    for (TVInfo tvInfo: tvInfoList1){
+                    for (TVInfo tvInfo: tvInfos){
                         if (tvInfo.isPlaying())
                             listNow.add(tvInfo);
                     }
                     return listNow;
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<List<TVInfo>>(){
+                .subscribeWith(new DefaultObserver<List<TVInfo>>(){
                     @Override
                     public void onNext(List<TVInfo> tvInfoList) {
                         //Logger.e(tvInfoList.toString());
@@ -108,9 +108,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
     public void getDataComingUp(List<TVInfo> tvInfoList){
         addSubscribe(Observable.just(tvInfoList)
                 .subscribeOn(Schedulers.newThread())
-                .map((Func1<List<TVInfo>, List<TVInfo>>) tvInfoList1 -> {
-                    if(tvInfoList==null)
-                        return new ArrayList<>();
+                .map(tvInfos -> {
                     List<TVInfo> listNow=new ArrayList<>();
                     boolean isFirst=false;
                     for (TVInfo tvInfo:tvInfoList){
@@ -125,7 +123,7 @@ public class LiveTVPresenter extends BasePresenter<LiveTvView> {
                     return listNow;
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<List<TVInfo>>(){
+                .subscribeWith(new DefaultObserver<List<TVInfo>>(){
                     @Override
                     public void onNext(List<TVInfo> tvInfoList) {
                        // Logger.e(tvInfoList.toString());

@@ -1,26 +1,28 @@
 package com.acuteksolutions.uhotel.data.rxjava;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
-import rx.subjects.SerializedSubject;
-import rx.subjects.Subject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 /**
- * Created by Toan.IT
- * Date: 25/05/2016
+ * Created by Toan.IT on 6/3/17.
+ * Email: huynhvantoan.itc@gmail.com
  */
 
 public class RxBus {
-    private final Subject<Object, Object> _bus = new SerializedSubject<>(PublishSubject.create());
+    public RxBus() {
+    }
+
+    private PublishSubject<Object> bus = PublishSubject.create();
 
     public void send(Object o) {
-        _bus.onNext(o);
+        bus.onNext(o);
     }
-    public Observable<Object> toObserverable() {
-        return _bus;
+
+    public Observable<Object> toObservable() {
+        return bus;
     }
 
     public boolean hasObservers() {
-        return _bus.hasObservers();
+        return bus.hasObservers();
     }
 }

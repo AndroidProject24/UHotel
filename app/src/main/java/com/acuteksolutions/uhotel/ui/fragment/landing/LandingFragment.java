@@ -9,7 +9,7 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.presenter.LandingPresenter;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
 import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
 import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;

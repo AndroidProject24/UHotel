@@ -18,7 +18,7 @@ import com.acuteksolutions.uhotel.mvp.presenter.FoodPresenter;
 import com.acuteksolutions.uhotel.mvp.view.FoodView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.FoodAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.bumptech.glide.Glide;
 

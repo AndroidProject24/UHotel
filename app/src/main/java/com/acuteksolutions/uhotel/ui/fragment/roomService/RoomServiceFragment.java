@@ -12,7 +12,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar;
 import com.acuteksolutions.uhotel.libs.swagpoints.SwagPoints;
 import com.acuteksolutions.uhotel.mvp.view.RoomServiceView;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 import java.util.Random;
 

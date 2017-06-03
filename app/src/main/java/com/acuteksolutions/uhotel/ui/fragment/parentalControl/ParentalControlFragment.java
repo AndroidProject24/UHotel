@@ -3,7 +3,7 @@ package com.acuteksolutions.uhotel.ui.fragment.parentalControl;
 import android.content.Context;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.view.ParentalControlView;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 
 public class ParentalControlFragment extends BaseFragment implements ParentalControlView {
   private Context mContext;

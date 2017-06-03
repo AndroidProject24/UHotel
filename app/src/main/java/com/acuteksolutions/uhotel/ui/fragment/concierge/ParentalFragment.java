@@ -22,7 +22,7 @@ import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.ParentalAdapter;
 import com.acuteksolutions.uhotel.ui.dialog.PinChangeDialog;
 import com.acuteksolutions.uhotel.ui.dialog.PinVerifyDialog;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.google.gson.JsonObject;
 

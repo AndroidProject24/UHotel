@@ -18,8 +18,8 @@ public class Category extends RealmObject {
         return "Category{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", product=" + Arrays.toString(product.toArray()) +
-                ", vodInfos=" + Arrays.toString(vodInfos.toArray()) +
+                ", product=" + (product!=null?Arrays.toString(product.toArray()):"null") +
+                ", vodInfos=" + (vodInfos!=null?Arrays.toString(vodInfos.toArray()):"null")+
                 '}';
     }
 

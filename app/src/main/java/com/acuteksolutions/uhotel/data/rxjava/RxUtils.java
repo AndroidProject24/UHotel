@@ -1,38 +1,38 @@
 package com.acuteksolutions.uhotel.data.rxjava;
 
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public class RxUtils {
-    private static CompositeSubscription mCompositeSubscription;
+    private static CompositeDisposable compositeDisposable;
 
-    public static void addCompositeSubscription(Subscription s) {
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = new CompositeSubscription();
+    public static void addCompositeSubscription(Disposable s) {
+        if (compositeDisposable == null) {
+            compositeDisposable = new CompositeDisposable();
         }
-        mCompositeSubscription.add(s);
+        compositeDisposable.add(s);
     }
 
     public void unCompositeSubscription(){
-        if (mCompositeSubscription != null) {
-            mCompositeSubscription.clear();
-            mCompositeSubscription=null;
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+            compositeDisposable=null;
         }
     }
 
-    public static void unSubscribe(Subscription subscription) {
+    public static void unSubscribe(Disposable subscription) {
         if (subscription != null) {
-            subscription.unsubscribe();
+            subscription.dispose();
         }
     }
 
-    public static void unSubscribe(Subscription... subscriptions)
+    public static void unSubscribe(Disposable ... subscriptions)
     {
-        for (Subscription subscription : subscriptions)
+        for (Disposable subscription : subscriptions)
         {
-            if (subscription != null && !subscription.isUnsubscribed())
+            if (subscription != null && !subscription.isDisposed())
             {
-                subscription.unsubscribe();
+                subscription.dispose();
             }
         }
     }

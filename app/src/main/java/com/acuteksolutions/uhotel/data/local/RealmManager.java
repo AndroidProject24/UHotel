@@ -11,17 +11,18 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmList;
 import io.realm.RealmMigration;
 import io.realm.RealmObject;
 import io.realm.RealmSchema;
-import rx.Observable;
 
 
-public class RealmManager implements DataSource{
+public class RealmManager implements DataSource {
     public RealmConfiguration mRealmConfigDB;
+
     @Inject
     public RealmManager() {
         mRealmConfigDB = new RealmConfiguration.Builder().build();
@@ -47,56 +48,77 @@ public class RealmManager implements DataSource{
     };
 
     public <T extends RealmObject> List<T> findAll(Class<T> clazz) {
-        Realm realm=null;
-        try{
-            realm=getRealmDB();
+        Realm realm = null;
+        try {
+            realm = getRealmDB();
             return realm.copyFromRealm(realm.where(clazz).findAll());
-        }finally {
-            if(realm!=null)
+        } finally {
+            if (realm != null)
                 realm.close();
         }
     }
 
-    public <T extends RealmObject> List<T> findAllWithKey(Class<T> clazz,String categoryID) {
-        Realm realm=null;
-        try{
-            realm=getRealmDB();
-            return realm.copyFromRealm(realm.where(clazz).equalTo("id",categoryID).findAll());
-        }finally {
-            if(realm!=null)
+   /* private <T extends RealmObject> Observable<RealmResults<T>> getListObjectAsync(Class<T> classObject) {
+        return getRealmDB().where(classObject)
+                .findAll()
+                .asObservable();
+    }
+
+    private <T extends RealmObject> Observable<RealmResults<T>> getListObjectAsyncWithKey(Class<T> classObject, String key, String id) {
+        return getRealmDB().where(classObject)
+                .equalTo(key, id)
+                .findAll()
+                .asObservable();
+    }
+
+    private <T extends RealmObject> Observable<T> getObjectAsyncWithKey(Class<T> classObject, String key, String id) {
+        return getRealmDB().where(classObject)
+                .equalTo(key, id)
+                .findFirst()
+                .asObservable();
+    }*/
+
+    public <T extends RealmObject> List<T> findAllWithKey(Class<T> clazz, String categoryID) {
+        Realm realm = null;
+        try {
+            realm = getRealmDB();
+            return realm.copyFromRealm(realm.where(clazz).equalTo("id", categoryID).findAll());
+        } finally {
+            if (realm != null)
                 realm.close();
         }
     }
 
     public <T extends RealmObject> T findFist(Class<T> clazz) {
-        Realm realm=null;
-        try{
-            realm=getRealmDB();
+        Realm realm = null;
+        try {
+            realm = getRealmDB();
             return realm.copyFromRealm(realm.where(clazz).findFirst());
-        }finally {
-            if(realm!=null)
+        } finally {
+            if (realm != null)
                 realm.close();
         }
     }
 
     public <T extends RealmObject> T findFistWithKey(Class<T> clazz) {
-        Realm realm=null;
-        try{
-            realm=getRealmDB();
+        Realm realm = null;
+        try {
+            realm = getRealmDB();
             return realm.copyFromRealm(realm.where(clazz).equalTo("id", false).findFirst());
-        }finally {
-            if(realm!=null)
+        } finally {
+            if (realm != null)
                 realm.close();
         }
     }
 
     public void saveListCategory(List<Category> categoryList) {
-        getRealmDB().executeTransactionAsync(realm -> realm.copyToRealmOrUpdate(categoryList));
+        Logger.e("saveListCategory");
+        getRealmDB().executeTransaction(realm -> realm.copyToRealmOrUpdate(categoryList));
     }
 
-    public void saveListMovies(RealmList<VODInfo> vodInfoList,String categoryID) {
-        getRealmDB().executeTransactionAsync(realm -> {
-            Category category=realm.where(Category.class).equalTo("id", categoryID).findFirst();
+    public void saveListMovies(RealmList<VODInfo> vodInfoList, String categoryID) {
+        getRealmDB().executeTransaction(realm -> {
+            Category category = realm.where(Category.class).equalTo("id", categoryID).findFirst();
             RealmList<VODInfo> list = vodInfoList;
             if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
                 RealmList<VODInfo> managedImageList = new RealmList<>();
@@ -110,14 +132,14 @@ public class RealmManager implements DataSource{
                 list = managedImageList;
             }
             category.setVodInfos(list);
-            Logger.e("SaveVODinfoList="+category.toString());
+            Logger.e("SaveVODinfoList=" + category.toString());
             realm.copyToRealmOrUpdate(category);
         });
     }
 
-    public void saveListMoviesDetails(final RealmList<Product> productList, String categoryID) {
-        getRealmDB().executeTransactionAsync(realm -> {
-            Category category=realm.where(Category.class).equalTo("id", categoryID).findFirst();
+    public void saveListMoviesFromCategory(final RealmList<Product> productList, String categoryID) {
+        getRealmDB().executeTransaction(realm -> {
+            Category category = realm.where(Category.class).equalTo("id", categoryID).findFirst();
             RealmList<Product> list = productList;
             if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
                 RealmList<Product> managedImageList = new RealmList<>();
@@ -131,32 +153,47 @@ public class RealmManager implements DataSource{
                 list = managedImageList;
             }
             category.setProduct(list);
-            Logger.e("SaveproductList="+category.toString());
+            Logger.e("SaveproductList=" + category.toString());
             realm.copyToRealmOrUpdate(category);
         });
+    }
+
+    public boolean checkCategory() {
+        return getRealmDB().where(Category.class).count() > 0;
+    }
+
+    public boolean checkProduct(String categoryId) {
+        Category category = getRealmDB().where(Category.class).equalTo("id", categoryId).findFirstAsync();
+        return category != null && category.getProduct() != null && category.getProduct().size() > 0;
+    }
+
+    public boolean checkVodInfo(String categoryId) {
+        Category category = getRealmDB().where(Category.class).equalTo("id", categoryId).findFirstAsync();
+        return category != null && category.getVodInfos() != null && category.getVodInfos().size() > 0;
     }
 
     @Override
     public Observable<List<Category>> getCategory() {
         List<Category> categoryList = findAll(Category.class);
+        Logger.e("categoryList"+categoryList.toString());
         return Observable.just(categoryList);
+
+        /*getListObjectAsync(Category.class)
+                .filter(data -> data.isLoaded() &&
+                        data.isValid() &&
+                        data.size() > 0)
+                .map(data -> {
+                    Logger.e("getCategory" + data.toString());
+                    return data;
+                });*/
     }
 
     @Override
-    public Observable<List<VODInfo>> getListMovies(String idList,String categoryID) {
-        Realm realmDB=null;
-        List<VODInfo> vodInfoList;
-        try{
-            realmDB=getRealmDB();
-            vodInfoList=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getVodInfos();
-        }finally {
-            if(realmDB!=null)
-                realmDB.close();
-        }
-        return Observable.just(vodInfoList);
+    public Observable<List<VODInfo>> getListMovies(String categoryID) {
+        return null;
     }
 
-    public Observable<String> getMoviesProduct(String categoryID) {
+    public Observable<String> getListIDMovies(String categoryID) {
         Realm realmDB=null;
         String listID ="";
         try{
@@ -165,7 +202,6 @@ public class RealmManager implements DataSource{
             RealmList<Product> products=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getProduct();
             Logger.e("products="+products.toString());
             if(products.size()>0){
-                //listID=TextUtils.join(",",  products.get(0).getItems());
                 StringBuilder builder = new StringBuilder();
                 for (Item item : products.get(0).getItems()) {
                     if (builder.length() == 0) builder.append(item.getItem());
@@ -179,10 +215,43 @@ public class RealmManager implements DataSource{
         }
         Logger.e("listID="+listID);
         return Observable.just(listID);
+       /* return getObjectAsyncWithKey(Category.class, "id", categoryID)
+                .map(Category::getProduct)
+                .filter(data -> data.isLoaded() &&
+                        data.isValid() &&
+                        data.size() > 0)
+                .map(products -> {
+                    StringBuilder builder = new StringBuilder();
+                    for (Item item : products.get(0).getItems()) {
+                        if (builder.length() == 0) builder.append(item.getItem());
+                        builder.append(",").append(item.getItem());
+                    }
+                    Logger.e("builder=" + builder.toString());
+                    return builder.toString();
+                });*/
     }
 
     @Override
-    public Observable<List<VODInfo>> getMoviesDetails(String catID) {
-       return null;
+    public Observable<List<VODInfo>> getMoviesFromCategory(String idList, String categoryID) {
+        Realm realmDB=null;
+        List<VODInfo> vodInfoList;
+        try{
+            realmDB=getRealmDB();
+            vodInfoList=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getVodInfos();
+            Logger.e("vodInfoList"+vodInfoList.toString());
+        }finally {
+            if(realmDB!=null)
+                realmDB.close();
+        }
+        return Observable.just(vodInfoList);
+        /*return getObjectAsyncWithKey(Category.class, "id", categoryID)
+                .filter(data -> data.isLoaded() &&
+                        data.isValid())
+                .map(Category::getVodInfos);*/
+    }
+
+    @Override
+    public void clear() {
+
     }
 }

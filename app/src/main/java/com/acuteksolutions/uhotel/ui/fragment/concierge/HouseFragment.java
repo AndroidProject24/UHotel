@@ -5,7 +5,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 
 /**

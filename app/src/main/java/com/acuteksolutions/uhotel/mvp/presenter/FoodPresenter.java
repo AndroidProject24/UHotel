@@ -1,6 +1,7 @@
 package com.acuteksolutions.uhotel.mvp.presenter;
 
 import android.content.Context;
+
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.repository.Repository;
@@ -11,16 +12,20 @@ import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.FoodView;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import javax.inject.Inject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Toan.IT
@@ -80,9 +85,7 @@ public class FoodPresenter extends BasePresenter<FoodView> {
           return listFood;
         })
         .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe(() -> getMvpView().showLoading())
-        .doOnCompleted(() -> getMvpView().hideLoading())
-        .subscribe(new DefaultObserver<ListFood>() {
+        .subscribeWith(new DefaultObserver<ListFood>() {
           @Override public void onError(Throwable e) {
             e.printStackTrace();
             getMvpView().showError(e.getMessage());

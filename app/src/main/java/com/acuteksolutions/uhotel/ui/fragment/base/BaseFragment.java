@@ -1,4 +1,4 @@
-package com.acuteksolutions.uhotel.ui.fragment;
+package com.acuteksolutions.uhotel.ui.fragment.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,9 +28,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import static dagger.internal.Preconditions.checkNotNull;
 
@@ -41,15 +38,14 @@ import static dagger.internal.Preconditions.checkNotNull;
 public abstract class BaseFragment <T extends BasePresenter> extends SupportFragment implements OnBackListener,BaseView {
     private View mContentView;
     private Context mContext;
-    protected Subscription subscription = Subscriptions.empty();
-    private CompositeSubscription mCompositeSubscription;
     private Unbinder unbinder;
     private String TAG = getTAG();
     protected abstract String getTAG();
     protected ToolbarTitleListener toolbarTitleListener;
     protected ViewpagerListener viewpagerListener;
     protected RequestManager glide;
-    private boolean isViewShown = false;
+    private boolean isPrepared=false;
+    protected boolean isVisible;
     @Inject
     protected T mPresenter;
     @Override
@@ -85,31 +81,38 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try {
+            isPrepared = true;
             if(mPresenter!=null)
                 mPresenter.attachView(this);
             unbinder = ButterKnife.bind(this, mContentView);
             mContext = getContext();
             glide= Glide.with(this);
-            if (!isViewShown) {
-                initViews();
-                initData();
-                Logger.wtf(TAG);
-            }
+            isPrepared = true;
+            lazyLoad();
+            Logger.wtf(TAG);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (getView() != null) {
-            isViewShown = true;
-            initViews();
-            initData();
-            Logger.wtf(TAG);
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
         } else {
-            isViewShown = false;
+            isVisible = false;
         }
+    }
+
+    private void lazyLoad(){
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+        initViews();
+        initData();
+        isPrepared = false;
     }
     protected abstract void injectDependencies();
 
@@ -127,25 +130,7 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         return mContext;
     }
 
-    public CompositeSubscription getCompositeSubscription() {
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
-        }
-
-        return this.mCompositeSubscription;
-    }
-
-    public void addSubscription(Subscription s) {
-        if (s == null) {
-            return;
-        }
-        if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = new CompositeSubscription();
-        }
-        this.mCompositeSubscription.add(s);
-    }
-
-    public void addFagment(@NonNull FragmentManager fragmentManager,@NonNull int frameId, @NonNull Fragment fragment){
+    public void addFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -176,7 +161,10 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         super.onDestroy();
         if (mPresenter != null)
             mPresenter.detachView();
-        unsubscribe();
+        if(BaseApplication.getRefWatcher(mContext)!=null) {
+            RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
+            refWatcher.watch(this);
+        }
         Glide.get(getmContext()).clearMemory();
         glide.onDestroy();
     }
@@ -221,18 +209,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         //NetUtils.checkHttpException(getContext(), e, mRootView);
     }
 
-    private void unsubscribe() {
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
-        if (this.mCompositeSubscription != null) {
-            this.mCompositeSubscription.unsubscribe();
-        }
-        if(BaseApplication.getRefWatcher(mContext)!=null) {
-            RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
-            refWatcher.watch(this);
-        }
-    }
     @Override
     public String toString() {
         return getClass().getSimpleName();

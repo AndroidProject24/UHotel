@@ -24,7 +24,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
   public void login(String pass){
       getMvpView().showLoading();
       addSubscribe(mRepository.getLogin(pass)
-              .subscribe(new DefaultObserver<Login>() {
+              .subscribeWith(new DefaultObserver<Login>() {
                   @Override
                   public void onError(Throwable e) {
                       e.printStackTrace();

@@ -10,7 +10,7 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.setting.Device;
 import com.acuteksolutions.uhotel.ui.adapter.setting.DeviceAdapter;
 import com.acuteksolutions.uhotel.ui.dialog.AddDevice;
-import com.acuteksolutions.uhotel.ui.fragment.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
 
 import java.util.List;
