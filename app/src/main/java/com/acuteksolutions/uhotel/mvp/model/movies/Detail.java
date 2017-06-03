@@ -10,12 +10,12 @@ public class Detail extends RealmObject {
     private int duration;
     private String poster;
     private String description;
-    private RealmList<Item> genres;
+    private RealmList<DetailsItem> genres;
 
     public Detail() {
     }
 
-    public Detail(String title, String actors, String director, int duration, String poster, String description, RealmList<Item> genres) {
+    public Detail(String title, String actors, String director, int duration, String poster, String description, RealmList<DetailsItem> genres) {
         this.title = title;
         this.actors = actors;
         this.director = director;
@@ -49,8 +49,13 @@ public class Detail extends RealmObject {
         return description;
     }
 
-    public RealmList<Item> getGenres() {
+    public RealmList<DetailsItem> getGenres() {
         return genres;
+    }
+
+
+    public void clearGenres() {
+        genres = new RealmList<>();
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.model.movies.Category;
 import com.acuteksolutions.uhotel.mvp.model.movies.Detail;
+import com.acuteksolutions.uhotel.mvp.model.movies.DetailsItem;
 import com.acuteksolutions.uhotel.mvp.model.movies.Item;
 import com.acuteksolutions.uhotel.mvp.model.movies.Product;
 import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
@@ -191,7 +192,7 @@ public class Repository implements DataSource {
                 Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId())))
                 .subscribeOn(Schedulers.io())
                 .flatMap(stringJsonString -> {
-                    List<Category> categoryList = null;
+                    List<Category> categoryList = new ArrayList<>();
                     try {
                         JSONObject result = new JSONObject(stringJsonString.result);
                         JSONArray list = result.getJSONArray(ParseGsonDef.ARRAY);
@@ -200,8 +201,9 @@ public class Repository implements DataSource {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Logger.e("getCloudCategory=" + categoryList);
-                    return Observable.just(categoryList);
+                    if (categoryList != null)
+                        return Observable.just(categoryList);
+                    return Observable.empty();
                 })
                 .subscribeOn(Schedulers.computation())
                 .doOnNext(mRealmManager::saveListCategory)
@@ -226,7 +228,7 @@ public class Repository implements DataSource {
                                     purchasesItem.add(new Item(id.getString(ParseGsonDef.ID)));
                                 }
                             }
-                            Product product = new Product(i, purchasesItem, null);
+                            Product product = new Product(purchasesItem, null);
                             productList.add(product);
                         }
                     } catch (JSONException e) {
@@ -248,20 +250,20 @@ public class Repository implements DataSource {
     }
 
     private Observable<List<VODInfo>> getCloudMoviesFromCategory(String idList, String categoryID) {
+        //Logger.e("getCloudMoviesFromCategory=" + "\n idList=" + idList + "\n categoryID=" + categoryID);
         return mRestApi.getPathMovies(Constant.DEVICE_MAC, LinkDef.LINK_LIST_MOVIES.replace(PathDef.LIST_ID, String.valueOf(idList)))
                 .subscribeOn(Schedulers.io())
                 .flatMap(stringJsonString -> {
                     RealmList<VODInfo> vodInfoList = new RealmList<>();
                     try {
-                        Logger.e(stringJsonString.result);
                         JSONArray result = new JSONArray(stringJsonString.result);
                         for (int i = 0; i < result.length(); i++) {
                             JSONObject item = result.getJSONObject(i);
                             JSONObject jsonDetail = item.getJSONObject("details");
                             JSONArray jsonGenres = jsonDetail.getJSONArray("genres");
-                            RealmList<Item> genres = new RealmList<>();
+                            RealmList<DetailsItem> genres = new RealmList<>();
                             for (int j = 0; j < jsonGenres.length(); j++) {
-                                genres.add(new Item(jsonGenres.getString(j)));
+                                genres.add(new DetailsItem(jsonGenres.getString(j)));
                             }
                             Detail detail = new Detail(
                                     (!jsonDetail.optString("title").equals("") ? jsonDetail.getString("title") : "N/A"),
@@ -294,29 +296,13 @@ public class Repository implements DataSource {
 
     @Override
     public Observable<List<Category>> getCategory() {
-        /*if(mRealmManager.checkCategory())
-            return Observable.concat(mRealmManager.getCategory(),getCloudCategory())
-                    .observeOn(AndroidSchedulers.mainThread());
-        else
-            return getCloudCategory().observeOn(AndroidSchedulers.mainThread());*/
-        Observable<List<Category>> remote = getCloudCategory();
-        Observable<List<Category>> local = mRealmManager.getCategory();
         return Observable.concat(mRealmManager.getCategory(), getCloudCategory())
+                .filter(categoryList -> categoryList != null && categoryList.size() > 0)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
     public Observable<List<VODInfo>> getListMovies(String categoryID) {
-        /*if(mRealmManager.checkVodInfo(categoryID))
-            return Observable.concat(mRealmManager.getListIDMovies(categoryID),
-                    getCloudListIDMovies(categoryID))
-                    .flatMap(idList -> getMoviesFromCategory(idList,categoryID))
-                    .observeOn(AndroidSchedulers.mainThread());
-        else
-            return getCloudListIDMovies(categoryID)
-                    .flatMap(idList -> getCloudMoviesFromCategory(idList,categoryID))
-                    .observeOn(AndroidSchedulers.mainThread());*/
-        Logger.e("getListMovies=" + categoryID);
         return Observable.concat(mRealmManager.getListIDMovies(categoryID),
                 getCloudListIDMovies(categoryID))
                 .flatMap(idList -> getMoviesFromCategory(idList, categoryID))
@@ -325,14 +311,10 @@ public class Repository implements DataSource {
 
     @Override
     public Observable<List<VODInfo>> getMoviesFromCategory(String idList, String categoryID) {
-       /* if(mRealmManager.checkProduct(categoryID))
-            return Observable.concat(mRealmManager.getMoviesFromCategory(idList,categoryID),
-                    getCloudMoviesFromCategory(idList,categoryID));
-        else
-            return getCloudMoviesFromCategory(idList,categoryID);*/
-        Logger.e("getMoviesFromCategory=" + idList);
-        return Observable.concat(mRealmManager.getMoviesFromCategory(idList, categoryID),
-                getCloudMoviesFromCategory(idList, categoryID));
+        if (!Preconditions.isEmpty(idList))
+            return Observable.concat(mRealmManager.getMoviesFromCategory(idList, categoryID),
+                    getCloudMoviesFromCategory(idList, categoryID));
+        return Observable.empty();
     }
 
     @Override

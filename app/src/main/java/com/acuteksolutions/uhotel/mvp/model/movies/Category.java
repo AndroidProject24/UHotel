@@ -46,4 +46,12 @@ public class Category extends RealmObject {
     public void setVodInfos(RealmList<VODInfo> vodInfos) {
         this.vodInfos = vodInfos;
     }
+
+    public void clearProduct() {
+        product = new RealmList<>();
+    }
+
+    public void clearVodInfo() {
+        vodInfos = new RealmList<>();
+    }
 }

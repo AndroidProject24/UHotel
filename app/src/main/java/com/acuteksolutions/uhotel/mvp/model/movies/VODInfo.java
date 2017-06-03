@@ -3,7 +3,7 @@ package com.acuteksolutions.uhotel.mvp.model.movies;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class VODInfo extends RealmObject implements Comparable<VODInfo> {
+public class VODInfo extends RealmObject{
     @PrimaryKey
     private int purchaseId;
     private String contentInfoUid;
@@ -50,10 +50,5 @@ public class VODInfo extends RealmObject implements Comparable<VODInfo> {
 
     public int getContentId() {
         return contentId;
-    }
-
-    @Override
-    public int compareTo(VODInfo another) {
-        return purchaseId - another.getPurchaseId();
     }
 }

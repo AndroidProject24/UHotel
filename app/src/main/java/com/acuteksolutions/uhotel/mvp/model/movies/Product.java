@@ -2,11 +2,8 @@ package com.acuteksolutions.uhotel.mvp.model.movies;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 public class Product extends RealmObject{
-    @PrimaryKey
-    private int id;
     private RealmList<Item> items;
 
     private PurchaseInfo purchaseInfo;
@@ -14,8 +11,7 @@ public class Product extends RealmObject{
     public Product() {
     }
 
-    public Product(int id,RealmList<Item> items, PurchaseInfo purchaseInfo) {
-        this.id=id;
+    public Product(RealmList<Item> items, PurchaseInfo purchaseInfo) {
         this.items = items;
         this.purchaseInfo = purchaseInfo;
     }

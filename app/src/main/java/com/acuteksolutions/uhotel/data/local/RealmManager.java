@@ -112,15 +112,13 @@ public class RealmManager implements DataSource {
     }
 
     public void saveListCategory(List<Category> categoryList) {
-        Logger.e("saveListCategory");
         getRealmDB().executeTransaction(realm -> realm.copyToRealmOrUpdate(categoryList));
     }
 
     public void saveListMovies(RealmList<VODInfo> vodInfoList, String categoryID) {
         getRealmDB().executeTransaction(realm -> {
-            Category category = realm.where(Category.class).equalTo("id", categoryID).findFirst();
-            RealmList<VODInfo> list = vodInfoList;
-            if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
+            Category category = realm.copyFromRealm(realm.where(Category.class).equalTo("id", categoryID).findFirst());
+            /*if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
                 RealmList<VODInfo> managedImageList = new RealmList<>();
                 for (VODInfo item : list) {
                     if (item.isManaged()) {
@@ -130,17 +128,17 @@ public class RealmManager implements DataSource {
                     }
                 }
                 list = managedImageList;
-            }
-            category.setVodInfos(list);
-            Logger.e("SaveVODinfoList=" + category.toString());
+            }*/
+            category.setVodInfos(vodInfoList);
             realm.copyToRealmOrUpdate(category);
+            //Logger.e("vodInfoList="+vodInfoList.toString()+"SaveVODinfoList=" + category.toString());
         });
     }
 
-    public void saveListMoviesFromCategory(final RealmList<Product> productList, String categoryID) {
+    public void saveListMoviesFromCategory(RealmList<Product> productList, String categoryID) {
         getRealmDB().executeTransaction(realm -> {
-            Category category = realm.where(Category.class).equalTo("id", categoryID).findFirst();
-            RealmList<Product> list = productList;
+            Category category = realm.copyFromRealm(realm.where(Category.class).equalTo("id", categoryID).findFirst());
+            /*RealmList<Product> list = productList;
             if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
                 RealmList<Product> managedImageList = new RealmList<>();
                 for (Product item : list) {
@@ -151,10 +149,10 @@ public class RealmManager implements DataSource {
                     }
                 }
                 list = managedImageList;
-            }
-            category.setProduct(list);
-            Logger.e("SaveproductList=" + category.toString());
+            }*/
+            category.setProduct(productList);
             realm.copyToRealmOrUpdate(category);
+            Logger.e("productList="+productList.toString()+"SaveproductList=" + category.toString());
         });
     }
 
