@@ -3,59 +3,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="70dp"
-    android:paddingRight="50dp"
-    >
-
-  <TextView
-      android:id="@+id/txt_title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:focusable="true"
-      android:focusableInTouchMode="true"
-      android:paddingTop="30dp"
-      android:text="Room Amenities"
-      android:textColor="@color/white"
-      android:textColorHighlight="@color/grey"
-      android:textSize="40sp"
-      />
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/recycler_view"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      />
-  <LinearLayout
-      android:id="@+id/ll_request_sent"
-      android:layout_width="350dp"
-      android:layout_height="60dp"
-      android:layout_marginLeft="50dp"
-      android:layout_marginTop="50dp"
-      android:background="@drawable/concierge_room_right_button_bg"
-      android:focusable="true"
-      android:focusableInTouchMode="true"
-      android:gravity="center_vertical"
-      >
+    android:paddingRight="50dp">
 
     <TextView
-        android:id="@+id/txt_request_send"
+        android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:text="Request items"
-        android:textAllCaps="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingTop="30dp"
+        android:text="Room Amenities"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        />
+        android:textColorHighlight="@color/grey"
+        android:textSize="40sp" />
 
-    <TextView
-        android:id="@+id/txt_item_total"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/confirm_request_text"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        />
-  </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_request_sent"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/concierge_room_right_button_bg"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/txt_request_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="Request items"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_item_total"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/confirm_request_text"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 </LinearLayout>

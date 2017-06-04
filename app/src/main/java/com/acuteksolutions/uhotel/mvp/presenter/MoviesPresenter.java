@@ -94,7 +94,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
               if(!Preconditions.isEmpty(linkStream)) {
                 getMvpView().playStream(linkStream);
               }else
-                getMvpView().showEmty();
+                getMvpView().linkStreamError();
             }catch (Exception e){
               e.printStackTrace();
             }

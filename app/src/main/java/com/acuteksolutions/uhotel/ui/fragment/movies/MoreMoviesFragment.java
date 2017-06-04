@@ -80,5 +80,10 @@ public class MoreMoviesFragment extends BaseFragment<MoviesPresenter> implements
   @Override public void showEmty() {
 
   }
+
+  @Override
+  public void linkStreamError() {
+
+  }
 }
 

@@ -35,6 +35,9 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
     @BindView(R.id.recycler_right_now) RecyclerView recyclerRightNow;
     @BindView(R.id.recycler_coming_up) RecyclerView recyclerComingUp;
     private Context mContext;
+    private LiveTVAdapter liveTVAdapter;
+    private RightNowAdapter rightNowAdapter;
+    private ComingUpAdapter comingUpAdapter;
 
     public static LiveTVFragment newInstance() {
         return new LiveTVFragment();
@@ -79,27 +82,33 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
 
     @Override
     public void getProgram(List<TVInfo> tvInfoList) {
-        mPresenter.getDataComingUp(tvInfoList);
-        mPresenter.getDataRightNow(tvInfoList);
-        LiveTVAdapter liveTVAdapter = new LiveTVAdapter(glide,tvInfoList);
-        liveTVAdapter.openLoadAnimation();
-        recyclerMain.setAdapter(liveTVAdapter);
+        if(liveTVAdapter==null) {
+            mPresenter.getDataComingUp(tvInfoList);
+            mPresenter.getDataRightNow(tvInfoList);
+            liveTVAdapter = new LiveTVAdapter(glide, tvInfoList);
+            liveTVAdapter.openLoadAnimation();
+            recyclerMain.setAdapter(liveTVAdapter);
+        }
     }
 
     @Override
     public void getDataRightNow(List<TVInfo> tvInfoList) {
-        RightNowAdapter rightNowAdapter = new RightNowAdapter(glide,tvInfoList);
-        rightNowAdapter.openLoadAnimation();
-        recyclerRightNow.setAdapter(rightNowAdapter);
-        rightNowAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
+        if(rightNowAdapter==null) {
+            rightNowAdapter = new RightNowAdapter(glide, tvInfoList);
+            rightNowAdapter.openLoadAnimation();
+            recyclerRightNow.setAdapter(rightNowAdapter);
+            rightNowAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
+        }
     }
 
     @Override
     public void getDataComingUp(List<TVInfo> tvInfoList) {
-        ComingUpAdapter comingUpAdapter = new ComingUpAdapter(glide,tvInfoList);
-        comingUpAdapter.openLoadAnimation();
-        recyclerComingUp.setAdapter(comingUpAdapter);
-        comingUpAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
+        if(comingUpAdapter==null) {
+            comingUpAdapter = new ComingUpAdapter(glide, tvInfoList);
+            comingUpAdapter.openLoadAnimation();
+            recyclerComingUp.setAdapter(comingUpAdapter);
+            comingUpAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
+        }
     }
 
 

@@ -105,6 +105,7 @@ ext {
             exoPlayer              : "com.google.android.exoplayer:exoplayer:${exoVersion}",
             exoPlayerOkhttp        : "com.google.android.exoplayer:extension-okhttp:${exoVersion}",
             statusBarCompat        : "com.github.niorgai:StatusBarCompat:${statusbarVersion}",
+            slider                 : "org.adw.library:discrete-seekbar:1.0.1",
     ]
 
     developmentDependencies = [

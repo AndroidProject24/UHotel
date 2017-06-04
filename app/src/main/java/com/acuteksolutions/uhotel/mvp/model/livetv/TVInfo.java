@@ -1,14 +1,13 @@
 package com.acuteksolutions.uhotel.mvp.model.livetv;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TVInfo implements Parcelable,Comparator<TVInfo> {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
+public class TVInfo extends RealmObject implements Comparator<TVInfo>{
     private String title;
     private long start;
     private long end;
@@ -16,7 +15,7 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
     private int channelNo;
     private String description;
     private String pictureLink;
-    private List<Stream> channelStreams;
+    private RealmList<Stream> channelStreams;
     public TVInfo() {
     }
 
@@ -48,7 +47,7 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
         this.pictureLink = pictureLink;
     }
 
-    public void setChannelStreams(List<Stream> channelStreams) {
+    public void setChannelStreams(RealmList<Stream> channelStreams) {
         this.channelStreams = channelStreams;
     }
 
@@ -80,7 +79,7 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
         return pictureLink;
     }
 
-    public List<Stream> getChannelStreams() {
+    public RealmList<Stream> getChannelStreams() {
         return channelStreams;
     }
 
@@ -122,44 +121,6 @@ public class TVInfo implements Parcelable,Comparator<TVInfo> {
             return true;
         else return  false;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.title);
-        dest.writeLong(this.start);
-        dest.writeString(this.channelName);
-        dest.writeInt(this.channelNo);
-        dest.writeString(this.description);
-        dest.writeString(this.pictureLink);
-        dest.writeTypedList(this.channelStreams);
-    }
-
-    protected TVInfo(Parcel in) {
-        this.title = in.readString();
-        this.start = in.readLong();
-        this.channelName = in.readString();
-        this.channelNo = in.readInt();
-        this.description = in.readString();
-        this.pictureLink = in.readString();
-        this.channelStreams = in.createTypedArrayList(Stream.CREATOR);
-    }
-
-    public static final Creator<TVInfo> CREATOR = new Creator<TVInfo>() {
-        @Override
-        public TVInfo createFromParcel(Parcel source) {
-            return new TVInfo(source);
-        }
-
-        @Override
-        public TVInfo[] newArray(int size) {
-            return new TVInfo[size];
-        }
-    };
 
     @Override
     public String toString() {

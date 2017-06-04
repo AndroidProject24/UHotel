@@ -1,9 +1,11 @@
 package com.acuteksolutions.uhotel.mvp.model.livetv;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class Channel {
+public class Channel extends RealmObject{
+    @PrimaryKey
     private Integer id;
     private String name;
     private Integer number;
@@ -21,8 +23,8 @@ public class Channel {
     private String icon;
     private String poster;
     private boolean localRecordable;
-    private Object previewDuration;
-    private List<Stream> streams = new ArrayList<Stream>();
+    private Integer previewDuration;
+    private RealmList<Stream> streams;
 
     public Integer getId() {
         return id;
@@ -160,19 +162,19 @@ public class Channel {
         this.localRecordable = localRecordable;
     }
 
-    public Object getPreviewDuration() {
+    public Integer getPreviewDuration() {
         return previewDuration;
     }
 
-    public void setPreviewDuration(Object previewDuration) {
+    public void setPreviewDuration(Integer previewDuration) {
         this.previewDuration = previewDuration;
     }
 
-    public List<Stream> getStreams() {
+    public RealmList<Stream> getStreams() {
         return streams;
     }
 
-    public void setStreams(List<Stream> streams) {
+    public void setStreams(RealmList<Stream> streams) {
         this.streams = streams;
     }
 

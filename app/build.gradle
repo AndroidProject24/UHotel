@@ -140,6 +140,7 @@ dependencies {
   compile appDependencies.baseRecyclerView
   compile appDependencies.exoPlayer
   compile appDependencies.exoPlayerOkhttp
+  compile appDependencies.slider
   compile (appDependencies.statusBarCompat) {
     exclude group: 'com.android.support'
   }

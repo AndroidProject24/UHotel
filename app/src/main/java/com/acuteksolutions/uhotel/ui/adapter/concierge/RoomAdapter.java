@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.SaveDataRoomListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
-import com.acuteksolutions.uhotel.libs.bubbleseekbar.BubbleSeekBar;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -52,7 +50,7 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                 Room room = (Room)item;
                 holder.setText(R.id.txt_name, room.getName())
                       .setText(R.id.txt_progress, String.valueOf(room.getValue()));
-                BubbleSeekBar bubbleSeekBar=holder.getView(R.id.seekBar);
+                /*BubbleSeekBar bubbleSeekBar=holder.getView(R.id.seekBar);
                 bubbleSeekBar.setProgress(room.getValue());
                 bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListenerAdapter() {
                     @Override
@@ -67,7 +65,7 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                     public void getProgressOnFinally(int progress, float progressFloat) {
                         viewpagerListener.disableSwipe(true);
                     }
-                });
+                });*/
                 break;
         }
     }

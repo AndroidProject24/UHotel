@@ -2,11 +2,17 @@ package com.acuteksolutions.uhotel.data.local;
 
 import com.acuteksolutions.uhotel.data.repository.DataSource;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
+import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
+import com.acuteksolutions.uhotel.mvp.model.livetv.Program;
+import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.model.movies.Category;
 import com.acuteksolutions.uhotel.mvp.model.movies.Item;
 import com.acuteksolutions.uhotel.mvp.model.movies.Product;
 import com.acuteksolutions.uhotel.mvp.model.movies.VODInfo;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,6 +64,7 @@ public class RealmManager implements DataSource {
         }
     }
 
+    //TODO: @Deprecated RXJAVA 1
    /* private <T extends RealmObject> Observable<RealmResults<T>> getListObjectAsync(Class<T> classObject) {
         return getRealmDB().where(classObject)
                 .findAll()
@@ -118,17 +125,6 @@ public class RealmManager implements DataSource {
     public void saveListMovies(RealmList<VODInfo> vodInfoList, String categoryID) {
         getRealmDB().executeTransaction(realm -> {
             Category category = realm.copyFromRealm(realm.where(Category.class).equalTo("id", categoryID).findFirst());
-            /*if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
-                RealmList<VODInfo> managedImageList = new RealmList<>();
-                for (VODInfo item : list) {
-                    if (item.isManaged()) {
-                        managedImageList.add(item);
-                    } else {
-                        managedImageList.add(realm.copyToRealm(item));
-                    }
-                }
-                list = managedImageList;
-            }*/
             category.setVodInfos(vodInfoList);
             realm.copyToRealmOrUpdate(category);
             //Logger.e("vodInfoList="+vodInfoList.toString()+"SaveVODinfoList=" + category.toString());
@@ -138,22 +134,18 @@ public class RealmManager implements DataSource {
     public void saveListMoviesFromCategory(RealmList<Product> productList, String categoryID) {
         getRealmDB().executeTransaction(realm -> {
             Category category = realm.copyFromRealm(realm.where(Category.class).equalTo("id", categoryID).findFirst());
-            /*RealmList<Product> list = productList;
-            if (!list.isManaged()) { // if the 'list' is managed, all items in it is also managed
-                RealmList<Product> managedImageList = new RealmList<>();
-                for (Product item : list) {
-                    if (item.isManaged()) {
-                        managedImageList.add(item);
-                    } else {
-                        managedImageList.add(realm.copyToRealm(item));
-                    }
-                }
-                list = managedImageList;
-            }*/
             category.setProduct(productList);
             realm.copyToRealmOrUpdate(category);
             Logger.e("productList="+productList.toString()+"SaveproductList=" + category.toString());
         });
+    }
+
+    public void saveAllChannel(List<Channel> channelList) {
+        getRealmDB().executeTransaction(realm -> realm.copyToRealmOrUpdate(channelList));
+    }
+
+    public void saveListProgram(List<Program> programList) {
+        getRealmDB().executeTransaction(realm -> realm.copyToRealmOrUpdate(programList));
     }
 
     public boolean checkCategory() {
@@ -176,7 +168,8 @@ public class RealmManager implements DataSource {
         Logger.e("categoryList"+categoryList.toString());
         return Observable.just(categoryList);
 
-        /*getListObjectAsync(Category.class)
+        /* @Deprecated Rxjava 1
+        getListObjectAsync(Category.class)
                 .filter(data -> data.isLoaded() &&
                         data.isValid() &&
                         data.size() > 0)
@@ -192,10 +185,9 @@ public class RealmManager implements DataSource {
     }
 
     public Observable<String> getListIDMovies(String categoryID) {
-        Realm realmDB=null;
+        Realm realmDB=getRealmDB();
         String listID ="";
         try{
-            realmDB=getRealmDB();
             Logger.e("getMoviesProduct="+categoryID);
             RealmList<Product> products=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getProduct();
             Logger.e("products="+products.toString());
@@ -213,7 +205,8 @@ public class RealmManager implements DataSource {
         }
         Logger.e("listID="+listID);
         return Observable.just(listID);
-       /* return getObjectAsyncWithKey(Category.class, "id", categoryID)
+       /* @Deprecated Rxjava 1
+       return getObjectAsyncWithKey(Category.class, "id", categoryID)
                 .map(Category::getProduct)
                 .filter(data -> data.isLoaded() &&
                         data.isValid() &&
@@ -231,10 +224,9 @@ public class RealmManager implements DataSource {
 
     @Override
     public Observable<List<VODInfo>> getMoviesFromCategory(String idList, String categoryID) {
-        Realm realmDB=null;
+        Realm realmDB=getRealmDB();
         List<VODInfo> vodInfoList;
         try{
-            realmDB=getRealmDB();
             vodInfoList=realmDB.where(Category.class).equalTo("id",categoryID).findFirst().getVodInfos();
             Logger.e("vodInfoList"+vodInfoList.toString());
         }finally {
@@ -242,14 +234,68 @@ public class RealmManager implements DataSource {
                 realmDB.close();
         }
         return Observable.just(vodInfoList);
-        /*return getObjectAsyncWithKey(Category.class, "id", categoryID)
+        /* @Deprecated Rxjava 1
+        return getObjectAsyncWithKey(Category.class, "id", categoryID)
                 .filter(data -> data.isLoaded() &&
                         data.isValid())
                 .map(Category::getVodInfos);*/
     }
 
     @Override
-    public void clear() {
-
+    public Observable<List<Channel>> getAllChannel() {
+        List<Channel> channelList = findAll(Channel.class);
+        Logger.e("getAllChannel:Realm="+channelList.toString());
+        return Observable.just(channelList);
     }
+
+    @Override
+    public Observable<List<TVInfo>> getProgram(List<Channel> channelList, Date currentDate) {
+        List<Program> programList = findAll(Program.class);
+        Logger.e("getProgram:Realm="+programList.toString());
+        List<TVInfo> tvInfoList=new ArrayList<>();
+        tvInfoList = setListNowUp(tvInfoList, channelList, programList);
+        if (Preconditions.checkList(tvInfoList))
+            return Observable.just(tvInfoList);
+        return Observable.empty();
+    }
+
+    @Override
+    public void clear() {
+        getRealmDB().executeTransactionAsync(realm -> {
+            realm.delete(Category.class);
+            realm.delete(VODInfo.class);
+            realm.delete(Channel.class);
+            realm.delete(TVInfo.class);
+        });
+    }
+
+    public List<TVInfo> setListNowUp(List<TVInfo> listTV, List<Channel> channelInfoList, List<Program> programInfoList) {
+        TVInfo tvInfo;
+        for (Program programInfo : programInfoList) {
+            tvInfo = new TVInfo();
+            tvInfo.setDescription(programInfo.getDescription());
+            tvInfo.setTitle(programInfo.getTitle());
+            tvInfo.setStart(programInfo.getStart());
+            tvInfo.setEnd(programInfo.getEnd());
+            Channel channelInfo = getChannelInfoOnId(channelInfoList, programInfo.getIdChannel());
+            if (channelInfo != null) {
+                tvInfo.setChannelStreams(channelInfo.getStreams());
+                tvInfo.setChannelName(channelInfo.getName());
+                tvInfo.setPictureLink(channelInfo.getIcon());
+                tvInfo.setChannelNo(channelInfo.getNumber());
+            }
+            listTV.add(tvInfo);
+        }
+       // Collections.sort(listTV, new TVInfo());
+        return listTV;
+    }
+
+    private Channel getChannelInfoOnId(List<Channel> channelInfoList, long channelId) {
+        for (Channel channelInfo : channelInfoList) {
+            if (channelInfo.getId() == channelId)
+                return channelInfo;
+        }
+        return null;
+    }
+
 }

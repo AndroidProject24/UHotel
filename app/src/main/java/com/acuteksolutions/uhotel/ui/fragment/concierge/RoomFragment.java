@@ -94,7 +94,8 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        realm.close();
+        if(realm!=null)
+            realm.close();
     }
 
     int total=0;

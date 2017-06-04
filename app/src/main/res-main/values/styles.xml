@@ -1,262 +1,274 @@
 <resources>
 
-  <style name="AppTheme" parent="AppBaseTheme"/>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
-  <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-    <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-    <item name="android:windowBackground">@color/black</item>
-  </style>
-  <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-    <item name="color">@android:color/white</item>
-  </style>
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarStyle">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
 
 
-  <style name="ExoPlayerTheme" parent="Theme.Design.NoActionBar">
-    <item name="android:windowNoTitle">true</item>
-    <item name="android:windowBackground">@android:color/black</item>
-  </style>
+    <style name="ExoPlayerTheme" parent="Theme.Design.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
 
-  <style name="CustomToolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <item name="android:windowActionBarOverlay">true</item>
-    <!-- Support library compatibility -->
-    <item name="windowActionBarOverlay">true</item>
-  </style>
+    <style name="CustomToolbar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+    </style>
 
-  <style name="MainTabLayoutStyle" parent="Widget.Design.TabLayout">
-    <item name="tabMode">fixed</item>
-    <item name="tabGravity">fill</item>
-    <item name="tabIndicatorColor">@color/transparent</item>
-    <item name="android:layout_height">@dimen/action_bar_height</item>
-    <item name="tabBackground">@color/tab_background</item>
-    <item name="tabTextColor">@color/white</item>
-    <item name="tabSelectedTextColor">@color/tab_select</item>
-  </style>
+    <style name="MainTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="android:layout_height">@dimen/action_bar_height</item>
+        <item name="tabBackground">@color/tab_background</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/tab_select</item>
+    </style>
 
-  <style name="MoviesTabLayoutStyle" parent="Widget.Design.TabLayout">
-    <item name="tabMode">fixed</item>
-    <item name="tabGravity">fill</item>
-    <item name="tabMaxWidth">0dp</item>
-    <item name="tabIndicatorColor">@color/transparent</item>
-    <item name="android:gravity">start</item>
-    <item name="android:tabStripEnabled">false</item>
-    <item name="tabIndicatorHeight">2dp</item>
-    <item name="android:layout_height">@dimen/action_bar_height</item>
-    <item name="tabBackground">@color/tab_background_child</item>
-    <item name="tabTextColor">@color/white</item>
-    <item name="tabSelectedTextColor">@color/tab_select</item>
-  </style>
+    <style name="MoviesTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="android:gravity">start</item>
+        <item name="android:tabStripEnabled">false</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="android:layout_height">@dimen/action_bar_height</item>
+        <item name="tabBackground">@color/tab_background_child</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/tab_select</item>
+    </style>
 
-  <style name="TextLabel" parent="TextAppearance.AppCompat">
-    <!-- Hint color and label color in FALSE state -->
-    <item name="android:textColorHint">@color/grey</item>
-    <item name="android:textSize">20sp</item>
-    <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-    <item name="colorAccent">@color/colorPrimary</item>
-    <item name="colorControlNormal">@color/colorPrimary</item>
-    <item name="colorControlActivated">@color/colorPrimaryDark</item>
-  </style>
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
 
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-  <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert"/>
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert" />
 
-  <style name="AVLoadingIndicatorView">
-    <item name="minWidth">48dip</item>
-    <item name="maxWidth">48dip</item>
-    <item name="minHeight">48dip</item>
-    <item name="maxHeight">48dip</item>
-    <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
-    <item name="indicatorColor">@color/tab_select</item>
-  </style>
-  <!--STYLE CONFIG-->
-  <style name="style_base">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-  </style>
+    <style name="AVLoadingIndicatorView">
+        <item name="minWidth">48dip</item>
+        <item name="maxWidth">48dip</item>
+        <item name="minHeight">48dip</item>
+        <item name="maxHeight">48dip</item>
+        <item name="indicatorName">BallSpinFadeLoaderIndicator</item>
+        <item name="indicatorColor">@color/tab_select</item>
+    </style>
+    <!--STYLE CONFIG-->
+    <style name="style_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
-  <style name="main_img" parent="style_base">
-    <item name="android:layout_marginRight">10dp</item>
-  </style>
+    <style name="main_img" parent="style_base">
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
 
-  <style name="style_image_main" parent="style_base">
-    <item name="android:layout_weight">1</item>
-    <item name="android:gravity">center</item>
-    <item name="android:layout_gravity">center</item>
-    <item name="android:layout_height">60dp</item>
-    <item name="android:adjustViewBounds">true</item>
-  </style>
+    <style name="style_image_main" parent="style_base">
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
 
-  <style name="style_text_main" parent="style_base">
-    <item name="android:layout_weight">1</item>
-    <item name="android:gravity">center</item>
-    <item name="android:layout_gravity">center</item>
-    <item name="android:textSize">18sp</item>
-    <item name="android:textColor">@color/black</item>
-  </style>
+    <style name="style_text_main" parent="style_base">
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
-  <style name="style_base_fill">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">match_parent</item>
-  </style>
+    <style name="style_base_fill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 
-  <!--LANDING-->
-  <style name="style_layout_home">
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">350dp</item>
-    <item name="android:layout_weight">1</item>
-  </style>
+    <!--LANDING-->
+    <style name="style_layout_home">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 
-  <style name="style_img_home">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">350dp</item>
-    <item name="android:scaleType">fitXY</item>
-  </style>
+    <style name="style_img_home">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
 
-  <style name="style_img_home2">
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">350dp</item>
-    <item name="android:scaleType">fitXY</item>
-    <item name="android:layout_weight">1</item>
-  </style>
+    <style name="style_img_home2">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 
-  <!--MOVIES-->
-  <style name="Movies.Button.Footerpage" parent="Base.Widget.AppCompat.ActionButton">
-    <item name="android:background">#000</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingTop">5dp</item>
-    <item name="android:paddingBottom">5dp</item>
-    <item name="android:paddingLeft">30dp</item>
-    <item name="android:paddingRight">30dp</item>
-    <item name="android:layout_marginLeft">30dp</item>
-    <item name="android:layout_marginRight">30dp</item>
-  </style>
+    <!--MOVIES-->
+    <style name="Movies.Button.Footerpage" parent="Base.Widget.AppCompat.ActionButton">
+        <item name="android:background">#000</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+    </style>
 
-  <!--ROOM CONTROL-->
-  <style name="RoomControl.Button" parent="Base.Widget.AppCompat.ActionButton">
-    <item name="android:background">@drawable/roomcontrol_tab_selector</item>
-    <item name="android:textSize">@dimen/textSize20</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textColor">@color/main_text_selector</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:textAllCaps">false</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingTop">15dp</item>
-    <item name="android:paddingBottom">15dp</item>
-    <item name="android:paddingLeft">100dp</item>
-    <item name="android:paddingRight">100dp</item>
-    <item name="android:layout_marginLeft">5dp</item>
-    <item name="android:layout_marginRight">5dp</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:focusable">true</item>
-  </style>
-  <style name="RoomControl_txt_content">
-    <item name="android:textSize">20sp</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:layout_marginRight">20dp</item>
-    <item name="android:paddingLeft">15dp</item>
-  </style>
-  <style name="RoomControl_txt_title">
-    <item name="android:layout_gravity">left</item>
-    <item name="android:textSize">25sp</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:paddingLeft">15dp</item>
-  </style>
-  <style name="RoomControl_txt_maincontent_lights">
-    <item name="android:textColor">@color/white</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:lineSpacingExtra">20dp</item>
-  </style>
+    <!--ROOM CONTROL-->
+    <style name="RoomControl.Button" parent="Base.Widget.AppCompat.ActionButton">
+        <item name="android:background">@drawable/roomcontrol_tab_selector</item>
+        <item name="android:textSize">@dimen/textSize20</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main_text_selector</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingLeft">100dp</item>
+        <item name="android:paddingRight">100dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">true</item>
+    </style>
 
-  <style name="RoomControl_txt_maincontent_lights_itemtxt">
-    <item name="android:layout_gravity">left</item>
-    <item name="android:textSize">25sp</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:paddingLeft">15dp</item>
-  </style>
+    <style name="RoomControl_txt_content">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
 
-  <style name="RoomControl_txt_maincontent_lights_itemstatus">
-    <item name="android:textSize">20sp</item>
-    <item name="android:textColor">@color/white</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:layout_marginRight">20dp</item>
-    <item name="android:paddingLeft">15dp</item>
-  </style>
+    <style name="RoomControl_txt_title">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
 
-  <style name="RoomControl_tab_style">
-    <item name="android:textColor">@color/white</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingBottom">10dp</item>
-    <item name="android:lineSpacingExtra">20dp</item>
-  </style>
+    <style name="RoomControl_txt_maincontent_lights">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:lineSpacingExtra">20dp</item>
+    </style>
 
-  <!--CONCIERGE PAGE-->
-  <style name="concierge_menu_normal">
-    <item name="android:focusable">true</item>
-    <item name="android:background">@drawable/concierge_menu_item_bg</item>
-    <item name="android:textSize">20sp</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textColor">@color/concierge_menu_item_color</item>
-    <item name="android:scaleType">center</item>
-    <item name="android:textAllCaps">false</item>
-    <item name="android:gravity">center</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:paddingTop">15dp</item>
-    <item name="android:paddingBottom">15dp</item>
-    <item name="android:layout_marginTop">5dp</item>
-    <item name="android:layout_marginBottom">5dp</item>
-    <item name="android:layout_marginLeft">25dp</item>
-    <item name="android:layout_marginRight">25dp</item>
-  </style>
-  <style name="title">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:paddingTop">30dp</item>
-    <item name="android:paddingBottom">30dp</item>
-    <item name="android:textColorHighlight">@color/grey</item>
-    <item name="android:textSize">40sp</item>
-    <item name="android:textColor">@color/white</item>
-  </style>
+    <style name="RoomControl_txt_maincontent_lights_itemtxt">
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
 
-  <style name="content">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:textSize">18sp</item>
-    <item name="android:textColor">@color/white</item>
-  </style>
+    <style name="RoomControl_txt_maincontent_lights_itemstatus">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
 
-  <style name="edittext">
-    <item name="android:gravity">left|center_vertical</item>
-    <item name="android:maxLines">1</item>
-    <item name="android:textCursorDrawable">@null</item>
-    <item name="android:singleLine">true</item>
-    <item name="android:padding">0dp</item>
-    <item name="android:background">@null</item>
-  </style>
+    <style name="RoomControl_tab_style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:lineSpacingExtra">20dp</item>
+    </style>
+
+    <style name="RoomControl_Slider">
+        <item name="dsb_max">100</item>
+        <item name="dsb_min">0</item>
+        <item name="dsb_rippleColor">@color/room_bg_tab_focus</item>
+        <item name="dsb_progressColor">@color/yellow</item>
+        <item name="dsb_indicatorColor">@color/tab_select</item>
+    </style>
+    <!--CONCIERGE PAGE-->
+    <style name="concierge_menu_normal">
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/concierge_menu_item_bg</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/concierge_menu_item_color</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+    </style>
+
+    <style name="title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:paddingTop">30dp</item>
+        <item name="android:paddingBottom">30dp</item>
+        <item name="android:textColorHighlight">@color/grey</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="edittext">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:background">@null</item>
+    </style>
 </resources>
 

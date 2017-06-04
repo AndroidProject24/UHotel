@@ -117,6 +117,7 @@
   <string name="common_no_network_msg">No network connected!\nPlease hit the screen and try again after connecting~</string>
   <string name="retry">Retry</string>
   <string name="no_internet">No Internet!</string>
+  <string name="link_stream_error">Link not found!</string>
   <string name="are_you_online_please_check_your_device_connection_settings">Are you online? Please check your device connection settings.</string>
 
   <!--EXOPLAYER-->

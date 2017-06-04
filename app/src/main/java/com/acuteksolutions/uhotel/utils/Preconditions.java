@@ -21,9 +21,14 @@ import android.text.TextUtils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public final class Preconditions {
   private Preconditions() {}
+
+  public static boolean checkList(List<?> list){
+    return list!=null && list.size()>0;
+  }
 
   public static boolean isNullOrEmpty(String string) {
     return string == null || string.isEmpty();

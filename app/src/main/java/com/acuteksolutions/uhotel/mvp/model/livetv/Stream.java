@@ -3,7 +3,9 @@ package com.acuteksolutions.uhotel.mvp.model.livetv;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Stream implements Parcelable {
+import io.realm.RealmObject;
+
+public class Stream extends RealmObject implements Parcelable {
 
     private String src;
     private String provider;

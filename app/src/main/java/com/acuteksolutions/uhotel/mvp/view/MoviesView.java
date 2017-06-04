@@ -19,4 +19,6 @@ public interface MoviesView extends BaseView {
     void playStream(String linkStream);
 
     void showEmty();
+
+    void linkStreamError();
 }

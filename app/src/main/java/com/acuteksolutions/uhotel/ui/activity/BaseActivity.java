@@ -16,12 +16,11 @@ import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.acuteksolutions.uhotel.utils.ActivityManager;
 import com.squareup.leakcanary.RefWatcher;
 
-import org.reactivestreams.Subscription;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
+
 import static dagger.internal.Preconditions.checkNotNull;
 
 /**
