@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @StringDef({ RoomControlDef.MAIN, RoomControlDef.OVERHEAD, RoomControlDef.WALL, RoomControlDef.SHEERS,
             RoomControlDef.BLACKOUT,RoomControlDef.SLIDER,RoomControlDef.TEMP})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface RoomControlDef {
   String MAIN="mainseek";
   String OVERHEAD="overheadseek";

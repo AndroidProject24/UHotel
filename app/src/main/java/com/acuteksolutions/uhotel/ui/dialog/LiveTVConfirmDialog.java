@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,11 +50,11 @@ public class LiveTVConfirmDialog extends DialogFragment {
         this.context = context;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        // request a window without the title
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        Preconditions.checkNotNull(dialog.getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
@@ -61,14 +63,11 @@ public class LiveTVConfirmDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-
         Dialog dialog = getDialog();
-        if (dialog != null) {
+        if (dialog.getWindow() != null) {
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-
         }
-
     }
 
     @Override

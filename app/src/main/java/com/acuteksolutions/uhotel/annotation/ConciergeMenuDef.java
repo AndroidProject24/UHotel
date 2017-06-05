@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 @IntDef({
     ConciergeMenuDef.ROOM, ConciergeMenuDef.CAR_RENTAL, ConciergeMenuDef.CHECK_OUT, ConciergeMenuDef.BUSINESS,
     ConciergeMenuDef.HOUSE, ConciergeMenuDef.VALET, ConciergeMenuDef.MIRROR, ConciergeMenuDef.PARENTAL})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ConciergeMenuDef {
   int ROOM=0;
   int CAR_RENTAL=1;

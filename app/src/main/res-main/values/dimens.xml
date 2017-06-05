@@ -30,4 +30,5 @@
   <!--DIALOG-->
   <dimen name="overlay_div_width">250dp</dimen>
   <dimen name="overlay_div_height">200dp</dimen>
+  <dimen name="parental_size">70dp</dimen>
 </resources>

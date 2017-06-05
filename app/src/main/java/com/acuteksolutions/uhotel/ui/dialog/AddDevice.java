@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +59,11 @@ public class AddDevice extends DialogFragment {
         this.context = context;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        // request a window without the title
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        Preconditions.checkNotNull(dialog.getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
@@ -70,14 +72,11 @@ public class AddDevice extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-
         Dialog dialog = getDialog();
-        if (dialog != null) {
+        if (dialog.getWindow() != null) {
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-
         }
-
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Email: Huynhvantoan.itc@gmail.com
  */
 @StringDef({ParseGsonDef.ID,ParseGsonDef.ARRAY, ParseGsonDef.OBJECT,ParseGsonDef.ITEMS, ParseGsonDef.MEDIA_RESOURCES})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ParseGsonDef {
   String ID="id";
   String ARRAY="list";

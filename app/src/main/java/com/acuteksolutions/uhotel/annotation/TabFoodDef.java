@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class TabFoodDef {
-  @Retention(RetentionPolicy.SOURCE)
+  @Retention(RetentionPolicy.RUNTIME)
 
   @IntDef({ COFFEE,BEST,TOP, HOTEL})
   public @interface TabFood{

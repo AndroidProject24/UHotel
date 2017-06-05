@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class TabMoviesDef {
-  @Retention(RetentionPolicy.SOURCE)
+  @Retention(RetentionPolicy.RUNTIME)
 
   @IntDef({ LATEST,ACTION,ADULTS, COMEDY, DRAMA, EVENTS, FAMILY})
   public @interface TabMovies{

@@ -12,12 +12,8 @@
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:bsb_bubble_color="@color/yellow"
-        app:bsb_bubble_text_color="@color/colorPrimaryDark"
-        app:bsb_max="10"
-        app:bsb_second_track_color="@color/tab_select"
-        app:bsb_thumb_radius="9dp"
-        app:bsb_track_color="@color/room_bg_track" />
+        style="@style/RoomControl_Slider"
+        app:dsb_max="10"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txt_progress"
@@ -28,7 +24,8 @@
         android:gravity="center_vertical"
         android:text="0"
         android:textColor="@color/white"
-        android:textSize="@dimen/textSize24" />
+        android:textSize="@dimen/textSize24"
+        tools:ignore="RtlHardcoded" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txt_name"

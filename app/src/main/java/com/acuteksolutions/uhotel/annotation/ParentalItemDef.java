@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @StringDef({ParentalItemDef.WATCH_TV,ParentalItemDef.MOVIES, ParentalItemDef.CONCIERGE,
             ParentalItemDef.FNA, ParentalItemDef.ROOM_CONTROL})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ParentalItemDef {
   String WATCH_TV="watchTvState";
   String MOVIES="moviesState";

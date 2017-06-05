@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class TabMainDef {
-  @Retention(RetentionPolicy.SOURCE)
+  @Retention(RetentionPolicy.RUNTIME)
 
   @IntDef({ HOME,CONCIERGE,LIVETV, MOVIES, FOOD, ROOMCONTROL})
   public @interface TabMain{

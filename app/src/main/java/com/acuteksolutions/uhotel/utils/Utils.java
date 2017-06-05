@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -134,6 +135,17 @@ public class Utils {
     return sdf.format(date);
   }
 
+  public static String getStringFromEditText(EditText content) {
+
+    String strContent = content.getText().toString().trim();
+    while (strContent.length() > 0 && strContent.endsWith("\n")) {
+      strContent = strContent.substring(0, strContent.length() - 2);
+    }
+    strContent = strContent.replace("\\", "\\\\").replace("\"", "\\\"")
+            .replace("\n", "\\n");
+    return strContent;
+
+  }
   public static String getMacAddess() {
     //return "00000000ffaa";
     WifiManager manager = (WifiManager) BaseApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);

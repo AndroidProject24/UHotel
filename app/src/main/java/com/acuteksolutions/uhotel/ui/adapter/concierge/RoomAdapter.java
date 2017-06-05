@@ -5,11 +5,14 @@ import android.annotation.SuppressLint;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.SaveDataRoomListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 import java.util.List;
 
@@ -50,22 +53,26 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                 Room room = (Room)item;
                 holder.setText(R.id.txt_name, room.getName())
                       .setText(R.id.txt_progress, String.valueOf(room.getValue()));
-                /*BubbleSeekBar bubbleSeekBar=holder.getView(R.id.seekBar);
-                bubbleSeekBar.setProgress(room.getValue());
-                bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListenerAdapter() {
+                DiscreteSeekBar discreteSeekBar=holder.getView(R.id.seekBar);
+                discreteSeekBar.setProgress(room.getValue());
+                discreteSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
                     @Override
-                    public void onProgressChanged(int progress, float progressFloat) {
-                        viewpagerListener.disableSwipe(false);
+                    public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int progress, boolean b) {
                         Logger.e("posExpand="+posExpand+"getAdapterPosition="+room.getPosition());
                         saveDataRoomListener.saveData(posExpand,room.getPosition(),progress);
                         holder.setText(R.id.txt_progress,String.valueOf(progress));
                     }
 
                     @Override
-                    public void getProgressOnFinally(int progress, float progressFloat) {
+                    public void onStartTrackingTouch(DiscreteSeekBar discreteSeekBar) {
+                        viewpagerListener.disableSwipe(false);
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(DiscreteSeekBar discreteSeekBar) {
                         viewpagerListener.disableSwipe(true);
                     }
-                });*/
+                });
                 break;
         }
     }

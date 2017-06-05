@@ -5,114 +5,53 @@
     android:layout_gravity="center"
     android:background="#2a2a2a"
     android:orientation="vertical"
-    android:paddingBottom="20dp"
-    >
-  <!--
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="2dp"
-          android:background="@color/orange"/>-->
+    android:paddingBottom="40dp">
 
-  <TextView
-      android:id="@+id/txtTitle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="10dp"
-      android:gravity="center"
-      android:text="Enter your new 4-digit PIN"
-      android:textColor="@color/white"
-      android:textSize="20sp"
-      />
-  <com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView
-      android:id="@+id/txtUnLockPin"
-      android:layout_width="500dp"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/textView"
-      android:layout_gravity="center"
-      android:layout_marginTop="30dp"
-      android:gravity="center"
-      android:nextFocusDown="@+id/btnUnlock"
-      app:accentType="character"
-      app:digitBackground="@drawable/bg_lock_dialog"
-      app:digitHeight="100dp"
-      app:digitSpacing="10dp"
-      app:digitTextSize="60sp"
-      app:digitWidth="100dp"
-      app:pinAccentColor="@color/yellow"
-      >
-    <requestFocus />
-  </com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView>
-  <TextView
-      android:id="@+id/txtReTitle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="10dp"
-      android:gravity="center"
-      android:text="Re-Enter your new 4-digit PIN"
-      android:textColor="@color/white"
-      android:textSize="20sp"
-      />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/yellow" />
 
-  <com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView
-      android:id="@+id/txtUnLockPin"
-      android:layout_width="500dp"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/textView"
-      android:layout_gravity="center"
-      android:layout_marginTop="30dp"
-      android:gravity="center"
-      android:nextFocusDown="@+id/btnUnlock"
-      app:accentType="character"
-      app:digitBackground="@drawable/bg_lock_dialog"
-      app:digitHeight="100dp"
-      app:digitSpacing="10dp"
-      app:digitTextSize="60sp"
-      app:digitWidth="100dp"
-      app:pinAccentColor="@color/yellow"
-      />
-
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="20dp"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-
-    <Button
-        android:id="@+id/btnClose"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/concierge_parental_button_selector"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/concierge_parental_button_selector"
-        android:textSize="18sp"
-        />
+        android:lines="2"
+        android:text="@string/dialog_pin_old"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
-    <Button
-        android:id="@+id/btnOk"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
+    <include layout="@layout/layout_pinview" />
+
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/concierge_parental_button_selector"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Change"
-        android:textAllCaps="false"
-        android:textColor="@color/concierge_parental_button_selector"
-        android:textSize="18sp"
-        />
-  </LinearLayout>
+        android:lines="2"
+        android:text="@string/dialog_pin_new"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <include layout="@layout/layout_pinview" />
+
+    <TextView
+        android:id="@+id/txtCancel"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="@string/dialog_cancel"
+        android:textColor="@color/dark"
+        android:textSize="20sp" />
+
 </LinearLayout>

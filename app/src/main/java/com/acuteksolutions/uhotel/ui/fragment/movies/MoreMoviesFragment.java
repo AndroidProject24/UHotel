@@ -73,9 +73,11 @@ public class MoreMoviesFragment extends BaseFragment<MoviesPresenter> implements
     mRecyclerview.setAdapter(moviesAdapter);
   }
 
-  @Override public void playStream(String linkStream) {
+  @Override
+  public void playStream(String title, String channel, String linkStream) {
 
   }
+
 
   @Override public void showEmty() {
 

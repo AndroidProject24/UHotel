@@ -14,7 +14,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 public class TabSettingDef {
-  @Retention(RetentionPolicy.SOURCE)
+  @Retention(RetentionPolicy.RUNTIME)
 
   @IntDef({ ACCOUNT,DEVICES})
   public @interface TabFood{

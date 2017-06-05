@@ -5,96 +5,86 @@
     android:orientation="vertical"
     tools:ignore="HardcodedText">
 
-  <TextView
-      android:id="@+id/txt_title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:paddingTop="50dp"
-      android:text="PIN PROTECT ACCESS TO ANY OF THE FOLLOWING:"
-      android:textColor="#635244"
-      android:textColorHighlight="@color/grey"
-      android:textSize="30sp"
-      />
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="350dp"
-      android:layout_marginLeft="50dp"
-      android:layout_marginRight="50dp"
-      android:layout_marginTop="40dp"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <TextView
+        android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        />
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="50dp"
+        android:text="PIN PROTECT ACCESS TO ANY OF THE FOLLOWING:"
+        android:textColor="#635244"
+        android:textColorHighlight="@color/grey"
+        android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/btnEnableAll"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/parental_control_div_focus_selector"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-        android:padding="20dp"
-        android:text="ENABLE\nALL"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        />
-  </LinearLayout>
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <TextView
+            android:id="@+id/btnEnableAll"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/parental_control_div_focus_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="ENABLE\nALL"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="40dp"
-      android:orientation="horizontal"
-
-      >
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="250dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/concierge_parental_button_selector"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:paddingBottom="15dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="15dp"
-        android:text="Save"
-        android:textAllCaps="false"
-        android:textColor="@color/concierge_parental_button_selector"
-        android:textSize="20sp"
-        />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
 
-    <Button
-        android:id="@+id/btnChangePin"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/concierge_parental_button_selector"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:paddingBottom="15dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="15dp"
-        android:text="Change PIN"
-        android:textAllCaps="false"
-        android:textColor="@color/concierge_parental_button_selector"
-        android:textSize="20sp"
-        />
-  </LinearLayout>
+        >
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/concierge_parental_button_selector"
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/concierge_parental_button_selector"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnChangePin"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/concierge_parental_button_selector"
+            android:paddingBottom="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:text="Change PIN"
+            android:textAllCaps="false"
+            android:textColor="@color/concierge_parental_button_selector"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </LinearLayout>

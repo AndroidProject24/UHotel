@@ -56,7 +56,7 @@ public class CustomPlaybackControlView extends FrameLayout {
 
   private final CustomPlaybackControlView.ComponentListener componentListener;
   private final ImageView playButton;
-  private final TextView timeCurrent,timeDuration,txtChannel,txtChannel1;
+  private final TextView timeCurrent,timeDuration,txtTitle,txtChannel;
   public final SeekBar progressBar;
   private final StringBuilder formatBuilder;
   private final Formatter formatter;
@@ -120,8 +120,8 @@ public class CustomPlaybackControlView extends FrameLayout {
     LayoutInflater.from(context).inflate(R.layout.exo_playback_control_view, this);
     timeCurrent = (TextView) findViewById(R.id.time_current);
     timeDuration = (TextView) findViewById(R.id.time_duration);
+    txtTitle = (TextView) findViewById(R.id.txt_title);
     txtChannel = (TextView) findViewById(R.id.txt_channel);
-    txtChannel1 = (TextView) findViewById(R.id.txt_channel1);
     progressBar = (SeekBar) findViewById(R.id.seek_progress);
     progressBar.setOnSeekBarChangeListener(componentListener);
     progressBar.setMax(PROGRESS_BAR_MAX);
@@ -545,5 +545,15 @@ public class CustomPlaybackControlView extends FrameLayout {
       }
       hideAfterTimeout();
     }
+  }
+
+  //Custom
+
+  public void setMoviesTitle(String title) {
+    txtTitle.setText(title);
+  }
+
+  public void setMoviesChannel(String channel) {
+    txtChannel.setText(channel);
   }
 }

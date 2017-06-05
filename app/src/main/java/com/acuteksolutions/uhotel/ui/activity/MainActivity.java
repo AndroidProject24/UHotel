@@ -147,15 +147,21 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
         .setName(getString(R.string.app_name))
     );
     mDrawer.setOnItemClickListener((item, id, position) -> {
-      mDrawer.selectItem(position);
       if (mPreferencesHelper.getJsonLogin()!=null) {
           Logger.e("position="+position);
-          if(position<2)
+          if(position<2) {
+              mDrawer.selectItem(1);
+              removeSettingFragment();
               viewPagerMain.setCurrentItem(1);
-          else if(position==11)
-            replaceFagment(getSupportFragmentManager(),R.id.layout_root,SettingFragment.newInstance());
-          else
-              viewPagerMain.setCurrentItem(position/2+1);
+          }else if(position==11) {
+              mDrawer.selectItem(6);
+              replaceFagment(getSupportFragmentManager(), R.id.layout_root, SettingFragment.newInstance());
+          }else {
+              position=position / 2 + 1;
+              mDrawer.selectItem(position);
+              removeSettingFragment();
+              viewPagerMain.setCurrentItem(position);
+          }
       }else{
           LoginActivity.start(this);
           Snackbar.make(mDrawer, "Please login!", Snackbar.LENGTH_LONG).show();
@@ -182,6 +188,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     setSupportActionBar(mToolbar);
   }
 
+  private void removeSettingFragment(){
+    if(getSupportFragmentManager().findFragmentByTag(SettingFragment.class.getName())!=null)
+      getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag(SettingFragment.class.getName())).commit();
+  }
   @Override
   public void onBackPressedSupport() {
     if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {

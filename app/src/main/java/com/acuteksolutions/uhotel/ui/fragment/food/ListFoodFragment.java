@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
@@ -18,11 +18,13 @@ import com.acuteksolutions.uhotel.mvp.presenter.FoodPresenter;
 import com.acuteksolutions.uhotel.mvp.view.FoodView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.FoodAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseLazyFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.bumptech.glide.Glide;
 
-public class ListFoodFragment extends BaseFragment<FoodPresenter> implements FoodView {
+import butterknife.BindView;
+
+public class ListFoodFragment extends BaseLazyFragment<FoodPresenter> implements FoodView {
   @BindView(R.id.recycle_food)
   RecyclerView mRecycleFood;
   @BindView(R.id.movies_main_info) ViewGroup mLayoutFood;

@@ -79,6 +79,12 @@
   </string-array>
 
   <drawable name="black">@color/black</drawable>
+  <string name="room_request">Request Items</string>
+  <string name="room_request_count">Request Items (%1$d)</string>
+  <string name="dialog_cancel">Cancel</string>
+  <string name="dialog_pin_old">Enter your new 4-digit PIN</string>
+  <string name="dialog_pin_new">Re-Enter your new 4-digit PIN</string>
+  <string name="dialog_parental">Enter your 4-digit PIN to edit your parental control settings</string>
   <string name="concierge_right_checkout_txt">Payment had been received. Thank you for choosing uHotel</string>
   <string name="concierge_right_housekeeping_txt">Housekeeping, Please!</string>
   <string name="concierge_right_housekeeping_txtclicked">Housekeeping Coming!</string>

@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @IntDef({
     ParentalPinDef.ONLY_VERIFY, ParentalPinDef.VERIFY_CHANGE_PIN, ParentalPinDef.CHANGE_PIN})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface ParentalPinDef {
   int ONLY_VERIFY=1;
   int CHANGE_PIN=2;

@@ -35,7 +35,7 @@ import static dagger.internal.Preconditions.checkNotNull;
  * Created by Toan.IT
  * Date:22/5/2016
  */
-public abstract class BaseFragment <T extends BasePresenter> extends SupportFragment implements OnBackListener,BaseView {
+public abstract class BaseLazyFragment<T extends BasePresenter> extends SupportFragment implements OnBackListener,BaseView {
     private View mContentView;
     private Context mContext;
     private Unbinder unbinder;
@@ -44,6 +44,8 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     protected ToolbarTitleListener toolbarTitleListener;
     protected ViewpagerListener viewpagerListener;
     protected RequestManager glide;
+    private boolean isPrepared=false;
+    protected boolean isVisible;
     @Inject
     protected T mPresenter;
     @Override
@@ -79,19 +81,38 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try {
+            isPrepared = true;
             if(mPresenter!=null)
                 mPresenter.attachView(this);
             unbinder = ButterKnife.bind(this, mContentView);
             mContext = getContext();
             glide= Glide.with(this);
-            initViews();
-            initData();
-            Logger.wtf(TAG);
+            lazyLoad();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad(){
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+        Logger.wtf(TAG);
+        initViews();
+        initData();
+        isPrepared = false;
+    }
     protected abstract void injectDependencies();
 
     protected abstract int setLayoutResourceID();

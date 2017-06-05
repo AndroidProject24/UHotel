@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @StringDef({LinkDef.LINK_LIST_CATEGORY, LinkDef.LINK_LIST_MOVIES,LinkDef.LINK_MOVIES_DETAILS,
     LinkDef.LINK_IMAGE_URL,LinkDef.LINK_LIVE_ALL_CHANNEL,LinkDef.LINK_LIVE_PROGRAM_BY_ID_PATH, LinkDef.LINK_STREAM})
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface LinkDef {
   String LINK_LIST_CATEGORY="/restapi/rest/region_uid/store/categories";
   String LINK_LIST_MOVIES="/vod/info?purchase_item_list=id_list";

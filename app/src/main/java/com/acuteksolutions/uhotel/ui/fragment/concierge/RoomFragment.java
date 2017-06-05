@@ -2,9 +2,13 @@ package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
@@ -25,6 +29,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
@@ -36,9 +41,9 @@ import io.realm.RealmResults;
 public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDataRoomListener{
     @BindView(R.id.txt_title) TextView txtTitle;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
-    @BindView(R.id.txt_request_send) TextView txtRequestSend;
-    @BindView(R.id.txt_item_total) TextView txtItemTotal;
+    @BindView(R.id.btnRequest) Button btnRequestSend;
     public RoomAdapter roomAdapter;
+    private AlertDialog alertDialog;
     private Context mContext;
     private Realm realm;
     @Inject RealmManager realmManager;
@@ -115,12 +120,31 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
                 }
                 listRoom.setTotal(total);
             }
-        }, () -> ((AppCompatTextView)roomAdapter.getViewByPosition(recyclerView,positionExPand,R.id.txt_total)).setText(String.format(" (%d)", total)));
+        }, () -> {
+            btnRequestSend.setText(String.format(getString(R.string.room_request_count),total));
+            ((AppCompatTextView)roomAdapter.getViewByPosition(recyclerView,positionExPand,R.id.txt_total)).setText(String.format(" (%d)", total));
+        });
     }
 
     @Override
     public void refreshList() {
         initData();
+    }
+
+    @OnClick(R.id.btnRequest)
+    void btnRequest(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.room_service_dialog, null);
+        view.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.show();
     }
 
 }

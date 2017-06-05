@@ -24,7 +24,7 @@ import com.acuteksolutions.uhotel.mvp.view.MoviesView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.MoviesAdapter;
 import com.acuteksolutions.uhotel.ui.exoplayer.VideoPlayerActivity;
-import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
+import com.acuteksolutions.uhotel.ui.fragment.base.BaseLazyFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements MoviesView {
+public class ListMoviesFragment extends BaseLazyFragment<MoviesPresenter> implements MoviesView {
     private Context mContext;
     @BindView(R.id.recycle_movies)
     RecyclerView mRecyclerMovies;
@@ -66,7 +66,6 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
     protected void initViews() {
         mRecyclerMovies.setLayoutManager(new GridLayoutManager(mContext, 4));
         mRecyclerMovies.setHasFixedSize(true);
-       // mRecyclerMovies.showShimmerAdapter();
     }
 
     @Override
@@ -90,7 +89,6 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
             moviesAdapter = new MoviesAdapter(glide, moviesList);
             moviesAdapter.openLoadAnimation();
             mRecyclerMovies.setAdapter(moviesAdapter);
-            //mRecyclerMovies.hideShimmerAdapter();
         }
         moviesAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(moviesList.get(i)));
     }
@@ -108,7 +106,7 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
             ((TextView) ButterKnife.findById(view, R.id.movies_overlay_main_txtnamemovie)).setText("Watch '" + vodInfo.getDetail().getTitle() + "'");
             ButterKnife.findById(view, R.id.movies_overlay_main_leftdiv).setOnClickListener(v -> {
                 alertDialog.dismiss();
-                mPresenter.getLinkStream(vodInfo.getContentInfoUid());
+                mPresenter.getLinkStream(vodInfo.getDetail().getTitle(), "", vodInfo.getContentInfoUid());
             });
             ButterKnife.findById(view, R.id.movies_overlay_main_rightdiv).setOnClickListener(
                     v -> alertDialog.dismiss());
@@ -118,11 +116,15 @@ public class ListMoviesFragment extends BaseFragment<MoviesPresenter> implements
     }
 
     @Override
-    public void playStream(String linkStream) {
+    public void playStream(String title, String channel, String linkStream) {
         Logger.e(linkStream);
         Intent player = new Intent(mContext, VideoPlayerActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        player.putExtra(BundleDef.BUNDLE_KEY, linkStream);
+        Bundle bundle = new Bundle();
+        bundle.putString(BundleDef.BUNDLE_KEY, linkStream);
+        bundle.putString(BundleDef.BUNDLE_MOVIES_TITLE, title);
+        bundle.putString(BundleDef.BUNDLE_MOVIES_CHANNEL, channel);
+        player.putExtra(BundleDef.BUNDLE, bundle);
         startActivity(player);
     }
 

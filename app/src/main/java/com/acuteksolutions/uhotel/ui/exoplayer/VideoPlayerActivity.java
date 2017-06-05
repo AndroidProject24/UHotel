@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
 import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
@@ -28,38 +29,50 @@ import com.google.android.exoplayer2.util.Util;
  */
 
 public class VideoPlayerActivity extends AppCompatActivity {
-  private Timeline.Window window;
-  private CustomExoPlayerView simpleExoPlayerView;
-  private SimpleExoPlayer player;
-  private Handler mainHandler;
-  private boolean shouldAutoPlay;
-  private DefaultTrackSelector trackSelector;
-  private long playerPosition;
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_video_player);
-    simpleExoPlayerView=(CustomExoPlayerView)findViewById(R.id.playerView);
-    shouldAutoPlay = true;
-    mainHandler = new Handler();
-    window = new Timeline.Window();
-  }
+    private Timeline.Window window;
+    private CustomExoPlayerView simpleExoPlayerView;
+    private SimpleExoPlayer player;
+    private Handler mainHandler;
+    private boolean shouldAutoPlay;
+    private DefaultTrackSelector trackSelector;
+    private long playerPosition;
+    private String title = "", channel = "", link = "";
 
-  private void initializePlayer() {
-    simpleExoPlayerView.requestFocus();
-    DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-    TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
-    trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
-    player = ExoPlayerFactory.newSimpleInstance(this,trackSelector);
-    simpleExoPlayerView.setPlayer(player);
-    player.setPlayWhenReady(shouldAutoPlay);
-    DataSource.Factory dataSourceFactory = ((BaseApplication) getApplication()).buildHttpDataSourceFactory(bandwidthMeter);
-    MediaSource videoSource = new HlsMediaSource(Uri.parse(Preconditions.checkNotNull(getIntent().getStringExtra(
-        BundleDef.BUNDLE_KEY))), dataSourceFactory, mainHandler, null);
-    // Prepare the player with the source.
-    player.prepare(videoSource);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video_player);
+        simpleExoPlayerView = (CustomExoPlayerView) findViewById(R.id.playerView);
+        getData();
+        shouldAutoPlay = true;
+        mainHandler = new Handler();
+        window = new Timeline.Window();
+    }
 
-    // if you are using different source like mp4 and custom subtitle
+    private void getData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            link = Preconditions.checkNotNull(bundle.getString(BundleDef.BUNDLE_KEY));
+            title = Preconditions.checkNotNull(bundle.getString(BundleDef.BUNDLE_MOVIES_TITLE));
+            channel = Preconditions.checkNotNull(bundle.getString(BundleDef.BUNDLE_MOVIES_CHANNEL));
+        }
+    }
+
+    private void initializePlayer() {
+        simpleExoPlayerView.requestFocus();
+        DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
+        trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
+        player = ExoPlayerFactory.newSimpleInstance(this, trackSelector);
+        simpleExoPlayerView.setPlayer(player);
+        player.setPlayWhenReady(shouldAutoPlay);
+        DataSource.Factory dataSourceFactory = ((BaseApplication) getApplication()).buildHttpDataSourceFactory(bandwidthMeter);
+        MediaSource videoSource = new HlsMediaSource(Uri.parse(link), dataSourceFactory, mainHandler, null);
+        player.prepare(videoSource);
+        simpleExoPlayerView.setMoviesTitle(title);
+        simpleExoPlayerView.setMoviesChannel(channel);
+
+        // if you are using different source like mp4 and custom subtitle
         /*
         extractorsFactory = new DefaultExtractorsFactory();
         MediaSource mediaSource = new ExtractorMediaSource(Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"),
@@ -71,58 +84,64 @@ public class VideoPlayerActivity extends AppCompatActivity {
         MergingMediaSource mergedSource =
                 new MergingMediaSource(mediaSource, subtitleSource);
          */
-    // if you want play without subtitle
+        // if you want play without subtitle
         /*
                 MediaSource mediaSource = new HlsMediaSource(Uri.parse("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"),
                 mediaDataSourceFactory, mainHandler, null);
         player.prepare(mediaSource);
          */
-  }
-
-  private void releasePlayer() {
-    if (player != null) {
-      shouldAutoPlay = player.getPlayWhenReady();
-      int playerWindow = player.getCurrentWindowIndex();
-      playerPosition = C.TIME_UNSET;
-      Timeline timeline = player.getCurrentTimeline();
-      if (timeline != null && timeline.getWindow(playerWindow, window).isSeekable) {
-        playerPosition = player.getCurrentPosition();
-      }
-      player.release();
-      player = null;
-      trackSelector = null;
     }
-  }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    if (Util.SDK_INT > 23) {
-      initializePlayer();
+    private void releasePlayer() {
+        try {
+            if (player != null) {
+                shouldAutoPlay = player.getPlayWhenReady();
+                int playerWindow = player.getCurrentWindowIndex();
+                playerPosition = C.TIME_UNSET;
+                Timeline timeline = player.getCurrentTimeline();
+                if (timeline != null && timeline.getWindow(playerWindow, window).isSeekable) {
+                    playerPosition = player.getCurrentPosition();
+                }
+                player.release();
+                player = null;
+                trackSelector = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            player.release();
+            player = null;
+        }
     }
-  }
 
-  @Override
-  public void onResume() {
-    super.onResume();
-    if ((Util.SDK_INT <= 23 || player == null)) {
-      initializePlayer();
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+        }
     }
-  }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-    if (Util.SDK_INT <= 23) {
-      releasePlayer();
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ((Util.SDK_INT <= 23 || player == null)) {
+            initializePlayer();
+        }
     }
-  }
 
-  @Override
-  public void onStop() {
-    super.onStop();
-    if (Util.SDK_INT > 23) {
-      releasePlayer();
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
     }
-  }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
+    }
 }

@@ -22,7 +22,7 @@ public class RightNowAdapter extends BaseQuickAdapter<TVInfo, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, TVInfo data) {
       try {
         helper.setText(R.id.txtChannelName, data.getTitle())
-                .addOnClickListener(R.id.layout_item);
+                .addOnClickListener(R.id.layout_play_now);
         if(data.getPictureLink()!=null)
           ImageUtils.loadImage(glide,data.getPictureLink(),(ImageView) helper.getView(R.id.imageView));
       }catch (Exception e){

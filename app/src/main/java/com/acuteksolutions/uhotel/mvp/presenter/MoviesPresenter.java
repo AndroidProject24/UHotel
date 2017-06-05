@@ -76,7 +76,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
             }));
   }
 
-  public void getLinkStream(String cid) {
+  public void getLinkStream(String title,String channel,String cid) {
     getMvpView().showLoading();
     addSubscribe(mRepository.getLinkStream(cid)
         .subscribeWith(new DefaultObserver<String>() {
@@ -92,7 +92,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
             try {
               getMvpView().hideLoading();
               if(!Preconditions.isEmpty(linkStream)) {
-                getMvpView().playStream(linkStream);
+                getMvpView().playStream(title,channel,linkStream);
               }else
                 getMvpView().linkStreamError();
             }catch (Exception e){

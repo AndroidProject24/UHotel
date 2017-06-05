@@ -16,7 +16,7 @@ public interface MoviesView extends BaseView {
 
     void listMovies(List<VODInfo> moviesList);
 
-    void playStream(String linkStream);
+    void playStream(String title,String channel,String linkStream);
 
     void showEmty();
 

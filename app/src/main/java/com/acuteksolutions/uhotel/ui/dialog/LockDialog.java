@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.acuteksolutions.uhotel.R;
-import com.acuteksolutions.uhotel.libs.pinentryview.PinEntryView;
 import com.acuteksolutions.uhotel.mvp.presenter.PinPresenter;
 import com.acuteksolutions.uhotel.mvp.view.PinView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
@@ -41,7 +38,7 @@ public class LockDialog extends DialogFragment implements PinView {
   public static final int LOCK_REQUEST_CODE = 2;
   public static final int RESULT_TO_HOME = 1;
   public static final int RESULT_UNBLOCK = 2;
-  @BindView(R.id.txtUnLockPin) PinEntryView txtUnlockPin;
+
   @BindView(R.id.btnUnlock) Button btnUnlock;
   private Context context;
   private Unbinder unbinder;
@@ -103,7 +100,7 @@ public class LockDialog extends DialogFragment implements PinView {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     try {
-      txtUnlockPin.addTextChangedListener(new TextWatcher() {
+     /* txtUnlockPin.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -120,7 +117,7 @@ public class LockDialog extends DialogFragment implements PinView {
             btnUnlock.requestFocus();
           }
         }
-      });
+      });*/
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -141,7 +138,7 @@ public class LockDialog extends DialogFragment implements PinView {
 
   @OnClick(R.id.btnUnlock)
   void btnUnlock(){
-    mPresenter.verifyPin(txtUnlockPin.getText().toString());
+   // mPresenter.verifyPin(txtUnlockPin.getText().toString());
   }
 
   @Override public void verifyPin(boolean checkVerify) {
@@ -151,8 +148,8 @@ public class LockDialog extends DialogFragment implements PinView {
         dismiss();
       } else {
         Toast.makeText(context, "Failed to verify your pin code!", Toast.LENGTH_SHORT).show();
-        txtUnlockPin.clearText();
-        txtUnlockPin.requestFocus();
+        //txtUnlockPin.clearText();
+        //txtUnlockPin.requestFocus();
       }
     } catch (Exception e) {
       e.printStackTrace();

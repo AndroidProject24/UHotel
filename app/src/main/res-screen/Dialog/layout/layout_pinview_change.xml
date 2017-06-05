@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="10dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/ediRePin1"
+        android:layout_width="@dimen/parental_size"
+        android:layout_height="@dimen/parental_size"
+        android:background="@drawable/parental_pin_selector"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/ediRePin2"
+        android:layout_width="@dimen/parental_size"
+        android:layout_height="@dimen/parental_size"
+        android:background="@drawable/parental_pin_selector"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/ediRePin3"
+        android:layout_width="@dimen/parental_size"
+        android:layout_height="@dimen/parental_size"
+        android:background="@drawable/parental_pin_selector"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/ediRePin4"
+        android:layout_width="@dimen/parental_size"
+        android:layout_height="@dimen/parental_size"
+        android:background="@drawable/parental_pin_selector"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="1"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/black" />
+</LinearLayout>
