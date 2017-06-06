@@ -50,7 +50,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras().getBundle(BundleDef.BUNDLE);
         if (bundle != null) {
             link = Preconditions.checkNotNull(bundle.getString(BundleDef.BUNDLE_KEY));
             title = Preconditions.checkNotNull(bundle.getString(BundleDef.BUNDLE_MOVIES_TITLE));

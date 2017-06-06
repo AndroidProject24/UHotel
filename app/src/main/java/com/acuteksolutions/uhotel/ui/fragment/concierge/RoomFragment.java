@@ -46,6 +46,7 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
     private AlertDialog alertDialog;
     private Context mContext;
     private Realm realm;
+    private int totalRow=0,total=0;
     @Inject RealmManager realmManager;
     public static RoomFragment newInstance() {
         return new RoomFragment();
@@ -89,8 +90,12 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
                 }
                 list.add(roomExpand);
             }
-
+            for (int i = 0; i < listRooms.size(); i++) {
+                for (Room room : listRooms.get(i).getDetailList())
+                    total = total + room.getValue();
+            }
         }, () -> {
+            btnRequestSend.setText(String.format(getString(R.string.room_request_count),total));
             roomAdapter = new RoomAdapter(list,this,viewpagerListener);
             recyclerView.setAdapter(roomAdapter);
         });
@@ -103,26 +108,35 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
             realm.close();
     }
 
-    int total=0;
     @SuppressLint("DefaultLocale")
     @Override
     public void saveData(int positionExPand,int position,int progress) {
         realm.executeTransactionAsync(realm -> {
-            total = 0;
+            totalRow = 0;
+            total=0;
             RealmResults<ListRoom> listRooms = realm.where(ListRoom.class).findAll();
-            if (listRooms.size() >= positionExPand) {
-                ListRoom listRoom = listRooms.get(positionExPand);
-                RealmList<Room> realmList = listRoom.getDetailList();
-                if (realmList.size() > position)
-                    realmList.get(position).setValue(progress);
-                for (Room room : realmList) {
-                    total = total + room.getValue();
+            try {
+                if (listRooms.size() >= positionExPand) {
+                    ListRoom listRoom = listRooms.get(positionExPand);
+                    RealmList<Room> realmList = listRoom.getDetailList();
+                    if (realmList.size() > position)
+                        realmList.get(position).setValue(progress);
+                    for (Room room : realmList) {
+                        totalRow = totalRow + room.getValue();
+                    }
+                    listRoom.setTotal(totalRow);
                 }
-                listRoom.setTotal(total);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            //Get total
+            for (int i = 0; i < listRooms.size(); i++) {
+                for (Room room : listRooms.get(i).getDetailList())
+                    total = total + room.getValue();
             }
         }, () -> {
             btnRequestSend.setText(String.format(getString(R.string.room_request_count),total));
-            ((AppCompatTextView)roomAdapter.getViewByPosition(recyclerView,positionExPand,R.id.txt_total)).setText(String.format(" (%d)", total));
+            ((AppCompatTextView)roomAdapter.getViewByPosition(recyclerView,positionExPand,R.id.txt_total)).setText(String.format(" (%d)", totalRow));
         });
     }
 
@@ -135,12 +149,7 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
     void btnRequest(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         View view = LayoutInflater.from(mContext).inflate(R.layout.room_service_dialog, null);
-        view.findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
+        view.findViewById(R.id.btnClose).setOnClickListener(v -> alertDialog.dismiss());
         builder.setView(view);
         alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(false);

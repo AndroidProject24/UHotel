@@ -38,6 +38,8 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                 RoomExpand roomExpand = (RoomExpand)item;
                 holder.setText(R.id.txt_name_expandable, roomExpand.getTitle())
                         .setText(R.id.txt_total, roomExpand.getTotal() > 0 ? String.format(" (%d)", roomExpand.getTotal()) : "0")
+                        .setTextColor(R.id.txt_total,roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white))
+                        .setTextColor(R.id.txt_name_expandable,roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white))
                         .setImageResource(R.id.img_arrow, roomExpand.isExpanded() ? R.drawable.room_arrow_up : R.drawable.room_arrow_down);
                 holder.itemView.setOnClickListener(v -> {
                     posExpand = holder.getAdapterPosition();
@@ -45,6 +47,10 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                         collapse(posExpand);
                         saveDataRoomListener.refreshList();
                     } else {
+                        for(int i=0;i<((RoomExpand) item).getSubItems().size();i++){
+                            if(((RoomExpand) item).isExpanded())
+                                collapse(i);
+                        }
                         expand(posExpand);
                     }
                 });

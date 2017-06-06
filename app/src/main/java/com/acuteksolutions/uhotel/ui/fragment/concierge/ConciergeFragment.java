@@ -64,7 +64,7 @@ public class ConciergeFragment extends BaseFragment{
   @Override
   protected void initData() {
       menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view,position));
-      new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu,ConciergeMenuDef.ROOM, R.id.btn_menu),0),500);
+      new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu,ConciergeMenuDef.ROOM, R.id.btn_menu),0),1000);
   }
 
   private void showScreen(@NonNull View view,int index) {

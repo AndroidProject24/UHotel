@@ -91,17 +91,17 @@ public class ParentalFragment extends BaseFragment<PinPresenter> implements PinV
 
   @OnClick(R.id.btnSave)
   void editClick() {
-    PinVerifyDialog parentalDialogFragment = PinVerifyDialog.newInstance();
-    parentalDialogFragment.setTargetFragment(this, ParentalPinDef.ONLY_VERIFY);
-    parentalDialogFragment.show(getFragmentManager(), PinVerifyDialog.class.getName());
+    PinVerifyDialog pinVerifyDialog = PinVerifyDialog.newInstance();
+    pinVerifyDialog.setTargetFragment(this, ParentalPinDef.ONLY_VERIFY);
+    pinVerifyDialog.show(getFragmentManager(), PinVerifyDialog.class.getName());
 
   }
 
   @OnClick(R.id.btnChangePin)
   void changePinClick() {
-    PinVerifyDialog parentalDialogFragment = PinVerifyDialog.newInstance();
-    parentalDialogFragment.setTargetFragment(this, ParentalPinDef.CHANGE_PIN);
-    parentalDialogFragment.show(getFragmentManager(), PinVerifyDialog.class.getName());
+    PinChangeDialog pinChangeDialog = PinChangeDialog.newInstance();
+    pinChangeDialog.setTargetFragment(this, ParentalPinDef.CHANGE_PIN);
+    pinChangeDialog.show(getFragmentManager(), PinVerifyDialog.class.getName());
   }
 
   @OnClick(R.id.btnEnableAll)
@@ -171,7 +171,7 @@ public class ParentalFragment extends BaseFragment<PinPresenter> implements PinV
     } else if (requestCode == ParentalPinDef.VERIFY_CHANGE_PIN) {
       if (resultCode == Activity.RESULT_OK) {
         if (data.getBooleanExtra(BundleDef.IS_CORRECT, false)) {
-          PinChangeDialog dialog = PinChangeDialog.newInstance(data.getStringExtra(BundleDef.BUNDLE_KEY));
+          PinChangeDialog dialog = PinChangeDialog.newInstance();
           dialog.setTargetFragment(this, ParentalPinDef.VERIFY_CHANGE_PIN);
           dialog.show(getFragmentManager(), PinChangeDialog.class.getName());
         }

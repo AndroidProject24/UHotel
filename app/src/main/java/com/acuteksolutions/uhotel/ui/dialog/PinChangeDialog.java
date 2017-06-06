@@ -60,12 +60,8 @@ public class PinChangeDialog extends DialogFragment implements PinView {
     EditText ediRePin3;
     @BindView(R.id.ediRePin4)
     EditText ediRePin4;
-    public static PinChangeDialog newInstance(String currentPIN) {
-        PinChangeDialog pinDialogFragment = new PinChangeDialog();
-        Bundle bundle = new Bundle();
-        bundle.putString(BundleDef.BUNDLE_KEY, currentPIN);
-        pinDialogFragment.setArguments(bundle);
-        return pinDialogFragment;
+    public static PinChangeDialog newInstance() {
+        return new PinChangeDialog();
     }
 
     @Override

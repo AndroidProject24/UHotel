@@ -40,7 +40,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"/>
 
-    <include layout="@layout/layout_pinview" />
+    <include layout="@layout/layout_pinview_change" />
 
     <TextView
         android:id="@+id/txtCancel"

@@ -193,8 +193,7 @@
                                     android:clickable="true"
                                     android:contentDescription="@string/md_content_description_open_profile_list"
                                     android:padding="@dimen/md_baseline"
-                                    android:scaleType="center"
-                                    android:src="@drawable/md_arrow_drop_down" />
+                                    android:scaleType="center" />
 
                             </LinearLayout>
 

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bglogin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bglogin">
 
     <LinearLayout
         android:id="@+id/mToobar"
@@ -17,13 +17,13 @@
             android:id="@+id/imaHeaderIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/menu_concierge"/>
+            android:src="@drawable/menu_concierge" />
 
         <TextView
             android:id="@+id/txtHeaderName"
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="@string/home_menu_concierge"
             android:textColor="@color/white"
             android:textSize="@dimen/textSize18" />
@@ -31,10 +31,10 @@
 
     <LinearLayout
         android:id="@+id/menu_left"
-        android:layout_below="@+id/mToobar"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:layout_below="@+id/mToobar"
+        android:background="@drawable/bg_left_gradient"
         android:gravity="center_vertical">
 
         <android.support.v7.widget.RecyclerView
@@ -45,10 +45,10 @@
 
     <FrameLayout
         android:id="@+id/fragment_concierge"
-        android:layout_alignTop="@+id/menu_left"
-        android:layout_toRightOf="@+id/menu_left"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/menu_left"
+        android:layout_toRightOf="@+id/menu_left" />
 
 
 </RelativeLayout>

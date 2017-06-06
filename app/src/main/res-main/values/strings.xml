@@ -79,6 +79,7 @@
   </string-array>
 
   <drawable name="black">@color/black</drawable>
+  <drawable name="menu_left">@color/menu_left</drawable>
   <string name="room_request">Request Items</string>
   <string name="room_request_count">Request Items (%1$d)</string>
   <string name="dialog_cancel">Cancel</string>
