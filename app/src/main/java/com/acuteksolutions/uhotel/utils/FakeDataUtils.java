@@ -3,8 +3,10 @@ package com.acuteksolutions.uhotel.utils;
 import android.content.Context;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ListRoom;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
+import com.acuteksolutions.uhotel.mvp.model.login.HomeMenu;
 import com.acuteksolutions.uhotel.mvp.model.setting.Account;
 import com.acuteksolutions.uhotel.mvp.model.setting.Device;
 
@@ -25,6 +27,17 @@ import io.realm.RealmList;
  */
 
 public class FakeDataUtils {
+
+  public static List<HomeMenu> homeMenus(Context context){
+    List<HomeMenu> listMenu=new ArrayList<>();
+    listMenu.add(new HomeMenu(R.drawable.menu_concierge,context.getResources().getString(TabMainDef.CONCIERGE)));
+    listMenu.add(new HomeMenu(R.drawable.menu_livetv,context.getResources().getString(TabMainDef.LIVETV)));
+    listMenu.add(new HomeMenu(R.drawable.menu_movies,context.getResources().getString(TabMainDef.MOVIES)));
+    listMenu.add(new HomeMenu(R.drawable.menu_food_activities,context.getResources().getString(TabMainDef.FOOD)));
+    listMenu.add(new HomeMenu(R.drawable.menu_room_control,context.getResources().getString(TabMainDef.ROOMCONTROL)));
+    listMenu.add(new HomeMenu(R.drawable.menu_settings,context.getResources().getString(R.string.home_menu_setting)));
+    return listMenu;
+  }
   public static void initDataRoom(Context context){
     Realm.getDefaultInstance().executeTransactionAsync(realm -> {
       if(realm.where(ListRoom.class).count()==0) {

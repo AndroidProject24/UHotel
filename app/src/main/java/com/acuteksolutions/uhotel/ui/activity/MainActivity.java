@@ -2,19 +2,20 @@ package com.acuteksolutions.uhotel.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,22 +31,21 @@ import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import com.acuteksolutions.uhotel.libs.materialdrawer.DrawerView;
-import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerItem;
-import com.acuteksolutions.uhotel.libs.materialdrawer.structure.DrawerProfile;
+import com.acuteksolutions.uhotel.ui.adapter.HomeMenuAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
+import com.acuteksolutions.uhotel.utils.FakeDataUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import butterknife.BindView;
 import qiu.niorgai.StatusBarCompat;
 
 public class MainActivity extends BaseActivity implements ToolbarTitleListener,ViewpagerListener {
-  private ActionBarDrawerToggle drawerToggle;
   private boolean doubleBackToExitPressedOnce;
-  @BindView(R.id.drawer) DrawerView mDrawer;
+  @BindView(R.id.drawer) NavigationView mDrawer;
   @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;
+  @BindView(R.id.recycler_menu) RecyclerView recyclerViewMenu;
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.tab_main) TabLayout tabMain;
   @BindView(R.id.viewPager_main) CustomSwipeableViewPager viewPagerMain;
@@ -97,77 +97,30 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   }
 
   private void initDrawer(){
-    drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-
-      public void onDrawerClosed(View view) {
-        invalidateOptionsMenu();
-      }
-
-      public void onDrawerOpened(View drawerView) {
-        invalidateOptionsMenu();
-      }
-    };
-    //drawerLayout.setStatusBarBackgroundColor(ContextCompat.getColor(this, R.color.transparent));
-    drawerLayout.addDrawerListener(drawerToggle);
-    drawerLayout.closeDrawer(mDrawer);
-
-    mDrawer.addDivider();
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_concierge))
-        .setTextPrimary(getString(TabMainDef.CONCIERGE)));
-    mDrawer.addDivider();
-
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_livetv))
-        .setTextPrimary(getString(TabMainDef.LIVETV)));
-    mDrawer.addDivider();
-
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_movies))
-        .setTextPrimary(getString(TabMainDef.MOVIES)));
-    mDrawer.addDivider();
-
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_food_activities))
-        .setTextPrimary(getString(TabMainDef.FOOD)));
-    mDrawer.addDivider();
-
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_room_control))
-        .setTextPrimary(getString(TabMainDef.ROOMCONTROL)));
-    mDrawer.addDivider();
-
-    mDrawer.addItems(new DrawerItem()
-        .setImage(ContextCompat.getDrawable(this, R.drawable.menu_settings))
-        .setTextPrimary(getString(R.string.home_menu_setting)));
-
-    mDrawer.addProfile(new DrawerProfile()
-        .setId(1)
-        .setRoundedAvatar((BitmapDrawable) ContextCompat.getDrawable(this, R.drawable.ic_exception))
-        .setName(getString(R.string.app_name))
-    );
-    mDrawer.setOnItemClickListener((item, id, position) -> {
-      if (mPreferencesHelper.getJsonLogin()!=null) {
-          Logger.e("position="+position);
-          if(position<2) {
-              mDrawer.selectItem(1);
+      ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+      drawerLayout.addDrawerListener(toggle);
+      toggle.syncState();
+      HomeMenuAdapter menuAdapter=new HomeMenuAdapter(this, FakeDataUtils.homeMenus(this));
+      menuAdapter.openLoadAnimation();
+      recyclerViewMenu.setAdapter(menuAdapter);
+      recyclerViewMenu.setLayoutManager(new LinearLayoutManager(this));
+      recyclerViewMenu.setHasFixedSize(true);
+      menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> {
+          position++;
+          drawerLayout.closeDrawer(GravityCompat.START);
+          if (mPreferencesHelper.getJsonLogin()==null) {
+              LoginActivity.start(MainActivity.this);
+              Snackbar.make(mDrawer, "Please login!", Snackbar.LENGTH_LONG).show();
+              return;
+          }
+          if(position==5){
               removeSettingFragment();
-              viewPagerMain.setCurrentItem(1);
-          }else if(position==11) {
-              mDrawer.selectItem(6);
               replaceFagment(getSupportFragmentManager(), R.id.layout_root, SettingFragment.newInstance());
           }else {
-              position=position / 2 + 1;
-              mDrawer.selectItem(position);
-              removeSettingFragment();
+              Logger.e("position="+position);
               viewPagerMain.setCurrentItem(position);
           }
-      }else{
-          LoginActivity.start(this);
-          Snackbar.make(mDrawer, "Please login!", Snackbar.LENGTH_LONG).show();
-      }
-      drawerLayout.closeDrawer(mDrawer);
-    });
+      });
   }
 
   private void initTabLayout() {
@@ -192,25 +145,30 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     if(getSupportFragmentManager().findFragmentByTag(SettingFragment.class.getName())!=null)
       getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag(SettingFragment.class.getName())).commit();
   }
+
   @Override
   public void onBackPressedSupport() {
-    if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
-      String currentTag = Preconditions.checkNotNull(
-          getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
-      if (currentTag.equals(LandingFragment.class.getName())) {
-        if (doubleBackToExitPressedOnce) {
-          finish();
-        }
-        this.doubleBackToExitPressedOnce = true;
-        Snackbar.make(mDrawer, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
-        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+      if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+          drawerLayout.closeDrawer(GravityCompat.START);
       } else {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
-        if (fragment instanceof OnBackListener) {
-          ((OnBackListener) fragment).onBackPress();
-        }
+          if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
+              String currentTag = Preconditions.checkNotNull(
+                      getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
+              if (currentTag.equals(LandingFragment.class.getName())) {
+                  if (doubleBackToExitPressedOnce) {
+                      finish();
+                  }
+                  this.doubleBackToExitPressedOnce = true;
+                  Snackbar.make(mDrawer, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
+                  new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+              } else {
+                  Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+                  if (fragment instanceof OnBackListener) {
+                      ((OnBackListener) fragment).onBackPress();
+                  }
+              }
+          }
       }
-    }
   }
 
   @Override
@@ -223,19 +181,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       keyListener.onKeyDown(keyCode, event);
     }
     return false;
-  }
-
-  @Override
-  public void onConfigurationChanged(Configuration newConfig) {
-    super.onConfigurationChanged(newConfig);
-    drawerToggle.onConfigurationChanged(newConfig);
-  }
-
-
-  @Override
-  protected void onPostCreate(Bundle savedInstanceState) {
-    super.onPostCreate(savedInstanceState);
-    drawerToggle.syncState();
   }
 
   @Override

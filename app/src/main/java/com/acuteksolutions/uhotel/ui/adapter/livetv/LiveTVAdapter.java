@@ -14,7 +14,7 @@ import java.util.List;
 public class LiveTVAdapter extends BaseQuickAdapter<TVInfo, BaseViewHolder> {
   private RequestManager glide;
     public LiveTVAdapter(RequestManager glide, List<TVInfo> datas) {
-        super(R.layout.coming_up_item,datas);
+        super(R.layout.featured_item,datas);
         this.glide=glide;
     }
 
@@ -22,7 +22,8 @@ public class LiveTVAdapter extends BaseQuickAdapter<TVInfo, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, TVInfo data) {
       try {
         helper.setText(R.id.txtChannelName, data.getTitle())
-                .addOnClickListener(R.id.layout_item);
+                .setText(R.id.txtDesc,data.getChannelName())
+                .addOnClickListener(R.id.root);
         if(data.getPictureLink()!=null)
           ImageUtils.loadImage(glide,data.getPictureLink(),(ImageView) helper.getView(R.id.imageView));
       }catch (Exception e){

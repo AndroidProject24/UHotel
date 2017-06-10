@@ -244,14 +244,14 @@ public class RealmManager implements DataSource {
     @Override
     public Observable<List<Channel>> getAllChannel() {
         List<Channel> channelList = findAll(Channel.class);
-        Logger.e("getAllChannel:Realm="+channelList.toString());
+        //Logger.e("getAllChannel:Realm="+channelList.toString());
         return Observable.just(channelList);
     }
 
     @Override
     public Observable<List<TVInfo>> getProgram(List<Channel> channelList, Date currentDate) {
         List<Program> programList = findAll(Program.class);
-        Logger.e("getProgram:Realm="+programList.toString());
+        //Logger.e("getProgram:Realm="+programList.toString());
         List<TVInfo> tvInfoList=new ArrayList<>();
         tvInfoList = setListNowUp(tvInfoList, channelList, programList);
         if (Preconditions.checkList(tvInfoList))

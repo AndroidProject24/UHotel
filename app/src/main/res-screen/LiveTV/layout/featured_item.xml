@@ -1,37 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_item"
-    android:layout_width="match_parent"
+    android:id="@+id/root"
+    android:layout_width="220dp"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    >
-  <ImageView
-      android:id="@+id/imageView"
-      android:layout_width="220dp"
-      android:layout_height="140dp"
-      android:scaleType="fitXY"
-      android:src="@mipmap/ic_launcher"
-      />
-  <TextView
-      android:id="@+id/txt_movies_name"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/imageView"
-      android:layout_marginTop="5dp"
-      android:ellipsize="end"
-      android:fontFamily="Helvetica"
-      android:maxLines="1"
-      android:text="Big Bug Bunny"
-      android:textColor="@color/white"
-      android:textSize="20sp"
-      />
-  <ImageView
-      android:id="@+id/img_play"
-      android:layout_width="80dp"
-      android:layout_height="80dp"
-      android:layout_marginLeft="75dp"
-      android:layout_marginTop="34dp"
-      android:contentDescription="@null"
-      android:src="@drawable/play_button"
-      />
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="220dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/livetv_box_bg"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/txtChannelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:gravity="bottom"
+        android:text="@string/blank"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize18"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/txtChannelName"
+        android:ellipsize="start"
+        android:gravity="bottom"
+        android:maxLines="2"
+        android:text="@string/blank"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize16" />
 </RelativeLayout>

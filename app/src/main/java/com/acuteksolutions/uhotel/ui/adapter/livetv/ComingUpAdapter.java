@@ -21,8 +21,13 @@ public class ComingUpAdapter extends BaseQuickAdapter<TVInfo, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, TVInfo data) {
       try {
-        helper.setText(R.id.txtChannelName, data.getTitle())
-                .addOnClickListener(R.id.root);
+        helper.setText(R.id.txtTitle,data.getTitle())
+                .setText(R.id.txtChannelName, data.getChannelName())
+                .setText(R.id.txtDesc,data.getDescription())
+                .setText(R.id.txtTimeLeft,data.getTimeLeftUpComing())
+                .setText(R.id.txtChannelNo,String.valueOf(data.getChannelNo()))
+                .addOnClickListener(R.id.layout_play_now)
+                .addOnClickListener(R.id.layout_play_begin);
         if(data.getPictureLink()!=null)
           ImageUtils.loadImage(glide,data.getPictureLink(),(ImageView) helper.getView(R.id.imageView));
       }catch (Exception e){

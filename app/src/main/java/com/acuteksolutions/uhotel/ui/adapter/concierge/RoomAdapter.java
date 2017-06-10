@@ -20,10 +20,12 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
     private SaveDataRoomListener saveDataRoomListener;
     private ViewpagerListener viewpagerListener;
     private int posExpand=0;
+    private int listSize=0;
     public static final int TYPE_EXPANDABLE = 0;
     public static final int TYPE_ROOM = 1;
     public RoomAdapter(List<MultiItemEntity> data,SaveDataRoomListener saveDataRoomListener,ViewpagerListener viewpagerListener) {
         super(data);
+        listSize=data.size();
         addItemType(TYPE_EXPANDABLE, R.layout.room_list_item_expand);
         addItemType(TYPE_ROOM, R.layout.room_list_item_slider);
         this.saveDataRoomListener=saveDataRoomListener;
@@ -42,9 +44,8 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                         .setTextColor(R.id.txt_name_expandable,roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white))
                         .setImageResource(R.id.img_arrow, roomExpand.isExpanded() ? R.drawable.room_arrow_up : R.drawable.room_arrow_down);
                 holder.itemView.setOnClickListener(v -> {
+                    //collapse(posExpand);
                     posExpand = holder.getAdapterPosition();
-                    for(int i=0;i<((RoomExpand) item).getSubItems().size();i++)
-                        collapse(i);
                     if (roomExpand.isExpanded()) {
                         collapse(posExpand);
                         saveDataRoomListener.refreshList();
