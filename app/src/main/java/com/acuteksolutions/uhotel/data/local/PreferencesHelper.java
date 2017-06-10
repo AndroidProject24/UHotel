@@ -17,10 +17,11 @@ import javax.inject.Singleton;
 
 @Singleton
 public class PreferencesHelper {
-    private static SharedPreferences mPref;
-    private static final String PREF_FILE_NAME = "PREF_APP_NAME";
-    private static final String PREF_USER = "PREF_USER_LOGIN";
-    public static final String PREF_CHANNEL= "PREF_CHANNEL";
+    private SharedPreferences mPref;
+    private final String PREF_FILE_NAME = "PREF_APP_NAME";
+    private final String PREF_USER = "PREF_USER_LOGIN";
+    private final String PREF_CHANNEL= "PREF_CHANNEL";
+    private final String PREF_TOTAL= "PREF_TOTAL";
     @Inject
     public PreferencesHelper(Context context) {
         mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -40,6 +41,14 @@ public class PreferencesHelper {
             return new Gson().fromJson(data, Login.class);
         }
         return null;
+    }
+
+    public void putRoomTotal(int total) {
+        mPref.edit().putInt(PREF_TOTAL, total).apply();
+    }
+
+    public int getRoomTotal() {
+        return mPref.getInt(PREF_TOTAL,0);
     }
 
     public void putJsonChannel(List<Channel> channel) {

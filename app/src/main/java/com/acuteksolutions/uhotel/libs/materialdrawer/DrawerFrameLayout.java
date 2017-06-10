@@ -61,14 +61,7 @@ public class DrawerFrameLayout extends DrawerLayout {
 
 
         TypedArray a = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.colorPrimaryDark});
-
-        int colorPrimaryDark = a.getColor(0, 0);
-        if (colorPrimaryDark != 0) {
-            setStatusBarBackgroundColor(colorPrimaryDark);
-        } else {
-            setStatusBarBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.black));
-        }
-
+        setStatusBarBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         a = getContext().obtainStyledAttributes(attrs, new int[]{R.attr.drawerMaxWidth});
 
         int drawerMaxWidth = a.getDimensionPixelSize(0, 0);

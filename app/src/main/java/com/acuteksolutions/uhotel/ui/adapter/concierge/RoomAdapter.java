@@ -43,14 +43,12 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                         .setImageResource(R.id.img_arrow, roomExpand.isExpanded() ? R.drawable.room_arrow_up : R.drawable.room_arrow_down);
                 holder.itemView.setOnClickListener(v -> {
                     posExpand = holder.getAdapterPosition();
+                    for(int i=0;i<((RoomExpand) item).getSubItems().size();i++)
+                        collapse(i);
                     if (roomExpand.isExpanded()) {
                         collapse(posExpand);
                         saveDataRoomListener.refreshList();
                     } else {
-                        for(int i=0;i<((RoomExpand) item).getSubItems().size();i++){
-                            if(((RoomExpand) item).isExpanded())
-                                collapse(i);
-                        }
                         expand(posExpand);
                     }
                 });
