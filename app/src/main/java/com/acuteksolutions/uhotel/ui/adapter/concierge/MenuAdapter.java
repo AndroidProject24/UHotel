@@ -3,6 +3,7 @@ package com.acuteksolutions.uhotel.ui.adapter.concierge;
 import com.acuteksolutions.uhotel.R;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public class MenuAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     helper.setText(R.id.btn_menu, data)
         .addOnClickListener(R.id.btn_menu);
   }
+
 }

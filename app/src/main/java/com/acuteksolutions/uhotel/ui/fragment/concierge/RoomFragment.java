@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.data.local.RealmManager;
 import com.acuteksolutions.uhotel.interfaces.SaveDataRoomListener;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ListRoom;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
@@ -82,7 +81,7 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
         realm.executeTransactionAsync(realm -> {
             RealmResults<ListRoom> listRooms= realm.where(ListRoom.class).findAll();
             for(ListRoom listRoom:listRooms){
-                Logger.e("getTotal="+listRoom.getTotal());
+               // Logger.e("getTotal="+listRoom.getTotal());
                 RoomExpand roomExpand=new RoomExpand(listRoom.getName(),listRoom.getTotal());
                 for(int i=0;i<listRoom.getDetailList().size();i++) {
                     Room room = listRoom.getDetailList().get(i);

@@ -376,9 +376,9 @@ public class CustomExoPlayerView extends FrameLayout
                 controlView.setVisibility(visibility);
                 if (visibility == VISIBLE) {
                     if (controller.getPlayer().getPlayWhenReady()) {
-                        controlView.setImageResource(android.R.drawable.ic_media_pause);
-                    } else {
                         controlView.setImageResource(android.R.drawable.ic_media_play);
+                    } else {
+                        controlView.setImageResource(android.R.drawable.ic_media_pause);
                     }
                 }
             }
