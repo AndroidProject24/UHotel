@@ -94,9 +94,11 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
                     total = total + room.getValue();
             }
         }, () -> {
-            btnRequestSend.setText(String.format(getString(R.string.room_request_count),total));
-            roomAdapter = new RoomAdapter(list,this,viewpagerListener);
-            recyclerView.setAdapter(roomAdapter);
+            try {
+                btnRequestSend.setText(String.format(getString(R.string.room_request_count), total));
+                roomAdapter = new RoomAdapter(list, this, viewpagerListener);
+                recyclerView.setAdapter(roomAdapter);
+            }catch (Exception ignored){}
         });
     }
 
@@ -134,8 +136,10 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
                     total = total + room.getValue();
             }
         }, () -> {
-            btnRequestSend.setText(String.format(getString(R.string.room_request_count),total));
-            ((AppCompatTextView)roomAdapter.getViewByPosition(recyclerView,positionExPand,R.id.txt_total)).setText(String.format(" (%d)", totalRow));
+            try {
+                btnRequestSend.setText(String.format(getString(R.string.room_request_count), total));
+                ((AppCompatTextView) roomAdapter.getViewByPosition(recyclerView, positionExPand, R.id.txt_total)).setText(String.format(" (%d)", totalRow));
+            }catch (Exception ignored){}
         });
     }
 

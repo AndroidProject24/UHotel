@@ -111,7 +111,7 @@ public class ConciergeFragment extends BaseFragment {
         if(index!=-1) {
             Button button=(Button) menuAdapter.getViewByPosition(recycler_menu, this.index, R.id.btn_menu);
             button.setBackground(getResources().getDrawable(R.drawable.menu_left_gradient));
-            button.setTextColor(Color.WHITE);
+            button.setTextColor(Color.BLACK);
         }
     }
 }

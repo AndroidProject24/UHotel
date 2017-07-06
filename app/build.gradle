@@ -127,13 +127,16 @@ dependencies {
   //annotationProcessor networkDependencies.glideCompiler
 
   //----- Network
-  compile networkDependencies.retrofit
   compile networkDependencies.okHttp
   compile networkDependencies.retrofitGsonConverter
   compile networkDependencies.retrofitRxJavaAdapter
   compile networkDependencies.reactivenetwork
+  compile (networkDependencies.retrofit){
+    exclude module: 'okhttp'
+  }
   compile (networkDependencies.okHttpLogging) {
     exclude group: 'org.json', module: 'json'
+    exclude module: 'okhttp'
   }
 
   //App

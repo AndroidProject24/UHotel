@@ -43,6 +43,7 @@ import qiu.niorgai.StatusBarCompat;
 
 public class MainActivity extends BaseActivity implements ToolbarTitleListener,ViewpagerListener {
   private boolean doubleBackToExitPressedOnce;
+  private ActionBarDrawerToggle toggle;
   @BindView(R.id.drawer) NavigationView mDrawer;
   @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;
   @BindView(R.id.recycler_menu) RecyclerView recyclerViewMenu;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   }
 
   private void initDrawer(){
-      ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+      toggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
       drawerLayout.addDrawerListener(toggle);
       toggle.syncState();
       HomeMenuAdapter menuAdapter=new HomeMenuAdapter(this, FakeDataUtils.homeMenus(this));
@@ -191,6 +192,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   @Override
   public void hideShowToolBar(boolean isShow) {
     if (isShow) {
+      toggle.setDrawerIndicatorEnabled(false);
       tabMain.setVisibility(View.VISIBLE);
       custom_tab_icon.setVisibility(View.VISIBLE);
       layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
@@ -198,6 +200,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());
       StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.tab_background));
     }else {
+      toggle.setDrawerIndicatorEnabled(true);
       tabMain.setVisibility(View.GONE);
       custom_tab_icon.setVisibility(View.GONE);
       layout_tab.setBackgroundColor(Color.TRANSPARENT);
