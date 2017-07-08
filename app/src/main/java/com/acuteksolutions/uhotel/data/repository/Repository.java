@@ -320,6 +320,6 @@ public class Repository implements DataSource {
 
     @Override
     public void clear() {
-
+        mRealmManager.clear();
     }
 }

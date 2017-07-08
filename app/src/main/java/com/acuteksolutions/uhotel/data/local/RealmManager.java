@@ -136,7 +136,7 @@ public class RealmManager implements DataSource {
             Category category = realm.copyFromRealm(realm.where(Category.class).equalTo("id", categoryID).findFirst());
             category.setProduct(productList);
             realm.copyToRealmOrUpdate(category);
-            Logger.e("productList="+productList.toString()+"SaveproductList=" + category.toString());
+            //Logger.e("productList="+productList.toString()+"SaveproductList=" + category.toString());
         });
     }
 
@@ -165,7 +165,7 @@ public class RealmManager implements DataSource {
     @Override
     public Observable<List<Category>> getCategory() {
         List<Category> categoryList = findAll(Category.class);
-        Logger.e("categoryList"+categoryList.toString());
+        //Logger.e("categoryList"+categoryList.toString());
         return Observable.just(categoryList);
 
         /* @Deprecated Rxjava 1

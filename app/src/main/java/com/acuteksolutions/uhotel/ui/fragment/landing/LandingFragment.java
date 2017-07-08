@@ -124,6 +124,10 @@ public class LandingFragment extends BaseFragment<LandingPresenter> {
 
   @Override public void onDestroyView() {
     super.onDestroyView();
-    toolbarTitleListener.hideShowToolBar(true);
+    try {
+        toolbarTitleListener.hideShowToolBar(true);
+    }catch (Exception e){
+        e.printStackTrace();
+    }
   }
 }

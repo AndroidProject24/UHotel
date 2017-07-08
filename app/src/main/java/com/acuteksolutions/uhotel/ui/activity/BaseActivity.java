@@ -101,10 +101,10 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     super.onDestroy();
     if (mPresenter != null)
       mPresenter.detachView();
-    if(BaseApplication.getRefWatcher(this)!=null) {
+    //if(BaseApplication.getRefWatcher(this)!=null) {
       RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
       refWatcher.watch(this);
-    }
+    //}
     ActivityManager.getInstance().popActivity(this);
   }
     @Override

@@ -138,10 +138,10 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         super.onDestroy();
         if (mPresenter != null)
             mPresenter.detachView();
-        if(BaseApplication.getRefWatcher(mContext)!=null) {
+       // if(BaseApplication.getRefWatcher(mContext)!=null) {
             RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
             refWatcher.watch(this);
-        }
+       // }
         Glide.get(getmContext()).clearMemory();
         glide.onDestroy();
     }
@@ -195,8 +195,10 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     public void onBackPress() {
         _removeWorkerFragments();
     }
+
     private void _removeWorkerFragments() {
         String fragmentTAG=getFragmentManager().findFragmentById(R.id.fragment).getTag();
+        Logger.e("_removeWorkerFragments="+fragmentTAG);
         if(!fragmentTAG.equalsIgnoreCase("")) {
             Fragment fragment=getFragmentManager().findFragmentByTag(fragmentTAG);
             if(fragment!=null)

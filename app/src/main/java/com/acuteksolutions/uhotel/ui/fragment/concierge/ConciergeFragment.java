@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.ConciergeMenuDef;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.MenuAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
@@ -102,9 +101,10 @@ public class ConciergeFragment extends BaseFragment {
         }
     }
     private void setFocus(View view,int index){
-        Logger.e("this.index="+this.index+"index="+index);
+        //Logger.e("this.index="+this.index+"index="+index);
         this.menuAdapter.removeFocus(this.index);
         this.menuAdapter.notifyItemChanged(this.index);
+        view.setSelected(true);
         view.requestFocus();
         view.requestFocusFromTouch();
         this.index = index;

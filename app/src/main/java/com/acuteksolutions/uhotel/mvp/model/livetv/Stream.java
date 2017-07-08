@@ -4,9 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Stream extends RealmObject implements Parcelable {
-
+    @PrimaryKey
     private String src;
     private String provider;
     private String protocolStack;

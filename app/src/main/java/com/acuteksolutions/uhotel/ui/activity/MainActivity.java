@@ -9,7 +9,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,17 +24,14 @@ import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.interfaces.KeyListener;
-import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
 import com.acuteksolutions.uhotel.ui.adapter.HomeMenuAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
-import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
 import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
-import com.acuteksolutions.uhotel.utils.Preconditions;
 
 import butterknife.BindView;
 import qiu.niorgai.StatusBarCompat;
@@ -53,7 +49,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   @BindView(R.id.appBar) AppBarLayout layout_tab;
   @BindView(R.id.layout_root) RelativeLayout layout_root;
   PreferencesHelper mPreferencesHelper;
-
+  private TabPagerMainAdapter tabPagerAdapter;
   public static void start(Context context) {
       Intent starter = new Intent(context, MainActivity.class);
       context.startActivity(starter);
@@ -127,9 +123,10 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       for (int i = 0; i < tabMainDef.tabSize(); i++) {
         tabMain.addTab(tabMain.newTab().setText(getString(tabMainDef.getTab(i))));
       }
-      TabPagerMainAdapter tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
+      tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
       viewPagerMain.setAdapter(tabPagerAdapter);
       tabMain.setupWithViewPager(viewPagerMain);
+      tabPagerAdapter.getRegisteredFragment(viewPagerMain.getCurrentItem());
     }catch (Exception e){
       e.printStackTrace();
     }
@@ -149,22 +146,15 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
           drawerLayout.closeDrawer(GravityCompat.START);
       } else {
-          if(getSupportFragmentManager().findFragmentById(R.id.fragment)!=null) {
-              String currentTag = Preconditions.checkNotNull(
-                      getSupportFragmentManager().findFragmentById(R.id.fragment).getTag());
-              if (currentTag.equals(LandingFragment.class.getName())) {
-                  if (doubleBackToExitPressedOnce) {
-                      finish();
-                  }
-                  this.doubleBackToExitPressedOnce = true;
-                  Snackbar.make(mDrawer, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
-                  new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-              } else {
-                  Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
-                  if (fragment instanceof OnBackListener) {
-                      ((OnBackListener) fragment).onBackPress();
-                  }
+          if(viewPagerMain.getCurrentItem()>0)
+            viewPagerMain.setCurrentItem(0);
+          else{
+              if (doubleBackToExitPressedOnce) {
+                  finish();
               }
+              this.doubleBackToExitPressedOnce = true;
+              Snackbar.make(mDrawer, R.string.msg_exit, Snackbar.LENGTH_SHORT).show();
+              new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
           }
       }
   }
@@ -172,7 +162,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     if(event.getKeyCode()==KeyEvent.KEYCODE_BACK ) {
-      onBackPressed();
+        onBackPressedSupport();
     }
     else if(getSupportFragmentManager().findFragmentById(R.id.fragment) instanceof KeyListener) {
       KeyListener keyListener = (KeyListener) getSupportFragmentManager().findFragmentById(R.id.fragment);

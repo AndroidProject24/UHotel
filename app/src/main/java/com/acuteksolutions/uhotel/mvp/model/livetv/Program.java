@@ -4,10 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Program extends RealmObject implements Parcelable {
-    private long duration;
+    @PrimaryKey
     private Integer idChannel;
+    private long duration;
     private String title;
     private String description;
     private long start;

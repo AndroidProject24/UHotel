@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.SaveDataRoomListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
 import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -20,12 +19,11 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
     private SaveDataRoomListener saveDataRoomListener;
     private ViewpagerListener viewpagerListener;
     private int posExpand=0;
-    private int listSize=0;
+    private boolean isExpand=false;
     public static final int TYPE_EXPANDABLE = 0;
     public static final int TYPE_ROOM = 1;
     public RoomAdapter(List<MultiItemEntity> data,SaveDataRoomListener saveDataRoomListener,ViewpagerListener viewpagerListener) {
         super(data);
-        listSize=data.size();
         addItemType(TYPE_EXPANDABLE, R.layout.room_list_item_expand);
         addItemType(TYPE_ROOM, R.layout.room_list_item_slider);
         this.saveDataRoomListener=saveDataRoomListener;
@@ -44,7 +42,10 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                         .setTextColor(R.id.txt_name_expandable,roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white))
                         .setImageResource(R.id.img_arrow, roomExpand.isExpanded() ? R.drawable.room_arrow_up : R.drawable.room_arrow_down);
                 holder.itemView.setOnClickListener(v -> {
-                    //collapse(posExpand);
+                    if(isExpand && posExpand != holder.getAdapterPosition()){
+                        collapse(posExpand);
+                    }
+                    isExpand = posExpand != holder.getAdapterPosition();
                     posExpand = holder.getAdapterPosition();
                     if (roomExpand.isExpanded()) {
                         collapse(posExpand);
@@ -63,7 +64,6 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
                 discreteSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
                     @Override
                     public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int progress, boolean b) {
-                        Logger.e("posExpand="+posExpand+"getAdapterPosition="+room.getPosition());
                         saveDataRoomListener.saveData(posExpand,room.getPosition(),progress);
                         holder.setText(R.id.txt_progress,String.valueOf(progress));
                     }

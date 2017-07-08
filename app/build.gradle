@@ -44,8 +44,6 @@ android {
     }
     debug {
       debuggable true
-      applicationIdSuffix '.debug'
-      versionNameSuffix '-DEBUG'
     }
 //    applicationVariants.all { variant ->
 //       configApkFileName(variant, defaultConfig)
@@ -151,9 +149,9 @@ dependencies {
   debugCompile   developmentDependencies.leakCanary
   releaseCompile developmentDependencies.leakCanaryRelease
   testCompile    developmentDependencies.leakCanaryRelease
-  debugCompile   developmentDependencies.blockCanaryEx
-  releaseCompile developmentDependencies.blockCanaryExRelease
-  testCompile    developmentDependencies.blockCanaryExRelease
+  compile   developmentDependencies.blockCanary
+  /*releaseCompile developmentDependencies.blockCanaryExRelease
+  testCompile    developmentDependencies.blockCanaryExRelease*/
 }
 /*
 @SuppressWarnings("GroovyAssignabilityCheck")

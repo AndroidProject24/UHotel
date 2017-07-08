@@ -41,7 +41,7 @@ ext {
     drawerVersion         ='5.9.1@aar'
     statusbarVersion      ='2.1.3'
     networking  ='0.4.0'
-    exoVersion='r2.4.1'
+    exoVersion='r2.4.3'
     fragmentationVersion ='0.10.5'
     mutidexVersion = '1.0.1'
 
@@ -57,7 +57,7 @@ ext {
 
     //Development
     leakCanaryVersion = '1.6-SNAPSHOT'
-    blockcanaryVersion = '1.4.1'
+    blockcanaryVersion = '1.5.0'
     blockcanaryExVersion = '0.9.9.1'
     stethoVersion = '1.4.2'
     realmStethoVersion='2.0.0'

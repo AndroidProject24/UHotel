@@ -22,6 +22,7 @@ public class MenuAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     helper.setText(R.id.btn_menu, data)
         .addOnClickListener(R.id.btn_menu);
       if(this.index==helper.getAdapterPosition()) {
+          helper.itemView.setSelected(false);
           helper.itemView.clearFocus();
       }
   }

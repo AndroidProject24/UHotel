@@ -49,6 +49,8 @@ public class TabPagerMainAdapter extends SmartFragmentStatePagerAdapter<LandingF
       case TabMainDef.TabMain.ROOMCONTROL:
         fragment= RoomServiceFragment.newInstance();
         break;
+      default:
+        break;
     }
     return fragment;
   }

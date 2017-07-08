@@ -1,6 +1,7 @@
 package com.acuteksolutions.uhotel.mvp.model.movies;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Toan.IT on 5/30/17.
@@ -18,6 +19,6 @@ public class Item extends RealmObject{
     public String getItem() {
         return item;
     }
-
+    @PrimaryKey
     private String item;
 }

@@ -18,6 +18,10 @@ public class LandingPresenter extends BasePresenter<LandingView> {
     this.mPreferencesHelper=preferencesHelper;
   }
 
+  public void clearData(){
+    this.mRepository.clear();
+  }
+
   public PreferencesHelper getPreferencesHelper(){
     return mPreferencesHelper;
   }
