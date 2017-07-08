@@ -5,14 +5,12 @@ import android.support.v7.widget.AppCompatImageView;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
+import com.acuteksolutions.uhotel.annotation.TabMainDef;
 import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.presenter.LandingPresenter;
 import com.acuteksolutions.uhotel.ui.activity.MainActivity;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
-import com.acuteksolutions.uhotel.ui.fragment.movies.MoviesFragment;
-import com.acuteksolutions.uhotel.ui.fragment.parentalControl.ParentalControlFragment;
-import com.acuteksolutions.uhotel.ui.fragment.roomService.RoomServiceFragment;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Utils;
 
@@ -80,27 +78,27 @@ public class LandingFragment extends BaseFragment<LandingPresenter> {
   }
 
   @OnClick(R.id.layout_message) public void click_message() {
-    replaceFagment(getFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.MOVIES);
   }
 
   @OnClick(R.id.layout_bar) public void click_bar() {
-    replaceFagment(getFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.MOVIES);
   }
 
   @OnClick(R.id.layout_sabrora) public void click_sabrora() {
-    replaceFagment(getFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.MOVIES);
   }
 
   @OnClick(R.id.img_movies) public void click_movies() {
-    replaceFagment(getFragmentManager(), R.id.fragment, MoviesFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.MOVIES);
   }
 
   @OnClick(R.id.img_room_service) public void click_roomService() {
-    replaceFagment(getFragmentManager(), R.id.fragment, RoomServiceFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.ROOMCONTROL);
   }
 
   @OnClick(R.id.img_parental_control) public void click_parentalControl() {
-    replaceFagment(getFragmentManager(), R.id.fragment, ParentalControlFragment.newInstance());
+    toolbarTitleListener.showScreen(TabMainDef.TabMain.CONCIERGE);
   }
 
   private String getName() {

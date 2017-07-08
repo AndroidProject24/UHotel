@@ -29,7 +29,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
@@ -44,7 +43,6 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
     public RoomAdapter roomAdapter;
     private AlertDialog alertDialog;
     private Context mContext;
-    private Realm realm;
     private int totalRow=0,total=0;
     @Inject RealmManager realmManager;
     public static RoomFragment newInstance() {
@@ -68,17 +66,17 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
     @Override protected void initViews() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
-        realm=realmManager.getRealmDB();
     }
 
     @Override protected int setLayoutResourceID() {
-        return R.layout.concierge_room_framgent;
+        return R.layout.concierge_room_fragment;
     }
 
     @Override
     protected void initData() {
+        total=0;
         ArrayList<MultiItemEntity> list = new ArrayList<>();
-        realm.executeTransactionAsync(realm -> {
+        realmManager.getRealmDB().executeTransactionAsync(realm -> {
             RealmResults<ListRoom> listRooms= realm.where(ListRoom.class).findAll();
             for(ListRoom listRoom:listRooms){
                // Logger.e("getTotal="+listRoom.getTotal());
@@ -102,20 +100,10 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        closeRealm();
-    }
-
-    private void closeRealm(){
-        if(realm!=null && !realm.isClosed())
-            realm.close();
-    }
     @SuppressLint("DefaultLocale")
     @Override
     public void saveData(int positionExPand,int position,int progress) {
-        realm.executeTransactionAsync(realm -> {
+        realmManager.getRealmDB().executeTransactionAsync(realm -> {
             totalRow = 0;
             total=0;
             RealmResults<ListRoom> listRooms = realm.where(ListRoom.class).findAll();

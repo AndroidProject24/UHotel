@@ -7,9 +7,9 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Program extends RealmObject implements Parcelable {
-    @PrimaryKey
     private Integer idChannel;
     private long duration;
+    @PrimaryKey
     private String title;
     private String description;
     private long start;

@@ -6,11 +6,12 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
-import com.acuteksolutions.uhotel.utils.ImageUtils;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Toan.IT
@@ -49,9 +50,9 @@ public class ValetFragment extends BaseFragment {
   @OnClick(R.id.img_valet)
   void imageClick() {
     if (!isClicked) {
-      ImageUtils.loadImage(glide,R.drawable.valet_bold,imgValet);
+      imgValet.setSelected(true);
       String pre = "Your car will be right up! Please come to valet counter with ";
-      String mes = pre + " your name and room number to get your vehicle";
+      String mes = pre + " your name and room number to get your vehicle.";
       SpannableString spannableString = new SpannableString(mes);
       spannableString.setSpan(new ForegroundColorSpan(Color.WHITE), pre.length(),
           pre.length() + 10,
@@ -62,6 +63,7 @@ public class ValetFragment extends BaseFragment {
       txtBottom.setText(spannableString);
       txtBottom.setTextColor(getResources().getColor(R.color.white));
       isClicked = true;
-    }
+    }else
+      imgValet.setSelected(false);
   }
 }

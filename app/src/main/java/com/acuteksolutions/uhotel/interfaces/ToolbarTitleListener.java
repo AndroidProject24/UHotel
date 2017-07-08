@@ -9,4 +9,6 @@ public interface ToolbarTitleListener {
     void changeTitle(String name);
 
     void hideShowToolBar(boolean isShow);
+
+    void showScreen(int index);
 }

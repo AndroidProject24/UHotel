@@ -33,6 +33,6 @@
         android:background="@drawable/room_request"
         android:textSize="@dimen/textSize22"
         android:text="@string/room_request"
-        android:textColor="@color/dark" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

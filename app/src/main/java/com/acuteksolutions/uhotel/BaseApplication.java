@@ -43,8 +43,8 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
-        setupTest();
         super.onCreate();
+        setupTest();
         Realm.init(this);
         initInjector();
         initData();

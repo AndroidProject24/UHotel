@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
+        android:layout_marginTop="5dp"
         android:gravity="bottom"
         android:text="@string/blank"
         android:textColor="@color/white"
@@ -32,8 +33,18 @@
         android:layout_toRightOf="@+id/txtChannelName"
         android:ellipsize="start"
         android:gravity="bottom"
+        android:visibility="gone"
         android:maxLines="2"
         android:text="@string/blank"
         android:textColor="@color/white"
         android:textSize="@dimen/textSize16" />
+
+    <ImageView
+        android:id="@+id/img_play"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="36dp"
+        android:contentDescription="@null"
+        android:src="@drawable/play_button" />
 </RelativeLayout>

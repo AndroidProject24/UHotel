@@ -2,8 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/tab_select" />
     <stroke
-        android:width="2dp"
-        android:color="@color/tab_select" />
+        android:width="@dimen/video_frame_width"
+        android:color="@android:color/white" />
+
+    <solid android:color="@android:color/black" />
 </shape>

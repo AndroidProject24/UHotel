@@ -3,46 +3,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="100dp"
-    android:paddingRight="50dp"
-    >
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingTop="50dp"
-      android:text="Valet"
-      android:textColor="@color/white"
-      android:textColorHighlight="@color/grey"
-      android:textSize="40sp"
-      />
+    android:paddingRight="50dp">
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingTop="20dp"
-      android:text="concierge_right_valet_details"
-      android:textColor="@color/white"
-      android:textSize="20sp"
-      />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:text="Valet"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/grey"
+        android:textSize="40sp" />
 
-  <ImageView
-      android:id="@+id/img_valet"
-      android:layout_width="200dp"
-      android:layout_height="200dp"
-      android:layout_gravity="center"
-      android:background="@drawable/concierge_image_select_selector"
-      android:focusable="true"
-      android:focusableInTouchMode="true"
-      android:src="@drawable/valet"
-      />
+    <TextView
+        android:layout_width="530dp"
+        android:layout_height="wrap_content"
+        android:minLines="3"
+        android:paddingTop="20dp"
+        android:text="Our records show that you have a car checked at our valet service. Please hit the ‘Valet’ button below to retrieve your vehicle at the front."
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
-  <TextView
-      android:id="@+id/txt_bottom"
-      android:layout_width="400dp"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:gravity="center"
-      android:text="@string/concierge_right_valet_txt"
-      android:textColor="@color/white"
-      android:textSize="16sp"
-      />
+    <ImageView
+        android:id="@+id/img_valet"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="30dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/concierge_valet_selector" />
+
+    <TextView
+        android:id="@+id/txt_bottom"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:text="@string/concierge_right_valet_txt"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 </LinearLayout>

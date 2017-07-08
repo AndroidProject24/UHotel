@@ -2,11 +2,12 @@ package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.OnClick;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
-import com.acuteksolutions.uhotel.utils.ImageUtils;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Toan.IT
@@ -44,10 +45,11 @@ public class HouseFragment extends BaseFragment {
   @OnClick(R.id.img_house)
   void imageClick() {
     if (!isClicked) {
-      ImageUtils.loadImage(glide,R.drawable.housekeeping_bold,img_house);
+      img_house.setSelected(true);
       txtBottom.setText("Housekeeping coming!");
       txtBottom.setTextColor(getResources().getColor(R.color.white));
       isClicked = true;
-    }
+    }else
+      img_house.setSelected(false);
   }
 }

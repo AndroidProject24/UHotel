@@ -18,6 +18,7 @@
 
     <style name="ExoPlayerTheme" parent="Theme.Design.NoActionBar">
         <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 

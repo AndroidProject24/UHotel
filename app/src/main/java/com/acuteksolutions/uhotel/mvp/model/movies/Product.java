@@ -5,7 +5,6 @@ import io.realm.RealmObject;
 
 public class Product extends RealmObject{
     private RealmList<Item> items;
-
     private PurchaseInfo purchaseInfo;
 
     public Product() {

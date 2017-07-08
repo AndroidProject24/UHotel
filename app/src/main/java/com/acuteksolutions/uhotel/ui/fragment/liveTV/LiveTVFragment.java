@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.BundleDef;
+import com.acuteksolutions.uhotel.libs.SimpleDividerItemDecoration;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.model.livetv.Channel;
 import com.acuteksolutions.uhotel.mvp.model.livetv.TVInfo;
 import com.acuteksolutions.uhotel.mvp.presenter.LiveTVPresenter;
@@ -94,6 +96,7 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
 
     @Override
     public void getProgram(List<TVInfo> tvInfoList) {
+        Logger.e("getProgram="+tvInfoList.size());
         if (liveTVAdapter == null) {
             mPresenter.getDataComingUp(tvInfoList);
             mPresenter.getDataRightNow(tvInfoList);
@@ -106,20 +109,22 @@ public class LiveTVFragment extends BaseFragment<LiveTVPresenter> implements Liv
 
     @Override
     public void getDataRightNow(List<TVInfo> tvInfoList) {
-        if (rightNowAdapter == null) {
+        if (rightNowAdapter==null) {
             rightNowAdapter = new RightNowAdapter(glide, tvInfoList);
             rightNowAdapter.openLoadAnimation();
             recyclerRightNow.setAdapter(rightNowAdapter);
+            recyclerRightNow.addItemDecoration(new SimpleDividerItemDecoration(mContext));
         }
         rightNowAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
     }
 
     @Override
     public void getDataComingUp(List<TVInfo> tvInfoList) {
-        if (comingUpAdapter == null) {
+        if (comingUpAdapter==null) {
             comingUpAdapter = new ComingUpAdapter(glide, tvInfoList);
             comingUpAdapter.openLoadAnimation();
             recyclerComingUp.setAdapter(comingUpAdapter);
+            recyclerComingUp.addItemDecoration(new SimpleDividerItemDecoration(mContext));
         }
         comingUpAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> showDialog(tvInfoList.get(i)));
     }

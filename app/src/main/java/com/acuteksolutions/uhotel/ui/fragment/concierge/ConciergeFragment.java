@@ -67,37 +67,45 @@ public class ConciergeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view, position));
-        new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu, ConciergeMenuDef.ROOM, R.id.btn_menu), 0), 500);
+        try {
+            menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view, position));
+            new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu, ConciergeMenuDef.ROOM, R.id.btn_menu), 0), 500);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void showScreen(@NonNull View view, int index) {
-        setFocus(view,index);
-        switch (index) {
-            case ConciergeMenuDef.ROOM:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
-                break;
-            case ConciergeMenuDef.CAR_RENTAL:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, CarRentalFragment.newInstance());
-                break;
-            case ConciergeMenuDef.CHECK_OUT:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, CheckoutFragment.newInstance());
-                break;
-            case ConciergeMenuDef.BUSINESS:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, BusinessFragment.newInstance());
-                break;
-            case ConciergeMenuDef.HOUSE:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, HouseFragment.newInstance());
-                break;
-            case ConciergeMenuDef.VALET:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, ValetFragment.newInstance());
-                break;
-            case ConciergeMenuDef.MIRROR:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, MirrorFragment.newInstance());
-                break;
-            case ConciergeMenuDef.PARENTAL:
-                replaceFagment(getFragmentManager(), R.id.fragment_concierge, ParentalFragment.newInstance());
-                break;
+        try {
+            setFocus(view, index);
+            switch (index) {
+                case ConciergeMenuDef.ROOM:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.CAR_RENTAL:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, CarRentalFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.CHECK_OUT:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, CheckoutFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.BUSINESS:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, BusinessFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.HOUSE:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, HouseFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.VALET:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, ValetFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.MIRROR:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, MirrorFragment.newInstance());
+                    break;
+                case ConciergeMenuDef.PARENTAL:
+                    replaceFagment(getFragmentManager(), R.id.fragment_concierge, ParentalFragment.newInstance());
+                    break;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
     private void setFocus(View view,int index){

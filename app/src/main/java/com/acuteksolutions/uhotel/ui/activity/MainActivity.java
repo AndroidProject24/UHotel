@@ -28,6 +28,7 @@ import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.ui.adapter.HomeMenuAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.setting.SettingFragment;
@@ -49,8 +50,8 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   @BindView(R.id.appBar) AppBarLayout layout_tab;
   @BindView(R.id.layout_root) RelativeLayout layout_root;
   PreferencesHelper mPreferencesHelper;
-  private TabPagerMainAdapter tabPagerAdapter;
-  public static void start(Context context) {
+
+    public static void start(Context context) {
       Intent starter = new Intent(context, MainActivity.class);
       context.startActivity(starter);
   }
@@ -123,7 +124,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       for (int i = 0; i < tabMainDef.tabSize(); i++) {
         tabMain.addTab(tabMain.newTab().setText(getString(tabMainDef.getTab(i))));
       }
-      tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
+        TabPagerMainAdapter tabPagerAdapter = new TabPagerMainAdapter(this, tabMainDef, getSupportFragmentManager());
       viewPagerMain.setAdapter(tabPagerAdapter);
       tabMain.setupWithViewPager(viewPagerMain);
       tabPagerAdapter.getRegisteredFragment(viewPagerMain.getCurrentItem());
@@ -198,7 +199,14 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     }
   }
 
-  @Override
+    @Override
+    public void showScreen(int index) {
+        Logger.e("showScreen="+index);
+        if(viewPagerMain!=null)
+            viewPagerMain.setCurrentItem(index);
+    }
+
+    @Override
   public void disableSwipe(boolean enable) {
     viewPagerMain.setPagingEnabled(enable);
   }
