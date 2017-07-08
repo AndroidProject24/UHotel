@@ -141,10 +141,10 @@ dependencies {
     exclude group: 'com.android.support'
   }
   //developmentDependencies
-  debugCompile   developmentDependencies.leakCanary
+  /*debugCompile   developmentDependencies.leakCanary
   releaseCompile developmentDependencies.leakCanaryRelease
   testCompile    developmentDependencies.leakCanaryRelease
-  compile   developmentDependencies.blockCanary
+  compile   developmentDependencies.blockCanary*/
   /*releaseCompile developmentDependencies.blockCanaryExRelease
   testCompile    developmentDependencies.blockCanaryExRelease*/
 }

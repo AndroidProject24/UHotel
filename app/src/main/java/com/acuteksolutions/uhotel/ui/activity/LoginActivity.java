@@ -18,8 +18,10 @@ import com.acuteksolutions.uhotel.libs.loading.AVLoadingIndicatorView;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.presenter.LoginPresenter;
 import com.acuteksolutions.uhotel.mvp.view.LoginView;
+import com.acuteksolutions.uhotel.utils.Constant;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.acuteksolutions.uhotel.utils.StatusBarUtil;
+import com.acuteksolutions.uhotel.utils.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -101,6 +103,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         SimpleDateFormat df = new SimpleDateFormat("MMMM dd, yyyy");
         String formattedDate = df.format(c.getTime());
         mTxtDate.setText(formattedDate);
+        Constant.DEVICE_MAC= Utils.getMacAddess();
     }
     @Override
     public void loginError() {

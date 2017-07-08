@@ -87,12 +87,12 @@
         android:nextFocusDown="@+id/login_main_div_loginbutton"
         android:nextFocusRight="@+id/login_main_div_loginbutton"
         android:paddingLeft="10dp"
-        android:text="kt12345678"
+
         android:textColor="@color/white"
         android:textColorHint="#A6A9A9"
         android:textSize="24sp"
         />
-
+    android:text="kt12345678"
   </android.support.design.widget.TextInputLayout>
 
   <android.support.v7.widget.AppCompatButton

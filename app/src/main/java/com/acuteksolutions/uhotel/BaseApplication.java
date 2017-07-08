@@ -12,12 +12,10 @@ import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
 import com.acuteksolutions.uhotel.libs.logger.LogLevel;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
-import com.github.moduth.blockcanary.BlockCanary;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
-import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import io.realm.Realm;
@@ -110,7 +108,7 @@ public class BaseApplication extends Application {
     }
 
     private void setupTest() {
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             // AndroidDevMetrics.initWith(this);
             BlockCanary.install(this, new AppBlockCanaryContext()).start();
             if (LeakCanary.isInAnalyzerProcess(this)) {
@@ -119,6 +117,6 @@ public class BaseApplication extends Application {
                 return;
             }
             refWatcher = LeakCanary.install(this);
-        }
+        }*/
     }
 }
