@@ -14,7 +14,6 @@ import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.acuteksolutions.uhotel.utils.ActivityManager;
-import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
 
@@ -102,8 +101,8 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     if (mPresenter != null)
       mPresenter.detachView();
     //if(BaseApplication.getRefWatcher(this)!=null) {
-      RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
-      refWatcher.watch(this);
+//      RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+//      refWatcher.watch(this);
     //}
     ActivityManager.getInstance().popActivity(this);
   }

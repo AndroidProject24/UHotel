@@ -71,6 +71,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     protected void initViews() {
         StatusBarUtil.setTranslucent(this);
         initTime();
+        mEtPass.setOnFocusChangeListener((view, hasFocus) -> {
+            if (hasFocus) {
+                mLayoutPass.setHint("PIN");
+            } else {
+                mLayoutPass.setHint("PIN");
+            }
+        });
         mEtPass.addTextChangedListener(textWatcher);
     }
 

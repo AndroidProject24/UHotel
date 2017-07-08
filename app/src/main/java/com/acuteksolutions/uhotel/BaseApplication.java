@@ -16,7 +16,6 @@ import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
-import com.squareup.leakcanary.RefWatcher;
 
 import io.realm.Realm;
 import okhttp3.OkHttpClient;
@@ -29,7 +28,7 @@ import okhttp3.OkHttpClient;
 public class BaseApplication extends Application {
     private static BaseApplication mInstance;
     private ApplicationComponent applicationComponent;
-    private RefWatcher refWatcher;
+    //private RefWatcher refWatcher;
     protected String userAgent;
     private OkHttpClient okHttpClient;
 
@@ -102,11 +101,11 @@ public class BaseApplication extends Application {
         return applicationComponent;
     }
 
-    public static RefWatcher getRefWatcher(Context context) {
+  /*  public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
     }
-
+*/
     private void setupTest() {
         /*if (BuildConfig.DEBUG) {
             // AndroidDevMetrics.initWith(this);
