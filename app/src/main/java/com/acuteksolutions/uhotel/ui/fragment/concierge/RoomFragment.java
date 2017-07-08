@@ -16,14 +16,10 @@ import com.acuteksolutions.uhotel.data.local.RealmManager;
 import com.acuteksolutions.uhotel.interfaces.SaveDataRoomListener;
 import com.acuteksolutions.uhotel.mvp.model.conciege.ListRoom;
 import com.acuteksolutions.uhotel.mvp.model.conciege.Room;
-import com.acuteksolutions.uhotel.mvp.model.conciege.RoomExpand;
 import com.acuteksolutions.uhotel.mvp.presenter.RoomPresenter;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.RoomAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -77,7 +73,7 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
 
     @Override
     protected void initData() {
-        ArrayList<MultiItemEntity> list = new ArrayList<>();
+       /* ArrayList<MultiItemEntity> list = new ArrayList<>();
         realm.executeTransactionAsync(realm -> {
             RealmResults<ListRoom> listRooms= realm.where(ListRoom.class).findAll();
             for(ListRoom listRoom:listRooms){
@@ -99,7 +95,7 @@ public class RoomFragment extends BaseFragment<RoomPresenter> implements SaveDat
                 roomAdapter = new RoomAdapter(list, this, viewpagerListener);
                 recyclerView.setAdapter(roomAdapter);
             }catch (Exception ignored){}
-        });
+        });*/
     }
 
     @Override

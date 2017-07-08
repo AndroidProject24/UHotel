@@ -131,7 +131,6 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        Logger.wtf(TAG);
     }
 
     @Override

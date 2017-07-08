@@ -250,7 +250,7 @@ public class Repository implements DataSource {
 
     private Observable<List<TVInfo>> getCloudProgram(List<Channel> channelList, Date currentDate) {
         return mRestApi.getTVProgram(Constant.DEVICE_MAC, LinkDef.LINK_LIVE_PROGRAM_BY_ID_PATH
-                .replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getLanguageId()))
+                .replace(PathDef.REGION_UID, String.valueOf(Preconditions.checkNotNull(mPreferencesHelper.getJsonLogin()).getRegionId()))
                 .replace(PathDef.DATE, Utils.parseDate(currentDate, "yyyy-MM-dd")))
                 .subscribeOn(Schedulers.io())
                 .flatMap(stringJsonString -> {

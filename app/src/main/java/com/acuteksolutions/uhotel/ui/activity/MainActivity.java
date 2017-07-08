@@ -30,7 +30,6 @@ import com.acuteksolutions.uhotel.interfaces.OnTabSelectedListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
 import com.acuteksolutions.uhotel.interfaces.ViewpagerListener;
 import com.acuteksolutions.uhotel.libs.CustomSwipeableViewPager;
-import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.ui.adapter.HomeMenuAdapter;
 import com.acuteksolutions.uhotel.ui.adapter.page.TabPagerMainAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.landing.LandingFragment;
@@ -108,19 +107,17 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       recyclerViewMenu.setHasFixedSize(true);
       menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> {
           position++;
+          removeSettingFragment();
           drawerLayout.closeDrawer(GravityCompat.START);
           if (mPreferencesHelper.getJsonLogin()==null) {
               LoginActivity.start(MainActivity.this);
               Snackbar.make(mDrawer, "Please login!", Snackbar.LENGTH_LONG).show();
               return;
           }
-          if(position==5){
-              removeSettingFragment();
+          if(position==6)
               replaceFagment(getSupportFragmentManager(), R.id.layout_root, SettingFragment.newInstance());
-          }else {
-              Logger.e("position="+position);
+          else
               viewPagerMain.setCurrentItem(position);
-          }
       });
   }
 

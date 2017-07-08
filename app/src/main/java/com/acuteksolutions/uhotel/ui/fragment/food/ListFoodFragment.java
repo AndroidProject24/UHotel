@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -19,6 +19,7 @@ import com.acuteksolutions.uhotel.mvp.view.FoodView;
 import com.acuteksolutions.uhotel.ui.activity.BaseActivity;
 import com.acuteksolutions.uhotel.ui.adapter.FoodAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseLazyFragment;
+import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.acuteksolutions.uhotel.utils.Preconditions;
 import com.bumptech.glide.Glide;
 
@@ -27,7 +28,6 @@ import butterknife.BindView;
 public class ListFoodFragment extends BaseLazyFragment<FoodPresenter> implements FoodView {
   @BindView(R.id.recycle_food)
   RecyclerView mRecycleFood;
-  @BindView(R.id.movies_main_info) ViewGroup mLayoutFood;
   @BindView(R.id.txt_food_category)
   TextView mTxtFoodCategory;
   @BindView(R.id.txt_food_name)
@@ -39,6 +39,8 @@ public class ListFoodFragment extends BaseLazyFragment<FoodPresenter> implements
   TextView mTxtFoodDes;
   @BindView(R.id.txt_food_address)
   TextView mTxtFoodAddress;
+  @BindView(R.id.img_bg)
+  ImageView mImg_bg;
   private Context mContext;
 
   public static ListFoodFragment newInstance(@TabFoodDef.TabFood int index) {
@@ -101,7 +103,7 @@ public class ListFoodFragment extends BaseLazyFragment<FoodPresenter> implements
       mTxtFoodRating.setText(info.getType());
       mTxtFoodDes.setText(info.getDes());
       mTxtFoodAddress.setText(info.getAddress());
-      mLayoutFood.setBackgroundResource(info.getUrl());
+      ImageUtils.loadImage(glide,info.getUrl(),mImg_bg);
     } catch (Exception e) {
       e.printStackTrace();
     }

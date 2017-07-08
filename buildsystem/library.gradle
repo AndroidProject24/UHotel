@@ -15,14 +15,14 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "25.0.3"
+    androidBuildToolsVersion = "26.0.0"
     androidMinSdkVersion = 16
-    androidTargetSdkVersion = 25
-    androidCompileSdkVersion = 25
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
     java8 = true
 
     //Libraries
-    supportLibsVersion = '25.3.1'
+    supportLibsVersion = '26.0.0-beta2'
     constraintVersion = '1.0.2'
     daggerVersion = '2.11'
     butterKnifeVersion = '8.6.0'
@@ -36,7 +36,7 @@ ext {
     gsonVersion     ='2.8.0'
     frescoVersion   = '1.3.0'
     glideVersion    ='3.8.0'//'4.0.0-RC0'
-    baseRecyclerVersion = '2.9.17'
+    baseRecyclerVersion = '2.9.23'
     reactivenetworkVersion = '0.9.1'
     drawerVersion         ='5.9.1@aar'
     statusbarVersion      ='2.1.3'
@@ -58,7 +58,7 @@ ext {
     //Development
     leakCanaryVersion = '1.6-SNAPSHOT'
     blockcanaryVersion = '1.4.1'
-    blockcanaryExVersion = '0.9.6'
+    blockcanaryExVersion = '0.9.9.1'
     stethoVersion = '1.4.2'
     realmStethoVersion='2.0.0'
     taktVersion   = '1.0.3'

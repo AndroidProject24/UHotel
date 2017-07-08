@@ -79,7 +79,7 @@ public class ParentalFragment extends BaseFragment<PinPresenter> implements PinV
       boolean isLocked = getValueSetting(i,settingInfo);
       arrayList.add(new ParentalItem(isLocked, getString(tabMainDef.getTab(i)), isLocked ? R.drawable.locked : R.drawable.opened));
     }
-    parentalAdapter=new ParentalAdapter(glide,arrayList);
+    parentalAdapter=new ParentalAdapter(getResources(),glide,arrayList);
     parentalAdapter.openLoadAnimation();
     recyclerView.setAdapter(parentalAdapter);
     parentalAdapter.setOnItemChildClickListener((baseQuickAdapter, view, i) -> {

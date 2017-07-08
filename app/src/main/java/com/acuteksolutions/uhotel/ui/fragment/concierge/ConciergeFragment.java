@@ -1,16 +1,15 @@
 package com.acuteksolutions.uhotel.ui.fragment.concierge;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.annotation.ConciergeMenuDef;
+import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.MenuAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
 import com.acuteksolutions.uhotel.utils.Preconditions;
@@ -70,14 +69,11 @@ public class ConciergeFragment extends BaseFragment {
     @Override
     protected void initData() {
         menuAdapter.setOnItemChildClickListener((baseQuickAdapter, view, position) -> showScreen(view, position));
-        new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu, ConciergeMenuDef.ROOM, R.id.btn_menu), 0), 1000);
+        new Handler().postDelayed(() -> showScreen(menuAdapter.getViewByPosition(recycler_menu, ConciergeMenuDef.ROOM, R.id.btn_menu), 0), 500);
     }
 
     private void showScreen(@NonNull View view, int index) {
-        view.requestFocus();
-        view.requestFocusFromTouch();
-        setbackgroundFocus(view);
-        this.index = index;
+        setFocus(view,index);
         switch (index) {
             case ConciergeMenuDef.ROOM:
                 replaceFagment(getFragmentManager(), R.id.fragment_concierge, RoomFragment.newInstance());
@@ -105,14 +101,13 @@ public class ConciergeFragment extends BaseFragment {
                 break;
         }
     }
-
-    private void setbackgroundFocus(View view) {
-        view.setBackground(getResources().getDrawable(R.drawable.box_rectangle_selected));
-        if(index!=-1) {
-            Button button=(Button) menuAdapter.getViewByPosition(recycler_menu, this.index, R.id.btn_menu);
-            button.setBackground(getResources().getDrawable(R.drawable.menu_left_gradient));
-            button.setTextColor(Color.BLACK);
-        }
+    private void setFocus(View view,int index){
+        Logger.e("this.index="+this.index+"index="+index);
+        this.menuAdapter.removeFocus(this.index);
+        this.menuAdapter.notifyItemChanged(this.index);
+        view.requestFocus();
+        view.requestFocusFromTouch();
+        this.index = index;
     }
 }
 

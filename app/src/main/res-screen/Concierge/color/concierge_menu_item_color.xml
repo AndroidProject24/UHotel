@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:color="@color/white" android:state_focused="true" />
-    <item android:color="@color/bg_item_choose" android:state_focused="false" android:state_selected="true" />
+    <item android:color="@color/menu_left" android:state_focused="true" />
     <item android:color="#B9B9B8" android:state_focused="false" android:state_selected="false" />
 </selector>
 

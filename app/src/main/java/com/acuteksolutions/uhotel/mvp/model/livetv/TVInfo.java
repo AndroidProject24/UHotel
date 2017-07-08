@@ -110,16 +110,12 @@ public class TVInfo extends RealmObject implements Comparator<TVInfo>{
         long endCurrentDiff = end - current;
         long minutes = TimeUnit.MILLISECONDS.toMinutes(endCurrentDiff);
 
-        if(currentStartDiff>=0 && endCurrentDiff>=0)
-            return true;
-        else return  false;
+        return currentStartDiff >= 0 && endCurrentDiff >= 0;
     }
 
     public boolean isComingUp() {
         long current=new Date().getTime();
-        if(current>start && current<end)
-            return true;
-        else return  false;
+        return current > start && current < end;
     }
 
     @Override
