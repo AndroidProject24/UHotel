@@ -24,6 +24,7 @@ public class MoviesAdapter extends BaseQuickAdapter<VODInfo, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, VODInfo data) {
         try {
+            //AutoUtils.autoSize(helper.itemView);
             helper.setText(R.id.txt_movies_name, data.getDetail().getTitle())
                     .addOnClickListener(R.id.layout_item);
             ImageUtils.loadImage(glide, data.getDetail().getPoster(), (ImageView) helper.getView(R.id.img_movies));

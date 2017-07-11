@@ -66,6 +66,7 @@ public class BaseApplication extends Application {
 
     private void initData() {
         try {
+            //AutoLayoutConifg.getInstance().useDeviceSize();
             FakeDataUtils.initDataRoom(this);
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);

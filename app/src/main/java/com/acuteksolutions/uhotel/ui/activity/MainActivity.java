@@ -12,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
 
   @Override
   protected void initViews() {
+      AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
       mPreferencesHelper=new PreferencesHelper(this);
     if(mPreferencesHelper.getJsonLogin()==null)
       LoginActivity.start(this);
@@ -134,7 +136,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
   }
 
   private void initToolbar(){
-    setSupportActionBar(mToolbar);
+      setSupportActionBar(mToolbar);
   }
 
   private void removeSettingFragment(){

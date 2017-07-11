@@ -140,6 +140,7 @@ dependencies {
   compile (appDependencies.statusBarCompat) {
     exclude group: 'com.android.support'
   }
+  compile 'com.zhy:autolayout:1.4.5'
   //developmentDependencies
   /*debugCompile   developmentDependencies.leakCanary
   releaseCompile developmentDependencies.leakCanaryRelease

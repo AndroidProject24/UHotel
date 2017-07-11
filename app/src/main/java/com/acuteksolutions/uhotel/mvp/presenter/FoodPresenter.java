@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -71,9 +70,9 @@ public class FoodPresenter extends BasePresenter<FoodView> {
           List<Food> foodList = new ArrayList<>();
           for (int i = 1; i <= 5; i++) {
             Food food = new Food();
-            if (!Objects.equals(jsonObject.optString("img" + (i) + "Rating"), "")) {
-              food.setRating(Integer.parseInt(jsonObject.optString("img" + (i) + "Rating")));
-            }
+              if (!Preconditions.isEmpty(jsonObject.optString("img" + (i) + "Rating"))) {
+                  food.setRating(Integer.parseInt(jsonObject.optString("img" + (i) + "Rating")));
+              }
             food.setName(jsonObject.optString("img" + (i) + "Name"));
             food.setType(jsonObject.optString("img" + (i) + "Type"));
             food.setDes(jsonObject.optString("img" + (i) + "Desc"));

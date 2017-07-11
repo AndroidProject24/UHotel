@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
@@ -38,7 +37,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @BindView(R.id.img_logo)
     ImageView mImgLogo;
     @BindView(R.id.lock)
-    TextClock mLock;
+    TextView mLock;
     @BindView(R.id.txt_date)
     TextView mTxtDate;
     @BindView(R.id.img_weather)

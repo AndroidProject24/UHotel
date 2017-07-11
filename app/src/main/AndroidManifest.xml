@@ -68,5 +68,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!--<meta-data android:name="design_width" android:value="768"/>
+        <meta-data android:name="design_height" android:value="1280"/>-->
     </application>
 </manifest>

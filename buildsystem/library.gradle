@@ -42,7 +42,7 @@ ext {
     statusbarVersion      ='2.1.3'
     networking  ='0.4.0'
     exoVersion='r2.4.3'
-    fragmentationVersion ='0.10.5'
+    fragmentationVersion ='1.0.7'
     mutidexVersion = '1.0.1'
 
     //Testing

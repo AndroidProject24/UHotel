@@ -21,6 +21,7 @@ public class LiveTVAdapter extends BaseQuickAdapter<TVInfo, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, TVInfo data) {
       try {
+        //AutoUtils.autoSize(helper.itemView);
         helper.setText(R.id.txtChannelName, data.getTitle())
                 .setText(R.id.txtDesc,data.getChannelName())
                 .addOnClickListener(R.id.root);

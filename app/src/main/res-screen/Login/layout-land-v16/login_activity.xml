@@ -28,13 +28,12 @@
       style="@style/style_base"
       >
 
-    <TextClock
+    <DigitalClock
         android:id="@+id/lock"
         android:format12Hour="h:mm a"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:timeZone="America/Los_Angeles"
-        tools:ignore="NewApi"
         style="@style/style_base"
         />
 
