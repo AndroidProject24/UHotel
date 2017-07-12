@@ -3,7 +3,6 @@ package com.acuteksolutions.uhotel.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -56,11 +55,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       Intent starter = new Intent(context, MainActivity.class);
       context.startActivity(starter);
   }
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    initDrawer();
-  }
 
   @Override
   protected String getTAG() {
@@ -76,6 +70,7 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
     else {
       initToolbar();
       initTabLayout();
+      initDrawer();
     }
   }
 
@@ -188,7 +183,6 @@ public class MainActivity extends BaseActivity implements ToolbarTitleListener,V
       layout_tab.setBackgroundColor(getResources().getColor(R.color.tab_background));
       RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) layout_root.getLayoutParams();
       params.addRule(RelativeLayout.BELOW,layout_tab.getId());
-      StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.tab_background));
     }else {
       toggle.setDrawerIndicatorEnabled(true);
       tabMain.setVisibility(View.GONE);

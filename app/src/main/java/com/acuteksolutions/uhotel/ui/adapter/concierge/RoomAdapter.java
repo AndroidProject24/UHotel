@@ -1,7 +1,6 @@
 package com.acuteksolutions.uhotel.ui.adapter.concierge;
 
 import android.annotation.SuppressLint;
-import android.view.View;
 import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
@@ -39,13 +38,11 @@ public class RoomAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, Base
             case TYPE_EXPANDABLE:
                 RoomExpand roomExpand = (RoomExpand)item;
                 TextView total=(TextView)holder.getView(R.id.txt_total);
-                total.setText(roomExpand.getTotal() > 0 ? String.format(" (%d)", roomExpand.getTotal()) : "0");
+                total.setText(roomExpand.getTotal() > 0 ? String.format(" (%d)", roomExpand.getTotal()) : "");
                 total.setTextColor(roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white));
                 holder.setText(R.id.txt_name_expandable, roomExpand.getTitle())
                         .setTextColor(R.id.txt_name_expandable,roomExpand.isExpanded() ? mContext.getResources().getColor(R.color.tab_select) : mContext.getResources().getColor(R.color.white))
                         .setImageResource(R.id.img_arrow, roomExpand.isExpanded() ? R.drawable.room_arrow_up : R.drawable.room_arrow_down);
-                if(roomExpand.getTotal()==0)
-                    total.setVisibility(View.GONE);
                 holder.itemView.setOnClickListener(v -> {
                     if(isExpand && posExpand != holder.getAdapterPosition()){
                         collapse(posExpand);
