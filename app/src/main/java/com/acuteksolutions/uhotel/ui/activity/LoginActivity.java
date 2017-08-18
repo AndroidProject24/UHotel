@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.libs.loading.AVLoadingIndicatorView;
@@ -36,14 +36,12 @@ import static com.acuteksolutions.uhotel.utils.Utils.isPasswordValid;
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginView {
     @BindView(R.id.img_logo)
     ImageView mImgLogo;
-    @BindView(R.id.lock)
-    TextView mLock;
     @BindView(R.id.txt_date)
-    TextView mTxtDate;
+    AppCompatTextView mTxtDate;
     @BindView(R.id.img_weather)
     ImageView mImgWeather;
     @BindView(R.id.txt_temp)
-    TextView mTxtTemp;
+    AppCompatTextView mTxtTemp;
     @BindView(R.id.etPass)
     TextInputEditText mEtPass;
     @BindView(R.id.layout_pass)
@@ -53,7 +51,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @BindView(R.id.loading_view)
     AVLoadingIndicatorView loading_view;
     @BindView(R.id.txt_error)
-    TextView txtError;
+    AppCompatTextView txtError;
     public static void start(Context context) {
         Intent starter = new Intent(context, LoginActivity.class);
         context.startActivity(starter);

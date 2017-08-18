@@ -2,6 +2,7 @@ package com.acuteksolutions.uhotel.libs;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.acuteksolutions.uhotel.R;
 
 /**

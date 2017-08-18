@@ -1,7 +1,9 @@
 package com.acuteksolutions.uhotel.annotation;
 
 import android.support.annotation.IntDef;
+
 import com.acuteksolutions.uhotel.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

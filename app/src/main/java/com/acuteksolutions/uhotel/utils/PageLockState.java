@@ -1,6 +1,7 @@
 package com.acuteksolutions.uhotel.utils;
 
 import android.util.Log;
+
 import org.json.JSONObject;
 
 public class PageLockState {

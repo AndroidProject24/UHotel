@@ -1,12 +1,14 @@
 package com.acuteksolutions.uhotel.ui.adapter;
 
 import android.widget.ImageView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.food.Food;
 import com.acuteksolutions.uhotel.utils.ImageUtils;
 import com.bumptech.glide.RequestManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+
 import java.util.List;
 
 public class FoodAdapter extends BaseQuickAdapter<Food, BaseViewHolder> {

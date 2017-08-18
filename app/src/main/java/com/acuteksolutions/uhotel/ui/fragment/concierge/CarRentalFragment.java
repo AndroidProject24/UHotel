@@ -3,13 +3,16 @@ package com.acuteksolutions.uhotel.ui.fragment.concierge;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import butterknife.BindView;
+
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.mvp.model.conciege.CarRentalItem;
 import com.acuteksolutions.uhotel.ui.adapter.concierge.CarRentalAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.base.BaseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by Toan.IT

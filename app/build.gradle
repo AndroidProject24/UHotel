@@ -140,14 +140,13 @@ dependencies {
   compile (appDependencies.statusBarCompat) {
     exclude group: 'com.android.support'
   }
-  compile 'com.zhy:autolayout:1.4.5'
   //developmentDependencies
-  /*debugCompile   developmentDependencies.leakCanary
+  debugCompile   developmentDependencies.leakCanary
   releaseCompile developmentDependencies.leakCanaryRelease
   testCompile    developmentDependencies.leakCanaryRelease
-  compile   developmentDependencies.blockCanary*/
-  /*releaseCompile developmentDependencies.blockCanaryExRelease
-  testCompile    developmentDependencies.blockCanaryExRelease*/
+  compile   developmentDependencies.blockCanary
+  //releaseCompile developmentDependencies.blockCanaryExRelease
+  //testCompile    developmentDependencies.blockCanaryExRelease
 }
 /*
 @SuppressWarnings("GroovyAssignabilityCheck")

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acuteksolutions.uhotel.BaseApplication;
 import com.acuteksolutions.uhotel.R;
 import com.acuteksolutions.uhotel.interfaces.OnBackListener;
 import com.acuteksolutions.uhotel.interfaces.ToolbarTitleListener;
@@ -20,6 +21,7 @@ import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
 
@@ -136,10 +138,10 @@ public abstract class BaseFragment <T extends BasePresenter> extends SupportFrag
         super.onDestroy();
         if (mPresenter != null)
             mPresenter.detachView();
-       // if(BaseApplication.getRefWatcher(mContext)!=null) {
-//            RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
-//            refWatcher.watch(this);
-       // }
+        if(BaseApplication.getRefWatcher(mContext)!=null) {
+            RefWatcher refWatcher = BaseApplication.getRefWatcher(mContext);
+            refWatcher.watch(this);
+        }
         Glide.get(getmContext()).clearMemory();
         glide.onDestroy();
     }

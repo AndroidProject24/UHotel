@@ -3,6 +3,7 @@ package com.acuteksolutions.uhotel.ui.adapter.page;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
 import com.acuteksolutions.uhotel.annotation.TabFoodDef;
 import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.food.ListFoodFragment;

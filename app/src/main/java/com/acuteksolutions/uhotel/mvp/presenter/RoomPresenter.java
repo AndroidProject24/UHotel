@@ -4,6 +4,7 @@ import com.acuteksolutions.uhotel.data.local.PreferencesHelper;
 import com.acuteksolutions.uhotel.data.repository.Repository;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.RoomConciergeView;
+
 import javax.inject.Inject;
 
 /**

@@ -6,6 +6,7 @@ import com.acuteksolutions.uhotel.data.rxjava.DefaultObserver;
 import com.acuteksolutions.uhotel.mvp.model.login.Login;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.LoginView;
+
 import javax.inject.Inject;
 
 /**

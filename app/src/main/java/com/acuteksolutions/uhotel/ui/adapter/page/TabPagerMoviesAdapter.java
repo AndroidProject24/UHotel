@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+
 import com.acuteksolutions.uhotel.annotation.TabMoviesDef;
 import com.acuteksolutions.uhotel.libs.SmartFragmentStatePagerAdapter;
 import com.acuteksolutions.uhotel.ui.fragment.movies.ListMoviesFragment;

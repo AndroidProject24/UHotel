@@ -3,9 +3,12 @@ package com.acuteksolutions.uhotel.data.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.acuteksolutions.uhotel.libs.logger.Logger;
-import io.realm.Realm;
+
 import java.io.IOException;
+
+import io.realm.Realm;
 
 /**
  * Toan.IT

@@ -14,6 +14,7 @@ import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.mvp.presenter.base.BasePresenter;
 import com.acuteksolutions.uhotel.mvp.view.base.BaseView;
 import com.acuteksolutions.uhotel.utils.ActivityManager;
+import com.squareup.leakcanary.RefWatcher;
 
 import javax.inject.Inject;
 
@@ -78,6 +79,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     transaction.addToBackStack(null);
     transaction.commit();
   }
+
   void replaceFagment(@NonNull FragmentManager fragmentManager, int frameId, @NonNull Fragment fragment){
     checkNotNull(fragmentManager);
     checkNotNull(fragment);
@@ -100,10 +102,10 @@ public abstract class BaseActivity <T extends BasePresenter> extends SupportActi
     super.onDestroy();
     if (mPresenter != null)
       mPresenter.detachView();
-    //if(BaseApplication.getRefWatcher(this)!=null) {
-//      RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
-//      refWatcher.watch(this);
-    //}
+    if(BaseApplication.getRefWatcher(this)!=null) {
+      RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+      refWatcher.watch(this);
+    }
     ActivityManager.getInstance().popActivity(this);
   }
     @Override
