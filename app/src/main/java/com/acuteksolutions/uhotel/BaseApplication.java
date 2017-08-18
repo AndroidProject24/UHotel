@@ -3,7 +3,6 @@ package com.acuteksolutions.uhotel;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 
 import com.acuteksolutions.uhotel.injector.component.ApplicationComponent;
@@ -12,13 +11,10 @@ import com.acuteksolutions.uhotel.injector.module.ApplicationModule;
 import com.acuteksolutions.uhotel.libs.logger.LogLevel;
 import com.acuteksolutions.uhotel.libs.logger.Logger;
 import com.acuteksolutions.uhotel.utils.FakeDataUtils;
-import com.github.moduth.blockcanary.BlockCanary;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import io.realm.Realm;
 import okhttp3.OkHttpClient;
@@ -31,7 +27,7 @@ import okhttp3.OkHttpClient;
 public class BaseApplication extends Application {
     private static BaseApplication mInstance;
     private ApplicationComponent applicationComponent;
-    private RefWatcher refWatcher;
+    //private RefWatcher refWatcher;
     protected String userAgent;
     private OkHttpClient okHttpClient;
 
@@ -44,7 +40,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        setupTest();
+        //setupTest();
         Realm.init(this);
         initInjector();
         initData();
@@ -71,7 +67,7 @@ public class BaseApplication extends Application {
         try {
             FakeDataUtils.initDataRoom(this);
             if ((0 != (getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE))) {
-                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+               /* StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                         .detectAll()
                         .penaltyLog()
                         .build());
@@ -81,9 +77,9 @@ public class BaseApplication extends Application {
                         .penaltyLog()
                         .penaltyDeath()
                         .build());
-                Logger.init(getString(R.string.app_name));
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
+                StrictMode.setThreadPolicy(policy);*/
+                Logger.init(getString(R.string.app_name));
             } else {
                 Logger.init(getString(R.string.app_name)).logLevel(LogLevel.NONE);
             }
@@ -104,12 +100,12 @@ public class BaseApplication extends Application {
         return applicationComponent;
     }
 
-    public static RefWatcher getRefWatcher(Context context) {
+  /*  public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
+    }*/
 
-    private void setupTest() {
+    /*private void setupTest() {
         if (BuildConfig.DEBUG) {
             // AndroidDevMetrics.initWith(this);
             BlockCanary.install(this, new AppBlockCanaryContext()).start();
@@ -120,5 +116,5 @@ public class BaseApplication extends Application {
             }
             refWatcher = LeakCanary.install(this);
         }
-    }
+    }*/
 }
