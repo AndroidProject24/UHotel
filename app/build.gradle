@@ -85,6 +85,7 @@ android {
       compile.exclude group: 'io.reactivex:rxjava', module: 'rxjava'
       compile.exclude group: 'io.reactivex:rxandroid', module: 'rxandroid'
   }*/
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
